@@ -1,10 +1,12 @@
 # cSpell:word commitlint typecheck stylelint
 pre-commit:
   parallel: true
+  colors: false
   commands:
     prettier:
       glob: '*.{js,jsx}'
       run: npm run prettier:ci {staged_files}
+      exclude: ".prettierrc.js"
     eslint:
       glob: '*.{js,jsx}'
       run: npm run eslint:ci {staged_files}
@@ -20,6 +22,7 @@ pre-commit:
 
 commit-msg:
   parallel: true
+  colors: false
   commands:
     lint-commit-msg:
       run: npx commitlint --edit --color=false --config commitlint.config.js
