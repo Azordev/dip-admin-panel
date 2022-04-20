@@ -62,13 +62,13 @@ jobs:
       run: ls -R
 
     - name: Download base stats
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: base
         path: webpack-stats.json
 
     - name: Download PR stats
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: pr
         path: ./build/webpack-stats.json
