@@ -39,14 +39,12 @@ jobs:
 
       - name: Install package
         run: npm install
-      - uses: actionsx/prettier@v2
-        with:
-          # prettier CLI arguments.
-          args: --list-different pages
       - name: spelling
         run: npm run spelling:ci .
       - name: eslint
         run: npm run eslint:ci pages
+      - name: prettier
+        run: npm run prettier:ci pages
       - name: test
         run: npm test
       - name: build
