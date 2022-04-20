@@ -1,0 +1,29 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "plugins": ["stylelint-scss"],
+  "rules": {
+    "indentation": 2,
+    "number-leading-zero": null,
+    "max-nesting-depth": 10,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "composes",
+          "fill",
+          "stroke",
+          "stroke-width",
+          "stroke-dasharray",
+          "stroke-dashoffset",
+          "stroke-linecap",
+          "stroke-linejoin",
+          "stroke-miterlimit",
+          "stroke-opacity",
+          "fill-opacity",
+          "fill-rule"
+        ],
+        "ignoreSelectors": [":export"]
+      }
+    ]
+  }
+}

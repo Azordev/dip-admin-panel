@@ -1,0 +1,42 @@
+{
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.language": "en,es",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "emmet.excludeLanguages": [],
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "markdown": "html",
+    "javascript": "javascriptreact"
+  },
+  "eslint.format.enable": true,
+  "eslint.packageManager": "npm",
+  "eslint.run": "onSave",
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.next": true,
+    "**/node_modules": true
+  },
+  "html.autoClosingTags": true,
+  "javascript.autoClosingTags": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": true,
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "scss.validate": false,
+  "search.exclude": {
+    "**/coverage": true,
+    "**/node_modules": true
+  },
+  "stylelint.validate": ["css", "scss", ".module.scss"],
+}
