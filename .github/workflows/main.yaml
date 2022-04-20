@@ -1,0 +1,55 @@
+---
+name: Lint Code Base
+on:
+  push:
+    branches: [main, release-*]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, dev, release-*]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.3]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install package
+        run: npm install
+      - uses: actionsx/prettier@v2
+        with:
+          # prettier CLI arguments.
+          args: --list-different pages
+      - name: spelling
+        run: npm run spelling:ci .
+      - name: eslint
+        run: npm run eslint:ci pages
+      - name: test
+        run: npm test
+      - name: build
+        run: npm run build --if-present
+    env:
+      CI: true

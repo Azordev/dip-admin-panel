@@ -1,0 +1,28 @@
+{
+  "version": "0.2",
+  "language": "en,es",
+  "words": [
+    "Azócar",
+    "azordev",
+    "camelcase",
+    "Codacy",
+    "commitlint",
+    "jsdoc",
+    "Laguan",
+    "noopener",
+    "noreferrer",
+    "Parens",
+    "Peña",
+    "Vercel"
+  ],
+  "flagWords": [],
+  "ignorePaths": [
+    "./.github/**",
+    "./.vscode/**",
+    "node_modules/**",
+    "public/**",
+    "package.json",
+    "package-lock.json",
+    "README.md"
+  ]
+}

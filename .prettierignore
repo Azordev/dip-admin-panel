@@ -1,3 +1,5 @@
 node_modules
 .next
 coverage
+./.*rc.{js,json}
+./*config.{js,json}
