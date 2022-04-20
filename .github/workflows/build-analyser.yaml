@@ -24,6 +24,7 @@ jobs:
       with:
         name: base
         path: ./build/webpack-stats.json
+        if-no-files-found: error
         retention-days: 1
 
   build-pr:
@@ -45,6 +46,7 @@ jobs:
       with:
         name: pr
         path: ./build/webpack-stats.json
+        if-no-files-found: error
         retention-days: 1
 
   report:
@@ -56,17 +58,20 @@ jobs:
     - name: Checkout PR
       uses: actions/checkout@v2
 
+    - name: Display structure of downloaded files
+      run: ls -R
+
     - name: Download base stats
       uses: actions/download-artifact@v2
       with:
         name: base
-        path: base
+        path: webpack-stats.json
 
     - name: Download PR stats
       uses: actions/download-artifact@v2
       with:
         name: pr
-        path: pr
+        path: ./build/webpack-stats.json
 
     - name: Get diff
       id: get-diff
