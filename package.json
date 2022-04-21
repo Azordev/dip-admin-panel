@@ -13,14 +13,16 @@
     "stylelint:ci": "stylelint --config .stylelintrc.json",
     "eslint:ci": "eslint --color --cache -f table",
     "stylelint": "stylelint --config .stylelintrc.json './**/*.{css,scss}'",
-    "eslint": "eslint pages --color --cache -f table",
-    "eslint:js:fix": "eslint pages --fix",
-    "prettier": "prettier --write pages --config ./.prettierrc.js",
+    "eslint": "eslint pages services --color --cache -f table",
+    "eslint:js:fix": "eslint pages services --fix",
+    "prettier": "prettier --write pages services --config ./.prettierrc.js",
     "prettier:ci": "prettier --check --config ./.prettierrc.js",
     "check": "npm run prettier && npm run eslint && npm run stylelint",
     "lefthook": "lefthook run lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
+    "graphql": "^16.3.0",
     "next": "12.1.5",
     "react": "~18.0.0",
     "react-dom": "~18.0.0"
