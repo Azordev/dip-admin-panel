@@ -15,7 +15,7 @@ const Providers: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Events</h1>
+      <h1 className={styles.title}>Providers</h1>
 
       {providers.map(provider => (
         <div key={provider.id} className={styles.card}>
