@@ -1,17 +1,10 @@
 import type { NextPage } from 'next'
+import type { IEvent } from '../../utils/types'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CREATE_EVENT } from '../services/GraphQl/mutations/events.mutations'
-import styles from '../styles/Home.module.css'
-
-interface IEvent {
-  id?: string
-  title: string
-  description: string
-  date: string
-  type: string
-}
+import { CREATE_EVENT } from '../../services/GraphQL/mutations/events.mutations'
+import styles from '../../styles/Home.module.css'
 
 const Create: NextPage = () => {
   const { push } = useRouter()

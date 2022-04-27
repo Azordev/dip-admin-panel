@@ -1,15 +1,8 @@
 import type { NextPage } from 'next'
+import type { IEvent } from '../utils/types'
 import { useQuery } from '@apollo/client'
-import { GET_EVENTS } from '../services/GraphQl/queries/events.queries'
+import { GET_EVENTS } from '../services/GraphQL/queries/events.queries'
 import styles from '../styles/Home.module.css'
-
-interface IEvent {
-  id?: string
-  title: string
-  description: string
-  date: string
-  type: string
-}
 
 const Home: NextPage = () => {
   const { data, loading } = useQuery(GET_EVENTS)
