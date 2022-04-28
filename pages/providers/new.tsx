@@ -16,10 +16,9 @@ const New: NextPage = () => {
     e.preventDefault()
 
     if (!newProvider.commercial_name || !newProvider.b2b_email) {
-      return
+      return null
     }
 
-    console.log(newProvider)
     createProvider({ variables: { ...newProvider, is_active: true } })
     push('/providers')
   }
