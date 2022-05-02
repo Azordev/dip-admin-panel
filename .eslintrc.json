@@ -33,7 +33,9 @@
         "bracketSpacing": true,
         "arrowParens": "avoid"
       }
-    ]
+    ],
+    "import/no-unresolved": ["off"],
+    "@next/next/no-img-element": "off"
   },
   "env": {
     // change as necessary
