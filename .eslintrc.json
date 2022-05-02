@@ -33,8 +33,7 @@
         "bracketSpacing": true,
         "arrowParens": "avoid"
       }
-    ],
-    "import/no-unresolved": ["off"]
+    ]
   },
   "env": {
     // change as necessary
