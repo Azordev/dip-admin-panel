@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import React, { useState } from 'react'
+import Image from 'next/image'
 import styles from '../styles/Login.module.css'
+import didLogo from '../images/did_logo.svg'
 
 const Login: NextPage = () => {
   const [authData, setAuthData] = useState({})
@@ -19,7 +21,7 @@ const Login: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles['login-container']}>
-        <img src="/did_logo.svg" alt="DID Logo" className={styles.logo} />
+        <Image src={didLogo} alt="DID Logo" className={styles.logo} />
         <h2 className={styles.title}>Ingresa a DID Perú</h2>
         <form onSubmit={submitHandler} className={styles['login-form']}>
           <input

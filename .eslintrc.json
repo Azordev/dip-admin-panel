@@ -34,8 +34,7 @@
         "arrowParens": "avoid"
       }
     ],
-    "import/no-unresolved": ["off"],
-    "@next/next/no-img-element": "off"
+    "import/no-unresolved": ["off"]
   },
   "env": {
     // change as necessary
