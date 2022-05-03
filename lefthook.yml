@@ -49,5 +49,4 @@ lint:
     spelling:
       run: npm run spelling
     markdown-link-check:
-      glob: '*.md'
-      run: npx markdown-link-check {staged_files}
+      run: npx markdown-link-check

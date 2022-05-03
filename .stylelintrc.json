@@ -25,5 +25,6 @@
         "ignoreSelectors": [":export"]
       }
     ]
-  }
+  },
+  "ignoreFiles": ["coverage/**", "**/coverage/**"]
 }

@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest --passWithNoTests --watch --detectOpenHandles --coverage",
     "test:ci": "jest --passWithNoTests --watchAll=false --ci",
-    "spelling": "cspell 'pages/**/*.{js,jsx,md,ts,tsx}' --no-must-find-files",
+    "spelling": "cspell 'pages/**/*.{js,jsx,md,ts,tsx}' --no-must-find-files -c cspell.json",
     "spelling:ci": "cspell run --no-must-find-files",
     "stylelint:ci": "stylelint --config .stylelintrc.json",
     "eslint:ci": "eslint --color --cache -f table",

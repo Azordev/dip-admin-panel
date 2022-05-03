@@ -10,16 +10,20 @@ interface Props {
   children: React.ReactNode
 }
 
-const Button: React.FC<Props> = ({ icon, onClick, className = '', iconAtEnd = false, type, children, ...rest }) => (
-  <button
-    type={type}
-    onClick={onClick}
-    className={`${className ? className + ' ' : ''}`}
-    {...rest}
-  >
-    {icon && <Icons8 name={icon} color="color" />}
-    {children}
-  </button>
-)
+const Button: React.FC<Props> = ({ icon, onClick, className = '', iconAtEnd = true, type, children, ...rest }) => {
+  const iconStyle = iconAtEnd ? 'row-reverse' : 'row'
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      style={{ flexDirection: iconStyle }}
+      className={`${className ? className + ' ' : ''}`}
+      {...rest}
+    >
+      {icon && <Icons8 name={icon} color="color" />}
+      {children}
+    </button>
+  )
+}
 
 export default Button

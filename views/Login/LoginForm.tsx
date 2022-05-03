@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useLazyQuery } from '@apollo/client'
@@ -8,13 +8,14 @@ import SubmitButton from '../Shared/Form/SubmitButton'
 import TextInput from '../Shared/Form/TextInput'
 import styles from './Login.module.scss'
 import { GET_USER_SESSION } from '../../services/GraphQL/queries/users'
+import { NextPage } from 'next'
 
 type Inputs = {
   username: string
   password: string
 }
 
-const LoginForm = () => {
+const LoginForm: NextPage = () => {
   const router = useRouter()
   const {
     register,
@@ -48,12 +49,18 @@ const LoginForm = () => {
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
-      <h1>Ingresa a DID Peru</h1>
-      <TextInput placeholder="Usuario" {...register('username', { required: true })} />
-      {errors.username && <p className={styles.error}>El usuario es requerido</p>}
+      <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru</h1>
+      <TextInput placeholder="Código de socio" {...register('username', { required: true })} />
+      {errors.username && <small className={styles.error}>El usuario es requerido</small>}
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
-      {errors.password && <p className={styles.error}>La contraseña es requerida</p>}
+      {errors.password && <small className={styles.error}>La contraseña es requerida</small>}
       <SubmitButton isLoading={loading} disabled={loading} text="Ingresar" />
+      <p className={styles.contact}>
+        ¿Deseas asociarte a DID Perú? Escribe a
+        <a href="mailto:example@email.com" target="_blank" rel="noopener noreferrer">
+          example@email.com
+        </a>
+      </p>
     </form>
   )
 }
