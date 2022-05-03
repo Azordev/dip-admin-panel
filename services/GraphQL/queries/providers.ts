@@ -3,26 +3,27 @@ import { gql } from '@apollo/client'
 export const GET_PROVIDERS = gql`
   query {
     providers {
-      id
       commercial_name
-      sales_email
-      sales_phone
       address
-      created_at
-      updated_at
-      avatar_url
+      sales_phone
+      b2b_phone
+      sales_email
+      b2b_email
+      legal_name
+      details
+      is_active
+      logo_url
     }
   }
 `
 
-// get providers per categories
 export const GET_PROVIDERS_BY_CATEGORY = gql`
-  query ($category_id: String!) {
-    categories(where: { id: { _eq: $category_id } }) {
-      providers {
+  query ($category_id: uuid!) {
+    providers: categories_by_pk(id: $category_id) {
+      provider_categories {
         provider {
+          commercial_name
           id
-          legal_name
           logo_url
         }
       }
@@ -31,16 +32,25 @@ export const GET_PROVIDERS_BY_CATEGORY = gql`
 `
 
 export const GET_PROVIDER_BY_ID = gql`
-  query ($id: String!) {
-    provider(id: $id) {
-      id
-      name
-      email
-      phone
+  query ($id: uuid!) {
+    provider: providers_by_pk(id: $id) {
+      commercial_name
       address
-      created_at
-      updated_at
-      avatar_url
+      sales_phone
+      b2b_phone
+      sales_email
+      b2b_email
+      legal_name
+      details
+      is_active
+      logo_url
+      categories {
+        category {
+          id
+          name
+          is_active
+        }
+      }
     }
   }
 `

@@ -1,49 +1,59 @@
+import { GetStaticPaths } from 'next'
 import React from 'react'
 import client from '../../services/GraphQL/client'
-import { GET_USER_BY_ID } from '../../services/GraphQL/queries/users'
+import { GET_EVENT_BY_ID } from '../../services/GraphQL/queries/events'
+import { Event as EventProps } from '../../services/GraphQL/types/events'
 import ClientOnly from '../../views/Shared/ClientOnly'
 import Image from '../../views/Shared/Image'
 
-interface Events {
-  id: string
-  title: string
-  description: string
-  date: string
-  type: string
-  image_url: string
-  requirements_url: string
-}
-const Event: React.FC<{ event: Events }> = ({ event }) => {
-  return (
-    <div>
-      <ClientOnly>
-        {event && (
-          <div>
-            <h1>{event.title}</h1>
-            <Image src={event.image_url} alt="avatar" />
-            <p>{event.description}</p>
-            <p>{event.date}</p>
-            <p>{event.type}</p>
+const Event: React.FC<{ event: EventProps }> = ({ event }) => (
+  <div>
+    <ClientOnly>
+      {event && (
+        <div>
+          <h1>{event.title}</h1>
+          {event.image_url && <Image src={event.image_url} alt="avatar" />}
+          <p>{event.description}</p>
+          <p>{event.date}</p>
+          <p>{event.type}</p>
+          {event.requirements_url && (
             <a href={event.requirements_url}>
               <button>Requisitos</button>
             </a>
-          </div>
-        )}
-      </ClientOnly>
-    </div>
-  )
-}
+          )}
+        </div>
+      )}
+    </ClientOnly>
+  </div>
+)
 
 export default Event
 
 export async function getStaticProps() {
   const { data } = await client.query({
-    query: GET_USER_BY_ID,
+    query: GET_EVENT_BY_ID,
   })
 
   return {
     props: {
-      user: data.user,
+      event: data.event,
     },
+  }
+}
+
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+  const { data } = await client.query({
+    query: GET_EVENT_BY_ID,
+  })
+
+  const paths =
+    data.events?.map((event: EventProps) => ({
+      params: {
+        id: event.id.toString(),
+      },
+    })) || []
+  return {
+    paths,
+    fallback: 'blocking', // indicates the type of fallback
   }
 }

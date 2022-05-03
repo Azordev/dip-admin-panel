@@ -15,8 +15,8 @@ export const GET_EVENTS = gql`
 `
 
 export const GET_EVENT_BY_ID = gql`
-  query ($id: String!) {
-    event(id: $id) {
+  query ($id: uuid!) {
+    event: events_by_pk(id: $id) {
       id
       title
       description

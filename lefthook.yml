@@ -1,4 +1,4 @@
-# cSpell:word commitlint typecheck stylelint
+# cSpell:word commitlint typecheck stylelint prettierrc
 pre-commit:
   parallel: true
   colors: false

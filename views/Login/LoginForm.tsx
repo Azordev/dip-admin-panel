@@ -9,11 +9,7 @@ import TextInput from '../Shared/Form/TextInput'
 import styles from './Login.module.scss'
 import { GET_USER_SESSION } from '../../services/GraphQL/queries/users'
 import { NextPage } from 'next'
-
-type Inputs = {
-  username: string
-  password: string
-}
+import { LoginInput } from '../../services/GraphQL/types/users'
 
 const LoginForm: NextPage = () => {
   const router = useRouter()
@@ -21,7 +17,7 @@ const LoginForm: NextPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<LoginInput>({
     defaultValues: {
       username: '',
       password: '',

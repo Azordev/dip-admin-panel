@@ -1,44 +1,77 @@
 import { gql } from '@apollo/client'
 
-export const CREATE_EVENT = gql`
-  mutation CreateEvent($title: String!, $description: String, $date: String!, $type: String!, image_url: String, requirements_url: String) {
-    insert_events_one(object: { date: $date, title: $title, description: $description, type: $type, is_active: true, requirements_url: requirements_url, image_url: image_url }) {
-      affected_rows
+export const INSERT_EVENT = gql`
+  mutation (
+    $title: String!
+    $description: String
+    $date: String!
+    $type: String!
+    $image_url: String
+    $requirements_url: String
+  ) {
+    insert_events_one(
+      object: {
+        date: $date
+        title: $title
+        description: $description
+        type: $type
+        is_active: true
+        requirements_url: $requirements_url
+        image_url: $image_url
+      }
+    ) {
+      is_active
     }
   }
 `
 
-// update event
 export const UPDATE_EVENT = gql`
-  mutation UpdateEvent($id: String!, $title: String, $description: String, $date: String, $type: String, image_url: String, requirements_url: String) {
-    update_events_by_pk(pk_columns: { id: $id }, _set: { date: $date, title: $title, description: $description, type: $type, requirements_url: requirements_url, image_url: image_url }) {
-      affected_rows
+  mutation (
+    $id: uuid!
+    $title: String
+    $description: String
+    $date: String
+    $type: String
+    $image_url: String
+    $requirements_url: String
+  ) {
+    update_events_by_pk(
+      pk_columns: { id: $id }
+      _set: {
+        date: $date
+        title: $title
+        description: $description
+        type: $type
+        requirements_url: $requirements_url
+        image_url: $image_url
+      }
+    ) {
+      is_active
     }
   }
 `
 
-// hide event
 export const HIDE_EVENT = gql`
-  mutation HideEvent($id: String!) {
+  mutation HideEvent($id: uuid!) {
     update_events_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
-      affected_rows
+      is_active
     }
   }
 `
 
 // member inscription in event
-export const CREATE_MEMBER_INSCRIPTION = gql`
-  mutation ($event_id: String!, $member_id: String!) {
+export const INSERT_MEMBER_INSCRIPTION = gql`
+  mutation ($event_id: uuid!, $member_id: uuid!) {
     insert_inscriptions_one(object: { event_id: $event_id, member_id: $member_id }) {
-      affected_rows
+      updated_at
     }
   }
 `
 
 // member cancellation in event
 export const CANCEL_MEMBER_INSCRIPTION = gql`
-  mutation ($event_id: String!, $member_id: String!) {
-    delete_inscriptions_by_pk(pk_columns: { event_id: $event_id, member_id: $member_id }) {
+  mutation ($event_id: uuid!, $member_id: uuid!) {
+    delete_inscriptions(where: { event_id: $event_id, member_id: $member_id }) {
       affected_rows
     }
   }

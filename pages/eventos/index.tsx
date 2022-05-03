@@ -3,23 +3,16 @@ import { useQuery } from '@apollo/client'
 import { GET_EVENTS } from '../../services/GraphQL/queries/events'
 import styles from '../../styles/Home.module.css'
 import ClientOnly from '../../views/Shared/ClientOnly'
+import { Event } from '../../services/GraphQL/types/events'
 
-interface IEvent {
-  id?: string
-  title: string
-  description: string
-  date: string
-  type: string
-}
-
-const Home: NextPage = () => {
+const Events: NextPage = () => {
   const { data, loading } = useQuery(GET_EVENTS)
 
   if (loading) {
     return <h2>Loading...</h2>
   }
 
-  const events: IEvent[] = data.events
+  const events: Event[] = data.events
 
   return (
     <ClientOnly>
@@ -40,4 +33,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Events
