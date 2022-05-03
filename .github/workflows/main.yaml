@@ -37,8 +37,8 @@ jobs:
         run: yarn eslint:ci pages
       - name: prettier
         run: yarn prettier:ci pages
-      - name: test
-        run: yarn test
+      # - name: test
+      #   run: yarn test
       - name: build
         run: yarn build --if-present
     env:
