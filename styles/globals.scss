@@ -1,0 +1,26 @@
+@import 'reset';
+@import 'animations', 'base_components', 'colors', 'fonts', 'forms', 'grid', 'layout', 'mixins', 'navigation', 'type', 'utilities';
+
+:root {
+  color: $black;
+  font-family: $font-base-sans-serif-family;
+  font-size: $font-base-size;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  line-height: $font-base-line-height;
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-delay: -1ms !important;
+      animation-duration: 3ms !important;
+      animation-iteration-count: 1 !important;
+      background-attachment: initial !important;
+      scroll-behavior: auto !important;
+      transition-delay: 0s !important;
+      transition-duration: 0s !important;
+    }
+  }
+}

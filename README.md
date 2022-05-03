@@ -35,4 +35,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## References
 
+### Used
 - https://dev.to/nabeelahmed1721/setting-up-typescript-with-eslint-prettier-on-vscode-25na
+- https://dev.to/maciekgrzybek/setup-next-js-with-typescript-jest-and-react-testing-library-28g5
+
+### To consider
+- https://blog.logrocket.com/testing-next-js-apps-jest/ Ideas for testing Next.js apps

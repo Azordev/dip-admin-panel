@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CREATE_EVENT } from '../services/GraphQl/mutations/events.mutations'
+import { CREATE_EVENT } from '../../services/GraphQL/mutations/events'
 import styles from '../styles/Home.module.css'
 
 interface IEvent {
