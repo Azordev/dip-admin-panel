@@ -13,7 +13,7 @@ export const INSERT_PROVIDER = gql`
     $is_active: Boolean
     $logo_url: String
   ) {
-    insert_providers_one(
+    provider: insert_providers_one(
       object: {
         commercial_name: $commercial_name
         address: $address
@@ -35,7 +35,7 @@ export const INSERT_PROVIDER = gql`
 // TODO: check if it needs more fields
 export const UPDATE_PROVIDER = gql`
   mutation ($id: uuid!, $commercial_name: String, $sales_email: String, $sales_phone: String, $address: String) {
-    update_providers_by_pk(
+    provider: update_providers_by_pk(
       pk_columns: { id: $id }
       _set: {
         commercial_name: $commercial_name
@@ -51,7 +51,7 @@ export const UPDATE_PROVIDER = gql`
 
 export const HIDE_PROVIDER = gql`
   mutation ($id: uuid!) {
-    update_providers_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
+    provider: update_providers_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
       is_active
     }
   }

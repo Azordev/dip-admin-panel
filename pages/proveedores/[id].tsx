@@ -1,7 +1,7 @@
 import { GetStaticPaths } from 'next'
 import React from 'react'
 import client from '../../services/GraphQL/client'
-import { GET_PROVIDER_BY_ID } from '../../services/GraphQL/queries/providers'
+import { GET_PROVIDERS, GET_PROVIDER_BY_ID } from '../../services/GraphQL/queries/providers'
 import { Provider as ProviderProps } from '../../services/GraphQL/types/providers'
 import ClientOnly from '../../views/Shared/ClientOnly'
 import Image from '../../views/Shared/Image'
@@ -26,31 +26,59 @@ const Provider: React.FC<{ provider: ProviderProps }> = ({ provider }) => (
 
 export default Provider
 
-export async function getStaticProps() {
-  const { data } = await client.query({
+type StaticProps = {
+  params: ProviderProps
+}
+
+export async function getStaticProps({ params: { id } }: StaticProps) {
+  const {
+    data: { provider },
+    errors,
+  } = await client.query({
     query: GET_PROVIDER_BY_ID,
+    variables: {
+      id,
+    },
   })
+
+  if (errors) {
+    return {
+      props: {
+        event: null,
+      },
+    }
+  }
 
   return {
     props: {
-      user: data.user,
+      provider,
     },
   }
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  const { data } = await client.query({
-    query: GET_PROVIDER_BY_ID,
+  const {
+    data: { providers },
+    errors,
+  } = await client.query({
+    query: GET_PROVIDERS,
   })
 
+  if (providers.length < 1 || errors) {
+    return {
+      paths: [],
+      fallback: false,
+    }
+  }
+
   const paths =
-    data.providers?.map((provider: ProviderProps) => ({
+    providers.map((provider: ProviderProps) => ({
       params: {
-        id: provider.id.toString(),
+        id: provider.id?.toString(),
       },
     })) || []
   return {
     paths,
-    fallback: 'blocking', // indicates the type of fallback
+    fallback: false, // indicates the type of fallback
   }
 }

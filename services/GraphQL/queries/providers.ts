@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const GET_PROVIDERS = gql`
   query {
     providers {
+      id
       commercial_name
       address
       sales_phone

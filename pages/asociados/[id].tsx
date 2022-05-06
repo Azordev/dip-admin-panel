@@ -1,7 +1,7 @@
 import { GetStaticPaths } from 'next'
 import React from 'react'
 import client from '../../services/GraphQL/client'
-import { GET_MEMBER_BY_ID } from '../../services/GraphQL/queries/users'
+import { GET_MEMBERS, GET_MEMBER_BY_ID } from '../../services/GraphQL/queries/users'
 import { Member as MemberProps } from '../../services/GraphQL/types/users'
 import ClientOnly from '../../views/Shared/ClientOnly'
 
@@ -22,31 +22,59 @@ const Member: React.FC<{ member: MemberProps }> = ({ member }) => (
 
 export default Member
 
-export async function getStaticProps() {
-  const { data } = await client.query({
+type StaticProps = {
+  params: MemberProps
+}
+
+export async function getStaticProps({ params: { id } }: StaticProps) {
+  const {
+    data: { member },
+    errors,
+  } = await client.query({
     query: GET_MEMBER_BY_ID,
+    variables: {
+      id,
+    },
   })
+
+  if (errors) {
+    return {
+      props: {
+        event: null,
+      },
+    }
+  }
 
   return {
     props: {
-      user: data.member,
+      member,
     },
   }
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  const { data } = await client.query({
-    query: GET_MEMBER_BY_ID,
+  const {
+    data: { members },
+    errors,
+  } = await client.query({
+    query: GET_MEMBERS,
   })
 
+  if (members.length < 1 || errors) {
+    return {
+      paths: [],
+      fallback: false,
+    }
+  }
+
   const paths =
-    data.members?.map((member: MemberProps) => ({
+    members.map((member: MemberProps) => ({
       params: {
-        id: member.id.toString(),
+        id: member.id?.toString(),
       },
     })) || []
   return {
     paths,
-    fallback: 'blocking', // indicates the type of fallback
+    fallback: false, // indicates the type of fallback
   }
 }

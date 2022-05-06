@@ -43,6 +43,7 @@ export const GET_USERS = gql`
 export const GET_MEMBERS = gql`
   query {
     members {
+      id
       avatar_url
       contact_information
       created_at
@@ -56,7 +57,6 @@ export const GET_MEMBERS = gql`
         }
       }
       first_names
-      id
       last_names
       user_id
       updated_at

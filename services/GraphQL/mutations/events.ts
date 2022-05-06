@@ -9,7 +9,7 @@ export const INSERT_EVENT = gql`
     $image_url: String
     $requirements_url: String
   ) {
-    insert_events_one(
+    event: insert_events_one(
       object: {
         date: $date
         title: $title
@@ -35,7 +35,7 @@ export const UPDATE_EVENT = gql`
     $image_url: String
     $requirements_url: String
   ) {
-    update_events_by_pk(
+    event: update_events_by_pk(
       pk_columns: { id: $id }
       _set: {
         date: $date
@@ -53,7 +53,7 @@ export const UPDATE_EVENT = gql`
 
 export const HIDE_EVENT = gql`
   mutation HideEvent($id: uuid!) {
-    update_events_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
+    event: update_events_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
       is_active
     }
   }
@@ -62,7 +62,7 @@ export const HIDE_EVENT = gql`
 // member inscription in event
 export const INSERT_MEMBER_INSCRIPTION = gql`
   mutation ($event_id: uuid!, $member_id: uuid!) {
-    insert_inscriptions_one(object: { event_id: $event_id, member_id: $member_id }) {
+    event: insert_inscriptions_one(object: { event_id: $event_id, member_id: $member_id }) {
       updated_at
     }
   }
@@ -71,7 +71,7 @@ export const INSERT_MEMBER_INSCRIPTION = gql`
 // member cancellation in event
 export const CANCEL_MEMBER_INSCRIPTION = gql`
   mutation ($event_id: uuid!, $member_id: uuid!) {
-    delete_inscriptions(where: { event_id: $event_id, member_id: $member_id }) {
+    event: delete_inscriptions(where: { event_id: $event_id, member_id: $member_id }) {
       affected_rows
     }
   }

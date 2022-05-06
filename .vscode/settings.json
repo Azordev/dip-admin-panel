@@ -17,8 +17,8 @@
   "cSpell.language": "en,es",
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.codeActionsOnSave": {
-		"source.fixAll.stylelint": true
-	},
+    "source.fixAll.stylelint": true
+  },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.bracketPairColorization.enabled": true,
@@ -51,6 +51,10 @@
     "**/coverage": true,
     "**/node_modules": true
   },
-  "stylelint.validate": ["css", "scss", ".module.scss"],
+  "stylelint.validate": [
+    "css",
+    "scss",
+    ".module.scss"
+  ],
   "prettier.configPath": ".prettierrc.js",
 }

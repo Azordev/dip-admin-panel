@@ -1,7 +1,7 @@
 import { GetStaticPaths } from 'next'
 import React from 'react'
 import client from '../../services/GraphQL/client'
-import { GET_EVENT_BY_ID } from '../../services/GraphQL/queries/events'
+import { GET_EVENTS, GET_EVENT_BY_ID } from '../../services/GraphQL/queries/events'
 import { Event as EventProps } from '../../services/GraphQL/types/events'
 import ClientOnly from '../../views/Shared/ClientOnly'
 import Image from '../../views/Shared/Image'
@@ -29,31 +29,59 @@ const Event: React.FC<{ event: EventProps }> = ({ event }) => (
 
 export default Event
 
-export async function getStaticProps() {
-  const { data } = await client.query({
+type StaticProps = {
+  params: EventProps
+}
+
+export async function getStaticProps({ params: { id } }: StaticProps) {
+  const {
+    data: { event },
+    errors,
+  } = await client.query({
     query: GET_EVENT_BY_ID,
+    variables: {
+      id,
+    },
   })
+
+  if (errors) {
+    return {
+      props: {
+        event: null,
+      },
+    }
+  }
 
   return {
     props: {
-      event: data.event,
+      event,
     },
   }
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  const { data } = await client.query({
-    query: GET_EVENT_BY_ID,
+  const {
+    data: { events },
+    errors,
+  } = await client.query({
+    query: GET_EVENTS,
   })
 
+  if (events.length < 1 || errors) {
+    return {
+      paths: [],
+      fallback: false,
+    }
+  }
+
   const paths =
-    data.events?.map((event: EventProps) => ({
+    events.map((event: EventProps) => ({
       params: {
-        id: event.id.toString(),
+        id: event.id?.toString(),
       },
     })) || []
   return {
     paths,
-    fallback: 'blocking', // indicates the type of fallback
+    fallback: false,
   }
 }
