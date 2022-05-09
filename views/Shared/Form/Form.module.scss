@@ -1,0 +1,20 @@
+@import 'colors';
+
+.submit {
+  background: $black;
+  border: 0;
+  border-radius: 150px;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  &:hover {
+    background: $gray-800;
+  }
+
+  &:active,
+  &:focus {
+    background: $gray-900;
+  }
+}

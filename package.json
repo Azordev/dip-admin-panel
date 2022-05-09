@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --passWithNoTests --watchAll=false",
-    "spelling": "cspell 'pages/**/*.{js,jsx,md,ts,tsx}' --no-must-find-files",
+    "test": "jest --passWithNoTests --watch --detectOpenHandles --coverage",
+    "test:ci": "jest --passWithNoTests --watchAll=false --ci",
+    "spelling": "cspell 'pages/**/*.{js,jsx,md,ts,tsx}' --no-must-find-files -c cspell.json",
     "spelling:ci": "cspell run --no-must-find-files",
     "stylelint:ci": "stylelint --config .stylelintrc.json",
     "eslint:ci": "eslint --color --cache -f table",
@@ -20,32 +21,39 @@
     "check": "npm run prettier && npm run eslint && npm run stylelint",
     "lefthook": "lefthook run lint"
   },
-  "dependencies": {
-    "@apollo/client": "^3.5.10",
-    "graphql": "^16.3.0",
-    "next": "12.1.5",
-    "react": "~18.0.0",
-    "react-dom": "~18.0.0"
+  "prettier": {
+    "stylelintIntegration": true
   },
   "devDependencies": {
     "@arkweid/lefthook": "0.7.7",
-    "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/config-conventional": "16.2.1",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
+    "@types/jest": "^27.4.1",
     "@types/node": "17.0.25",
-    "@types/react": "18.0.5",
-    "@types/react-dom": "18.0.1",
+    "@types/react": "^18.0.6",
+    "@types/react-dom": "18.0.2",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
+    "babel-jest": "^27.5.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "commitlint": "^16.2.4",
     "cspell": "5.19.7",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "8.5.0",
-    "eslint-config-standard": "16.0.3",
+    "eslint-config-standard": "17.0.0",
     "eslint-formatter-table": "7.32.1",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "6.0.0",
-    "jest": "27.5.1",
+    "eslint-plugin-testing-library": "^5.3.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.5.1",
+    "markdown-link-check": "^3.10.0",
+    "postcss": "^8.4.12",
     "prettier": "2.6.2",
     "sass": "1.50.1",
     "stylelint": "14.7.1",
@@ -53,9 +61,20 @@
     "stylelint-config-standard": "25.0.0",
     "stylelint-scss": "4.2.0",
     "ts-node-dev": "1.1.8",
-    "typescript": "4.6.3"
+    "typescript": "^4.6.3"
   },
-  "prettier": {
-    "stylelintIntegration": true
+  "dependencies": {
+    "@apollo/client": "3.5.10",
+    "eslint-plugin-n": "^15.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "graphql": "16.3.0",
+    "next": "12.1.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-hook-form": "^7.30.0",
+    "react-toastify": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=16.14.0"
   }
 }

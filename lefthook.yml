@@ -1,4 +1,4 @@
-# cSpell:word commitlint typecheck stylelint
+# cSpell:word commitlint typecheck stylelint prettierrc
 pre-commit:
   parallel: true
   colors: false
@@ -49,5 +49,4 @@ lint:
     spelling:
       run: npm run spelling
     markdown-link-check:
-      glob: '*.md'
-      run: npx markdown-link-check {staged_files}
+      run: npx markdown-link-check

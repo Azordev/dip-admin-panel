@@ -2,27 +2,20 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CREATE_EVENT } from '../services/GraphQl/mutations/events.mutations'
-import styles from '../styles/Home.module.css'
-
-interface IEvent {
-  id?: string
-  title: string
-  description: string
-  date: string
-  type: string
-}
+import { INSERT_EVENT } from '../../services/GraphQL/mutations/events'
+import styles from '../../styles/Home.module.css'
+import { EventBase as Event } from '../../services/GraphQL/types/events'
 
 const Create: NextPage = () => {
   const { push } = useRouter()
-  const [newEvent, setNewEvent] = useState<IEvent>({
+  const [newEvent, setNewEvent] = useState<Event>({
     title: '',
     description: '',
     date: '',
     type: '',
   })
 
-  const [createEvent] = useMutation(CREATE_EVENT)
+  const [createEvent] = useMutation(INSERT_EVENT)
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -32,7 +25,7 @@ const Create: NextPage = () => {
     }
 
     createEvent({ variables: newEvent })
-    push('/')
+    push('/eventos')
   }
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>

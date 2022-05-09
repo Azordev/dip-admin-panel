@@ -1,0 +1,68 @@
+@mixin animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@mixin animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@mixin animate-pulse {
+  animation: pulse 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @media (prefers-reduced-motion) {
+    .animation {
+      animation-name: dissolve;
+    }
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.5);
+  }
+}
+
+@mixin animate-bounce {
+  animation: bounce 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @media (prefers-reduced-motion) {
+    .animation {
+      animation-name: none;
+    }
+  }
+}
+
+@keyframes bounce {
+  from,
+  to {
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    transform: translate(0);
+  }
+
+  50% {
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transform: translate(0, -25%);
+  }
+}

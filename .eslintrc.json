@@ -16,7 +16,7 @@
     "ecmaVersion": 2015,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "@typescript-eslint"],
+  "plugins": ["prettier", "@typescript-eslint", "testing-library"],
   "rules": {
     "no-empty-pattern": ["off"],
     "no-undef": ["error"],
@@ -38,5 +38,12 @@
   "env": {
     // change as necessary
     "node": true
-  }
+  },
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }

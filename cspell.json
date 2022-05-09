@@ -5,6 +5,7 @@
     "Azócar",
     "azordev",
     "camelcase",
+    "checkmark",
     "Codacy",
     "commitlint",
     "jsdoc",
@@ -13,7 +14,15 @@
     "noreferrer",
     "Parens",
     "Peña",
-    "Vercel"
+    "toastify",
+    "Toastify",
+    "Vercel",
+    "Requisitos",
+    "Enviar",
+    "proveedores",
+    "Proveedores",
+    "Comercial",
+    "eventos"
   ],
   "flagWords": [],
   "ignorePaths": [

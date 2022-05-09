@@ -2,11 +2,23 @@
   "[css]": {
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
   "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.language": "en,es",
   "diffEditor.ignoreTrimWhitespace": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true
+  },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.bracketPairColorization.enabled": true,
@@ -19,9 +31,10 @@
     "javascript": "javascriptreact"
   },
   "eslint.format.enable": true,
-  "eslint.packageManager": "npm",
+  "eslint.packageManager": "yarn",
   "eslint.run": "onSave",
   "files.insertFinalNewline": true,
+  "files.eol": "\n",
   "files.exclude": {
     "**/.git": true,
     "**/.next": true,
@@ -38,7 +51,10 @@
     "**/coverage": true,
     "**/node_modules": true
   },
-  "stylelint.validate": ["css", "scss", ".module.scss"],
+  "stylelint.validate": [
+    "css",
+    "scss",
+    ".module.scss"
+  ],
   "prettier.configPath": ".prettierrc.js",
-  "files.eol": "\n"
 }

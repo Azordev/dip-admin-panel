@@ -2,3 +2,4 @@ name : CodeQL Configuration
 
 paths:
   - './pages'
+  - './services'
