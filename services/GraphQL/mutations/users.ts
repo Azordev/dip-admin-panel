@@ -16,7 +16,7 @@ export const UPDATE_USER = gql`
   }
 `
 
-export const HIDE_USER = gql`
+export const DEACTIVATE_USER = gql`
   mutation ($id: uuid!) {
     user: update_users_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
       is_active

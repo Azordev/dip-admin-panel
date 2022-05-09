@@ -51,8 +51,8 @@ export const UPDATE_EVENT = gql`
   }
 `
 
-export const HIDE_EVENT = gql`
-  mutation HideEvent($id: uuid!) {
+export const DEACTIVATE_EVENT = gql`
+  mutation ($id: uuid!) {
     event: update_events_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
       is_active
     }
