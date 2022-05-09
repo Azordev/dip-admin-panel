@@ -13,9 +13,6 @@ pre-commit:
     stylelint:
       glob: './**/*.styled.jsx' # For CSS-in-JS
       run: npm run stylelint:ci {staged_files}
-    spelling:
-      glob: '*.{js,jsx,md}'
-      run: npm run spelling:ci {staged_files}
     markdown-link-check:
       glob: '*.md'
       run: npx markdown-link-check {staged_files}
@@ -46,7 +43,5 @@ lint:
       run: npm run eslint
     stylelint:
       run: npm run stylelint
-    spelling:
-      run: npm run spelling
     markdown-link-check:
       run: npx markdown-link-check
