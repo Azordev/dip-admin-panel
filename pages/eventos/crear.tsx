@@ -48,7 +48,7 @@ const Create: NextPage = () => {
           type="datetime-local"
           name="date"
           onChange={changeHandler}
-          value={new Date(newEvent.date).toISOString()}
+          value={new Date(newEvent.date).toISOString().slice(0, 16)}
           placeholder="date"
         />
         <input type="text" name="type" onChange={changeHandler} value={newEvent.type} placeholder="type" />
