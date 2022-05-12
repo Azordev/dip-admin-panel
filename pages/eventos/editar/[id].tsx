@@ -8,6 +8,7 @@ import { Event, EventBase } from '../../../services/GraphQL/types/events'
 import client from '../../../services/GraphQL/client'
 import ClientOnly from '../../../views/Shared/ClientOnly'
 import styles from '../../../styles/Home.module.css'
+import { formatDate } from '../../../services/utils/dateFormat'
 
 const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
   const { push } = useRouter()
@@ -17,17 +18,19 @@ const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
     date: event.date,
     type: event.type,
   })
+  const [date, setDate] = useState(event.date.toString().slice(0, 16).split('T')[0])
+  const [time, setTime] = useState(event.date.toString().slice(0, 16).split('T')[1])
 
   const [updateEvent] = useMutation(UPDATE_EVENT)
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!updatedEvent.title || !updatedEvent.description || !updatedEvent.date || !updatedEvent.type) {
+    if (!updatedEvent.title || !updatedEvent.description || !updatedEvent.type || !date || !time) {
       return
     }
 
-    await updateEvent({ variables: { ...event, ...updatedEvent } })
+    await updateEvent({ variables: { ...event, ...{ ...updatedEvent, date: formatDate(date, time) } } })
     push('/eventos')
   }
 
@@ -49,13 +52,8 @@ const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
               value={updatedEvent.description}
               placeholder="description"
             />
-            <input
-              type="datetime-local"
-              name="date"
-              onChange={changeHandler}
-              value={new Date(updatedEvent.date).toISOString().slice(0, 16)}
-              placeholder="date"
-            />
+            <input type="date" name="date" onChange={e => setDate(e.target.value)} value={date} placeholder="date" />
+            <input type="time" name="time" onChange={e => setTime(e.target.value)} value={time} placeholder="date" />
             <input type="text" name="type" onChange={changeHandler} value={updatedEvent.type} placeholder="type" />
             <button type="submit">Enviar</button>
           </form>

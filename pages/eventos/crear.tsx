@@ -5,26 +5,29 @@ import { useMutation } from '@apollo/client'
 import { INSERT_EVENT } from '../../services/GraphQL/mutations/events'
 import styles from '../../styles/Home.module.css'
 import { EventBase as Event } from '../../services/GraphQL/types/events'
+import { formatDate } from '../../services/utils/dateFormat'
 
 const Create: NextPage = () => {
   const { push } = useRouter()
   const [newEvent, setNewEvent] = useState<Event>({
     title: '',
     description: '',
-    date: 0,
+    date: '',
     type: '',
   })
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
 
   const [createEvent] = useMutation(INSERT_EVENT)
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!newEvent.title || !newEvent.description || !newEvent.date || !newEvent.type) {
+    if (!newEvent.title || !newEvent.description || !newEvent.type || !date || !time) {
       return
     }
 
-    createEvent({ variables: newEvent })
+    createEvent({ variables: { ...newEvent, date: formatDate(date, time) } })
     push('/eventos')
   }
 
@@ -44,13 +47,8 @@ const Create: NextPage = () => {
           value={newEvent.description}
           placeholder="description"
         />
-        <input
-          type="datetime-local"
-          name="date"
-          onChange={changeHandler}
-          value={new Date(newEvent.date).toISOString().slice(0, 16)}
-          placeholder="date"
-        />
+        <input type="date" name="date" onChange={e => setDate(e.target.value)} value={date} placeholder="date" />
+        <input type="time" name="time" onChange={e => setTime(e.target.value)} value={time} placeholder="date" />
         <input type="text" name="type" onChange={changeHandler} value={newEvent.type} placeholder="type" />
         <button type="submit">Enviar</button>
       </form>
