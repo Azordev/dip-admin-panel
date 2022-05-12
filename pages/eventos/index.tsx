@@ -1,11 +1,14 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_EVENTS } from '../../services/GraphQL/queries/events'
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Events.module.css'
 import ClientOnly from '../../views/Shared/ClientOnly'
 import { Event } from '../../services/GraphQL/types/events'
+import EventItem from '../../components/EventItem'
 
 const Events: NextPage = () => {
+  const { push } = useRouter()
   const { data, loading } = useQuery(GET_EVENTS)
 
   if (loading) {
@@ -16,19 +19,21 @@ const Events: NextPage = () => {
 
   return (
     <ClientOnly>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Events</h1>
-
-        {events.map(event => (
-          <div key={event.id} className={styles.card}>
-            <h2>{event.title}</h2>
-            <p>{event.description}</p>
-            <p>
-              {event.date} - {event.type}
-            </p>
+      <>
+        <header className={styles['page-header']}>
+          <h1 className={styles['header-title']}>Eventos</h1>
+          <button className={styles['new-event-button']} onClick={() => push('/eventos/crear')}>
+            Crear Evento
+          </button>
+        </header>
+        <div className={styles.container}>
+          <div className={styles['events-list']}>
+            {events.map(event => (
+              <EventItem key={event.id} event={event} />
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      </>
     </ClientOnly>
   )
 }

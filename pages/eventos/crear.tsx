@@ -11,7 +11,7 @@ const Create: NextPage = () => {
   const [newEvent, setNewEvent] = useState<Event>({
     title: '',
     description: '',
-    date: '',
+    date: 0,
     type: '',
   })
 
@@ -44,7 +44,13 @@ const Create: NextPage = () => {
           value={newEvent.description}
           placeholder="description"
         />
-        <input type="text" name="date" onChange={changeHandler} value={newEvent.date} placeholder="date" />
+        <input
+          type="datetime-local"
+          name="date"
+          onChange={changeHandler}
+          value={new Date(newEvent.date).toISOString()}
+          placeholder="date"
+        />
         <input type="text" name="type" onChange={changeHandler} value={newEvent.type} placeholder="type" />
         <button type="submit">Enviar</button>
       </form>
