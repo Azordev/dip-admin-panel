@@ -1,27 +1,51 @@
-import React, { useState } from 'react'
-import { GetStaticPaths, NextPage } from 'next'
+import React, { useEffect, useState } from 'react'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
-import { GET_EVENTS, GET_EVENT_BY_ID } from '../../../services/GraphQL/queries/events'
+import { useMutation, useLazyQuery } from '@apollo/client'
+import { GET_EVENT_BY_ID } from '../../../services/GraphQL/queries/events'
 import { UPDATE_EVENT } from '../../../services/GraphQL/mutations/events'
-import { Event, EventBase } from '../../../services/GraphQL/types/events'
-import client from '../../../services/GraphQL/client'
+import { EventBase } from '../../../services/GraphQL/types/events'
 import ClientOnly from '../../../views/Shared/ClientOnly'
 import styles from '../../../styles/Home.module.css'
 import { formatDate } from '../../../services/utils/dateFormat'
 
-const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
-  const { push } = useRouter()
+const EditEvent: NextPage = () => {
+  const [getOriginalEventData, { loading, data }] = useLazyQuery(GET_EVENT_BY_ID)
+  const { push, query } = useRouter()
   const [updatedEvent, setUpdatedEvent] = useState<EventBase>({
-    title: event.title,
-    description: event.description,
-    date: event.date,
-    type: event.type,
+    title: data?.title || '',
+    description: data?.description || '',
+    date: data?.date || '',
+    type: data?.type || '',
   })
-  const [date, setDate] = useState(event.date.toString().slice(0, 16).split('T')[0])
-  const [time, setTime] = useState(event.date.toString().slice(0, 16).split('T')[1])
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
 
   const [updateEvent] = useMutation(UPDATE_EVENT)
+
+  useEffect(() => {
+    const getCurrentData = async (id: string) => {
+      const { called, error } = await getOriginalEventData({
+        variables: {
+          id,
+        },
+      })
+
+      if (error || !called) {
+        console.error(error)
+      }
+
+      if (called) {
+        const { event } = data
+        setUpdatedEvent(event)
+        setDate(event.date?.toString().slice(0, 16).split('T')[0] || '')
+        setTime(event.date?.toString().slice(0, 16).split('T')[1] || '')
+      }
+    }
+
+    if (query.id) getCurrentData(query.id as string)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query])
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -30,13 +54,14 @@ const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
       return
     }
 
-    await updateEvent({ variables: { ...event, ...{ ...updatedEvent, date: formatDate(date, time) } } })
+    await updateEvent({ variables: { ...data.event, ...{ ...updatedEvent, date: formatDate(date, time) } } })
     push('/eventos')
   }
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUpdatedEvent({ ...updatedEvent, [e.target.name]: e.target.value })
 
+  console.warn(data)
   return (
     <ClientOnly>
       <div>
@@ -55,7 +80,7 @@ const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
             <input type="date" name="date" onChange={e => setDate(e.target.value)} value={date} placeholder="date" />
             <input type="time" name="time" onChange={e => setTime(e.target.value)} value={time} placeholder="date" />
             <input type="text" name="type" onChange={changeHandler} value={updatedEvent.type} placeholder="type" />
-            <button type="submit">Enviar</button>
+            <button type="submit">{loading ? 'Enviando' : 'Enviar'}</button>
           </form>
         </div>
       </div>
@@ -64,60 +89,3 @@ const EditEvent: NextPage<{ event: Event }> = ({ event }) => {
 }
 
 export default EditEvent
-
-type StaticProps = {
-  params: Event
-}
-
-export async function getStaticProps({ params: { id } }: StaticProps) {
-  const {
-    data: { event },
-    errors,
-  } = await client.query({
-    query: GET_EVENT_BY_ID,
-    variables: {
-      id,
-    },
-  })
-
-  if (errors) {
-    return {
-      props: {
-        event: null,
-      },
-    }
-  }
-
-  return {
-    props: {
-      event,
-    },
-  }
-}
-
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  const {
-    data: { events },
-    errors,
-  } = await client.query({
-    query: GET_EVENTS,
-  })
-
-  if (events.length < 1 || errors) {
-    return {
-      paths: [],
-      fallback: false,
-    }
-  }
-
-  const paths =
-    events.map((event: Event) => ({
-      params: {
-        id: event.id?.toString(),
-      },
-    })) || []
-  return {
-    paths,
-    fallback: false,
-  }
-}
