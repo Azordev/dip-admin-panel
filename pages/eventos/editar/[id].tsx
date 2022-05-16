@@ -44,7 +44,6 @@ const EditEvent: NextPage = () => {
     }
 
     if (query.id) getCurrentData(query.id as string)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
