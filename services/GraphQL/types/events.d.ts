@@ -1,7 +1,7 @@
 export interface EventBase {
   title: string
   description: string
-  date: string | number
+  date: string
   type: string
   image_url?: string
   requirements_url?: string

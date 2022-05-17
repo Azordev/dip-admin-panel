@@ -8,6 +8,7 @@ import { EventBase } from '../../../services/GraphQL/types/events'
 import ClientOnly from '../../../views/Shared/ClientOnly'
 import styles from '../../../styles/Home.module.css'
 import { formatDate } from '../../../services/utils/dateFormat'
+import { toast } from 'react-toastify'
 
 const EditEvent: NextPage = () => {
   const [getOriginalEventData, { loading, data }] = useLazyQuery(GET_EVENT_BY_ID)
@@ -25,7 +26,11 @@ const EditEvent: NextPage = () => {
 
   useEffect(() => {
     const getCurrentData = async (id: string) => {
-      const { called, error } = await getOriginalEventData({
+      const {
+        called,
+        error,
+        data: originalData,
+      } = await getOriginalEventData({
         variables: {
           id,
         },
@@ -33,10 +38,11 @@ const EditEvent: NextPage = () => {
 
       if (error || !called) {
         console.error(error)
+        return toast('Error al obtener la información', { type: 'error' })
       }
 
-      if (called) {
-        const { event } = data
+      if (called && originalData) {
+        const { event } = originalData
         setUpdatedEvent(event)
         setDate(event.date?.toString().slice(0, 16).split('T')[0] || '')
         setTime(event.date?.toString().slice(0, 16).split('T')[1] || '')
@@ -50,17 +56,18 @@ const EditEvent: NextPage = () => {
     e.preventDefault()
 
     if (!updatedEvent.title || !updatedEvent.description || !updatedEvent.type || !date || !time) {
-      return
+      return toast('Todos los campos son requeridos', { type: 'error' })
     }
 
     await updateEvent({ variables: { ...data.event, ...{ ...updatedEvent, date: formatDate(date, time) } } })
     push('/eventos')
   }
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setUpdatedEvent({ ...updatedEvent, [e.target.name]: e.target.value })
 
-  console.warn(data)
+  const buttonText = loading ? 'Enviando' : 'Enviar'
+
   return (
     <ClientOnly>
       <div>
@@ -78,8 +85,12 @@ const EditEvent: NextPage = () => {
             />
             <input type="date" name="date" onChange={e => setDate(e.target.value)} value={date} placeholder="date" />
             <input type="time" name="time" onChange={e => setTime(e.target.value)} value={time} placeholder="date" />
-            <input type="text" name="type" onChange={changeHandler} value={updatedEvent.type} placeholder="type" />
-            <button type="submit">{loading ? 'Enviando' : 'Enviar'}</button>
+            {/* <input type="text" name="type"   placeholder="type" /> */}
+            <select name="type" onChange={changeHandler} value={updatedEvent.type}>
+              <option value="Type 1">Type 1</option>
+              <option value="Type 2">Type 2</option>
+            </select>
+            <button type="submit">{buttonText}</button>
           </form>
         </div>
       </div>
