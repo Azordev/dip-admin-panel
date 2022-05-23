@@ -33,8 +33,7 @@
         "bracketSpacing": true,
         "arrowParens": "avoid"
       }
-    ],
-    "react-hooks/exhaustive-deps": "off"
+    ]
   },
   "env": {
     // change as necessary
