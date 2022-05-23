@@ -1,8 +1,5 @@
-// eslint-disable-next-line import/no-named-default
-import { default as LoginView } from '../views/Login'
+import Login from '../views/Login'
 
-const Login = () => {
-  return <LoginView />
-}
+const LoginPage = () => <Login />
 
-export default Login
+export default LoginPage

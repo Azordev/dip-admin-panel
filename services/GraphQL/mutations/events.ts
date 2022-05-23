@@ -4,7 +4,7 @@ export const INSERT_EVENT = gql`
   mutation (
     $title: String!
     $description: String
-    $date: String!
+    $date: timestamptz!
     $type: String!
     $image_url: String
     $requirements_url: String
@@ -30,7 +30,7 @@ export const UPDATE_EVENT = gql`
     $id: uuid!
     $title: String
     $description: String
-    $date: String
+    $date: timestamptz
     $type: String
     $image_url: String
     $requirements_url: String

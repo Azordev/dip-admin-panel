@@ -2,6 +2,7 @@
 @import 'animations', 'base_components', 'colors', 'fonts', 'forms', 'grid', 'layout', 'mixins', 'navigation', 'type', 'utilities';
 
 :root {
+  background: $bg-gray;
   color: $black;
   font-family: $font-base-sans-serif-family;
   font-size: $font-base-size;

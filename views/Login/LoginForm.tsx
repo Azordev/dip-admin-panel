@@ -1,18 +1,16 @@
-import React from 'react'
-import { useRouter } from 'next/router'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLazyQuery } from '@apollo/client'
-import { toast } from 'react-toastify'
+import { LoginInput } from '../../services/GraphQL/types/users'
 import PasswordInput from '../Shared/Form/PasswordInput'
 import SubmitButton from '../Shared/Form/SubmitButton'
 import TextInput from '../Shared/Form/TextInput'
 import styles from './Login.module.scss'
-import { GET_USER_SESSION } from '../../services/GraphQL/queries/users'
-import { NextPage } from 'next'
-import { LoginInput } from '../../services/GraphQL/types/users'
 
-const LoginForm: NextPage = () => {
-  const router = useRouter()
+interface LoginFormProps {
+  onSubmit: (formData: LoginInput) => void
+  loading: boolean
+}
+const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
     handleSubmit,
@@ -23,30 +21,22 @@ const LoginForm: NextPage = () => {
       password: '',
     },
   })
-  const [checkUserSession, { loading, data }] = useLazyQuery(GET_USER_SESSION)
 
-  const onSubmit = handleSubmit(async formData => {
-    const { called, error } = await checkUserSession({ variables: formData })
-    if (called) {
-      console.log(data, error)
-      if (error) {
-        console.log(error)
-        toast('Error al iniciar sesión', { type: 'error' })
-      }
+  const submitHandler = handleSubmit(onSubmit)
 
-      if (!data || data?.users?.length === 0) {
-        toast('Usuario o contraseña incorrectos', { type: 'error' })
-      }
-      if (data?.users?.length > 0) {
-        router.push('/eventos/')
-      }
-    }
-  })
+  console.error(errors)
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={submitHandler}>
       <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru</h1>
-      <TextInput placeholder="Código de socio" {...register('username', { required: true })} />
+      <TextInput
+        placeholder="Código de socio"
+        {...register('username', {
+          required: true,
+          minLength: 10,
+          maxLength: 10,
+        })}
+      />
       {errors.username && <small className={styles.error}>El usuario es requerido</small>}
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
       {errors.password && <small className={styles.error}>La contraseña es requerida</small>}

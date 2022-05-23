@@ -26,11 +26,6 @@ commit-msg:
       skip:
         - merge
         - rebase
-    spell-check:
-      run: npm run spelling --no-summary {1}
-      skip:
-        - merge
-        - rebase
 
 lint:
   parallel: true
