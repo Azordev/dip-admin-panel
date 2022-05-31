@@ -43,9 +43,4 @@ input {
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
     outline: 0;
   }
-
-  &:invalid:not(:focus) {
-    // Show a light reminder
-    background: $pink;
-  }
 }

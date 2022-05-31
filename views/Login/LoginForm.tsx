@@ -24,8 +24,6 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
 
   const submitHandler = handleSubmit(onSubmit)
 
-  console.error(errors)
-
   return (
     <form className={styles.form} onSubmit={submitHandler}>
       <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru</h1>
@@ -37,9 +35,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
           maxLength: 10,
         })}
       />
-      {errors.username && <small className={styles.error}>El usuario es requerido</small>}
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
-      {errors.password && <small className={styles.error}>La contraseña es requerida</small>}
       <SubmitButton isLoading={loading} disabled={loading} text="Ingresar" />
       <p className={styles.contact}>
         ¿Deseas asociarte a DID Perú? Escribe a
