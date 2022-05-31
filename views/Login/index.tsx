@@ -37,7 +37,7 @@ const Login: NextPage = () => {
           error: `Unexpected state:\n${JSON.stringify(data)}`,
           origin: 'ADMIN',
           type: 'UNEXPECTED',
-          codeLocation: 'views::Login::L40',
+          codeLocation: 'views::Login::L35',
         },
       })
     }
