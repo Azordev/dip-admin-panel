@@ -30,6 +30,7 @@
     "./.vscode/**",
     "node_modules/**",
     "public/**",
+    "coverage/**",
     "package.json",
     "package-lock.json",
     "README.md"

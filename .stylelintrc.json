@@ -26,5 +26,5 @@
       }
     ]
   },
-  "ignoreFiles": ["coverage/**", "**/coverage/**"]
+  "ignoreFiles": [".github/**", "**/coverage/**", "**/node_modules/**", "**/test/**", "**/public/**"]
 }
