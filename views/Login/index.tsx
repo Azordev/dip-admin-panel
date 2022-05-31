@@ -12,12 +12,12 @@ const Login: NextPage = () => {
 
   const onSubmit = async (formData: LoginInput) => {
     const { called, error } = await checkUserSession({ variables: formData })
+    if (error) {
+      console.log(error)
+      toast('Error al iniciar sesión', { type: 'error' })
+    }
     if (called) {
       console.log(data, error)
-      if (error) {
-        console.log(error)
-        toast('Error al iniciar sesión', { type: 'error' })
-      }
 
       if (!data || data?.users?.length === 0) {
         toast('Usuario o contraseña incorrectos', { type: 'error' })

@@ -11,7 +11,11 @@ interface LoginFormProps {
   loading: boolean
 }
 const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
-  const { register, handleSubmit } = useForm<LoginInput>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInput>({
     defaultValues: {
       username: '',
       password: '',
@@ -27,11 +31,11 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
         placeholder="Usuario"
         {...register('username', {
           required: true,
-          minLength: 10,
-          maxLength: 10,
         })}
       />
+      {errors.username && <small className={styles.error}>El usuario es requerido</small>}
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
+      {errors.password && <small className={styles.error}>La contraseña es requerida</small>}
       <SubmitButton isLoading={loading} disabled={loading} text="Ingresar" />
     </form>
   )
