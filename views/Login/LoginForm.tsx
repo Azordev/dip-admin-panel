@@ -11,11 +11,7 @@ interface LoginFormProps {
   loading: boolean
 }
 const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginInput>({
+  const { register, handleSubmit } = useForm<LoginInput>({
     defaultValues: {
       username: '',
       password: '',
@@ -26,9 +22,9 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
-      <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru</h1>
+      <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru - Portal de Administrador</h1>
       <TextInput
-        placeholder="Código de socio"
+        placeholder="Usuario"
         {...register('username', {
           required: true,
           minLength: 10,
@@ -37,12 +33,6 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
       />
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
       <SubmitButton isLoading={loading} disabled={loading} text="Ingresar" />
-      <p className={styles.contact}>
-        ¿Deseas asociarte a DID Perú? Escribe a
-        <a href="mailto:example@email.com" target="_blank" rel="noopener noreferrer">
-          example@email.com
-        </a>
-      </p>
     </form>
   )
 }
