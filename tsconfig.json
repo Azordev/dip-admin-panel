@@ -32,7 +32,19 @@
       ],
       "@/styles/*": [
         "./styles/*"
-      ]
+      ],
+      "@/utils/*": [
+        "./utils/*"
+      ],
+      "@/views/*": [
+        "./views/*"
+      ],
+      "@/hooks/*": [
+        "./hooks/*"
+      ],
+      "@/services/*": [
+        "./services/*"
+      ],
     }
   },
   "include": [

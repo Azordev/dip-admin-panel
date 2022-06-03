@@ -1,12 +1,12 @@
+import { useLayoutEffect } from 'react'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useLazyQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
-import { GET_USER_SESSION } from '../../services/GraphQL/queries/users'
-import { NextPage } from 'next'
-import { LoginInput } from '../../services/GraphQL/types/users'
+import { GET_USER_SESSION } from '@/services/GraphQL/queries/users'
+import { LoginInput } from '@/services/GraphQL/types/users'
+import UseError from '@/hooks/useError'
 import LoginLayout from './Layout'
-import UseError from '../../hooks/useError'
-import { useLayoutEffect } from 'react'
 
 const Login: NextPage = () => {
   const router = useRouter()

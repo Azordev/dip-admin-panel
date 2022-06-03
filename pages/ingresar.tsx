@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Login from '../views/Login'
+import Login from '@/views/Login'
 
 const LoginPage: NextPage = () => {
   const { push } = useRouter()

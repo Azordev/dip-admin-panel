@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { LoginInput } from '../../services/GraphQL/types/users'
+import { LoginInput } from '@/services/GraphQL/types/users'
 import PasswordInput from '../Shared/Form/PasswordInput'
 import SubmitButton from '../Shared/Form/SubmitButton'
 import TextInput from '../Shared/Form/TextInput'
