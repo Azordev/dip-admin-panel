@@ -44,7 +44,7 @@
     "commitlint": "^16.2.4",
     "cspell": "5.19.7",
     "eslint": "8.13.0",
-    "eslint-config-next": "12.1.5",
+    "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard": "17.0.0",
     "eslint-formatter-table": "7.32.1",
