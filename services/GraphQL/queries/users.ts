@@ -44,7 +44,6 @@ export const GET_MEMBERS = gql`
   query {
     members {
       id
-      avatar_url
       contact_information
       created_at
       email
@@ -69,6 +68,12 @@ export const GET_MEMBERS = gql`
         type
         updated_at
       }
+      user {
+        avatar_url
+        is_active
+        type
+        username
+      }
     }
   }
 `
@@ -76,7 +81,6 @@ export const GET_MEMBERS = gql`
 export const GET_MEMBER_BY_ID = gql`
   query ($id: uuid!) {
     member: members_by_pk(id: $id) {
-      avatar_url
       contact_information
       created_at
       email
@@ -101,6 +105,12 @@ export const GET_MEMBER_BY_ID = gql`
         status
         type
         updated_at
+      }
+      user {
+        avatar_url
+        is_active
+        type
+        username
       }
     }
   }

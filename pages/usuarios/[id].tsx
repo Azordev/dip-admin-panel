@@ -1,17 +1,19 @@
 import { GetStaticPaths } from 'next'
 import React from 'react'
-import client from '../../services/GraphQL/client'
-import { GET_USERS, GET_USER_BY_ID } from '../../services/GraphQL/queries/users'
-import { User as UserProp } from '../../services/GraphQL/types/users'
-import ClientOnly from '../../views/Shared/ClientOnly'
+import Image from '@/views/Shared/Image'
+import client from '@/services/GraphQL/client'
+import { GET_USERS, GET_USER_BY_ID } from '@/services/GraphQL/queries/users'
+import { User as UserProp } from '@/services/GraphQL/types/users'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const User: React.FC<{ user: UserProp }> = ({ user }) => (
   <div>
     <ClientOnly>
       {user && (
         <div>
-          <h1>{user.name}</h1>
-          <p>{user.email}</p>
+          {user.avatar_url && <Image src={user.avatar_url} alt={user.username} />}
+          <h1>{user.username}</h1>
+          <p>{user.type}</p>
         </div>
       )}
     </ClientOnly>

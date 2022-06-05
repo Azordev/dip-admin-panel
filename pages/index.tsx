@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSession, getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import LoginButton from '@/components/LoginButton'
 
 const DIDAdminPanel = () => {

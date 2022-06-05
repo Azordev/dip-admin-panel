@@ -14,7 +14,6 @@ export interface Member {
   first_names: string
   last_names?: string
   email: string
-  avatar_url: string
   created_at?: string
   updated_at?: string
   user_id: string
