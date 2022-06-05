@@ -40,6 +40,11 @@ jobs:
       # - name: test
       #   run: yarn test
       - name: build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_GRAPHQL_URL: ${{ secrets.NEXT_PUBLIC_GRAPHQL_URL }}
+          NEXT_PUBLIC_MAGIC_PK: ${{ secrets.MY_VARIABLE }}
+          MAGIC_SK: ${{ secrets.MY_VARIABLE }}
         run: yarn build
     env:
       CI: true
