@@ -1,6 +1,6 @@
 import React from 'react'
 import type { AppProps } from 'next/app'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, Zoom } from 'react-toastify'
 import { ApolloProvider } from '@apollo/client'
 import { SessionProvider } from 'next-auth/react'
 import client from '@/services/GraphQL/client'
@@ -11,7 +11,7 @@ const DIDAdminPanel = ({ Component, pageProps: { session, ...pageProps } }: AppP
   <SessionProvider session={session}>
     <ApolloProvider client={client}>
       <Component {...pageProps} />
-      <ToastContainer />
+      <ToastContainer transition={Zoom} />
     </ApolloProvider>
   </SessionProvider>
 )

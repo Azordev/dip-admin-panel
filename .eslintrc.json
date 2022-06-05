@@ -6,7 +6,6 @@
     "eslint:recommended",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:promise/recommended",
     "plugin:import/typescript",
     "plugin:prettier/recommended"
@@ -31,6 +30,12 @@
     ],
     "no-var": [
       "error"
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "destructuredArrayIgnorePattern": "^_"
+      }
     ],
     "object-curly-spacing": [
       "error",
@@ -69,7 +74,10 @@
   ],
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
     },
     "import/resolver": {
       "typescript": {

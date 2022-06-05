@@ -1,52 +1,39 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect as useEffect } from 'react'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { useLazyQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 import { GET_USER_SESSION } from '@/services/GraphQL/queries/users'
 import { LoginInput } from '@/services/GraphQL/types/users'
-import UseError from '@/hooks/useError'
+import useError from '@/hooks/useError'
 import LoginLayout from './Layout'
+import useMagicLink from '@/hooks/useMagicLink'
 
 const Login: NextPage = () => {
-  const router = useRouter()
   const [checkUserSession, { loading, data }] = useLazyQuery(GET_USER_SESSION)
-  const [createError] = UseError()
+  const [logError] = useError()
+  const magicLink = useMagicLink()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (data?.users?.length === 1) {
-      window.sessionStorage.setItem('userId', data.users[0].id)
-      window.sessionStorage.setItem('user', JSON.stringify(data.users[0]))
-      router.push('/eventos/')
+      magicLink(data.users[0])
     }
     if (data?.users?.length === 0) {
-      toast('Usuario o contraseña incorrectos', { type: 'error' })
+      toast.error('Usuario o contraseña incorrectos')
     }
-  }, [data, router])
+  }, [data, magicLink])
 
   const onSubmit = async (formData: LoginInput) => {
     const { called, error } = await checkUserSession({ variables: formData })
     if (error) {
-      createError({
-        variables: {
-          error: JSON.stringify(error),
-          origin: 'ADMIN',
-          type: 'UNEXPECTED',
-          codeLocation: 'views::Login::L30',
-        },
-      })
-      toast('Error al iniciar sesión', { type: 'error' })
+      logError(error, 'views::Login::L28', 'UNEXPECTED')
+      toast.error('Error al iniciar sesión')
     }
     if (!called) {
-      createError({
-        variables: {
-          error: 'Unexpected state',
-          origin: 'ADMIN',
-          type: 'UNEXPECTED',
-          codeLocation: 'views::Login::L41',
-        },
-      })
+      logError(Error('Unexpected state'), 'views::Login::L32', 'UNEXPECTED')
     }
+    toast.success('Usuario encontrado en base de datos, procediendo a verificar sesión...', {
+      theme: 'colored',
+    })
   }
 
   return <LoginLayout onSubmit={onSubmit} loading={loading} />
