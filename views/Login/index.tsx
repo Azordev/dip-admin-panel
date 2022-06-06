@@ -1,38 +1,38 @@
 import { useLayoutEffect as useEffect } from 'react'
 import { NextPage } from 'next'
 import { useLazyQuery } from '@apollo/client'
-import { toast } from 'react-toastify'
 import { GET_USER_SESSION } from '@/services/GraphQL/queries/users'
 import { LoginInput } from '@/services/GraphQL/types/users'
-import useError from '@/hooks/useError'
+import useLogger from '@/hooks/useLogger'
 import LoginLayout from './Layout'
 import useMagicLink from '@/hooks/useMagicLink'
 
 const Login: NextPage = () => {
   const [checkUserSession, { loading, data }] = useLazyQuery(GET_USER_SESSION)
-  const [logError] = useError()
+  const { log, warn, error } = useLogger()
   const magicLink = useMagicLink()
 
   useEffect(() => {
     if (data?.users?.length === 1) {
-      toast.success('Usuario encontrado en base de datos, procediendo a verificar sesión...', {
-        theme: 'colored',
-      })
+      log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
       magicLink(data.users[0])
     }
     if (data?.users?.length === 0) {
-      toast.error('Usuario o contraseña incorrectos')
+      warn(
+        'Login:useEffect',
+        'No se encontró ningún usuario en base de datos, Usuario o contraseña incorrectos...',
+        'INPUT',
+      )
     }
-  }, [data, magicLink])
+  }, [data, magicLink, log, warn])
 
   const onSubmit = async (formData: LoginInput) => {
-    const { called, error } = await checkUserSession({ variables: formData })
-    if (error) {
-      logError(error, 'views::Login::L31', 'UNEXPECTED')
-      toast.error('Error al iniciar sesión')
+    const { called, error: requestError } = await checkUserSession({ variables: formData })
+    if (requestError) {
+      error(requestError, 'Login:onSubmit', 'Error al verificar sesión', 'SERVER_CONNECTION')
     }
     if (!called) {
-      logError(Error('Unexpected state'), 'views::Login::L35', 'UNEXPECTED')
+      warn('Login:onSubmit', 'No se pudo verificar sesión', 'AVAILABILITY')
     }
   }
 

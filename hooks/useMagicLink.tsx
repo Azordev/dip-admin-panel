@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify'
 import { signIn } from 'next-auth/react'
 import { Magic, RPCError, RPCErrorCode } from 'magic-sdk'
-import useError from '@/hooks/useError'
+import useError from '@/hooks/useLogger'
 import { User } from '@/services/GraphQL/types/users'
 import { useRouter } from 'next/router'
 
