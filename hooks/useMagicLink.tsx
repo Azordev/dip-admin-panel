@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify'
 import { signIn } from 'next-auth/react'
 import { Magic, RPCError, RPCErrorCode } from 'magic-sdk'
 import useError from '@/hooks/useLogger'
@@ -9,7 +8,7 @@ const magicCredential = process.env.NEXT_PUBLIC_MAGIC_PK || ''
 const magic = typeof window !== 'undefined' && new Magic(magicCredential)
 
 const useMagicLink = () => {
-  const [logError] = useError()
+  const { warn } = useError()
   const router = useRouter()
 
   const magicLink = async (user: User) => {
@@ -48,11 +47,11 @@ const useMagicLink = () => {
               default:
                 message = err.rawMessage
             }
-            toast.error(message, { theme: 'colored' })
-            logError(Error(message), 'useMagicLink::magicLink::L52', 'AUTHORIZATION')
+            warn('Login:useMagicLink', message, 'AUTHORIZATION')
           }
           alert('Error al tratar de entrar con Magic, recargando formulario')
-          router.reload()
+          // Have to reload to erase internal state of Magic
+          setTimeout(() => router.reload(), 1000)
         })
     } catch (err) {
       return router.reload()

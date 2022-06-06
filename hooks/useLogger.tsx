@@ -51,8 +51,8 @@ const useLogger = () => {
       }
     }
     if (type === 'SUCCESS') toast.success(message, { theme: 'colored' })
-    if (type === 'INFORMATIVE') toast.info(message, { theme: 'colored' })
-    toast(message)
+    else if (type === 'INFORMATIVE') toast.info(message, { theme: 'colored' })
+    else toast(message)
   }
 
   return { log, warn, error }
