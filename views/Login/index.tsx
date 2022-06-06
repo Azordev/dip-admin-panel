@@ -15,6 +15,9 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (data?.users?.length === 1) {
+      toast.success('Usuario encontrado en base de datos, procediendo a verificar sesión...', {
+        theme: 'colored',
+      })
       magicLink(data.users[0])
     }
     if (data?.users?.length === 0) {
@@ -25,15 +28,12 @@ const Login: NextPage = () => {
   const onSubmit = async (formData: LoginInput) => {
     const { called, error } = await checkUserSession({ variables: formData })
     if (error) {
-      logError(error, 'views::Login::L28', 'UNEXPECTED')
+      logError(error, 'views::Login::L31', 'UNEXPECTED')
       toast.error('Error al iniciar sesión')
     }
     if (!called) {
-      logError(Error('Unexpected state'), 'views::Login::L32', 'UNEXPECTED')
+      logError(Error('Unexpected state'), 'views::Login::L35', 'UNEXPECTED')
     }
-    toast.success('Usuario encontrado en base de datos, procediendo a verificar sesión...', {
-      theme: 'colored',
-    })
   }
 
   return <LoginLayout onSubmit={onSubmit} loading={loading} />
