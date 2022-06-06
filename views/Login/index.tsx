@@ -4,8 +4,8 @@ import { useLazyQuery } from '@apollo/client'
 import { GET_USER_SESSION } from '@/services/GraphQL/queries/users'
 import { LoginInput } from '@/services/GraphQL/types/users'
 import useLogger from '@/hooks/useLogger'
-import LoginLayout from './Layout'
 import useMagicLink from '@/hooks/useMagicLink'
+import LoginLayout from './Layout'
 
 const Login: NextPage = () => {
   const [checkUserSession, { loading, data }] = useLazyQuery(GET_USER_SESSION)
