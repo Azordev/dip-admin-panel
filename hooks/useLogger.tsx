@@ -46,7 +46,6 @@ const useLogger = () => {
       console.info(JSON.stringify({ codeLocation, message, type }, null, 4))
       if (type === 'DEBUG') {
         console.trace()
-        // eslint-disable-next-line no-debugger
         debugger
       }
     }
