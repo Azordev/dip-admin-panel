@@ -8,7 +8,6 @@ export const magicProviderCredentials = {
   credentials: {
     didToken: { label: 'DID Token', type: 'text' },
   },
-  // eslint-disable-next-line no-unused-vars
   async authorize({ didToken }, _req) {
     magic.token.validate(didToken)
 

@@ -6,7 +6,6 @@ import styles from './Login.module.scss'
 import LoginForm from './LoginForm'
 
 interface LoginFormProps {
-  // eslint-disable-next-line no-unused-vars
   onSubmit: (_formData: LoginInput) => void
   loading: boolean
 }
