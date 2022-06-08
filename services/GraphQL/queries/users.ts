@@ -1,13 +1,20 @@
 import { gql } from '@apollo/client'
 
 export const GET_USER_SESSION = gql`
-  query login($password: String = "", $username: String = "") {
-    users(where: { password: { _eq: $password }, username: { _eq: $username } }) {
+  query login($password: String!, $username: String!) {
+    users(
+      where: {
+        _and: {
+          type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] }
+          username: { _eq: $username }
+          password: { _eq: $password }
+          is_active: { _eq: true }
+        }
+      }
+    ) {
       username
       type
-      is_active
       id
-      created_at
       avatar_url
     }
   }
