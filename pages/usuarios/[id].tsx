@@ -11,9 +11,11 @@ const User: FC<{ user: UserProp }> = ({ user }) => (
     <ClientOnly>
       {user && (
         <div>
-          {user.avatar_url && <Image src={user.avatar_url} alt={user.username} />}
-          <h1>{user.username}</h1>
-          <p>{user.type}</p>
+          {user.avatar_url && <Image src={user.avatar_url} alt={user.member_code} />}
+          <h1>
+            {user.member_information?.first_names} {user.member_information?.last_names}
+          </h1>
+          <p>{user.position}</p>
         </div>
       )}
     </ClientOnly>

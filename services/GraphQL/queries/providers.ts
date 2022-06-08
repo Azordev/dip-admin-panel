@@ -18,20 +18,6 @@ export const GET_PROVIDERS = gql`
   }
 `
 
-export const GET_PROVIDERS_BY_CATEGORY = gql`
-  query ($category_id: uuid!) {
-    providers: categories_by_pk(id: $category_id) {
-      provider_categories {
-        provider {
-          commercial_name
-          id
-          logo_url
-        }
-      }
-    }
-  }
-`
-
 export const GET_PROVIDER_BY_ID = gql`
   query ($id: uuid!) {
     provider: providers_by_pk(id: $id) {
@@ -45,13 +31,6 @@ export const GET_PROVIDER_BY_ID = gql`
       details
       is_active
       logo_url
-      categories {
-        category {
-          id
-          name
-          is_active
-        }
-      }
     }
   }
 `

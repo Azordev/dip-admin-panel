@@ -13,16 +13,26 @@ const Login: NextPage = () => {
   const magicLink = useMagicLink()
 
   useEffect(() => {
-    if (data?.users?.length === 1) {
-      log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
-      magicLink(data.users[0])
-    }
     if (data?.users?.length === 0) {
       warn(
         'Login:useEffect',
         'No se encontró ningún usuario en base de datos, Usuario o contraseña incorrectos...',
         'INPUT',
       )
+    } else {
+      if (data?.users?.length > 1) {
+        warn(
+          'Login:useEffect',
+          'Se encontraron varios usuarios en base de datos, usando el primer email. Informe al servicio técnico del incidente...',
+          'INPUT',
+        )
+      }
+      log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
+      if (data.users[0]?.is_active && data.users[0]?.member_information?.email) {
+        magicLink(data.users[0])
+      } else {
+        warn('Login:useEffect', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
+      }
     }
   }, [data, magicLink, log, warn])
 

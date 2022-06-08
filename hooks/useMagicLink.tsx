@@ -17,7 +17,7 @@ const useMagicLink = () => {
 
       // login with Magic
       await magic.auth
-        .loginWithMagicLink({ email: user.username })
+        .loginWithMagicLink({ email: user.member_information?.email || '' })
         .then(async didToken => {
           window.sessionStorage.setItem('userId', user.id)
           window.sessionStorage.setItem('user', JSON.stringify(user))
