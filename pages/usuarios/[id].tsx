@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { GetStaticPaths } from 'next'
 import client from '@/services/GraphQL/client'
-import { GET_USERS, GET_USER_BY_ID } from '@/services/GraphQL/queries/users'
+import { GET_USERS } from '@/services/GraphQL/queries/users'
 import { User as UserProp } from '@/services/GraphQL/types/users'
 import Image from '@/views/Shared/Image'
 import ClientOnly from '@/views/Shared/ClientOnly'
@@ -28,25 +28,7 @@ type StaticProps = {
   params: UserProp
 }
 
-export async function getStaticProps({ params: { id } }: StaticProps) {
-  const {
-    data: { user },
-    errors,
-  } = await client.query({
-    query: GET_USER_BY_ID,
-    variables: {
-      id,
-    },
-  })
-
-  if (errors) {
-    return {
-      props: {
-        event: null,
-      },
-    }
-  }
-
+export async function getStaticProps({ params: user }: StaticProps) {
   return {
     props: {
       user,
@@ -72,7 +54,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   const paths =
     users.map((user: UserProp) => ({
       params: {
-        id: user.id?.toString(),
+        ...user,
       },
     })) || []
   return {

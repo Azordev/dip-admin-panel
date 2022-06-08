@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client'
-import { usersInfoFragment, memberInfoFragment } from '../types/users.d'
+import { eventInfo } from '../types/events.d'
+import { subscriptionInfo } from '../types/payments.d'
+import { usersInfo, memberInfo } from '../types/users.d'
 
 export const GET_USER_SESSION = gql`
   query login($password: String!, $memberCode: String!) {
@@ -13,95 +15,69 @@ export const GET_USER_SESSION = gql`
         }
       }
     ) {
-      ...usersInfo
+      ${usersInfo}
       member_information {
-        ...memberInfo
+        ${memberInfo}
       }
     }
   }
-  ${usersInfoFragment}
-  ${memberInfoFragment}
 `
 
 export const GET_USER_BY_ID = gql`
   query ($id: uuid!) {
     user: users_by_pk(id: $id) {
       is_active
-      ...usersInfo
+      ${usersInfo}
       member_information {
-        ...memberInfo
+        ${memberInfo}
       }
     }
   }
-  ${usersInfoFragment}
-  ${memberInfoFragment}
 `
 
 export const GET_USERS = gql`
   query {
     users {
       is_active
-      ...usersInfo
+      ${usersInfo}
     }
   }
-  ${usersInfoFragment}
 `
 
 export const GET_MEMBERS = gql`
   query {
     members {
-      ...memberInfo
+      ${memberInfo}
       events_inscribed {
-        event_information {
-          date
-          image_url
-          is_active
-          title
+        event: event_information {
+          ${eventInfo}
         }
       }
       subscriptions {
-        id
-        expiration
-        details
-        status
-        type
+        ${subscriptionInfo}
       }
       user {
-        ...usersInfo
+        ${usersInfo}
       }
     }
   }
-  ${usersInfoFragment}
-  ${memberInfoFragment}
 `
 
 export const GET_MEMBER_BY_ID = gql`
   query ($id: uuid!) {
     member: members_by_pk(id: $id) {
-      ...memberInfo
+      ${memberInfo}
       events_inscribed {
-        event_information {
-          id
-          date
-          image_url
-          is_active
-          title
+        event: event_information {
+          ${eventInfo}
         }
       }
       subscriptions {
-        id
-        expiration
-        created_at
-        details
-        status
-        type
-        updated_at
+        ${subscriptionInfo}
       }
       user {
-        ...usersInfo
+        ${usersInfo}
       }
     }
   }
-  ${usersInfoFragment}
-  ${memberInfoFragment}
 `

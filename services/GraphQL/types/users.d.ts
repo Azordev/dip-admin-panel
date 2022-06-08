@@ -1,17 +1,12 @@
-import { gql } from '@apollo/client'
-
-export const memberInfoFragment = gql`
-  fragment memberInfo on Member {
-    id
-    contact_information
-    private_information
-    email
-    phone
-    address
-    first_names
-    last_names
-    user_id
-  }
+export const memberInfo = `
+  id
+  contact_information
+  private_information
+  email
+  address
+  first_names
+  last_names
+  user_id
 `
 
 export interface Member {
@@ -26,13 +21,11 @@ export interface Member {
   user_id: string
 }
 
-export const usersInfoFragment = gql`
-  fragment usersInfo on User {
-    id
-    position
-    avatar_url
-    type
-  }
+export const usersInfo = `
+  id
+  position
+  avatar_url
+  type
 `
 
 export interface User {
