@@ -13,6 +13,7 @@ const Login: NextPage = () => {
   const magicLink = useMagicLink()
 
   useEffect(() => {
+    if (!data) return
     if (data?.users?.length === 0) {
       warn(
         'Login:useEffect',
