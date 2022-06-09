@@ -11,12 +11,11 @@ export const GET_USER_SESSION = gql`
           type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] }
           member_code: { _eq: $memberCode }
           password: { _eq: $password }
-          is_active: { _eq: true }
         }
       }
     ) {
       ${usersInfo}
-      member_information {
+      member_info {
         ${memberInfo}
       }
     }
@@ -28,7 +27,7 @@ export const GET_USER_BY_ID = gql`
     user: users_by_pk(id: $id) {
       is_active
       ${usersInfo}
-      member_information {
+      member_info {
         ${memberInfo}
       }
     }

@@ -6,10 +6,12 @@ import { LoginInput } from '@/services/GraphQL/types/users'
 import useLogger from '@/hooks/useLogger'
 import useMagicLink from '@/hooks/useMagicLink'
 import LoginLayout from './Layout'
+import { useRouter } from 'next/router'
 
 const Login: NextPage = () => {
   const [checkUserSession, { loading, data }] = useLazyQuery(GET_USER_SESSION)
   const { log, warn, error } = useLogger()
+  const router = useRouter()
   const magicLink = useMagicLink()
 
   useEffect(() => {
@@ -17,25 +19,29 @@ const Login: NextPage = () => {
     if (data?.users?.length === 0) {
       warn(
         'Login:useEffect',
-        'No se encontró ningún usuario en base de datos, Usuario o contraseña incorrectos...',
+        'No se encontró ningún usuario en base de datos con esas credenciales, Usuario o contraseña incorrectos...',
         'INPUT',
       )
     } else {
+      // DB have a condition to check "code_member" is unique, so this state should be impossible
       if (data?.users?.length > 1) {
-        warn(
+        error(
+          Error('Se encontraron más de un usuario en base de datos'),
           'Login:useEffect',
-          'Se encontraron varios usuarios en base de datos, usando el primer email. Informe al servicio técnico del incidente...',
-          'INPUT',
+          'Se encontraron varios usuarios en base de datos con estas credenciales. Informe al servicio técnico del incidente...',
+          'UNEXPECTED',
         )
+        setTimeout(() => router.reload(), 1000)
+        return
       }
       log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
-      if (data.users[0]?.is_active && data.users[0]?.member_information?.email) {
+      if (data.users[0]?.is_active && data.users[0]?.member_info?.email) {
         magicLink(data.users[0])
       } else {
         warn('Login:useEffect', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
       }
     }
-  }, [data, magicLink, log, warn])
+  }, [data, magicLink, log, warn, error, router])
 
   const onSubmit = async (formData: LoginInput) => {
     const { called, error: requestError } = await checkUserSession({ variables: formData })

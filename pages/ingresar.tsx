@@ -3,15 +3,17 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Login from '@/views/Login'
 import ClientOnly from '@/views/Shared/ClientOnly'
+import { useSession } from 'next-auth/react'
 
 const LoginPage: NextPage = () => {
   const { push } = useRouter()
+  const { data: session, status } = useSession()
 
   useEffect(() => {
-    if (window.sessionStorage.getItem('userId')) {
+    if (session && status === 'authenticated') {
       push('/eventos')
     }
-  }, [push])
+  }, [push, session, status])
   return (
     <ClientOnly>
       <Login />

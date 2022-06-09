@@ -26,6 +26,7 @@ export const usersInfo = `
   position
   avatar_url
   type
+  is_active
 `
 
 export interface User {
@@ -38,7 +39,7 @@ export interface User {
   is_active?: boolean
   created_at?: string
   updated_at?: string
-  member_information?: Member
+  member_info?: Member
 }
 
 export interface LoginInput {

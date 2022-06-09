@@ -3,7 +3,7 @@ import Icons8 from '../Icons8'
 
 interface Props {
   icon?: string
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (_e: React.MouseEvent<HTMLButtonElement>) => void
   className?: string
   type?: 'submit' | 'reset' | 'button'
   iconAtEnd?: boolean

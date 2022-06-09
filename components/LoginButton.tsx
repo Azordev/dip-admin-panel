@@ -1,19 +1,17 @@
+import Button from '@/views/Shared/Button'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
-export default function LoginButton() {
+const LoginButton = () => {
   const { data: session } = useSession()
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user?.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
+
+  const icon = session ? 'logout-rounded-right--v1' : 'login-rounded-right--v1'
+  const text = session ? 'Salir' : 'Ingresar'
+
   return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
+    <Button icon={icon} onClick={() => (session ? signOut() : signIn())}>
+      {text}
+    </Button>
   )
 }
+
+export default LoginButton

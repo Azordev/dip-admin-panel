@@ -7,19 +7,17 @@ import Image from '@/views/Shared/Image'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const User: FC<{ user: UserProp }> = ({ user }) => (
-  <div>
-    <ClientOnly>
-      {user && (
-        <div>
-          {user.avatar_url && <Image src={user.avatar_url} alt={user.member_code} />}
-          <h1>
-            {user.member_information?.first_names} {user.member_information?.last_names}
-          </h1>
-          <p>{user.position}</p>
-        </div>
-      )}
-    </ClientOnly>
-  </div>
+  <ClientOnly>
+    {user && (
+      <div>
+        {user.avatar_url && <Image src={user.avatar_url} alt={user.member_code} />}
+        <h1>
+          {user.member_info?.first_names} {user.member_info?.last_names}
+        </h1>
+        <p>{user.position}</p>
+      </div>
+    )}
+  </ClientOnly>
 )
 
 export default User

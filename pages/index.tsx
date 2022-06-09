@@ -8,7 +8,7 @@ const DIDAdminPanel = () => {
     <div>
       <h1>DID Admin Panel</h1>
       {status === 'loading' && <p>Loading...</p>}
-      {status === 'unauthenticated' && <LoginButton />}
+      <LoginButton />
       {status === 'authenticated' && (
         <>
           <p>Signed in as {session.user?.email}</p>
