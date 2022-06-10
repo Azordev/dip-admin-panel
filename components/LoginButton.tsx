@@ -4,7 +4,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 const LoginButton = () => {
   const { data: session } = useSession()
 
-  const icon = session ? 'logout-rounded-right--v1' : 'login-rounded-right--v1'
+  const icon = session ? 'exit' : 'login-rounded-right--v1'
   const text = session ? 'Salir' : 'Ingresar'
 
   return (
