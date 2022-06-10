@@ -12,7 +12,7 @@ type ErrorBoundaryState = {
   error: Error | null
   errorInfo: ErrorInfo | null
   hasError: boolean
-  errorId: string | null
+  errorId?: string
 }
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   static propTypes: { children: PropTypes.ReactComponentLike }
@@ -35,16 +35,19 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   // This method is called if any error is encountered
   async componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    const userId = window.sessionStorage.getItem('userId')
     // You can use your own error logging service here
     const variables = {
       codeLocation: 'ErrorBoundary::componentDidCatch',
-      error,
+      error: { error: error.message, errorInfo },
+      userId,
       type: 'UNEXPECTED',
     }
     let errorId = ''
     if (process.env.NODE_ENV !== 'production') {
       console.error(JSON.stringify(variables, null, 4))
     } else {
+      const stringError = JSON.stringify({ error: error.message, errorInfo })
       const {
         data: {
           error: { id },
@@ -54,7 +57,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         mutation: INSERT_ERROR,
         variables: {
           ...variables,
-          error: JSON.stringify(error),
+          error: stringError,
           origin: 'ADMIN',
         },
       })
@@ -74,12 +77,12 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   render() {
-    const { hasError, errorInfo } = this.state
+    const { hasError, errorInfo, errorId } = this.state
     const { children } = this.props
     // Check if the error is thrown
     if (hasError) {
       // You can render any custom fallback UI
-      return <Fallback errorInfo={errorInfo} />
+      return <Fallback errorInfo={errorInfo} errorId={errorId} />
     }
 
     // Normally, just render children, i.e. in

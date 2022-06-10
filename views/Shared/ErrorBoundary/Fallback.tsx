@@ -19,7 +19,7 @@ const Error = ({ errorInfo = { componentStack: 'error' }, errorId }: ErrorProps)
     </button>
     <details className="error-details">
       <summary>Click for error details</summary>
-      Info:{errorInfo && errorInfo?.componentStack.toString()}
+      Info:{errorInfo && <pre style={{ whiteSpace: 'pre-wrap' }}>{errorInfo?.componentStack.toString()}</pre>}
       ErrorId:{errorId && errorId}
     </details>
   </div>
