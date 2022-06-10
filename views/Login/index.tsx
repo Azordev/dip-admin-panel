@@ -32,8 +32,8 @@ const Login: NextPage = () => {
         setTimeout(() => router.reload(), 1000)
         return
       }
-      log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
       if (data.users[0]?.is_active && data.users[0]?.member_info?.email) {
+        log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
         const user = data.users[0]
         window.sessionStorage.setItem('userId', user.id)
         window.sessionStorage.setItem('user', JSON.stringify(user))
