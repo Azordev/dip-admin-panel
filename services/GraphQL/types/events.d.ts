@@ -1,3 +1,11 @@
+export const eventInfo = `
+  id
+  date
+  image_url
+  is_active
+  title
+`
+
 export interface EventBase {
   title: string
   description: string

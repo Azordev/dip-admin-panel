@@ -7,7 +7,7 @@ import TextInput from '../Shared/Form/TextInput'
 import styles from './Login.module.scss'
 
 interface LoginFormProps {
-  onSubmit: (formData: LoginInput) => void
+  onSubmit: (_formData: LoginInput) => void
   loading: boolean
 }
 const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
@@ -17,7 +17,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
     formState: { errors },
   } = useForm<LoginInput>({
     defaultValues: {
-      username: '',
+      memberCode: '',
       password: '',
     },
   })
@@ -28,12 +28,12 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
     <form className={styles.form} onSubmit={submitHandler}>
       <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru - Portal de Administrador</h1>
       <TextInput
-        placeholder="Usuario"
-        {...register('username', {
+        placeholder="Código de Miembro"
+        {...register('memberCode', {
           required: true,
         })}
       />
-      {errors.username && <small className={styles.error}>El usuario es requerido</small>}
+      {errors.memberCode && <small className={styles.error}>El código es requerido</small>}
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
       {errors.password && <small className={styles.error}>La contraseña es requerida</small>}
       <SubmitButton isLoading={loading} disabled={loading} text="Ingresar" />

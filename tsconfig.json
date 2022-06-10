@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "lib": [
       "dom",
@@ -50,15 +51,14 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
+    "**/*.js",
     "**/*.tsx",
     "**/*.d.ts",
   ],
   "exclude": [
     "node_modules",
     "coverage",
-    ".next",
     ".vscode",
     ".github",
-    "public"
   ]
 }

@@ -1,17 +1,24 @@
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import Login from '@/views/Login'
+import ClientOnly from '@/views/Shared/ClientOnly'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const LoginPage: NextPage = () => {
-  const { push } = useRouter()
+  const router = useRouter()
 
   useEffect(() => {
-    if (window.sessionStorage.getItem('userId')) {
-      push('/eventos')
+    const user = window.sessionStorage.getItem('user')
+
+    if (user) {
+      router.push('/')
     }
-  }, [push])
-  return <Login />
+  }, [router])
+  return (
+    <ClientOnly>
+      <Login />
+    </ClientOnly>
+  )
 }
 
 export default LoginPage

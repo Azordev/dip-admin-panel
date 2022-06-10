@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [16.x]
 
     steps:
       - name: Checkout Code
@@ -40,6 +40,11 @@ jobs:
       # - name: test
       #   run: yarn test
       - name: build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_GRAPHQL_URL: ${{ secrets.NEXT_PUBLIC_GRAPHQL_URL }}
+          NEXT_PUBLIC_MAGIC_PK: ${{ secrets.NEXT_PUBLIC_MAGIC_PK }}
+          MAGIC_SK: ${{ secrets.MAGIC_SK }}
         run: yarn build
     env:
       CI: true

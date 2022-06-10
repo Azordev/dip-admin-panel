@@ -1,14 +1,23 @@
 import { gql } from '@apollo/client'
+import { eventInfo } from '../types/events.d'
+import { subscriptionInfo } from '../types/payments.d'
+import { usersInfo, memberInfo } from '../types/users.d'
 
 export const GET_USER_SESSION = gql`
-  query login($password: String = "", $username: String = "") {
-    users(where: { password: { _eq: $password }, username: { _eq: $username } }) {
-      username
-      type
-      is_active
-      id
-      created_at
-      avatar_url
+  query login($password: String!, $memberCode: String!) {
+    users(
+      where: {
+        _and: {
+          type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] }
+          member_code: { _eq: $memberCode }
+          password: { _eq: $password }
+        }
+      }
+    ) {
+      ${usersInfo}
+      member_info {
+        ${memberInfo}
+      }
     }
   }
 `
@@ -16,12 +25,11 @@ export const GET_USER_SESSION = gql`
 export const GET_USER_BY_ID = gql`
   query ($id: uuid!) {
     user: users_by_pk(id: $id) {
-      username
-      type
       is_active
-      id
-      created_at
-      avatar_url
+      ${usersInfo}
+      member_info {
+        ${memberInfo}
+      }
     }
   }
 `
@@ -29,13 +37,8 @@ export const GET_USER_BY_ID = gql`
 export const GET_USERS = gql`
   query {
     users {
-      username
-      type
-      password
       is_active
-      id
-      created_at
-      avatar_url
+      ${usersInfo}
     }
   }
 `
@@ -43,31 +46,17 @@ export const GET_USERS = gql`
 export const GET_MEMBERS = gql`
   query {
     members {
-      id
-      avatar_url
-      contact_information
-      created_at
-      email
+      ${memberInfo}
       events_inscribed {
-        event_information {
-          date
-          image_url
-          is_active
-          title
+        event: event_information {
+          ${eventInfo}
         }
       }
-      first_names
-      last_names
-      user_id
-      updated_at
       subscriptions {
-        id
-        expiration
-        created_at
-        details
-        status
-        type
-        updated_at
+        ${subscriptionInfo}
+      }
+      user {
+        ${usersInfo}
       }
     }
   }
@@ -76,31 +65,17 @@ export const GET_MEMBERS = gql`
 export const GET_MEMBER_BY_ID = gql`
   query ($id: uuid!) {
     member: members_by_pk(id: $id) {
-      avatar_url
-      contact_information
-      created_at
-      email
+      ${memberInfo}
       events_inscribed {
-        event_information {
-          date
-          image_url
-          is_active
-          title
+        event: event_information {
+          ${eventInfo}
         }
       }
-      first_names
-      id
-      last_names
-      user_id
-      updated_at
       subscriptions {
-        id
-        expiration
-        created_at
-        details
-        status
-        type
-        updated_at
+        ${subscriptionInfo}
+      }
+      user {
+        ${usersInfo}
       }
     }
   }
