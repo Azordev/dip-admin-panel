@@ -1,3 +1,4 @@
+// @ts-nocheck
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 
@@ -17,15 +18,7 @@ const nextConfig = {
         fs: false,
       }
     }
-    return {
-      ...config,
-      entry() {
-        return config.entry().then(entry => ({
-          ...entry,
-          cli: path.resolve(process.cwd(), 'lib/cli.ts'),
-        }))
-      },
-    }
+    return config
   },
 }
 
