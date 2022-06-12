@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import styles from '../../styles/Home.module.css'
-import { ProviderBase as Provider } from '../../services/GraphQL/providers/types'
-import { CREATE_PROVIDER } from '../../services/GraphQL/providers/mutations'
+import { ProviderBase as Provider } from '@/services/GraphQL/providers/types'
+import { CREATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
+import styles from '@/styles/Home.module.css'
 
 const Create: NextPage = () => {
   const { push } = useRouter()
@@ -17,7 +17,7 @@ const Create: NextPage = () => {
 
   const [createProvider] = useMutation(CREATE_PROVIDER)
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!newProvider.commercial_name || !newProvider.b2b_email) {
@@ -28,7 +28,7 @@ const Create: NextPage = () => {
     push('/proveedores')
   }
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setNewProviders({ ...newProvider, [e.target.name]: e.target.value })
 
   return (

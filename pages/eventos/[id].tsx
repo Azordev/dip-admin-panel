@@ -1,40 +1,21 @@
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
-import client from '../../services/GraphQL/client'
-import { EVENT_BY_ID } from '../../services/GraphQL/events/queries'
-import { Event as EventProps } from '../../services/GraphQL/events/types'
-import ClientOnly from '../../views/Shared/ClientOnly'
-import Image from '../../views/Shared/Image'
+import { useQuery } from '@apollo/client'
+import { EVENT_BY_ID } from '@/services/GraphQL/events/queries'
+import useLogger from '@/hooks/useLogger'
+import ClientOnly from '@/views/Shared/ClientOnly'
+import Image from '@/views/Shared/Image'
+import { Event as EventFields } from '@/services/GraphQL/events/types'
 
-const Event: React.FC = () => {
-  const [event, setEvent] = React.useState<EventProps>()
-  const [loading, setLoading] = React.useState(true)
-  const { push, query } = useRouter()
+const Event: NextPage = () => {
+  const { data: event, loading, error } = useQuery<EventFields>(EVENT_BY_ID)
+  const { push } = useRouter()
+  const { error: LogError } = useLogger()
 
-  useEffect(() => {
-    const fetchEvent = async (id: string) => {
-      const {
-        data: { event },
-        errors,
-      } = await client.query({
-        query: EVENT_BY_ID,
-        variables: {
-          id,
-        },
-      })
-
-      if (errors) {
-        push('/eventos')
-      }
-
-      setEvent(event)
-      setLoading(false)
-    }
-
-    if (query.id && query.id.length > 0 && typeof query.id === 'string') {
-      fetchEvent(query.id)
-    }
-  }, [query.id, push])
+  if (error) {
+    LogError(error, 'Event.tsx', 'useQuery(EVENT_BY_ID)', 'UNEXPECTED')
+    push('/eventos')
+  }
 
   return (
     <div>

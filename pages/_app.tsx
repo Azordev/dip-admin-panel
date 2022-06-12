@@ -1,12 +1,12 @@
+import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 import { ApolloProvider } from '@apollo/client'
 import { ToastContainer, Zoom } from 'react-toastify'
-import { useRouter } from 'next/router'
 import client from '@/services/GraphQL/client'
 import ErrorBoundary from '@/views/Shared/ErrorBoundary'
-import '@/styles/globals.scss'
 import 'react-toastify/dist/ReactToastify.min.css'
-import { useEffect } from 'react'
+import '@/styles/globals.scss'
 
 const DIDAdminPanel = ({ Component, pageProps: { ...pageProps } }: AppProps) => {
   const router = useRouter()

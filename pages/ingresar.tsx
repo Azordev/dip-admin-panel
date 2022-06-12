@@ -1,8 +1,8 @@
+import { useEffect } from 'react'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Login from '@/views/Login'
 import ClientOnly from '@/views/Shared/ClientOnly'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 
 const LoginPage: NextPage = () => {
   const router = useRouter()

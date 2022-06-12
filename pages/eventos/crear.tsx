@@ -1,18 +1,17 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CREATE_EVENT } from '../../services/GraphQL/events/mutations'
-import styles from '../../styles/Home.module.css'
-import { EventEditable } from '../../services/GraphQL/events/types'
+import { CREATE_EVENT } from '@/services/GraphQL/events/mutations'
+import { EventEditable } from '@/services/GraphQL/events/types'
+import styles from '@/styles/Home.module.css'
 
 const Create: NextPage = () => {
-  const { push } = useRouter()
   const [newEvent, setNewEvent] = useState<EventEditable>()
-
   const [createEvent] = useMutation(CREATE_EVENT)
+  const { push } = useRouter()
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!newEvent?.title || !newEvent?.description || !newEvent?.type || !newEvent?.date) {
@@ -23,7 +22,7 @@ const Create: NextPage = () => {
     push('/eventos')
   }
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (!newEvent) return
     let event = newEvent
     if (e.target.name === 'date') {
