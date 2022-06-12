@@ -1,7 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import client from '@/services/GraphQL/client'
-import { INSERT_ERROR } from '@/services/GraphQL/errors/errors'
+import { CREATE_ERROR } from '@/services/GraphQL/errors/mutations'
 import Fallback from './Fallback'
 
 interface ErrorBoundaryProps {
@@ -54,7 +54,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         },
         errors,
       } = await client.mutate({
-        mutation: INSERT_ERROR,
+        mutation: CREATE_ERROR,
         variables: {
           ...variables,
           error: stringError,

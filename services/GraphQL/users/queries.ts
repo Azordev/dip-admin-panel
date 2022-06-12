@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
-import { eventInfo } from '../events/types'
-import { subscriptionInfo } from '../payments/types'
-import { usersInfo, memberInfo } from './types'
+import { eventInfo } from '../events/types.d'
+import { subscriptionInfo } from '../payments/types.d'
+import { usersInfo, memberInfo } from './types.d'
 
 export const USER_SESSION = gql`
   query login($password: String!, $memberCode: String!) {

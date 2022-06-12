@@ -28,6 +28,8 @@ export interface EventBase {
 }
 
 export interface EventEditable extends EventBase {
+  title?: string
+  type?: string
   image_url?: string
   requirements_url?: string
   image_url?: string
@@ -36,7 +38,7 @@ export interface EventEditable extends EventBase {
   contact_information?: string
 }
 
-export interface Event extends EventBase {
+export interface Event extends EventEditable {
   id: string
   is_active: boolean
   created_at: string

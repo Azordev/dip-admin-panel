@@ -4,52 +4,54 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_EVENT } from '../../services/GraphQL/events/mutations'
 import styles from '../../styles/Home.module.css'
-import { EventBase as Event } from '../../services/GraphQL/events/types'
-import { formatDate } from '../../services/utils/dateFormat'
+import { EventEditable } from '../../services/GraphQL/events/types'
 
 const Create: NextPage = () => {
   const { push } = useRouter()
-  const [newEvent, setNewEvent] = useState<Event>({
-    title: '',
-    description: '',
-    date: '',
-    type: '',
-  })
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+  const [newEvent, setNewEvent] = useState<EventEditable>()
 
   const [createEvent] = useMutation(CREATE_EVENT)
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!newEvent.title || !newEvent.description || !newEvent.type || !date || !time) {
+    if (!newEvent?.title || !newEvent?.description || !newEvent?.type || !newEvent?.date) {
       return
     }
 
-    createEvent({ variables: { ...newEvent, date: formatDate(date, time) } })
+    createEvent({ variables: { ...newEvent } })
     push('/eventos')
   }
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setNewEvent({ ...newEvent, [e.target.name]: e.target.value })
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!newEvent) return
+    let event = newEvent
+    if (e.target.name === 'date') {
+      const formattedDate = new Date(e.target.value).toISOString()
+      event.date = formattedDate
+    }
+    event = {
+      ...newEvent,
+      [e.target.name]: e.target.value,
+    }
+    setNewEvent(event)
+  }
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Create Event</h1>
 
       <form onSubmit={submitHandler}>
-        <input type="text" name="title" onChange={changeHandler} value={newEvent.title} placeholder="title" />
+        <input type="text" name="title" onChange={changeHandler} value={newEvent?.title} placeholder="title" />
         <input
           type="text"
           name="description"
           onChange={changeHandler}
-          value={newEvent.description}
+          value={newEvent?.description}
           placeholder="description"
         />
-        <input type="date" name="date" onChange={e => setDate(e.target.value)} value={date} placeholder="date" />
-        <input type="time" name="time" onChange={e => setTime(e.target.value)} value={time} placeholder="date" />
-        <input type="text" name="type" onChange={changeHandler} value={newEvent.type} placeholder="type" />
+        <input type="date" name="datetime-local" onChange={changeHandler} value={newEvent?.date} />
+        <input type="text" name="type" onChange={changeHandler} value={newEvent?.type} placeholder="type" />
         <button type="submit">Enviar</button>
       </form>
     </div>

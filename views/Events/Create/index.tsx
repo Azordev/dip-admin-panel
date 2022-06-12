@@ -40,7 +40,6 @@ const UpdateEvent: FC = () => {
   }, [query, originalEvent, getOriginalEventData])
 
   const submitHandler = async (updatedEvent: EventEditable) => {
-    console.log(updatedEvent)
     const formattedDate = new Date(updatedEvent.date).toISOString()
     await updateEvent({
       variables: { ...originalEvent, ...updatedEvent, date: formattedDate },
