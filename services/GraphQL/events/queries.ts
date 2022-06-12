@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const EVENTS = gql`
-  query ($query: String, $limit: Int = 24, $offset: Int = 0) {
+  query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     events(
       limit: $limit
       offset: $offset

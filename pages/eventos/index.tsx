@@ -15,6 +15,9 @@ const Events: NextPage = () => {
     return <h2>Loading...</h2>
   }
 
+  if (!data) {
+    return <h2>No hay eventos</h2>
+  }
   const events: Event[] = data.events
 
   return (
