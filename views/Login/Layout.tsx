@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import { LoginInput } from '@/services/GraphQL/types/users'
+import { LoginInput } from '@/services/GraphQL/users/users'
 import Centered from '../Shared/Layouts/Centered'
 import LogoDID from '../SVGs/LogoDID/LogoDID'
 import styles from './Login.module.scss'

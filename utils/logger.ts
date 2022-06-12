@@ -1,5 +1,5 @@
 import client from '@/services/GraphQL/client'
-import { INSERT_ERROR } from '@/services/GraphQL/mutations/errors'
+import { INSERT_ERROR } from '@/services/GraphQL/errors/errors'
 
 export const logError = (error: Error) => {
   if (process.env.NODE_ENV === 'development') {

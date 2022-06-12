@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { EventBase } from '../../../services/GraphQL/types/events'
+import { Event, EventEditable } from '../../../services/GraphQL/events/types'
 import styles from '../../../styles/Home.module.css'
 import EditEventForm from './EditEventForm'
 
 interface EditEventFormProps {
-  onSubmit: (formData: EventBase) => void
+  onSubmit: (_formData: EventEditable) => void
   loading: boolean
-  originalEvent?: EventBase
+  originalEvent?: Event
 }
 const Layout: FC<EditEventFormProps> = ({ onSubmit, loading, originalEvent }) => (
   <div>

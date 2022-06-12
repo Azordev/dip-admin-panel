@@ -2,11 +2,11 @@ import type { NextPage } from 'next'
 import { useQuery } from '@apollo/client'
 import styles from '../../styles/Home.module.css'
 import ClientOnly from '../../views/Shared/ClientOnly'
-import { Provider } from '../../services/GraphQL/types/providers'
-import { GET_PROVIDERS } from '../../services/GraphQL/queries/providers'
+import { Provider } from '../../services/GraphQL/providers/types'
+import { PROVIDERS } from '../../services/GraphQL/providers/queries'
 
 const Providers: NextPage = () => {
-  const { data, loading } = useQuery(GET_PROVIDERS)
+  const { data, loading } = useQuery(PROVIDERS)
 
   if (loading) {
     return <h2>Loading...</h2>

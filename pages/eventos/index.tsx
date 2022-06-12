@@ -1,15 +1,15 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { GET_EVENTS } from '../../services/GraphQL/queries/events'
+import { EVENTS } from '../../services/GraphQL/events/queries'
 import styles from '../../styles/Events.module.css'
 import ClientOnly from '../../views/Shared/ClientOnly'
-import { Event } from '../../services/GraphQL/types/events'
+import { Event } from '../../services/GraphQL/events/types'
 import EventItem from '../../components/EventItem'
 
 const Events: NextPage = () => {
   const { push } = useRouter()
-  const { data, loading } = useQuery(GET_EVENTS)
+  const { data, loading } = useQuery(EVENTS)
 
   if (loading) {
     return <h2>Loading...</h2>

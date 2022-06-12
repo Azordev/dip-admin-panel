@@ -1,19 +1,19 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { EventBase } from '../../../services/GraphQL/types/events'
+import { Event, EventEditable } from '../../../services/GraphQL/events/types'
 import ClientOnly from '../../Shared/ClientOnly'
 
 interface EditEventFormProps {
-  onSubmit: (formData: EventBase) => void
+  onSubmit: (_formData: EventEditable) => void
   loading: boolean
-  originalEvent?: EventBase
+  originalEvent?: Event
 }
 const EditEventForm: FC<EditEventFormProps> = ({ onSubmit, loading, originalEvent }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EventBase>()
+  } = useForm<EventEditable>()
   const submitHandler = handleSubmit(onSubmit)
   const buttonText = loading ? 'Enviando' : 'Enviar'
 
@@ -39,10 +39,10 @@ const EditEventForm: FC<EditEventFormProps> = ({ onSubmit, loading, originalEven
           {...register('date', { required: true })}
         />
         <select defaultValue={originalEvent?.type} {...register('type', { required: true })}>
-          <option value="attendance" selected={originalEvent?.type === 'attendance'}>
+          <option value="attendance" selected={originalEvent?.type === 'ATTENDANCE'}>
             Evento
           </option>
-          <option value="announce" selected={originalEvent?.type === 'announce'}>
+          <option value="announce" selected={originalEvent?.type === 'WORKSHOP'}>
             Convocatoria
           </option>
         </select>

@@ -1,8 +1,8 @@
 import { GetStaticPaths } from 'next'
 import React from 'react'
 import client from '../../services/GraphQL/client'
-import { GET_PROVIDERS, GET_PROVIDER_BY_ID } from '../../services/GraphQL/queries/providers'
-import { Provider as ProviderProps } from '../../services/GraphQL/types/providers'
+import { PROVIDERS, PROVIDER_BY_ID } from '../../services/GraphQL/providers/queries'
+import { Provider as ProviderProps } from '../../services/GraphQL/providers/types'
 import ClientOnly from '../../views/Shared/ClientOnly'
 import Image from '../../views/Shared/Image'
 
@@ -35,7 +35,7 @@ export async function getStaticProps({ params: { id } }: StaticProps) {
     data: { provider },
     errors,
   } = await client.query({
-    query: GET_PROVIDER_BY_ID,
+    query: PROVIDER_BY_ID,
     variables: {
       id,
     },
@@ -61,7 +61,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     data: { providers },
     errors,
   } = await client.query({
-    query: GET_PROVIDERS,
+    query: PROVIDERS,
   })
 
   if (providers.length < 1 || errors) {

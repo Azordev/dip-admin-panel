@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const INSERT_ADMIN = gql`
+export const CREATE_ADMIN = gql`
   mutation ($email: String!, $password: String, $avatar_url: String) {
     user: insert_users_one(object: { username: $email, password: $password, type: 'ADMIN', is_active: true, avatar_url: $avatar_url }) {
       id
@@ -9,7 +9,7 @@ export const INSERT_ADMIN = gql`
   }
 `
 
-export const INSERT_USER_MEMBER = gql`
+export const CREATE_USER_MEMBER = gql`
   mutation ($username: String!, $password: String, $avatar_url: String) {
     user: insert_users_one(object: { username: $username, password: $password, type: 'MEMBER', is_active: true, avatar_url: $avatar_url }) {
       id
@@ -18,7 +18,7 @@ export const INSERT_USER_MEMBER = gql`
   }
 `
 
-export const INSERT_MEMBER = gql`
+export const CREATE_MEMBER = gql`
   mutation ($first_names: String!, $last_names: String, $email: String!, $user_id: uuid!) {
     member: insert_members_one(
       object: { first_names: $first_names, last_names: $last_names, email: $email, user_id: $user_id }

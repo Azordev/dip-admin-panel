@@ -1,17 +1,17 @@
 import { gql } from '@apollo/client'
-import { eventInfo } from '../types/events.d'
-import { subscriptionInfo } from '../types/payments.d'
-import { usersInfo, memberInfo } from '../types/users.d'
+import { eventInfo } from '../events/types'
+import { subscriptionInfo } from '../payments/types'
+import { usersInfo, memberInfo } from './types'
 
-export const GET_USER_SESSION = gql`
+export const USER_SESSION = gql`
   query login($password: String!, $memberCode: String!) {
     users(
       where: {
-        _and: {
-          type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] }
-          member_code: { _eq: $memberCode }
-          password: { _eq: $password }
-        }
+        _and: [
+          {type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] }},
+          {member_code: { _eq: $memberCode }},
+          {password: { _eq: $password }}
+        ]
       }
     ) {
       ${usersInfo}
@@ -22,7 +22,7 @@ export const GET_USER_SESSION = gql`
   }
 `
 
-export const GET_USER_BY_ID = gql`
+export const USER_BY_ID = gql`
   query ($id: uuid!) {
     user: users_by_pk(id: $id) {
       is_active
@@ -34,16 +34,23 @@ export const GET_USER_BY_ID = gql`
   }
 `
 
-export const GET_USERS = gql`
-  query {
-    users {
-      is_active
+export const USERS = gql`
+  query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
+    users(limit: $limit, offset: $offset, order_by: {member_code: asc}, where: {member_code: {_ilike: $query}}) {
       ${usersInfo}
+      member_info {
+        ${memberInfo}
+      }
+      frontend_errors: frontend_errors_aggregate {
+        stats: aggregate {
+          count
+        }
+      }
     }
   }
 `
 
-export const GET_MEMBERS = gql`
+export const MEMBERS = gql`
   query {
     members {
       ${memberInfo}
@@ -62,7 +69,7 @@ export const GET_MEMBERS = gql`
   }
 `
 
-export const GET_MEMBER_BY_ID = gql`
+export const MEMBER_BY_ID = gql`
   query ($id: uuid!) {
     member: members_by_pk(id: $id) {
       ${memberInfo}

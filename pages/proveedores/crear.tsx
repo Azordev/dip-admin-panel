@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import styles from '../../styles/Home.module.css'
-import { ProviderBase as Provider } from '../../services/GraphQL/types/providers'
-import { INSERT_PROVIDER } from '../../services/GraphQL/mutations/providers'
+import { ProviderBase as Provider } from '../../services/GraphQL/providers/types'
+import { CREATE_PROVIDER } from '../../services/GraphQL/providers/mutations'
 
 const Create: NextPage = () => {
   const { push } = useRouter()
@@ -15,7 +15,7 @@ const Create: NextPage = () => {
     logo_url: '',
   })
 
-  const [createProvider] = useMutation(INSERT_PROVIDER)
+  const [createProvider] = useMutation(CREATE_PROVIDER)
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

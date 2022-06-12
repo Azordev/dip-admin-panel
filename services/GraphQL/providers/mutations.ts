@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const INSERT_PROVIDER = gql`
+export const CREATE_PROVIDER = gql`
   mutation (
     $commercial_name: String!
     $address: String

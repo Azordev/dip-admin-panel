@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { INSERT_EVENT } from '../../services/GraphQL/mutations/events'
+import { CREATE_EVENT } from '../../services/GraphQL/events/mutations'
 import styles from '../../styles/Home.module.css'
-import { EventBase as Event } from '../../services/GraphQL/types/events'
+import { EventBase as Event } from '../../services/GraphQL/events/types'
 import { formatDate } from '../../services/utils/dateFormat'
 
 const Create: NextPage = () => {
@@ -18,7 +18,7 @@ const Create: NextPage = () => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
 
-  const [createEvent] = useMutation(INSERT_EVENT)
+  const [createEvent] = useMutation(CREATE_EVENT)
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

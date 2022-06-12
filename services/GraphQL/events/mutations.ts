@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const INSERT_EVENT = gql`
+export const CREATE_EVENT = gql`
   mutation (
     $title: String!
     $description: String

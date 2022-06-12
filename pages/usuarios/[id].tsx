@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { GetStaticPaths } from 'next'
 import client from '@/services/GraphQL/client'
-import { GET_USERS } from '@/services/GraphQL/queries/users'
-import { User as UserProp } from '@/services/GraphQL/types/users'
+import { USERS } from '@/services/GraphQL/users/queries'
+import { User as UserProp } from '@/services/GraphQL/users/types'
 import Image from '@/views/Shared/Image'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
@@ -39,7 +39,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     data: { users },
     errors,
   } = await client.query({
-    query: GET_USERS,
+    query: USERS,
   })
 
   if (users.length < 1 || errors) {

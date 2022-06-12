@@ -6,7 +6,6 @@ export const memberInfo = `
   address
   first_names
   last_names
-  user_id
 `
 
 export interface Member {
@@ -18,12 +17,24 @@ export interface Member {
   address?: string
   created_at?: string
   updated_at?: string
-  user_id: string
+  events_inscribed?: Event[]
+  events?: {
+    stats: {
+      count: number
+    }
+  }
+  // subscriptions?: Subscription[]
+  subscriptions?: {
+    stats: {
+      count: number
+    }
+  }
 }
 
 export const usersInfo = `
   id
   position
+  member_code
   avatar_url
   type
   is_active
@@ -40,6 +51,11 @@ export interface User {
   created_at?: string
   updated_at?: string
   member_info?: Member
+  frontend_errors?: {
+    stats: {
+      count: number
+    }
+  }
 }
 
 export interface LoginInput {

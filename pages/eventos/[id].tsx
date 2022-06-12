@@ -1,8 +1,7 @@
-import { GetStaticPaths } from 'next'
 import React from 'react'
 import client from '../../services/GraphQL/client'
-import { GET_EVENTS, GET_EVENT_BY_ID } from '../../services/GraphQL/queries/events'
-import { Event as EventProps } from '../../services/GraphQL/types/events'
+import { EVENT_BY_ID } from '../../services/GraphQL/events/queries'
+import { Event as EventProps } from '../../services/GraphQL/events/types'
 import ClientOnly from '../../views/Shared/ClientOnly'
 import Image from '../../views/Shared/Image'
 
@@ -38,7 +37,7 @@ export async function getStaticProps({ params: { id } }: StaticProps) {
     data: { event },
     errors,
   } = await client.query({
-    query: GET_EVENT_BY_ID,
+    query: EVENT_BY_ID,
     variables: {
       id,
     },
@@ -56,32 +55,5 @@ export async function getStaticProps({ params: { id } }: StaticProps) {
     props: {
       event,
     },
-  }
-}
-
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  const {
-    data: { events },
-    errors,
-  } = await client.query({
-    query: GET_EVENTS,
-  })
-
-  if (events.length < 1 || errors) {
-    return {
-      paths: [],
-      fallback: false,
-    }
-  }
-
-  const paths =
-    events.map((event: EventProps) => ({
-      params: {
-        id: event.id?.toString(),
-      },
-    })) || []
-  return {
-    paths,
-    fallback: false,
   }
 }

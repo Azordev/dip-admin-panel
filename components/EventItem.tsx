@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import type { Event } from '../services/GraphQL/types/events'
+import type { Event } from '../services/GraphQL/events/types'
 import { useRouter } from 'next/router'
 import styles from '../styles/Events.module.css'
 import { readableDate } from '../services/utils/dateFormat'

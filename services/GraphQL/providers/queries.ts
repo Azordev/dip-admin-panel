@@ -1,8 +1,13 @@
 import { gql } from '@apollo/client'
 
-export const GET_PROVIDERS = gql`
-  query {
-    providers {
+export const PROVIDERS = gql`
+  query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
+    providers(
+      order_by: { commercial_name: asc }
+      where: { _or: [{ commercial_name: { _ilike: $query } }, { legal_name: { _ilike: $query } }] }
+      limit: $limit
+      offset: $offset
+    ) {
       id
       commercial_name
       address
@@ -18,7 +23,7 @@ export const GET_PROVIDERS = gql`
   }
 `
 
-export const GET_PROVIDER_BY_ID = gql`
+export const PROVIDER_BY_ID = gql`
   query ($id: uuid!) {
     provider: providers_by_pk(id: $id) {
       commercial_name

@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client'
 import { toast } from 'react-toastify'
-import { INSERT_ERROR } from '../services/GraphQL/mutations/errors'
+import { CREATE_ERROR } from '../services/GraphQL/errors/mutations'
 
 const useLogger = () => {
-  const [createError] = useMutation(INSERT_ERROR)
+  const [createError] = useMutation(CREATE_ERROR)
 
   const error = (
     error: Error,
