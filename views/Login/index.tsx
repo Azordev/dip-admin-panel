@@ -21,7 +21,7 @@ const Login: NextPage = () => {
         'INPUT',
       )
     } else {
-      // DB have a condition to check "code_member" is unique, so this state should be impossible
+      // DB have a condition to check "code_member" is unique, so this state should be impossible, left just in case.
       if (data?.users?.length > 1) {
         error(
           Error('Se encontraron más de un usuario en base de datos'),

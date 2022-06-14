@@ -37,6 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - https://dev.to/nabeelahmed1721/setting-up-typescript-with-eslint-prettier-on-vscode-25na
 - https://dev.to/maciekgrzybek/setup-next-js-with-typescript-jest-and-react-testing-library-28g5
 - https://dev.to/narciero/using-nextauth-js-with-magic-links-df4
+- https://bobbyhadz.com/blog/react-jsx-element-type-does-not-have-any-construct
 
 ### To consider
 - https://blog.logrocket.com/testing-next-js-apps-jest/ Ideas for testing Next.js apps
