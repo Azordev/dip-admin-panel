@@ -1,92 +1,45 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useMutation } from '@apollo/client'
-import { ProviderBase as Provider } from '@/services/GraphQL/providers/types'
+import { ProviderEditable } from '@/services/GraphQL/providers/types'
 import { CREATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
 import styles from '@/styles/Home.module.css'
 
 const Create: NextPage = () => {
   const { push } = useRouter()
-  const [newProvider, setNewProviders] = useState<Provider>({
-    commercial_name: '',
-    b2b_phone: '',
-    b2b_email: '',
-    logo_url: '',
-  })
-
   const [createProvider] = useMutation(CREATE_PROVIDER)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    if (!newProvider.commercial_name || !newProvider.b2b_email) {
+  const submitHandler = handleSubmit((newProvider: ProviderEditable) => {
+    if (!newProvider?.commercial_name || !newProvider?.b2b_email) {
       return
     }
 
     createProvider({ variables: newProvider })
     push('/proveedores')
-  }
-
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) =>
-    setNewProviders({ ...newProvider, [e.target.name]: e.target.value })
+  })
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Create Provider</h1>
 
       <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          name="commercial_name"
-          onChange={changeHandler}
-          value={newProvider.commercial_name}
-          placeholder="Comercial Name"
-        />
-        <input type="text" name="address" onChange={changeHandler} value={newProvider.address} placeholder="Address" />
-        <input
-          type="text"
-          name="sales_phone"
-          onChange={changeHandler}
-          value={newProvider.sales_phone}
-          placeholder="Sales Phone"
-        />
-        <input
-          type="text"
-          name="b2b_phone"
-          onChange={changeHandler}
-          value={newProvider.b2b_phone}
-          placeholder="B2B Phone"
-        />
-        <input
-          type="text"
-          name="sales_email"
-          onChange={changeHandler}
-          value={newProvider.sales_email}
-          placeholder="Sales Email"
-        />
-        <input
-          type="text"
-          name="b2b_email"
-          onChange={changeHandler}
-          value={newProvider.b2b_email}
-          placeholder="B2B Email"
-        />
-        <input
-          type="text"
-          name="legal_name"
-          onChange={changeHandler}
-          value={newProvider.legal_name}
-          placeholder="Legal Name"
-        />
-        <input type="text" name="details" onChange={changeHandler} value={newProvider.details} placeholder="Details" />
-        <input
-          type="text"
-          name="logo_url"
-          onChange={changeHandler}
-          value={newProvider.logo_url}
-          placeholder="Logo URL"
-        />
+        <input type="text" placeholder="Comercial Name" {...register('commercial_name', { required: true })} />
+        {errors.commercial_name && <span>This field is required</span>}
+        <input type="text" placeholder="Address" {...register('address')} />
+        <input type="text" placeholder="Sales Phone" {...register('sales_phone')} />
+        <input type="text" placeholder="B2B Phone" {...register('b2b_phone')} />
+        <input type="text" placeholder="Sales Email" {...register('sales_email')} />
+        <input type="text" placeholder="B2B Email" {...register('b2b_email', { required: true })} />
+        {errors.b2b_email && <span>This field is required</span>}
+        <input type="text" placeholder="Legal Name" {...register('legal_name')} />
+        <input type="text" placeholder="Details" {...register('details')} />
+        <input type="text" placeholder="Logo URL" {...register('logo_url')} />
         <button type="submit">Enviar</button>
       </form>
     </div>
