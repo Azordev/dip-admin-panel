@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EVENT_BY_ID } from '@/services/GraphQL/events/queries'
 import { EventEditable } from '@/services/GraphQL/events/types'
-import UpdateEvent from '@/views/Events/Create'
+import UpdateEvent from '@/views/Events/Edit'
 import UpdateFormContainer from '@/components/UpdateForm'
 import useLogger from '@/hooks/useLogger'
 
