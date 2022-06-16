@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { eventInfo } from './types.d'
 
 export const EVENTS = gql`
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
@@ -10,13 +11,7 @@ export const EVENTS = gql`
       }
       order_by: { title: asc }
     ) {
-      id
-      title
-      description
-      date
-      type
-      image_url
-      requirements_url
+      ${eventInfo}
     }
   }
 `
@@ -24,13 +19,7 @@ export const EVENTS = gql`
 export const EVENT_BY_ID = gql`
   query ($id: uuid!) {
     event: events_by_pk(id: $id) {
-      id
-      title
-      description
-      date
-      type
-      image_url
-      requirements_url
+      ${eventInfo}
     }
   }
 `

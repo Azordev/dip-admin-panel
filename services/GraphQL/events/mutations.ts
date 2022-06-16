@@ -59,7 +59,6 @@ export const DEACTIVATE_EVENT = gql`
   }
 `
 
-// member inscription in event
 export const INSERT_MEMBER_INSCRIPTION = gql`
   mutation ($event_id: uuid!, $member_id: uuid!) {
     event: insert_inscriptions_one(object: { event_id: $event_id, member_id: $member_id }) {
@@ -68,7 +67,6 @@ export const INSERT_MEMBER_INSCRIPTION = gql`
   }
 `
 
-// member cancellation in event
 export const CANCEL_MEMBER_INSCRIPTION = gql`
   mutation ($event_id: uuid!, $member_id: uuid!) {
     event: delete_inscriptions(where: { event_id: $event_id, member_id: $member_id }) {
