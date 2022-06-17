@@ -2,36 +2,28 @@ import { gql } from '@apollo/client'
 
 export const CREATE_ADMIN = gql`
   mutation ($email: String!, $password: String, $avatar_url: String) {
-    user: insert_users_one(object: { username: $email, password: $password, type: 'ADMIN', is_active: true, avatar_url: $avatar_url }) {
-      id
-      updated_at
-    }
-  }
-`
-
-export const CREATE_USER_MEMBER = gql`
-  mutation ($username: String!, $password: String, $avatar_url: String) {
-    user: insert_users_one(object: { username: $username, password: $password, type: 'MEMBER', is_active: true, avatar_url: $avatar_url }) {
-      id
-      updated_at
-    }
-  }
-`
-
-export const CREATE_MEMBER = gql`
-  mutation ($first_names: String!, $last_names: String, $email: String!, $user_id: uuid!) {
-    member: insert_members_one(
-      object: { first_names: $first_names, last_names: $last_names, email: $email, user_id: $user_id }
+    user: insert_users_one(
+      object: { username: $email, password: $password, type: "ADMIN", is_active: true, avatar_url: $avatar_url }
     ) {
+      id
       updated_at
-      user {
-        id
-      }
     }
   }
 `
 
-export const UPDATE_ADMIN = gql`
+// This creates also the member
+export const CREATE_USER_MEMBER = gql`
+  mutation ($username: String!, $password: String, $avatar_url: String, $type: String, $position: String) {
+    user: insert_users_one(
+      object: { username: $username, password: $password, type: $type, is_active: true, avatar_url: $avatar_url }
+    ) {
+      id
+      updated_at
+    }
+  }
+`
+
+export const UPDATE_USER = gql`
   mutation ($id: uuid!, $username: String, $password: String, $is_active: boolean, $avatar_url: String) {
     user: update_users_by_pk(
       pk_columns: { id: $id }
@@ -43,15 +35,7 @@ export const UPDATE_ADMIN = gql`
   }
 `
 
-export const UPDATE_USER_MEMBER = gql`
-  mutation ($id: uuid!, $username: String, $password: String, $is_active: boolean, $avatar_url: String) {
-    user: update_users_by_pk(
-      pk_columns: { id: $id }
-      _set: { username: $username, password: $password, is_active: $is_active, avatar_url: $avatar_url }
-    ) {
-      id
-    }
-  }
+export const UPDATE_MEMBER = gql`
   mutation (
     $id: uuid!
     $first_names: String

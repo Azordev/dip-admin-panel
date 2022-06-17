@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { Event, EventEditable } from '@/services/GraphQL/events/types'
 import ClientOnly from '../../Shared/ClientOnly'
@@ -52,4 +52,4 @@ const EditEventForm: FC<EditEventFormProps> = ({ onSubmit, loading, originalData
   )
 }
 
-export default memo(EditEventForm)
+export default EditEventForm

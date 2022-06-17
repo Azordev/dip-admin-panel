@@ -8,13 +8,22 @@ export const memberInfo = `
   last_names
 `
 
-export interface Member {
-  id: string
-  first_names: string
-  last_names?: string
+export interface MemberBase {
+  contact_information?: string
+  private_information?: string
   email: string
-  phone?: string
   address?: string
+  phone?: string
+  first_names?: string
+  last_names?: string
+}
+
+export interface MemberEditable extends MemberBase {
+  email: string
+}
+
+export interface Member extends MemberBase {
+  id: string
   created_at?: string
   updated_at?: string
   events_inscribed?: Event[]
@@ -23,7 +32,6 @@ export interface Member {
       count: number
     }
   }
-  // subscriptions?: Subscription[]
   subscriptions?: {
     stats: {
       count: number
@@ -40,10 +48,26 @@ export const usersInfo = `
   is_active
 `
 
-export interface User {
+export interface UserBase {
+  member_code: string
+  type: string
+  is_active: boolean
+  position?: string
+  avatar_url?: string
+}
+
+export interface UserEditable extends UserBase {
+  member_code?: string
+  password?: string
+  type?: string
+  position?: string
+  avatar_url?: string
+  is_active?: boolean
+}
+
+export interface User extends UserBase {
   id: string
   member_code: string
-  password?: string
   type?: string
   position?: string
   avatar_url?: string
