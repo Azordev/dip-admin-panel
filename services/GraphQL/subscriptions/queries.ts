@@ -1,4 +1,6 @@
 import { gql } from '@apollo/client'
+import { paymentInfo } from '../payments/types'
+import { subscriptionInfo } from './types'
 
 export const SUBSCRIPTIONS = gql`
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
@@ -15,21 +17,32 @@ export const SUBSCRIPTIONS = gql`
       }
     ) {
       id
-      status
-      type
-      expiration
-      details
+      ${subscriptionInfo}
+      created_at
+      updated_at
+      member {
+        id
+        email
+        user {
+          member_code
+        }
+      }
+    }
+  }
+`
+
+export const SUBSCRIPTION_BY_ID = gql`
+  query ($id: uuid!) {
+    subscription: subscriptions_by_pk(id: $id) {
+      id
+      ${subscriptionInfo}
       created_at
       updated_at
       payment {
         id
-        is_confirmed
-        in_review
-        is_reversed
-        quantity
-        reference_details
-        reference_id
-        total_price
+        ${paymentInfo}
+        created_at
+        updated_at
       }
       member {
         id
