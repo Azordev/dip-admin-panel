@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { Event } from '@/services/GraphQL/events/types'
 import Image from '@/views/Shared/Image'
+import { Event } from '@/services/GraphQL/events/types'
 
 const EventDetail: FC<{ event: Event }> = ({ event }) => (
   <div>
