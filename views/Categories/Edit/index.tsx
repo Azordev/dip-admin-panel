@@ -1,6 +1,6 @@
-import { Category, CategoryEditable } from '@/services/GraphQL/categories/types'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { Category, CategoryEditable } from '@/services/GraphQL/categories/types'
 
 interface EditCategoryFormProps {
   onSubmit: (_formData: CategoryEditable) => void
