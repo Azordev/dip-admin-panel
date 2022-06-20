@@ -1,0 +1,21 @@
+import type { NextPage } from 'next'
+import { useQuery } from '@apollo/client'
+import ClientOnly from '@/views/Shared/ClientOnly'
+import { CATEGORIES } from '@/services/GraphQL/categories/queries'
+import CategoriesList from '@/views/Categories/List'
+
+const Categories: NextPage = () => {
+  const { data, loading, error } = useQuery(CATEGORIES)
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    console.error(error)
+  }
+
+  return <ClientOnly>{data.length && <CategoriesList categories={data.categories} />}</ClientOnly>
+}
+
+export default Categories
