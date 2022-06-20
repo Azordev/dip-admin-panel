@@ -26,3 +26,25 @@ export const INSCRIPTIONS = gql`
     }
   }
 `
+
+export const INSCRIPTION_BY_ID = gql`
+  query ($id: uuid!) {
+    inscription: inscriptions_by_pk(id: $id) {
+      id
+      attendee_member {
+        first_names
+        last_names
+        id
+        email
+      }
+      event_information {
+        id
+        date
+        is_active
+        title
+        type
+      }
+      updated_at
+    }
+  }
+`

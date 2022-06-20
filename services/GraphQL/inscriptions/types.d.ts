@@ -1,3 +1,13 @@
+export const inscriptionInfo = `
+  member_id
+  event_id
+`
+
+export interface InscriptionEditable {
+  member_id: string
+  event_id: string
+}
+
 export interface Inscription {
   id: string
   attendee_member: {
