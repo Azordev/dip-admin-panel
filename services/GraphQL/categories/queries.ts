@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { categoryInfo } from './types'
+import { categoryInfo } from './types.d'
 
 export const CATEGORIES = gql`
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {

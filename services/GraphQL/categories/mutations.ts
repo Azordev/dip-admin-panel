@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { categoryInfo } from './types'
+import { categoryInfo } from './types.d'
 
 export const CREATE_CATEGORY = gql`
   mutation ($name: String!, $description: String, $badge_url: String) {

@@ -1,5 +1,5 @@
-import { Payment } from '../payments/types'
-import { Member } from '../users/types'
+import { Payment } from '../payments/types.d'
+import { Member } from '../users/types.d'
 
 export const subscriptionInfo = `
   status

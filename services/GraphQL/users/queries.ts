@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 import { eventInfo } from '../events/types.d'
-import { subscriptionInfo } from '../payments/types.d'
+import { subscriptionInfo } from '../subscriptions/types.d'
 import { usersInfo, memberInfo } from './types.d'
 
 export const USER_SESSION = gql`

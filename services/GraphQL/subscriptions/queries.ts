@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
-import { paymentInfo } from '../payments/types'
-import { subscriptionInfo } from './types'
+import { paymentInfo } from '../payments/types.d'
+import { subscriptionInfo } from './types.d'
 
 export const SUBSCRIPTIONS = gql`
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
