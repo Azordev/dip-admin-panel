@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { ApolloProvider } from '@apollo/client'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { ApolloProvider } from '@apollo/client'
+import { useEffect } from 'react'
 import { ToastContainer, Zoom } from 'react-toastify'
+
 import client from '@/services/GraphQL/client'
 import ErrorBoundary from '@/views/Shared/ErrorBoundary'
 import 'react-toastify/dist/ReactToastify.min.css'

@@ -1,6 +1,7 @@
+import { useMutation } from '@apollo/client'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
 import useLogger from '@/hooks/useLogger'
 import { CREATE_USER_MEMBER } from '@/services/GraphQL/users/mutations'
 import { UserEditable } from '@/services/GraphQL/users/types'

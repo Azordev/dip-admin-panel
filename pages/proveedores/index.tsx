@@ -1,9 +1,10 @@
-import type { NextPage } from 'next'
 import { useQuery } from '@apollo/client'
-import { Provider } from '@/services/GraphQL/providers/types'
+import type { NextPage } from 'next'
+
 import { PROVIDERS } from '@/services/GraphQL/providers/queries'
-import ClientOnly from '@/views/Shared/ClientOnly'
+import { Provider } from '@/services/GraphQL/providers/types'
 import styles from '@/styles/Home.module.css'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Providers: NextPage = () => {
   const { data, loading } = useQuery(PROVIDERS)

@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
 import { Category, CategoryEditable } from '@/services/GraphQL/categories/types'
 
 interface EditCategoryFormProps {

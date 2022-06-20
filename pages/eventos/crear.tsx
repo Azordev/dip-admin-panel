@@ -1,11 +1,12 @@
+import { useMutation } from '@apollo/client'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
+import useLogger from '@/hooks/useLogger'
 import { CREATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EventEditable } from '@/services/GraphQL/events/types'
 import styles from '@/styles/Home.module.css'
 import CreateEventForm from '@/views/Events/Create'
-import useLogger from '@/hooks/useLogger'
 
 const Create: NextPage = () => {
   const [createEvent, { loading, error: mutationError }] = useMutation(CREATE_EVENT)

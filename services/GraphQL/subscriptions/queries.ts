@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+
 import { paymentInfo } from '../payments/types.d'
 import { subscriptionInfo } from './types.d'
 

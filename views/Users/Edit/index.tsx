@@ -1,7 +1,9 @@
 import { FC } from 'react'
+
 import { MemberEditable, UserEditable } from '@/services/GraphQL/users/types'
-import EditUserForm from './EditUser'
+
 import EditMemberForm from './EditMember'
+import EditUserForm from './EditUser'
 
 interface EditUserFormProps {
   submitUser: (_user: UserEditable) => void

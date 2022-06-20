@@ -1,5 +1,6 @@
-import Icons8 from '.'
 import { render } from '@testing-library/react'
+
+import Icons8 from '.'
 
 describe('Icons8', () => {
   it('renders component with not null name parameter', () => {

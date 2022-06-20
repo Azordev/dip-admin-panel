@@ -1,11 +1,12 @@
+import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+
+import useLogger from '@/hooks/useLogger'
 import { EVENT_BY_ID } from '@/services/GraphQL/events/queries'
 import { Event as EventFields } from '@/services/GraphQL/events/types'
-import useLogger from '@/hooks/useLogger'
-import ClientOnly from '@/views/Shared/ClientOnly'
 import EventDetail from '@/views/Events/Detail'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Event: NextPage = () => {
   const { data: event, loading, error } = useQuery<EventFields>(EVENT_BY_ID)

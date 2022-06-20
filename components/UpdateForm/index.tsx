@@ -1,7 +1,8 @@
-import { FC, ElementType, useEffect, useState } from 'react'
+import { DocumentNode, useLazyQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { useLazyQuery, DocumentNode } from '@apollo/client'
+import { ElementType, FC, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+
 import UpdateFormLayout from './Layout'
 
 interface Props {

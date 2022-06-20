@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+
 import client from '@/services/GraphQL/client'
 import { USERS } from '@/services/GraphQL/users/queries'
 import { User as UserProp } from '@/services/GraphQL/users/types'

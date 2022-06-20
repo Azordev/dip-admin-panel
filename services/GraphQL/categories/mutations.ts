@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+
 import { categoryInfo } from './types.d'
 
 export const CREATE_CATEGORY = gql`

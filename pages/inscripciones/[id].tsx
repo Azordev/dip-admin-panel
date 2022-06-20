@@ -1,9 +1,10 @@
+import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+
 import useLogger from '@/hooks/useLogger'
-import ClientOnly from '@/views/Shared/ClientOnly'
 import { INSCRIPTION_BY_ID } from '@/services/GraphQL/inscriptions/queries'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Inscription: NextPage = () => {
   const { data, loading, error } = useQuery(INSCRIPTION_BY_ID)

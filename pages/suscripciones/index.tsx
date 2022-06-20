@@ -1,10 +1,10 @@
+import { useQuery } from '@apollo/client'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
 
-import ClientOnly from '@/views/Shared/ClientOnly'
 import { SUBSCRIPTIONS } from '@/services/GraphQL/subscriptions/queries'
 import { Subscription } from '@/services/GraphQL/subscriptions/types.d'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Subscriptions: NextPage = () => {
   const { push } = useRouter()

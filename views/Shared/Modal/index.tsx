@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+
 import styles from './Modal.module.scss'
 
 type Props = {
@@ -21,14 +22,15 @@ const Modal = ({ title, isOpened, onProceed, onClose, children }: Props) => {
   }, [isOpened])
 
   useEffect(() => {
+    const refCurrent = ref.current
     const handleCancel = (event: React.ChangeEvent) => {
       event.preventDefault()
       onClose()
     }
-    ref.current?.addEventListener('cancel', handleCancel)
+    refCurrent?.addEventListener('cancel', handleCancel)
 
     return () => {
-      ref.current?.removeEventListener('cancel', handleCancel)
+      refCurrent?.removeEventListener('cancel', handleCancel)
     }
   }, [onClose])
 

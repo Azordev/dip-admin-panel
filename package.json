@@ -14,9 +14,9 @@
     "stylelint:ci": "stylelint --config .stylelintrc.json",
     "eslint:ci": "eslint --color --cache -f table",
     "stylelint": "stylelint --config .stylelintrc.json './**/*.{css,scss}'",
-    "eslint": "eslint pages services --color --cache -f table",
-    "eslint:js:fix": "eslint pages services --fix",
-    "prettier": "prettier --write pages services --config ./.prettierrc.js",
+    "eslint": "eslint pages services views components utils hooks --color --cache -f table",
+    "eslint:js:fix": "eslint pages services views components utils hooks --fix",
+    "prettier": "prettier --write pages services views components utils hooks --config ./.prettierrc.js",
     "prettier:ci": "prettier --check --config ./.prettierrc.js",
     "check": "npm run prettier && npm run eslint && npm run stylelint",
     "lefthook": "lefthook run lint"
@@ -72,6 +72,7 @@
   "dependencies": {
     "@apollo/client": "3.5.10",
     "@magic-sdk/admin": "1.4.1",
+    "@types/prop-types": "^15.7.5",
     "graphql": "16.3.0",
     "magic-sdk": "8.1.1",
     "next": "12.1.5",

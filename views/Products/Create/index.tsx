@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
 import { ProductEditable } from '@/services/GraphQL/products/types'
 
 interface CreateProductFormProps {

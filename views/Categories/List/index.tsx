@@ -1,4 +1,5 @@
 import { FC } from 'react'
+
 import { Category } from '@/services/GraphQL/categories/types'
 
 const CategoriesList: FC<{ categories: Category[] }> = ({ categories }) => (

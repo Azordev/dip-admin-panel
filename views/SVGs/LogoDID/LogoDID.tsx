@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './LogoDID.module.scss'
 
 const LogoDID: React.FC<{ className?: string }> = ({ className }) => (

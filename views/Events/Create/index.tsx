@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
 import { EventEditable } from '@/services/GraphQL/events/types'
 
 interface CreateEventFormProps {

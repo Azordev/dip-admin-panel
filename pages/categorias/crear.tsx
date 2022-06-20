@@ -1,10 +1,11 @@
+import { useMutation } from '@apollo/client'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
 import useLogger from '@/hooks/useLogger'
-import CreateCategoryForm from '@/views/Categories/Create'
-import { CategoryEditable } from '@/services/GraphQL/categories/types'
 import { CREATE_CATEGORY } from '@/services/GraphQL/categories/mutations'
+import { CategoryEditable } from '@/services/GraphQL/categories/types'
+import CreateCategoryForm from '@/views/Categories/Create'
 
 const Create: NextPage = () => {
   const { push } = useRouter()

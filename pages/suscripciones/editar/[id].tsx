@@ -1,11 +1,12 @@
+import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
 import useLogger from '@/hooks/useLogger'
+import { UPDATE_SUBSCRIPTION } from '@/services/GraphQL/subscriptions/mutations'
 import { SubscriptionEditable } from '@/services/GraphQL/subscriptions/types.d'
 import ClientOnly from '@/views/Shared/ClientOnly'
 import EditSubscriptionForm from '@/views/Subscriptions/Edit'
-import { UPDATE_SUBSCRIPTION } from '@/services/GraphQL/subscriptions/mutations'
 
 const EditSubscription: NextPage = () => {
   const { push, query } = useRouter()

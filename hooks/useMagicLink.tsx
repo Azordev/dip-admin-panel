@@ -1,6 +1,7 @@
+import { Magic, RPCError, RPCErrorCode } from 'magic-sdk'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { Magic, RPCError, RPCErrorCode } from 'magic-sdk'
+
 import useError from '@/hooks/useLogger'
 import { User } from '@/services/GraphQL/users/types'
 

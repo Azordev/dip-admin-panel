@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
 import { Member, MemberEditable } from '@/services/GraphQL/users/types'
+
 import ClientOnly from '../../../Shared/ClientOnly'
 
 interface EditMemberFormProps {

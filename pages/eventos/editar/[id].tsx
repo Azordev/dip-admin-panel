@@ -1,12 +1,13 @@
+import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
+import UpdateFormContainer from '@/components/UpdateForm'
+import useLogger from '@/hooks/useLogger'
 import { UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EVENT_BY_ID } from '@/services/GraphQL/events/queries'
 import { EventEditable } from '@/services/GraphQL/events/types'
 import UpdateEvent from '@/views/Events/Edit'
-import UpdateFormContainer from '@/components/UpdateForm'
-import useLogger from '@/hooks/useLogger'
 
 const EditEvent: NextPage = () => {
   const [updateEvent, { loading, error: mutationError }] = useMutation(UPDATE_EVENT)

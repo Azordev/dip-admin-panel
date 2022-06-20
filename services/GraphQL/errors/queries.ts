@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+
 import { errorInfo } from './types'
 
 export const ERRORS = gql`

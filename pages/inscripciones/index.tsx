@@ -1,8 +1,9 @@
-import type { NextPage } from 'next'
 import { useQuery } from '@apollo/client'
-import ClientOnly from '@/views/Shared/ClientOnly'
+import type { NextPage } from 'next'
+
 import { INSCRIPTIONS } from '@/services/GraphQL/inscriptions/queries'
 import { Inscription } from '@/services/GraphQL/inscriptions/types'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Inscriptions: NextPage = () => {
   const { data, loading, error } = useQuery(INSCRIPTIONS)

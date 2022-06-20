@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
 import Login from '@/views/Login'
 import ClientOnly from '@/views/Shared/ClientOnly'
 

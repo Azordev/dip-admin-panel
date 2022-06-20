@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+
 import { eventInfo } from './types.d'
 
 export const EVENTS = gql`

@@ -1,6 +1,7 @@
-import { UserEditable } from '@/services/GraphQL/users/types'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
+import { UserEditable } from '@/services/GraphQL/users/types'
 
 interface CreateUserFormProps {
   onSubmit: (_formData: UserEditable) => void

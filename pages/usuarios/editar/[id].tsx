@@ -1,9 +1,10 @@
+import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
 import useLogger from '@/hooks/useLogger'
-import { MemberEditable, UserEditable } from '@/services/GraphQL/users/types'
 import { UPDATE_MEMBER, UPDATE_USER } from '@/services/GraphQL/users/mutations'
+import { MemberEditable, UserEditable } from '@/services/GraphQL/users/types'
 import EditUserAndMember from '@/views/Users/Edit'
 
 const EditUserInformation: NextPage = () => {

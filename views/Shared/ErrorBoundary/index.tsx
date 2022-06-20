@@ -1,7 +1,9 @@
-import { Component, ErrorInfo, ReactNode } from 'react'
 import PropTypes from 'prop-types'
+import { Component, ErrorInfo, ReactNode } from 'react'
+
 import client from '@/services/GraphQL/client'
 import { CREATE_ERROR } from '@/services/GraphQL/errors/mutations'
+
 import Fallback from './Fallback'
 
 interface ErrorBoundaryProps {

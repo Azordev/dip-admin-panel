@@ -1,11 +1,12 @@
+import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+
+import useLogger from '@/hooks/useLogger'
 import { PROVIDER_BY_ID } from '@/services/GraphQL/providers/queries'
 import { Provider as ProviderFields } from '@/services/GraphQL/providers/types'
 import ClientOnly from '@/views/Shared/ClientOnly'
 import Image from '@/views/Shared/Image'
-import useLogger from '@/hooks/useLogger'
 
 const Provider: NextPage = () => {
   const { data: provider, loading, error } = useQuery<ProviderFields>(PROVIDER_BY_ID)

@@ -1,5 +1,6 @@
-import { FC } from 'react'
 import Link from 'next/link'
+import { FC } from 'react'
+
 import { Category } from '@/services/GraphQL/categories/types'
 
 const CategoryDetail: FC<{ category: Category }> = ({ category }) => (

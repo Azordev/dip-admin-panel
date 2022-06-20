@@ -1,11 +1,13 @@
-import { useLayoutEffect as useEffect } from 'react'
-import { NextPage } from 'next'
 import { useLazyQuery } from '@apollo/client'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useLayoutEffect as useEffect } from 'react'
+
+import useLogger from '@/hooks/useLogger'
 import { USER_SESSION } from '@/services/GraphQL/users/queries'
 import { LoginInput } from '@/services/GraphQL/users/types'
-import useLogger from '@/hooks/useLogger'
+
 import LoginLayout from './Layout'
-import { useRouter } from 'next/router'
 
 const Login: NextPage = () => {
   const [checkUserSession, { loading, data }] = useLazyQuery(USER_SESSION)

@@ -1,9 +1,10 @@
+import { useMutation } from '@apollo/client'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { useMutation } from '@apollo/client'
-import { ProviderEditable } from '@/services/GraphQL/providers/types'
+
 import { CREATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
+import { ProviderEditable } from '@/services/GraphQL/providers/types'
 import styles from '@/styles/Home.module.css'
 
 const Create: NextPage = () => {

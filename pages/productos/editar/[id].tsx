@@ -1,9 +1,10 @@
+import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+
 import useLogger from '@/hooks/useLogger'
-import { ProductEditable } from '@/services/GraphQL/products/types'
 import { UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
+import { ProductEditable } from '@/services/GraphQL/products/types'
 import EditProductForm from '@/views/Products/Edit'
 
 const EditProduct: NextPage = () => {

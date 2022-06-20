@@ -1,6 +1,7 @@
-import { InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
+import { InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
 
 interface CreateInscriptionFormProps {
   onSubmit: (_formData: InscriptionEditable) => void

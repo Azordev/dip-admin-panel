@@ -1,4 +1,5 @@
 import { FC, memo } from 'react'
+
 import { User } from '@/services/GraphQL/users/types'
 import Image from '@/views/Shared/Image'
 

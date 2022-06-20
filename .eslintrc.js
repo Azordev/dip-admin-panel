@@ -40,6 +40,48 @@ module.exports = {
       },
     ],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-cycle': ['warn', { maxDepth: 3 }],
+    'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true }],
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index'], 'object'],
+        pathGroupsExcludedImportTypes: [],
+        pathGroups: [
+          {
+            pattern: '@/**',
+            group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: '*.{json,graphql}',
+            patternOptions: { matchBase: true, nocase: true },
+            group: 'object',
+            position: 'after',
+          },
+          {
+            pattern: '*.{css,scss,eot,otf,ttf,woff,woff2,svg,jpg,jpeg,png,gif,html}',
+            patternOptions: { matchBase: true, nocase: true },
+            group: 'object',
+            position: 'after',
+          },
+        ],
+        'newlines-between': 'always',
+      },
+    ],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['**/*.stories.@(ts|tsx)', '**/*.test.@(ts|tsx)', '**/tests/*.@(ts|tsx)', '@types/prop-types'],
+      },
+    ],
+    'import/core-modules': 0,
   },
   env: {
     'jest/globals': true,

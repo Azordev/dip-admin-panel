@@ -1,6 +1,7 @@
-import { SubscriptionEditable, Subscription } from '@/services/GraphQL/subscriptions/types'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
+import { Subscription, SubscriptionEditable } from '@/services/GraphQL/subscriptions/types'
 
 interface EditSubscriptionFormProps {
   onSubmit: (_formData: SubscriptionEditable) => void

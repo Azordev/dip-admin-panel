@@ -1,6 +1,7 @@
-import { ProductEditable, Product } from '@/services/GraphQL/products/types'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
+import { Product, ProductEditable } from '@/services/GraphQL/products/types'
 
 interface EditProductFormProps {
   onSubmit: (_formData: ProductEditable) => void

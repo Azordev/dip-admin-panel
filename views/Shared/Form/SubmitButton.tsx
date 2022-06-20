@@ -1,5 +1,7 @@
 import React from 'react'
+
 import Button from '../Button'
+
 import styles from './Form.module.scss'
 
 const SubmitButton = ({ isLoading = false, text = 'Submit', ...rest }) => (

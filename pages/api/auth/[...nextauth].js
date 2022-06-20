@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+
 import { magicProviderCredentials } from './nextauth.provider.magic.utils'
 
 export default NextAuth({

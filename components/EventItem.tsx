@@ -1,8 +1,9 @@
 import type { NextPage } from 'next'
-import type { Event } from '../services/GraphQL/events/types'
 import { useRouter } from 'next/router'
-import styles from '../styles/Events.module.css'
-import { readableDate } from '../services/utils/dateFormat'
+
+import type { Event } from '@/services/GraphQL/events/types'
+import { readableDate } from '@/services/utils/dateFormat'
+import styles from '@/styles/Events.module.css'
 
 const EventItem: NextPage<{ event: Event }> = ({ event }) => {
   const { push } = useRouter()

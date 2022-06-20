@@ -1,11 +1,12 @@
+import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
-import { CATEGORY_BY_ID } from '@/services/GraphQL/categories/queries'
+
 import useLogger from '@/hooks/useLogger'
-import ClientOnly from '@/views/Shared/ClientOnly'
+import { CATEGORY_BY_ID } from '@/services/GraphQL/categories/queries'
 import { Category as CategoryFields } from '@/services/GraphQL/categories/types'
 import CategoryDetail from '@/views/Categories/Detail'
+import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Category: NextPage = () => {
   const { data: category, loading, error } = useQuery<CategoryFields>(CATEGORY_BY_ID)
