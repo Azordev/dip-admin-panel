@@ -1,28 +1,27 @@
 import { ApolloProvider } from '@apollo/client'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { ToastContainer, Zoom } from 'react-toastify'
 
 import client from '@/services/GraphQL/client'
 import ErrorBoundary from '@/views/Shared/ErrorBoundary'
+import Dashboard from '@/views/Shared/Layouts/Dashboard'
 import 'react-toastify/dist/ReactToastify.min.css'
 import '@/styles/globals.scss'
 
 const DIDAdminPanel = ({ Component, pageProps: { ...pageProps } }: AppProps) => {
   const router = useRouter()
 
-  useEffect(() => {
-    const user = window.sessionStorage.getItem('user')
-
-    if (!user) {
-      router.push('/ingresar')
-    }
-  }, [router])
   return (
     <ErrorBoundary>
       <ApolloProvider client={client}>
-        <Component {...pageProps} />
+        {router.pathname === '/ingresar' ? (
+          <Component {...pageProps} />
+        ) : (
+          <Dashboard>
+            <Component {...pageProps} />
+          </Dashboard>
+        )}
         <ToastContainer transition={Zoom} />
       </ApolloProvider>
     </ErrorBoundary>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LogoDID from '../../../SVGs/LogoDID/LogoDID'
+import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
 const Footer = () => (
   <footer>
