@@ -1,20 +1,23 @@
-import { DocumentNode, useLazyQuery } from '@apollo/client'
+import { type DocumentNode, useLazyQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { ElementType, FC, useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import { type FC, useEffect, useState } from 'react'
 
+import useLogger from '@/hooks/useLogger'
+
+import Loading from '../Loading'
 import UpdateFormLayout from './Layout'
 
 interface Props {
   submitHandler: (_dataForm: any) => void
   currentDataQuery: DocumentNode
-  UpdateForm: ElementType
+  UpdateForm: FC<any>
   isSubmitLoading?: boolean
 }
 
 const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSubmitLoading, UpdateForm }) => {
   const [queryOriginalData, { loading }] = useLazyQuery(currentDataQuery)
   const { query } = useRouter()
+  const { error: logError } = useLogger()
   const [currentData, setCurrentData] = useState()
 
   useEffect(() => {
@@ -30,8 +33,8 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
       })
 
       if (error) {
-        console.error(error)
-        return toast('Error al obtener la información', { type: 'error' })
+        logError(error, 'components/UpdateForm', 'Error al obtener la información', 'API_ORIGIN')
+        return
       }
 
       if (called && originalData) {
@@ -41,18 +44,14 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
     }
 
     if (query.id) getCurrentData(query.id as string)
-  }, [currentDataQuery, currentData, query, queryOriginalData])
+  }, [currentDataQuery, currentData, query, queryOriginalData, logError])
+
+  if (loading) return <Loading />
 
   return (
-    <>
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : (
-        <UpdateFormLayout>
-          <UpdateForm onSubmit={submitHandler} loading={isSubmitLoading} originalData={currentData} />
-        </UpdateFormLayout>
-      )}
-    </>
+    <UpdateFormLayout>
+      <UpdateForm onSubmit={submitHandler} loading={isSubmitLoading} originalData={currentData} />
+    </UpdateFormLayout>
   )
 }
 
