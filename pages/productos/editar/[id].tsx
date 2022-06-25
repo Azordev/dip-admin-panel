@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
-import { NextPage } from 'next'
+import { type NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import useLogger from '@/hooks/useLogger'
 import { UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
-import { ProductEditable } from '@/services/GraphQL/products/types'
+import { type ProductEditable } from '@/services/GraphQL/products/types'
 import EditProductForm from '@/views/Products/Edit'
 
 const EditProduct: NextPage = () => {
@@ -18,7 +18,7 @@ const EditProduct: NextPage = () => {
     push('/productos')
   }
 
-  if (mutationError) error(Error(mutationError.message), 'pages/productos/[id].tsx', 'Error al actualizar el producto')
+  if (mutationError) error(mutationError, 'pages/productos/[id].tsx', 'Error al actualizar el producto')
 
   return (
     <div className="container">

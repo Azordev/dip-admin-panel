@@ -4,12 +4,12 @@ import { useRouter } from 'next/router'
 
 import useLogger from '@/hooks/useLogger'
 import { PRODUCT_BY_ID } from '@/services/GraphQL/products/queries'
-import { Product } from '@/services/GraphQL/products/types'
+import { Product as ProductFields } from '@/services/GraphQL/products/types'
 import ClientOnly from '@/views/Shared/ClientOnly'
 import Image from '@/views/Shared/Image'
 
 const Product: NextPage = () => {
-  const { data: product, loading, error } = useQuery<Product>(PRODUCT_BY_ID)
+  const { data: product, loading, error } = useQuery<ProductFields>(PRODUCT_BY_ID)
   const { push } = useRouter()
   const { error: LogError } = useLogger()
 
