@@ -1,31 +1,24 @@
 import { useQuery } from '@apollo/client'
-import type { NextPage } from 'next'
+import { type NextPage } from 'next'
 
+import EmptyList from '@/components/EmptyList'
+import Loading from '@/components/Loading'
+import useLogger from '@/hooks/useLogger'
 import { INSCRIPTIONS } from '@/services/GraphQL/inscriptions/queries'
-import { Inscription } from '@/services/GraphQL/inscriptions/types'
+import InscriptionList from '@/views/Inscriptions/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Inscriptions: NextPage = () => {
-  const { data, loading, error } = useQuery(INSCRIPTIONS)
+  const { data, loading, error: queryError } = useQuery(INSCRIPTIONS)
+  const { error: logError } = useLogger()
 
-  if (loading) {
-    return <p>Loading...</p>
-  }
+  if (queryError) logError(queryError, 'pages/inscripciones/index.tsx', 'Hubo un error al traer las inscripciones')
 
-  if (error) {
-    console.error(error)
-  }
-
+  if (loading) return <Loading />
+  if (!data || data.inscriptions.length < 1) return <EmptyList text="No se encontraron inscripciones" />
   return (
     <ClientOnly>
-      <>
-        <h1>Inscriptions</h1>
-        <ul>
-          {data?.inscripciones.map((inscription: Inscription) => (
-            <li key={inscription.id}>{inscription.id}</li>
-          ))}
-        </ul>
-      </>
+      <InscriptionList inscriptions={data.inscriptions} />
     </ClientOnly>
   )
 }
