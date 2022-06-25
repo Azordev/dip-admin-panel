@@ -1,22 +1,28 @@
 import { useQuery } from '@apollo/client'
-import type { NextPage } from 'next'
+import { type NextPage } from 'next'
 
+import EmptyList from '@/components/EmptyList'
+import Loading from '@/components/Loading'
+import useLogger from '@/hooks/useLogger'
 import { CATEGORIES } from '@/services/GraphQL/categories/queries'
 import CategoriesList from '@/views/Categories/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Categories: NextPage = () => {
   const { data, loading, error } = useQuery(CATEGORIES)
-
-  if (loading) {
-    return <p>Loading...</p>
-  }
+  const { error: logError } = useLogger()
 
   if (error) {
-    console.error(error)
+    logError(error, 'pages/categorias/index.tsx', 'No se pudo obtener la categoría.')
   }
 
-  return <ClientOnly>{data.length && <CategoriesList categories={data.categories} />}</ClientOnly>
+  if (loading) return <Loading />
+  if (!data && data.categories.length < 1) return <EmptyList text="No hay categorías aun, por favor crear una" />
+  return (
+    <ClientOnly>
+      <CategoriesList categories={data.categories} />
+    </ClientOnly>
+  )
 }
 
 export default Categories

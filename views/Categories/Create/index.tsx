@@ -1,29 +1,20 @@
 import { FC } from 'react'
-import { useForm } from 'react-hook-form'
 
 import { Category } from '@/services/GraphQL/categories/types'
 
-interface CreateCategoryFormProps {
+import CreateCategoryForm from './Form'
+
+interface CreateCategoryLayoutProps {
   onSubmit: (_formData: Category) => void
   loading: boolean
 }
 
-const CreateCategoryForm: FC<CreateCategoryFormProps> = ({ onSubmit, loading }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Category>()
-  const submitHandler = handleSubmit(onSubmit)
-  const buttonText = loading ? 'Enviando' : 'Enviar'
+const CreateCategoryLayout: FC<CreateCategoryLayoutProps> = ({ onSubmit, loading }) => (
+  <div>
+    <h1>Create Category</h1>
 
-  return (
-    <form onSubmit={submitHandler}>
-      <input type="text" placeholder="title" {...register('name', { required: true })} />
-      {errors.name && <small className="text-red-500">{errors.name.message}</small>}
-      <button type="submit">{buttonText}</button>
-    </form>
-  )
-}
+    <CreateCategoryForm onSubmit={onSubmit} loading={loading} />
+  </div>
+)
 
-export default CreateCategoryForm
+export default CreateCategoryLayout

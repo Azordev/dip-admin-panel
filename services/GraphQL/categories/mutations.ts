@@ -3,9 +3,9 @@ import { gql } from '@apollo/client'
 import { categoryInfo } from './types.d'
 
 export const CREATE_CATEGORY = gql`
-  mutation ($name: String!, $description: String, $badge_url: String) {
+  mutation ($name: String!, $description: String, $badgeUrl: String) {
     category: insert_categories_one(
-      object: { name: $name, description: $description, badge_url: $badge_url, is_active: true }
+      object: { name: $name, description: $description, badge_url: $badgeUrl, is_active: true }
     ) {
       ${categoryInfo}
     }
@@ -13,10 +13,10 @@ export const CREATE_CATEGORY = gql`
 `
 
 export const UPDATE_CATEGORY = gql`
-  mutation ($id: uuid!, $name: String, $description: String, $badge_url: String, $is_active: Boolean) {
+  mutation ($id: uuid!, $name: String, $description: String, $badgeUrl: String, $isActive: Boolean) {
     category: update_categories_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, description: $description, badge_url: $badge_url, is_active: $is_active }
+      _set: { name: $name, description: $description, badge_url: $badgeUrl, is_active: $isActive }
     ) {
       id
     }

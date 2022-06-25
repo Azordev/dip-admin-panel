@@ -30,6 +30,11 @@ export const CATEGORY_BY_ID = gql`
       ${categoryInfo}
       created_at
       updated_at
+      products: products_aggregate {
+        stats: aggregate {
+          count
+        }
+      }
     }
   }
 `

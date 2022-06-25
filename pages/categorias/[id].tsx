@@ -1,28 +1,36 @@
 import { useQuery } from '@apollo/client'
-import { NextPage } from 'next'
+import { type NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import EmptyItem from '@/components/EmptyItem'
+import Loading from '@/components/Loading'
 import useLogger from '@/hooks/useLogger'
 import { CATEGORY_BY_ID } from '@/services/GraphQL/categories/queries'
-import { Category as CategoryFields } from '@/services/GraphQL/categories/types'
 import CategoryDetail from '@/views/Categories/Detail'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Category: NextPage = () => {
-  const { data: category, loading, error } = useQuery<CategoryFields>(CATEGORY_BY_ID)
-  const { push } = useRouter()
-  const { error: LogError } = useLogger()
+  const { push, query } = useRouter()
+  const {
+    data,
+    loading,
+    error: queryError,
+  } = useQuery(CATEGORY_BY_ID, {
+    variables: { id: query.id },
+  })
+  const { error: logError } = useLogger()
 
-  if (error) {
-    LogError(error, 'pages/categorias/[id].tsx Category.tsx', 'useQuery(CATEGORY_BY_ID)', 'UNEXPECTED')
+  if (queryError) {
+    logError(queryError, 'pages/categorias/[id].tsx Category.tsx', 'useQuery(CATEGORY_BY_ID)', 'UNEXPECTED')
     push('/categorias')
   }
 
+  if (loading) return <Loading />
+  if (!data || !data.category) return <EmptyItem text="La categoría esta vacía o es invalida" />
   return (
-    <div>
-      {loading && <p>Cargando...</p>}
-      <ClientOnly>{category && category !== undefined ? <CategoryDetail category={category} /> : <></>}</ClientOnly>
-    </div>
+    <ClientOnly>
+      <CategoryDetail category={data.category} />
+    </ClientOnly>
   )
 }
 

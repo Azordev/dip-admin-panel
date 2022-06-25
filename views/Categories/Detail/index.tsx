@@ -7,7 +7,7 @@ const CategoryDetail: FC<{ category: Category }> = ({ category }) => (
   <div>
     <h1>{category.name}</h1>
 
-    <input type="checkbox" checked={category.is_active} />
+    {category.is_active ? <p>Activo</p> : <p>Desactivado</p>}
 
     {category.products.stats.count > 0 && <Link href={`/categorias/`}>{category.products.stats.count}</Link>}
   </div>
