@@ -17,13 +17,26 @@
   "cSpell.language": "en,es",
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.insertSpaces": true,
+  "editor.rulers": [
+    {
+      "column": 80,
+      "color": "#ffaa0080"
+    },
+    {
+      "column": 120,
+      "color": "#ff0000"
+    },
+  ],
   "editor.tabSize": 2,
+  "editor.wordWrapColumn": 120,
+  "editor.wordWrap": "wordWrapColumn",
   "emmet.excludeLanguages": [],
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
