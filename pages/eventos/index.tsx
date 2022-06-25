@@ -1,43 +1,24 @@
 import { useQuery } from '@apollo/client'
-import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import { type NextPage } from 'next'
 
-import EventItem from '@/components/EventItem'
+import EmptyList from '@/components/EmptyList'
+import Loading from '@/components/Loading'
+import useLogger from '@/hooks/useLogger'
 import { EVENTS } from '@/services/GraphQL/events/queries'
-import { Event } from '@/services/GraphQL/events/types'
-import styles from '@/styles/Events.module.css'
+import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Events: NextPage = () => {
-  const { push } = useRouter()
-  const { data, loading } = useQuery(EVENTS)
+  const { data, loading, error: queryError } = useQuery(EVENTS)
+  const { error: logError } = useLogger()
 
-  if (loading) {
-    return <h2>Loading...</h2>
-  }
+  if (queryError) logError(queryError, 'pages/events/index.tsx', 'No se pudo obtener los eventos de la base de datos')
 
-  if (!data) {
-    return <h2>No hay eventos</h2>
-  }
-  const events: Event[] = data.events
-
+  if (loading) return <Loading />
+  if (!data && data.events.length < 1) return <EmptyList text="No hay eventos" />
   return (
     <ClientOnly>
-      <>
-        <header className={styles['page-header']}>
-          <h1 className={styles['header-title']}>Eventos</h1>
-          <button className={styles['new-event-button']} onClick={() => push('/eventos/crear')}>
-            Crear Evento
-          </button>
-        </header>
-        <div className={styles.container}>
-          <div className={styles['events-list']}>
-            {events.map(event => (
-              <EventItem key={event.id} event={event} />
-            ))}
-          </div>
-        </div>
-      </>
+      <EventsList events={data.events} />
     </ClientOnly>
   )
 }
