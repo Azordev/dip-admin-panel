@@ -9,7 +9,7 @@ import InscriptionList from '@/views/Inscriptions/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Inscriptions: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(INSCRIPTIONS)
+  const { data, loading, queryError } = useQuery(INSCRIPTIONS)
   const { error: logError } = useLogger()
 
   if (queryError) logError(queryError, 'pages/inscripciones/index.tsx', 'Hubo un error al traer las inscripciones')

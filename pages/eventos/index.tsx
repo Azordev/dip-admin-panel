@@ -9,7 +9,7 @@ import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Events: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(EVENTS)
+  const { data, loading, queryError } = useQuery(EVENTS)
   const { error: logError } = useLogger()
 
   if (queryError) logError(queryError, 'pages/events/index.tsx', 'No se pudo obtener los eventos de la base de datos')

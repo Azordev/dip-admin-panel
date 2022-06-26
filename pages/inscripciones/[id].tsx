@@ -11,12 +11,9 @@ import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Inscription: NextPage = () => {
   const { push, query } = useRouter()
-  const {
-    data,
-    loading,
-    error: queryError,
-  } = useQuery(INSCRIPTION_BY_ID, {
+  const { data, loading, queryError } = useQuery(INSCRIPTION_BY_ID, {
     variables: { id: query.id },
+    errorPolicy: 'all',
   })
   const { error: LogError } = useLogger()
 

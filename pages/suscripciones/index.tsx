@@ -8,7 +8,7 @@ import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Subscriptions: NextPage = () => {
   const { push } = useRouter()
-  const { data, loading, error } = useQuery(SUBSCRIPTIONS)
+  const { data, loading, queryError } = useQuery(SUBSCRIPTIONS)
 
   if (loading) {
     return <h2>Loading...</h2>
@@ -18,8 +18,8 @@ const Subscriptions: NextPage = () => {
     return <h2>No hay suscripciones</h2>
   }
 
-  if (error) {
-    console.error(error)
+  if (queryError) {
+    console.error(queryError)
     push('/')
   }
 

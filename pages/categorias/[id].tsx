@@ -11,11 +11,7 @@ import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Category: NextPage = () => {
   const { push, query } = useRouter()
-  const {
-    data,
-    loading,
-    error: queryError,
-  } = useQuery(CATEGORY_BY_ID, {
+  const { data, loading, queryError } = useQuery(CATEGORY_BY_ID, {
     variables: { id: query.id },
   })
   const { error: logError } = useLogger()

@@ -4,17 +4,16 @@ import { useRouter } from 'next/router'
 
 import useLogger from '@/hooks/useLogger'
 import { PROVIDER_BY_ID } from '@/services/GraphQL/providers/queries'
-import { Provider as ProviderFields } from '@/services/GraphQL/providers/types'
 import ClientOnly from '@/views/Shared/ClientOnly'
 import Image from '@/views/Shared/Image'
 
 const Provider: NextPage = () => {
-  const { data: provider, loading, error } = useQuery<ProviderFields>(PROVIDER_BY_ID)
+  const { data: provider, loading, queryError } = useQuery(PROVIDER_BY_ID)
   const { push } = useRouter()
   const { error: LogError } = useLogger()
 
-  if (error) {
-    LogError(error, 'Provider.tsx', 'useQuery(PROVIDER_BY_ID)', 'UNEXPECTED')
+  if (queryError) {
+    LogError(queryError, 'Provider.tsx', 'useQuery(PROVIDER_BY_ID)', 'UNEXPECTED')
     push('/proveedores')
   }
 

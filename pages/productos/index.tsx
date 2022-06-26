@@ -9,7 +9,7 @@ import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Products: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(PRODUCTS)
+  const { data, loading, queryError } = useQuery(PRODUCTS)
   const { error: logError } = useLogger()
 
   if (queryError) logError(queryError, 'pages/productos/index.tsx', 'No se pudo obtener la lista de eventos')

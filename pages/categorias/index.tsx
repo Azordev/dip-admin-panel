@@ -9,12 +9,10 @@ import CategoriesList from '@/views/Categories/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Categories: NextPage = () => {
-  const { data, loading, error } = useQuery(CATEGORIES)
+  const { data, loading, queryError } = useQuery(CATEGORIES)
   const { error: logError } = useLogger()
 
-  if (error) {
-    logError(error, 'pages/categorias/index.tsx', 'No se pudo obtener la categoría.')
-  }
+  if (queryError) logError(queryError, 'pages/categorias/index.tsx', 'No se pudo obtener la categoría.')
 
   if (loading) return <Loading />
   if (!data && data.categories.length < 1) return <EmptyList text="No hay categorías aun, por favor crear una" />

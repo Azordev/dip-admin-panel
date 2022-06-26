@@ -10,7 +10,7 @@ const Subscription: NextPage = () => {
   const { push } = useRouter()
   const { error } = useLogger()
 
-  const { data, loading, error: queryError } = useQuery<{ subscription: { id: string } }>(SUBSCRIPTION_BY_ID)
+  const { data, loading, queryError } = useQuery<{ subscription: { id: string } }>(SUBSCRIPTION_BY_ID)
 
   if (queryError) {
     error(queryError, 'pages/suscripciones/[id].tsx', 'useQuery(subscription)', 'UNEXPECTED')

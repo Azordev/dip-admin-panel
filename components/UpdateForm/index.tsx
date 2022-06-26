@@ -24,16 +24,16 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
     const getCurrentData = async (id: string) => {
       const {
         called,
-        error,
         data: originalData,
+        queryError,
       } = await queryOriginalData({
         variables: {
           id,
         },
       })
 
-      if (error) {
-        logError(error, 'components/UpdateForm', 'Error al obtener la información', 'API_ORIGIN')
+      if (queryError) {
+        logError(queryError, 'components/UpdateForm', 'Error al obtener la información', 'API_ORIGIN')
         return
       }
 
