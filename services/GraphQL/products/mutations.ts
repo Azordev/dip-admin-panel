@@ -6,7 +6,7 @@ export const CREATE_PRODUCT = gql`
     $description: String = ""
     $details: String = ""
     $available: numeric = 1
-    $image_url: String = ""
+    $imageUrl: String = ""
     $offer_discount: Int = 10
     $provider_id: uuid = ""
     $unit_system: String = ""
@@ -18,11 +18,11 @@ export const CREATE_PRODUCT = gql`
         description: $description
         details: $details
         available: $available
-        image_url: $image_url
-        offer_discount: $offer_discount
-        provider_id: $provider_id
-        unit_system: $unit_system
-        with_offer: $with_offer
+        image_url: $imageUrl
+        offer_discount: $offerDiscount
+        provider_id: $providerId
+        unit_system: $unitSystem
+        with_offer: $withOffer
       }
     ) {
       id
@@ -37,11 +37,11 @@ export const UPDATE_PRODUCT = gql`
     $description: String = ""
     $details: String = ""
     $available: numeric = 1
-    $image_url: String = ""
-    $offer_discount: Int = 10
-    $provider_id: uuid = ""
-    $unit_system: String = ""
-    $with_offer: Boolean = false
+    $imageUrl: String = ""
+    $offerDiscount: Int = 10
+    $providerId: uuid = ""
+    $unitSystem: String = ""
+    $withOffer: Boolean = false
   ) {
     update_products_by_pk(
       pk_columns: { id: $id }
@@ -50,11 +50,11 @@ export const UPDATE_PRODUCT = gql`
         description: $description
         details: $details
         available: $available
-        image_url: $image_url
-        offer_discount: $offer_discount
-        provider_id: $provider_id
-        unit_system: $unit_system
-        with_offer: $with_offer
+        image_url: $imageUrl
+        offer_discount: $offerDiscount
+        provider_id: $providerId
+        unit_system: $unitSystem
+        with_offer: $withOffer
       }
     ) {
       id

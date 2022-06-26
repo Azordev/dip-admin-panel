@@ -1,34 +1,26 @@
 import { useQuery } from '@apollo/client'
 import type { NextPage } from 'next'
 
-import { SUBSCRIPTIONS } from '@/services/GraphQL/subscriptions/queries'
-import { Subscription } from '@/services/GraphQL/subscriptions/types'
+import EmptyList from '@/components/EmptyList'
+import Loading from '@/components/Loading'
+import useLogger from '@/hooks/useLogger'
+import { PRODUCTS } from '@/services/GraphQL/products/queries'
+import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-const Subscriptions: NextPage = () => {
-  const { data, loading } = useQuery(SUBSCRIPTIONS)
+const Products: NextPage = () => {
+  const { data, loading, error: queryError } = useQuery(PRODUCTS)
+  const { error: logError } = useLogger()
 
-  if (loading) {
-    return <h2>Loading...</h2>
-  }
+  if (queryError) logError(queryError, 'pages/productos/index.tsx', 'No se pudo obtener la lista de eventos')
 
-  if (!data) {
-    return <h2>No hay suscripciones</h2>
-  }
-
+  if (loading) return <Loading />
+  if (!data || !data.products) return <EmptyList text="No hay suscripciones" />
   return (
     <ClientOnly>
-      <>
-        <h1>Suscripciones</h1>
-
-        <ul>
-          {data.subscriptions.map((subscription: Subscription) => (
-            <li key={subscription.id}>{subscription.id}</li>
-          ))}
-        </ul>
-      </>
+      <ProductList products={data.products} />
     </ClientOnly>
   )
 }
 
-export default Subscriptions
+export default Products
