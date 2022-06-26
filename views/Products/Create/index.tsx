@@ -1,15 +1,10 @@
 import { FC } from 'react'
 
-import { ProductEditable } from '@/services/GraphQL/products/types'
+import { MutableProductFormProps } from '@/services/GraphQL/products/types'
 
 import CreateProductForm from './Form'
 
-interface CreateProductLayoutProps {
-  onSubmit: (_formData: ProductEditable) => void
-  loading: boolean
-}
-
-const CreateProductLayout: FC<CreateProductLayoutProps> = ({ onSubmit, loading }) => (
+const CreateProductLayout: FC<MutableProductFormProps> = ({ onSubmit, loading }) => (
   <div className="container">
     <h1 className="title">Create Product</h1>
 

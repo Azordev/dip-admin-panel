@@ -1,15 +1,9 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Product, ProductEditable } from '@/services/GraphQL/products/types'
+import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
-interface EditProductFormProps {
-  onSubmit: (_formData: ProductEditable) => void
-  loading: boolean
-  originalData?: Product
-}
-
-const EditProductForm: FC<EditProductFormProps> = ({ onSubmit, loading, originalData: originalProduct }) => {
+const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading, originalData: originalProduct }) => {
   const {
     register,
     handleSubmit,

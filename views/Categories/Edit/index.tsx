@@ -1,15 +1,9 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Category, CategoryEditable } from '@/services/GraphQL/categories/types'
+import { CategoryEditable, MutableCategoryFormProps } from '@/services/GraphQL/categories/types'
 
-interface EditCategoryFormProps {
-  onSubmit: (_formData: CategoryEditable) => void
-  loading: boolean
-  originalData?: Category
-}
-
-const EditCategoryForm: FC<EditCategoryFormProps> = ({ onSubmit, loading, originalData: originalCategory }) => {
+const EditCategoryForm: FC<MutableCategoryFormProps> = ({ onSubmit, loading, originalData: originalCategory }) => {
   const {
     register,
     handleSubmit,

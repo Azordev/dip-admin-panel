@@ -26,3 +26,9 @@ export interface Category extends CategoryBase {
     }
   }
 }
+
+export interface MutableCategoryFormProps {
+  onSubmit: (_formData: CategoryEditable) => void
+  loading: boolean
+  originalData?: Category
+}

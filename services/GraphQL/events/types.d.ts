@@ -49,3 +49,9 @@ export interface Event extends EventEditable {
     }
   }
 }
+
+export interface MutableEventFormProps {
+  onSubmit: (_formData: EventEditable) => void
+  loading: boolean
+  originalData?: Event
+}

@@ -1,14 +1,9 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
+import { InscriptionEditable, MutableInscriptionFormProps } from '@/services/GraphQL/inscriptions/types'
 
-interface CreateInscriptionFormProps {
-  onSubmit: (_formData: InscriptionEditable) => void
-  loading: boolean
-}
-
-const CreateInscriptionForm: FC<CreateInscriptionFormProps> = ({ onSubmit, loading }) => {
+const CreateInscriptionForm: FC<MutableInscriptionFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
     handleSubmit,

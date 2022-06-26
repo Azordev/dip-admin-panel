@@ -1,19 +1,14 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Category } from '@/services/GraphQL/categories/types'
+import { CategoryEditable, MutableCategoryFormProps } from '@/services/GraphQL/categories/types'
 
-interface CreateCategoryFormProps {
-  onSubmit: (_formData: Category) => void
-  loading: boolean
-}
-
-const CreateCategoryForm: FC<CreateCategoryFormProps> = ({ onSubmit, loading }) => {
+const CreateCategoryForm: FC<MutableCategoryFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Category>()
+  } = useForm<CategoryEditable>()
   const submitHandler = handleSubmit(onSubmit)
   const buttonText = loading ? 'Enviando' : 'Enviar'
 

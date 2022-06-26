@@ -86,3 +86,8 @@ export interface LoginInput {
   memberCode: string
   password: string
 }
+
+export interface LoginFormProps {
+  onSubmit: (_formData: LoginInput) => void
+  loading: boolean
+}

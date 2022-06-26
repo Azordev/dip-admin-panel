@@ -1,15 +1,10 @@
 import { FC } from 'react'
 
-import { InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
+import { MutableInscriptionFormProps } from '@/services/GraphQL/inscriptions/types'
 
 import CreateInscriptionForm from './Form'
 
-interface CreateInscriptionLayoutProps {
-  onSubmit: (_formData: InscriptionEditable) => void
-  loading: boolean
-}
-
-const CreateInscriptionLayout: FC<CreateInscriptionLayoutProps> = ({ onSubmit, loading }) => (
+const CreateInscriptionLayout: FC<MutableInscriptionFormProps> = ({ onSubmit, loading }) => (
   <div>
     <h1>Create Inscription</h1>
     <CreateInscriptionForm onSubmit={onSubmit} loading={loading} />

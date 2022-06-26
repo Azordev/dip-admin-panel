@@ -1,15 +1,10 @@
 import { FC } from 'react'
 
-import { Category } from '@/services/GraphQL/categories/types'
+import { MutableCategoryFormProps } from '@/services/GraphQL/categories/types'
 
 import CreateCategoryForm from './Form'
 
-interface CreateCategoryLayoutProps {
-  onSubmit: (_formData: Category) => void
-  loading: boolean
-}
-
-const CreateCategoryLayout: FC<CreateCategoryLayoutProps> = ({ onSubmit, loading }) => (
+const CreateCategoryLayout: FC<MutableCategoryFormProps> = ({ onSubmit, loading }) => (
   <div>
     <h1>Create Category</h1>
 

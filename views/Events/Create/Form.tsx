@@ -1,14 +1,9 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { EventEditable } from '@/services/GraphQL/events/types'
+import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 
-interface CreateEventFormProps {
-  onSubmit: (_formData: EventEditable) => void
-  loading: boolean
-}
-
-const CreateEventForm: FC<CreateEventFormProps> = ({ onSubmit, loading }) => {
+const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
     handleSubmit,

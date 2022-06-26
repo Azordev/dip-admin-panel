@@ -25,3 +25,8 @@ export interface Inscription {
   }
   updated_at: string
 }
+
+export interface MutableInscriptionFormProps {
+  onSubmit: (_formData: InscriptionEditable) => void
+  loading: boolean
+}

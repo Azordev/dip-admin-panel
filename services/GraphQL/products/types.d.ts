@@ -46,3 +46,9 @@ export interface Product extends ProductBase {
   createdAt: string
   updatedAt: string
 }
+
+export interface MutableProductFormProps {
+  onSubmit: (_formData: ProductEditable) => void
+  loading: boolean
+  originalData?: Product
+}

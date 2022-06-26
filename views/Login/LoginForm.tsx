@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { LoginInput } from '@/services/GraphQL/users/types'
+import { LoginFormProps, LoginInput } from '@/services/GraphQL/users/types'
 
 import PasswordInput from '../Shared/Form/PasswordInput'
 import SubmitButton from '../Shared/Form/SubmitButton'
@@ -9,10 +9,6 @@ import TextInput from '../Shared/Form/TextInput'
 
 import styles from './Login.module.scss'
 
-interface LoginFormProps {
-  onSubmit: (_formData: LoginInput) => void
-  loading: boolean
-}
 const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
