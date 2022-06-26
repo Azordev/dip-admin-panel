@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { type FC } from 'react'
+import { FC } from 'react'
 
-import { type Inscription } from '@/services/GraphQL/inscriptions/types'
+import { Inscription } from '@/services/GraphQL/inscriptions/types'
 
 const InscriptionList: FC<{ inscriptions: Inscription[] }> = ({ inscriptions }) => (
   <>

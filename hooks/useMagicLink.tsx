@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 import useError from '@/hooks/useLogger'
-import { type User } from '@/services/GraphQL/users/types'
+import { User } from '@/services/GraphQL/users/types'
 
 const magicCredential = process.env.NEXT_PUBLIC_MAGIC_PK || ''
 const magic = typeof window !== 'undefined' && new Magic(magicCredential)

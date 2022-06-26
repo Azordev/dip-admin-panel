@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { type NextPage } from 'next'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import EmptyItem from '@/components/EmptyItem'

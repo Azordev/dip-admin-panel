@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import type { NextPage } from 'next'
+import { NextPage } from 'next'
 
 import { PROVIDERS } from '@/services/GraphQL/providers/queries'
 import { Provider } from '@/services/GraphQL/providers/types'

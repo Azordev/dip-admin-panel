@@ -1,6 +1,6 @@
-import { type DocumentNode, useLazyQuery } from '@apollo/client'
+import { DocumentNode, useLazyQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { type FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
 

@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
-import { type NextPage } from 'next'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import useLogger from '@/hooks/useLogger'
 import { CREATE_INSCRIPTION } from '@/services/GraphQL/inscriptions/mutations'
-import { type InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
+import { InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
 import CreateInscriptionLayout from '@/views/Inscriptions/Create'
 
 const Create: NextPage = () => {

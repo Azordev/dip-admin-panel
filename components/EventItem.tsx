@@ -1,7 +1,7 @@
-import { type NextPage } from 'next'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import { type Event } from '@/services/GraphQL/events/types'
+import { Event } from '@/services/GraphQL/events/types'
 import { readableDate } from '@/services/utils/dateFormat'
 import styles from '@/styles/Events.module.css'
 

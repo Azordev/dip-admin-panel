@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import type { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { ToastContainer, Zoom } from 'react-toastify'
 

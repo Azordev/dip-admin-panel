@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { FC } from 'react'
 
 const EmptyItem: FC<{ text: string }> = ({ text }) => <h3>{text}</h3>
 

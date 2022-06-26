@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
-import { type NextPage } from 'next'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import useLogger from '@/hooks/useLogger'
 import { CREATE_CATEGORY } from '@/services/GraphQL/categories/mutations'
-import { type CategoryEditable } from '@/services/GraphQL/categories/types'
+import { CategoryEditable } from '@/services/GraphQL/categories/types'
 import CreateCategoryLayout from '@/views/Categories/Create'
 
 const Create: NextPage = () => {

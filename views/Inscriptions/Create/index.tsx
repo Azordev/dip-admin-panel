@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { type InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
+import { InscriptionEditable } from '@/services/GraphQL/inscriptions/types'
 
 import CreateInscriptionForm from './Form'
 
