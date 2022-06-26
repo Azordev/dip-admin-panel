@@ -2,49 +2,44 @@ import { gql } from '@apollo/client'
 
 export const CREATE_PROVIDER = gql`
   mutation (
-    $commercial_name: String!
+    $commercialName: String!
     $address: String
-    $sales_phone: String
-    $b2b_phone: String!
-    $sales_email: String
-    $b2b_email: String!
-    $legal_name: String
+    $salesPhone: String
+    $b2bPhone: String!
+    $salesEmail: String
+    $b2bEmail: String!
+    $legalName: String
     $details: String
-    $is_active: Boolean
-    $logo_url: String
+    $isActive: Boolean
+    $logoUrl: String
   ) {
     provider: insert_providers_one(
       object: {
-        commercial_name: $commercial_name
+        commercial_name: $commercialName
         address: $address
-        sales_phone: $sales_phone
-        b2b_phone: $b2b_phone
-        sales_email: $sales_email
-        b2b_email: $b2b_email
-        legal_name: $legal_name
+        sales_phone: $salesPhone
+        b2b_phone: $b2bPhone
+        sales_email: $salesEmail
+        b2b_email: $b2bEmail
+        legal_name: $legalName
         details: $details
-        is_active: $is_active
-        logo_url: $logo_url
+        is_active: $isActive
+        logo_url: $logoUrl
       }
     ) {
-      is_active
+      isActive: is_active
     }
   }
 `
 
 // TODO: check if it needs more fields
 export const UPDATE_PROVIDER = gql`
-  mutation ($id: uuid!, $commercial_name: String, $sales_email: String, $sales_phone: String, $address: String) {
+  mutation ($id: uuid!, $commercialName: String, $salesEmail: String, $salesPhone: String, $address: String) {
     provider: update_providers_by_pk(
       pk_columns: { id: $id }
-      _set: {
-        commercial_name: $commercial_name
-        sales_email: $sales_email
-        sales_phone: $sales_phone
-        address: $address
-      }
+      _set: { commercial_name: $commercialName, sales_email: $salesEmail, sales_phone: $salesPhone, address: $address }
     ) {
-      is_active
+      isActive: is_active
     }
   }
 `
@@ -52,7 +47,7 @@ export const UPDATE_PROVIDER = gql`
 export const DEACTIVATE_PROVIDER = gql`
   mutation ($id: uuid!) {
     provider: update_providers_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
-      is_active
+      isActive: is_active
     }
   }
 `

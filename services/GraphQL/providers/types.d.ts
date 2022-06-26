@@ -1,25 +1,48 @@
+import { gql } from '@apollo/client'
+
+export const providerInfo = gql`
+  fragment ProviderInfoFragment on providers {
+    commercialName: commercial_name
+    address
+    salesPhone: sales_phone
+    b2bPhone: b2b_phone
+    salesEmail: sales_email
+    b2bEmail: b2b_email
+    legalName: legal_name
+    details
+    isActive: is_active
+    logoUrl: logo_url
+  }
+`
+
 export interface ProviderBase {
-  commercial_name: string
-  b2b_email: string
-  is_active: boolean
-  avatar_url?: string
+  commercialName: string
+  b2bEmail: string
+  isActive: boolean
+  avatarUrl?: string
   address?: string
-  sales_phone?: string
-  b2b_phone?: string
-  sales_email?: string
-  legal_name?: string
+  salesPhone?: string
+  b2bPhone?: string
+  salesEmail?: string
+  legalName?: string
   details?: string
-  logo_url?: string
+  logoUrl?: string
 }
 
 export interface ProviderEditable extends ProviderBase {
-  commercial_name?: string
-  b2b_email?: string
-  is_active?: boolean
+  commercialName?: string
+  b2bEmail?: string
+  isActive?: boolean
 }
 
 export interface Provider extends ProviderBase {
   id: string
-  created_at?: string
-  updated_at?: string
+  createdAt?: string
+  updatedAt?: string
+}
+
+export interface MutableProviderFormProps {
+  onSubmit: (_formData: ProviderEditable) => void
+  loading: boolean
+  originalData?: Provider
 }

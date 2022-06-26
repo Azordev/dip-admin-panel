@@ -1,6 +1,9 @@
 import { gql } from '@apollo/client'
 
+import { providerInfo } from './types.d'
+
 export const PROVIDERS = gql`
+  ${providerInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     providers(
       order_by: { commercial_name: asc }
@@ -9,33 +12,18 @@ export const PROVIDERS = gql`
       offset: $offset
     ) {
       id
-      commercial_name
-      address
-      sales_phone
-      b2b_phone
-      sales_email
-      b2b_email
-      legal_name
-      details
-      is_active
-      logo_url
+      ...ProviderInfoFragment
     }
   }
 `
 
 export const PROVIDER_BY_ID = gql`
+  ${providerInfo}
   query ($id: uuid!) {
     provider: providers_by_pk(id: $id) {
-      commercial_name
-      address
-      sales_phone
-      b2b_phone
-      sales_email
-      b2b_email
-      legal_name
-      details
-      is_active
-      logo_url
+      ...ProviderInfoFragment
+      createdAt: created_at
+      updatedAt: updated_at
     }
   }
 `

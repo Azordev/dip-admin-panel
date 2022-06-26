@@ -1,35 +1,24 @@
 import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 
+import EmptyList from '@/components/EmptyList'
+import Loading from '@/components/Loading'
+import useLogger from '@/hooks/useLogger'
 import { PROVIDERS } from '@/services/GraphQL/providers/queries'
-import { Provider } from '@/services/GraphQL/providers/types'
-import styles from '@/styles/Home.module.css'
+import ProvidersList from '@/views/Providers/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Providers: NextPage = () => {
-  const { data, loading } = useQuery(PROVIDERS)
+  const { data, loading, error: queryError } = useQuery(PROVIDERS)
+  const { error: logError } = useLogger()
 
-  if (loading) {
-    return <h2>Loading...</h2>
-  }
+  if (queryError) logError(queryError, 'pages/proveedores/index.tsx')
 
-  const providers: Provider[] = data.providers
-
+  if (loading) return <Loading />
+  if (!data || !data.providers) return <EmptyList text="La lista de proveedores esta vacía o es invalida." />
   return (
     <ClientOnly>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Proveedores</h1>
-
-        {providers.map(provider => (
-          <div key={provider.id} className={styles.card}>
-            <h2>{provider.commercial_name}</h2>
-            <p>{provider.address}</p>
-            <p>
-              {provider.address} - {provider.sales_phone}
-            </p>
-          </div>
-        ))}
-      </div>
+      <ProvidersList providers={data.providers} />
     </ClientOnly>
   )
 }
