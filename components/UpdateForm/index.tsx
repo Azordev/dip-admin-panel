@@ -25,7 +25,7 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
       const {
         called,
         data: originalData,
-        queryError,
+        error: queryError,
       } = await queryOriginalData({
         variables: {
           id,
