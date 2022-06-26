@@ -7,11 +7,11 @@ import useLogger from '@/hooks/useLogger'
 import { UPDATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
 import { PROVIDER_BY_ID } from '@/services/GraphQL/providers/queries'
 import { ProviderEditable } from '@/services/GraphQL/providers/types'
-import UpdateProvider from '@/views/Providers/Create'
+import EditProviderLayout from '@/views/Providers/Edit'
 
 const EditProvider: NextPage = () => {
-  const [updateProvider, { loading, error: mutationError }] = useMutation(UPDATE_PROVIDER)
   const { push, query } = useRouter()
+  const [updateProvider, { loading, error: mutationError }] = useMutation(UPDATE_PROVIDER)
   const { error } = useLogger()
 
   const submitHandler = async (updatedProvider: ProviderEditable) => {
@@ -29,7 +29,7 @@ const EditProvider: NextPage = () => {
       currentDataQuery={PROVIDER_BY_ID}
       submitHandler={submitHandler}
       isSubmitLoading={loading}
-      UpdateForm={UpdateProvider}
+      UpdateForm={EditProviderLayout}
     />
   )
 }
