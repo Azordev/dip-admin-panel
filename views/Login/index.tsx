@@ -47,7 +47,7 @@ const Login: NextPage = () => {
   }, [data, log, warn, error, router])
 
   const onSubmit = async (formData: LoginInput) => {
-    const { called, queryError } = await checkUserSession({ variables: formData })
+    const { called, error: queryError } = await checkUserSession({ variables: formData })
     if (queryError) {
       error(queryError, 'Login:onSubmit', 'Error al verificar sesión', 'SERVER_CONNECTION')
     }

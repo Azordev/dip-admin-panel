@@ -32,10 +32,12 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.1.1",
     "@testing-library/user-event": "14.1.1",
+    "@types/formidable": "2.0.5",
     "@types/jest": "27.4.1",
     "@types/node": "17.0.25",
     "@types/react": "18.0.6",
     "@types/react-dom": "18.0.2",
+    "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
     "babel-jest": "27.5.1",
@@ -72,7 +74,9 @@
   "dependencies": {
     "@apollo/client": "3.5.10",
     "@magic-sdk/admin": "1.4.1",
-    "@types/prop-types": "^15.7.5",
+    "@types/prop-types": "15.7.5",
+    "aws-sdk": "2.1160.0",
+    "formidable": "2.0.1",
     "graphql": "16.3.0",
     "magic-sdk": "8.1.1",
     "next": "12.1.5",
@@ -81,7 +85,8 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-hook-form": "7.30.0",
-    "react-toastify": "8.2.0"
+    "react-toastify": "8.2.0",
+    "uuid": "8.3.2"
   },
   "engines": {
     "node": ">=16.14.0"

@@ -9,7 +9,7 @@ import CategoriesList from '@/views/Categories/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Categories: NextPage = () => {
-  const { data, loading, queryError } = useQuery(CATEGORIES)
+  const { data, loading, error: queryError } = useQuery(CATEGORIES)
   const { error: logError } = useLogger()
 
   if (queryError) logError(queryError, 'pages/categorias/index.tsx', 'No se pudo obtener la categoría.')

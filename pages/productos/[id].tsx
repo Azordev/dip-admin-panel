@@ -10,7 +10,7 @@ import ProductDetail from '@/views/Products/Detail'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Product: NextPage = () => {
-  const { data, loading, queryError } = useQuery(PRODUCT_BY_ID)
+  const { data, loading, error: queryError } = useQuery(PRODUCT_BY_ID)
   const { push } = useRouter()
   const { error: LogError } = useLogger()
 

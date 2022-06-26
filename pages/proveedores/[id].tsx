@@ -8,7 +8,7 @@ import ClientOnly from '@/views/Shared/ClientOnly'
 import Image from '@/views/Shared/Image'
 
 const Provider: NextPage = () => {
-  const { data: provider, loading, queryError } = useQuery(PROVIDER_BY_ID)
+  const { data: provider, loading, error: queryError } = useQuery(PROVIDER_BY_ID)
   const { push } = useRouter()
   const { error: LogError } = useLogger()
 
