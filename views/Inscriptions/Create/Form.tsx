@@ -14,10 +14,10 @@ const CreateInscriptionForm: FC<MutableInscriptionFormProps> = ({ onSubmit, load
 
   return (
     <form onSubmit={submitHandler}>
-      <input type="text" placeholder="member ID" {...register('member_id', { required: true })} />
-      {errors.member_id && <small className="text-red-500">{errors.member_id.message}</small>}
-      <input type="text" placeholder="event ID" {...register('event_id', { required: true })} />
-      {errors.event_id && <small className="text-red-500">{errors.event_id.message}</small>}
+      <input type="text" placeholder="member ID" {...register('memberId', { required: true })} />
+      {errors.memberId && <small className="text-red-500">{errors.memberId.message}</small>}
+      <input type="text" placeholder="event ID" {...register('eventId', { required: true })} />
+      {errors.eventId && <small className="text-red-500">{errors.eventId.message}</small>}
       <button type="submit">{buttonText}</button>
     </form>
   )

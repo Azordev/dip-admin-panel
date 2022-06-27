@@ -1,29 +1,29 @@
-export const inscriptionInfo = `
-  member_id
-  event_id
+import { gql } from '@apollo/client'
+
+import { Event } from '../events/types'
+
+export const inscriptionInfo = gql`
+  fragment InscriptionInfoFragment on inscription {
+    memberId: member_id
+    eventId: event_id
+  }
 `
 
 export interface InscriptionEditable {
-  member_id: string
-  event_id: string
+  memberId: string
+  eventId: string
 }
 
 export interface Inscription {
   id: string
-  attendee_member: {
+  member: {
     first_names: string
     last_names: string
     id: string
     email: string
   }
-  event_information: {
-    id: string
-    date: string
-    is_active: boolean
-    title: string
-    type: 'ATTENDANCE' | 'WORKSHOP'
-  }
-  updated_at: string
+  event: Event
+  updatedAt: string
 }
 
 export interface MutableInscriptionFormProps {
