@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import { Provider } from '../providers/types'
+import { Provider } from '../providers/types.d'
 
 export const productInfo = gql`
   fragment ProductInfoFragment on products {
