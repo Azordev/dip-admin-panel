@@ -1,25 +1,29 @@
-export const categoryInfo = `
-  # badge_url
-  # description
-  is_active
-  name
+import { gql } from '@apollo/client'
+
+export const categoryInfo = gql`
+  fragment CategoryInfoFragment on categories {
+    # badgeUrl
+    # description
+    isActive
+    name
+  }
 `
 
 export interface CategoryBase {
-  // badge_url?: string
+  // badgeUrl?: string
   // description?: string
   name: string
 }
 
 export interface CategoryEditable extends CategoryBase {
-  is_active?: boolean
+  isActive?: boolean
 }
 
 export interface Category extends CategoryBase {
   id: string
-  is_active: boolean
-  created_at: string
-  updated_at: string
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
   products: {
     stats: {
       count: number

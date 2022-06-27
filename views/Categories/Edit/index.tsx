@@ -24,8 +24,8 @@ const EditCategoryForm: FC<MutableCategoryFormProps> = ({ onSubmit, loading, ori
         {errors.name && <small className="text-red-500">{errors.name.message}</small>}
         <input
           type="checkbox"
-          checked={originalCategory?.is_active ?? false}
-          {...register('is_active', { required: false })}
+          checked={originalCategory?.isActive ?? false}
+          {...register('isActive', { required: false })}
         />
         <button type="submit">{buttonText}</button>
       </form>

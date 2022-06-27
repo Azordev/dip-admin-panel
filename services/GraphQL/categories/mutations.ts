@@ -3,11 +3,12 @@ import { gql } from '@apollo/client'
 import { categoryInfo } from './types.d'
 
 export const CREATE_CATEGORY = gql`
+  ${categoryInfo}
   mutation ($name: String!, $description: String, $badgeUrl: String) {
     category: insert_categories_one(
       object: { name: $name, description: $description, badge_url: $badgeUrl, is_active: true }
     ) {
-      ${categoryInfo}
+      ...CategoryInfoFragment
     }
   }
 `
