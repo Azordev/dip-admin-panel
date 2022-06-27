@@ -1,21 +1,26 @@
-export const memberInfo = `
-  id
-  contact_information
-  private_information
-  email
-  address
-  first_names
-  last_names
+import { gql } from '@apollo/client'
+
+export const memberInfo = gql`
+  fragment MemberInfoFragment on members {
+    id
+    contactInformation: contact_information
+    privateInformation: private_information
+    email
+    address
+    phone
+    firstNames: first_names
+    lastNames: last_names
+  }
 `
 
 export interface MemberBase {
-  contact_information?: string
-  private_information?: string
+  contactInformation?: string
+  privateInformation?: string
   email: string
   address?: string
   phone?: string
-  first_names?: string
-  last_names?: string
+  firstNames?: string
+  lastNames?: string
 }
 
 export interface MemberEditable extends MemberBase {
@@ -24,9 +29,9 @@ export interface MemberEditable extends MemberBase {
 
 export interface Member extends MemberBase {
   id: string
-  created_at?: string
-  updated_at?: string
-  events_inscribed?: Event[]
+  createdAt?: string
+  updatedAt?: string
+  eventsInscribed?: Event[]
   events?: {
     stats: {
       count: number
@@ -39,43 +44,45 @@ export interface Member extends MemberBase {
   }
 }
 
-export const usersInfo = `
-  id
-  position
-  member_code
-  avatar_url
-  type
-  is_active
+export const usersInfo = gql`
+  fragment UserInfoFragment on users {
+    id
+    position
+    memberCode: member_code
+    avatarUrl: avatar_url
+    type
+    isActive: is_active
+  }
 `
 
 export interface UserBase {
-  member_code: string
+  memberCode: string
   type: string
-  is_active: boolean
+  isActive: boolean
   position?: string
-  avatar_url?: string
+  avatarUrl?: string
 }
 
 export interface UserEditable extends UserBase {
-  member_code?: string
+  memberCode?: string
   password?: string
   type?: string
   position?: string
-  avatar_url?: string
-  is_active?: boolean
+  avatarUrl?: string
+  isActive?: boolean
 }
 
 export interface User extends UserBase {
   id: string
-  member_code: string
+  memberCode: string
   type?: string
   position?: string
-  avatar_url?: string
-  is_active?: boolean
-  created_at?: string
-  updated_at?: string
-  member_info?: Member
-  frontend_errors?: {
+  avatarUrl?: string
+  isActive?: boolean
+  createdAt?: string
+  updatedAt?: string
+  memberInfo?: Member
+  frontendErrors?: {
     stats: {
       count: number
     }

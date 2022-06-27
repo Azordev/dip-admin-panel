@@ -31,7 +31,7 @@ const Users: NextPage = () => {
           <div>
             {users.map((user: User) => (
               <div key={user.id}>
-                <h2>{user.member_code}</h2>
+                <h2>{user.memberCode}</h2>
                 <p>{user.position}</p>
               </div>
             ))}

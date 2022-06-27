@@ -14,7 +14,7 @@ const useMagicLink = () => {
 
   const magicLink = async (user: User) => {
     // ts-ignore
-    if (!user.member_info?.email) {
+    if (!user.memberInfo?.email) {
       warn('useMagicLink', 'No se encontró un email en el usuario', 'INPUT')
       return
     }
@@ -23,7 +23,7 @@ const useMagicLink = () => {
 
       // login with Magic
       await magic.auth
-        .loginWithMagicLink({ email: user.member_info?.email as string })
+        .loginWithMagicLink({ email: user.memberInfo?.email as string })
         .then(async didToken => {
           window.sessionStorage.setItem('userId', user.id)
           window.sessionStorage.setItem('user', JSON.stringify(user))

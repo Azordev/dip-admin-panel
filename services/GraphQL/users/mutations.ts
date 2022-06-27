@@ -1,36 +1,36 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_ADMIN = gql`
-  mutation ($email: String!, $password: String, $avatar_url: String) {
+  mutation ($email: String!, $password: String, $avatarUrl: String) {
     user: insert_users_one(
-      object: { username: $email, password: $password, type: "ADMIN", is_active: true, avatar_url: $avatar_url }
+      object: { username: $email, password: $password, type: "ADMIN", is_active: true, avatar_url: $avatarUrl }
     ) {
       id
-      updated_at
+      updatedAt: updated_at
     }
   }
 `
 
 // This creates also the member
 export const CREATE_USER_MEMBER = gql`
-  mutation ($username: String!, $password: String, $avatar_url: String, $type: String, $position: String) {
+  mutation ($username: String!, $password: String, $avatarUrl: String, $type: String, $position: String) {
     user: insert_users_one(
-      object: { username: $username, password: $password, type: $type, is_active: true, avatar_url: $avatar_url }
+      object: { username: $username, password: $password, type: $type, is_active: true, avatar_url: $avatarUrl }
     ) {
       id
-      updated_at
+      updatedAt: updated_at
     }
   }
 `
 
 export const UPDATE_USER = gql`
-  mutation ($id: uuid!, $username: String, $password: String, $is_active: boolean, $avatar_url: String) {
+  mutation ($id: uuid!, $memberCode: String, $password: String, $isActive: boolean, $avatarUrl: String) {
     user: update_users_by_pk(
       pk_columns: { id: $id }
-      _set: { username: $username, password: $password, is_active: $is_active, avatar_url: $avatar_url }
+      _set: { member_code: $memberCode, password: $password, is_active: $isActive, avatar_url: $avatarUrl }
     ) {
       id
-      is_active
+      isActive: is_active
     }
   }
 `
@@ -38,19 +38,19 @@ export const UPDATE_USER = gql`
 export const UPDATE_MEMBER = gql`
   mutation (
     $id: uuid!
-    $first_names: String
-    $last_names: String
+    $firstNames: String
+    $lastNames: String
     $email: String
-    $contact_information: String
+    $contactInformation: String
     $degree: String
   ) {
     member: update_members(
       where: { user_id: { _eq: $id } }
       _set: {
-        first_names: $first_names
-        last_names: $last_names
+        first_names: $firstNames
+        last_names: $lastNames
         email: $email
-        contact_information: $contact_information
+        contact_information: $contactInformation
         degree: $degree
       }
     ) {

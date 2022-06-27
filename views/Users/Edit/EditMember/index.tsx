@@ -26,14 +26,14 @@ const EditMemberForm: FC<EditMemberFormProps> = ({ onSubmit, loading, originalDa
         <input
           type="text"
           placeholder="first_names"
-          defaultValue={originalMember?.first_names}
+          defaultValue={originalMember?.firstNames}
           {...register('first_names', { required: true })}
         />
-        {errors.last_names && <small className="text-red-500">{errors.last_names.message}</small>}
+        {errors.lastNames && <small className="text-red-500">{errors.lastNames.message}</small>}
         <input
           type="text"
           placeholder="last_names"
-          defaultValue={originalMember?.last_names}
+          defaultValue={originalMember?.lastNames}
           {...register('last_names')}
         />
         <input
@@ -48,13 +48,13 @@ const EditMemberForm: FC<EditMemberFormProps> = ({ onSubmit, loading, originalDa
         <input
           type="text"
           placeholder="contact_information"
-          defaultValue={originalMember?.contact_information}
+          defaultValue={originalMember?.contactInformation}
           {...register('contact_information')}
         />
         <input
           type="text"
           placeholder="private_information"
-          defaultValue={originalMember?.private_information}
+          defaultValue={originalMember?.privateInformation}
           {...register('private_information')}
         />
         <button type="submit">{buttonText}</button>

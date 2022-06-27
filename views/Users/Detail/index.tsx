@@ -5,9 +5,9 @@ import Image from '@/views/Shared/Image'
 
 const UserDetail: FC<{ user: User }> = ({ user }) => (
   <div>
-    {user.avatar_url && <Image src={user.avatar_url} alt={user.member_code} />}
+    {user.avatarUrl && <Image src={user.avatarUrl} alt={user.memberCode} />}
     <h1>
-      {user.member_info?.first_names} {user.member_info?.last_names}
+      {user.memberInfo?.firstNames} {user.memberInfo?.lastNames}
     </h1>
     <p>{user.position}</p>
   </div>

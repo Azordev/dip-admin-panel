@@ -19,8 +19,8 @@ const CreateUserForm: FC<CreateUserFormProps> = ({ onSubmit, loading }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <input type="text" placeholder="member_code" {...register('member_code', { required: true })} />
-      {errors.member_code && <small className="text-red-500">{errors.member_code.message}</small>}
+      <input type="text" placeholder="member_code" {...register('memberCode', { required: true })} />
+      {errors.memberCode && <small className="text-red-500">{errors.memberCode.message}</small>}
       <input type="text" placeholder="password" {...register('password', { required: true })} />
       {errors.password && <small className="text-red-500">{errors.password.message}</small>}
       <input type="text" placeholder="position" {...register('position')} />

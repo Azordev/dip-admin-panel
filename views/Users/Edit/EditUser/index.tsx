@@ -26,10 +26,10 @@ const EditUserForm: FC<EditUserFormProps> = ({ onSubmit, loading, originalData: 
         <input
           type="text"
           placeholder="member_code"
-          defaultValue={originalUser?.member_code}
-          {...register('member_code', { required: true })}
+          defaultValue={originalUser?.memberCode}
+          {...register('memberCode', { required: true })}
         />
-        {errors.member_code && <small className="text-red-500">{errors.member_code.message}</small>}
+        {errors.memberCode && <small className="text-red-500">{errors.memberCode.message}</small>}
         <input type="password" placeholder="password" {...register('password', { required: true })} />
         <input
           type="text"

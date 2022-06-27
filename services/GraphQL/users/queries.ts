@@ -16,7 +16,7 @@ export const USER_SESSION = gql`
       }
     ) {
       ${usersInfo}
-      member_info {
+      memberInfo: member_info {
         ${memberInfo}
       }
     }
@@ -26,9 +26,9 @@ export const USER_SESSION = gql`
 export const USER_BY_ID = gql`
   query ($id: uuid!) {
     user: users_by_pk(id: $id) {
-      is_active
+      isActive
       ${usersInfo}
-      member_info {
+      memberInfo: member_info {
         ${memberInfo}
       }
     }
@@ -39,10 +39,10 @@ export const USERS = gql`
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     users(limit: $limit, offset: $offset, order_by: {member_code: asc}, where: {member_code: {_ilike: $query}}) {
       ${usersInfo}
-      member_info {
+      memberInfo: member_info {
         ${memberInfo}
       }
-      frontend_errors: frontend_errors_aggregate {
+      frontendErrors: frontend_errors_aggregate {
         stats: aggregate {
           count
         }
@@ -55,7 +55,7 @@ export const MEMBERS = gql`
   query {
     members {
       ${memberInfo}
-      events_inscribed {
+      eventsInscribed: events_inscribed {
         event: event_information {
           ${eventInfo}
         }
