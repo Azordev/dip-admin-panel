@@ -3,22 +3,14 @@ import { gql } from '@apollo/client'
 export const memberInfo = gql`
   fragment MemberInfoFragment on members {
     id
-    contactInformation: contact_information
-    privateInformation: private_information
     email
-    address
-    phone
     firstNames: first_names
     lastNames: last_names
   }
 `
 
 export interface MemberBase {
-  contactInformation?: string
-  privateInformation?: string
   email: string
-  address?: string
-  phone?: string
   firstNames?: string
   lastNames?: string
 }
@@ -33,11 +25,6 @@ export interface Member extends MemberBase {
   updatedAt?: string
   eventsInscribed?: Event[]
   events?: {
-    stats: {
-      count: number
-    }
-  }
-  subscriptions?: {
     stats: {
       count: number
     }

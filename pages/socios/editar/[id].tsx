@@ -17,27 +17,23 @@ const EditUserInformation: NextPage = () => {
     await updateUser({
       variables: { ...updatedUser, id: query.id },
     })
-    push('/usuarios')
+    push('/socios')
   }
 
   const submitMemberHandler = async (updatedMember: MemberEditable) => {
     await updateMember({
       variables: { ...updatedMember, id: query.id },
     })
-    push('/usuarios')
+    push('/socios')
   }
 
   if (updaterUserMutationError)
-    logError(
-      updaterUserMutationError,
-      'pages/usuarios/editar/[id].tsx',
-      'Error al actualizar la información del usuario',
-    )
+    logError(updaterUserMutationError, 'pages/socios/editar/[id].tsx', 'Error al actualizar la información del usuario')
 
   if (updateMemberError)
     logError(
       updateMemberError,
-      'pages/usuarios/editar/[id].tsx',
+      'pages/socios/editar/[id].tsx',
       'Error al actualizar la información de miembro del usuario',
     )
 

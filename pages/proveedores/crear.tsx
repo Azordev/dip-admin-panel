@@ -13,7 +13,7 @@ const Create: NextPage = () => {
   const { error: logError } = useLogger()
 
   const submitHandler = async (newProvider: ProviderEditable) => {
-    if (!newProvider?.commercialName || !newProvider?.b2bEmail) {
+    if (!newProvider?.commercialName) {
       return
     }
 

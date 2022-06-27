@@ -8,12 +8,8 @@ export const eventInfo = gql`
     type
     isActive: is_active
     requirementsUrl: requirements_url
-    invitationUrl: invitation_url
     imageUrl: image_url
-    details
     description
-    contactInformation: contact_information
-    adUrl: ad_url
     createdAt: created_at
     updatedAt: updated_at
     inscriptions: inscriptions_aggregate {
@@ -36,10 +32,6 @@ export interface EventEditable extends EventBase {
   type?: string
   imageUrl?: string
   requirementsUrl?: string
-  imageUrl?: string
-  adUrl?: string
-  details?: string
-  contactInformation?: string
 }
 
 export interface Event extends EventEditable {

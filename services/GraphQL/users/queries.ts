@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client'
 
 import { eventInfo } from '../events/types.d'
-import { subscriptionInfo } from '../subscriptions/types.d'
 import { memberInfo, usersInfo } from './types.d'
 
 export const USER_SESSION = gql`
@@ -60,9 +59,6 @@ export const MEMBERS = gql`
           ${eventInfo}
         }
       }
-      subscriptions {
-        ${subscriptionInfo}
-      }
       user {
         ${usersInfo}
       }
@@ -78,9 +74,6 @@ export const MEMBER_BY_ID = gql`
         event: event_information {
           ${eventInfo}
         }
-      }
-      subscriptions {
-        ${subscriptionInfo}
       }
       user {
         ${usersInfo}

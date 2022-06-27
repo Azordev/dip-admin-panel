@@ -14,10 +14,10 @@ const Create: NextPage = () => {
 
   const submitHandler = async (newUser: UserEditable) => {
     createUser({ variables: { ...newUser } })
-    push('/usuarios')
+    push('/socios')
   }
 
-  if (mutationError) logError(mutationError, 'pages/usuarios/crear.tsx', 'Error al crear el usuario')
+  if (mutationError) logError(mutationError, 'pages/socios/crear.tsx', 'Error al crear el usuario')
 
   return (
     <div className="container">

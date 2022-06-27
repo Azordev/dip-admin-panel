@@ -21,12 +21,12 @@ const User: NextPage = () => {
   const { error: logError } = useLogger()
 
   if (queryError) {
-    logError(queryError, 'pages/categorias/[id].tsx Category.tsx', 'useQuery(CATEGORY_BY_ID)', 'UNEXPECTED')
-    push('/usuarios')
+    logError(queryError, 'pages/socios/[id].tsx', 'useQuery(USER_BY_ID)', 'UNEXPECTED')
+    push('/socios')
   }
 
   if (loading) return <Loading />
-  if (!data || !data.user) return <EmptyItem text="La categoría esta vacía o es invalida" />
+  if (!data || !data.user) return <EmptyItem text="El usuario esta vacío o es invalido." />
 
   return (
     <ClientOnly>

@@ -29,20 +29,6 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
         {...register('email', { required: true })}
       />
       {errors.email && <small className="text-red-500">{errors.email.message}</small>}
-      <input type="text" placeholder="phone" defaultValue={originalMember?.phone} {...register('phone')} />
-      <input type="text" placeholder="address" defaultValue={originalMember?.address} {...register('address')} />
-      <input
-        type="text"
-        placeholder="contactInformation"
-        defaultValue={originalMember?.contactInformation}
-        {...register('contactInformation')}
-      />
-      <input
-        type="text"
-        placeholder="privateInformation"
-        defaultValue={originalMember?.privateInformation}
-        {...register('privateInformation')}
-      />
       <button type="submit">{buttonText}</button>
     </form>
   )

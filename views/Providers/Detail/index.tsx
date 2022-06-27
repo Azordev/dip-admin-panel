@@ -5,11 +5,9 @@ import Image from '@/views/Shared/Image'
 
 const ProviderDetail: FC<{ provider: Provider }> = ({ provider }) => (
   <div>
-    {provider.avatarUrl && <Image src={provider.avatarUrl} alt="avatar" />}
+    {provider.logoUrl && <Image src={provider.logoUrl} alt="avatar" />}
     <h1>{provider.commercialName}</h1>
-    <p>{provider.salesEmail}</p>
     <p>{provider.salesPhone}</p>
-    <p>{provider.address}</p>
     <p>{provider.createdAt}</p>
     <p>{provider.updatedAt}</p>
   </div>

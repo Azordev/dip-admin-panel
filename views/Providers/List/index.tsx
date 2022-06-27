@@ -10,10 +10,7 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => (
     {providers.map(provider => (
       <div key={provider.id} className={styles.card}>
         <h2>{provider.commercialName}</h2>
-        <p>{provider.address}</p>
-        <p>
-          {provider.address} - {provider.salesPhone}
-        </p>
+        <p>{provider.salesPhone}</p>
       </div>
     ))}
   </div>
