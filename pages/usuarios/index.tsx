@@ -1,43 +1,20 @@
 import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 
+import EmptyList from '@/components/EmptyList'
+import Loading from '@/components/Loading'
 import { USERS } from '@/services/GraphQL/users/queries'
-import { User } from '@/services/GraphQL/users/types'
 import ClientOnly from '@/views/Shared/ClientOnly'
+import UsersList from '@/views/Users/List'
 
 const Users: NextPage = () => {
-  const { push } = useRouter()
   const { data, loading } = useQuery(USERS)
 
-  if (loading) {
-    return <h2>Loading...</h2>
-  }
-
-  if (!data) {
-    return <h2>No hay usuarios</h2>
-  }
-
-  const users = data.users
-
+  if (loading) return <Loading />
+  if (!data || data.users.length < 1) return <EmptyList text="La lista de usuarios esta vacía o es invalida." />
   return (
     <ClientOnly>
-      <>
-        <header>
-          <h1>Usuarios</h1>
-          <button onClick={() => push('/usuarios/crear')}>Crear Usuario</button>
-        </header>
-        <div>
-          <div>
-            {users.map((user: User) => (
-              <div key={user.id}>
-                <h2>{user.memberCode}</h2>
-                <p>{user.position}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </>
+      <UsersList users={data.users} />
     </ClientOnly>
   )
 }

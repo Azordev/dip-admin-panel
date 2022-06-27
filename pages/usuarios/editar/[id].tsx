@@ -8,10 +8,10 @@ import { MemberEditable, UserEditable } from '@/services/GraphQL/users/types'
 import EditUserAndMember from '@/views/Users/Edit'
 
 const EditUserInformation: NextPage = () => {
+  const { push, query } = useRouter()
   const [updateUser, { loading: updateUserMutationLoading, error: updaterUserMutationError }] = useMutation(UPDATE_USER)
   const [updateMember, { loading: updaterMemberMutationLoading, error: updateMemberError }] = useMutation(UPDATE_MEMBER)
-  const { push, query } = useRouter()
-  const { error } = useLogger()
+  const { error: logError } = useLogger()
 
   const submitUserHandler = async (updatedUser: UserEditable) => {
     await updateUser({
@@ -28,10 +28,18 @@ const EditUserInformation: NextPage = () => {
   }
 
   if (updaterUserMutationError)
-    error(Error(updaterUserMutationError.message), 'pages/usuarios/editar/[id].tsx', 'Error al actualizar el usuario')
+    logError(
+      updaterUserMutationError,
+      'pages/usuarios/editar/[id].tsx',
+      'Error al actualizar la información del usuario',
+    )
 
   if (updateMemberError)
-    error(Error(updateMemberError.message), 'pages/usuarios/editar/[id].tsx', 'Error al actualizar el usuario')
+    logError(
+      updateMemberError,
+      'pages/usuarios/editar/[id].tsx',
+      'Error al actualizar la información de miembro del usuario',
+    )
 
   return (
     <EditUserAndMember

@@ -98,3 +98,15 @@ export interface LoginFormProps {
   onSubmit: (_formData: LoginInput) => void
   loading: boolean
 }
+
+export interface MutableUserFormProps {
+  onSubmit: (_formData: UserEditable) => void
+  loading: boolean
+  originalData?: User
+}
+
+export interface MutableMemberFormProps {
+  onSubmit: (_formData: MemberEditable) => void
+  loading: boolean
+  originalData?: Member
+}
