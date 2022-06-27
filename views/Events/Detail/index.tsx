@@ -6,12 +6,12 @@ import Image from '@/views/Shared/Image'
 const EventDetail: FC<{ event: Event }> = ({ event }) => (
   <div>
     <h1>{event.title}</h1>
-    {event.image_url && <Image src={event.image_url} alt="avatar" />}
+    {event.imageUrl && <Image src={event.imageUrl} alt="avatar" />}
     <p>{event.description}</p>
     <p>{event.date}</p>
     <p>{event.type}</p>
-    {event.requirements_url && (
-      <a href={event.requirements_url}>
+    {event.requirementsUrl && (
+      <a href={event.requirementsUrl}>
         <button>Requisitos</button>
       </a>
     )}

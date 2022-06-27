@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 import { eventInfo } from './types.d'
 
 export const EVENTS = gql`
+  ${eventInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     events(
       limit: $limit
@@ -12,15 +13,16 @@ export const EVENTS = gql`
       }
       order_by: { title: asc }
     ) {
-      ${eventInfo}
+      ...EventInfoFragment
     }
   }
 `
 
 export const EVENT_BY_ID = gql`
+  ${eventInfo}
   query ($id: uuid!) {
     event: events_by_pk(id: $id) {
-      ${eventInfo}
+      ...EventInfoFragment
     }
   }
 `
