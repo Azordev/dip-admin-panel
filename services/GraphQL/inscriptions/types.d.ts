@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import { Event } from '../events/types'
+import { Event } from '../events/types.d'
 
 export const inscriptionInfo = gql`
   fragment InscriptionInfoFragment on inscription {

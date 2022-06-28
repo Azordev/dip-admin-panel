@@ -16,11 +16,13 @@ const Dashboard: FC<Props> = ({ children }) => {
       <aside className={styles.sidebar}>
         <nav>
           <Link href="/" passHref>
-            <LogoDID />
+            <a>
+              <LogoDID />
+            </a>
           </Link>
           <Link href="/eventos">Eventos</Link>
           <Link href="/proveedores">Proveedores</Link>
-          <Link href="/usuarios">Usuarios</Link>
+          <Link href="/socios">Socios</Link>
         </nav>
         <button className={styles.button} onClick={logOut}>
           Cerrar Sesión

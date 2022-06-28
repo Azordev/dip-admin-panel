@@ -29,6 +29,7 @@ const EditCategory: NextPage = () => {
       submitHandler={submitHandler}
       isSubmitLoading={loading}
       UpdateForm={UpdateCategory}
+      parent="CATEGORÍAS"
     />
   )
 }

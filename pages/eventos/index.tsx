@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
+import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
 import useLogger from '@/hooks/useLogger'
 import { EVENTS } from '@/services/GraphQL/events/queries'
@@ -18,7 +19,10 @@ const Events: NextPage = () => {
   if (!data && data.events.length < 1) return <EmptyList text="No hay eventos" />
   return (
     <ClientOnly>
-      <EventsList events={data.events} />
+      <>
+        <ListHeader createText="Crear nuevo evento" createPath="/eventos/crear" parent="EVENTOS" />
+        <EventsList events={data.events} />
+      </>
     </ClientOnly>
   )
 }

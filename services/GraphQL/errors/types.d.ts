@@ -1,6 +1,10 @@
-export const errorInfo = `
-  origin
-  type
-  error
-  code_location
+import { gql } from '@apollo/client'
+
+export const errorInfo = gql`
+  fragment ErrorInfoFragment on frontend_errors {
+    origin
+    type
+    error
+    codeLocation: code_location
+  }
 `

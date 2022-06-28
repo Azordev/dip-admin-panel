@@ -30,6 +30,7 @@ const EditEvent: NextPage = () => {
       submitHandler={submitHandler}
       isSubmitLoading={loading}
       UpdateForm={UpdateEvent}
+      parent="EVENTOS"
     />
   )
 }

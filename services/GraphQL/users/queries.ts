@@ -4,42 +4,48 @@ import { eventInfo } from '../events/types.d'
 import { memberInfo, usersInfo } from './types.d'
 
 export const USER_SESSION = gql`
+  ${usersInfo}
+  ${memberInfo}
   query login($password: String!, $memberCode: String!) {
     users(
       where: {
         _and: [
-          {type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] }},
-          {member_code: { _eq: $memberCode }},
-          {password: { _eq: $password }}
+          { type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] } }
+          { member_code: { _eq: $memberCode } }
+          { password: { _eq: $password } }
         ]
       }
     ) {
-      ${usersInfo}
+      ...UserInfoFragment
       memberInfo: member_info {
-        ${memberInfo}
+        ...MemberInfoFragment
       }
     }
   }
 `
 
 export const USER_BY_ID = gql`
+  ${memberInfo}
+  ${usersInfo}
   query ($id: uuid!) {
     user: users_by_pk(id: $id) {
+      ...UserInfoFragment
       isActive
-      ${usersInfo}
       memberInfo: member_info {
-        ${memberInfo}
+        ...MemberInfoFragment
       }
     }
   }
 `
 
 export const USERS = gql`
+  ${usersInfo}
+  ${memberInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
-    users(limit: $limit, offset: $offset, order_by: {member_code: asc}, where: {member_code: {_ilike: $query}}) {
-      ${usersInfo}
+    users(limit: $limit, offset: $offset, order_by: { member_code: asc }, where: { member_code: { _ilike: $query } }) {
+      ...UserInfoFragment
       memberInfo: member_info {
-        ${memberInfo}
+        ...MemberInfoFragment
       }
       frontendErrors: frontend_errors_aggregate {
         stats: aggregate {
@@ -51,32 +57,36 @@ export const USERS = gql`
 `
 
 export const MEMBERS = gql`
+  ${usersInfo}
+  ${memberInfo}
   query {
     members {
-      ${memberInfo}
+      ...MemberInfoFragment
       eventsInscribed: events_inscribed {
         event: event_information {
           ${eventInfo}
         }
       }
       user {
-        ${usersInfo}
+        ...UserInfoFragment
       }
     }
   }
 `
 
 export const MEMBER_BY_ID = gql`
+  ${usersInfo}
+  ${memberInfo}
   query ($id: uuid!) {
     member: members_by_pk(id: $id) {
-      ${memberInfo}
+      ...MemberInfoFragment
       events_inscribed {
         event: event_information {
           ${eventInfo}
         }
       }
       user {
-        ${usersInfo}
+        ...UserInfoFragment
       }
     }
   }

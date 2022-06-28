@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+
+  a {
+    color: #000;
+    display: flex;
+    text-decoration: none;
+
+    div {
+      margin-right: 0.5rem;
+    }
+  }
+}

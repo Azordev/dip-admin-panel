@@ -9,7 +9,7 @@ const UsersList: FC<{ users: User[] }> = ({ users }) => {
     <>
       <header>
         <h1>Usuarios</h1>
-        <button onClick={() => push('/usuarios/crear')}>Crear Usuario</button>
+        <button onClick={() => push('/socios/crear')}>Crear Usuario</button>
       </header>
       <div>
         <div>

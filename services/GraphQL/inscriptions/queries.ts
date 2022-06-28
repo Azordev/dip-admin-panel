@@ -1,9 +1,11 @@
 import { gql } from '@apollo/client'
 
 import { eventInfo } from '../events/types.d'
+import { memberInfo } from '../users/types.d'
 
 export const INSCRIPTIONS = gql`
   ${eventInfo}
+  ${memberInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     inscriptions(
       limit: $limit
@@ -12,13 +14,10 @@ export const INSCRIPTIONS = gql`
       order_by: { name: asc }
     ) {
       id
-      attendee_member {
-        first_names
-        last_names
-        id
-        email
+      member: attendee_member {
+        ...MemberInfoFragment
       }
-      event_information {
+      event: event_information {
         ...EventInfoFragment
       }
       updatedAt: updated_at
@@ -28,14 +27,12 @@ export const INSCRIPTIONS = gql`
 
 export const INSCRIPTION_BY_ID = gql`
   ${eventInfo}
+  ${memberInfo}
   query ($id: uuid!) {
     inscription: inscriptions_by_pk(id: $id) {
       id
       member: attendee_member {
-        first_names
-        last_names
-        id
-        email
+        ...MemberInfoFragment
       }
       event: event_information {
         ...EventInfoFragment

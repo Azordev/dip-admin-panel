@@ -6,16 +6,17 @@ import { ToastContainer, Zoom } from 'react-toastify'
 import client from '@/services/GraphQL/client'
 import ErrorBoundary from '@/views/Shared/ErrorBoundary'
 import Dashboard from '@/views/Shared/Layouts/Dashboard'
+
 import 'react-toastify/dist/ReactToastify.min.css'
 import '@/styles/globals.scss'
 
 const DIDAdminPanel = ({ Component, pageProps: { ...pageProps } }: AppProps) => {
-  const router = useRouter()
+  const { pathname } = useRouter()
 
   return (
     <ErrorBoundary>
       <ApolloProvider client={client}>
-        {router.pathname === '/ingresar' ? (
+        {pathname === '/ingresar' ? (
           <Component {...pageProps} />
         ) : (
           <Dashboard>
@@ -27,4 +28,5 @@ const DIDAdminPanel = ({ Component, pageProps: { ...pageProps } }: AppProps) => 
     </ErrorBoundary>
   )
 }
+
 export default DIDAdminPanel

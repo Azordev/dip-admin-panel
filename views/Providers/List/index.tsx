@@ -1,17 +1,21 @@
+import Link from 'next/link'
 import { FC } from 'react'
 
+import ListHeader from '@/components/ListHeader'
 import { Provider } from '@/services/GraphQL/providers/types'
 import styles from '@/styles/Home.module.css'
 
 const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => (
   <div className={styles.container}>
-    <h1 className={styles.title}>Proveedores</h1>
+    <ListHeader createText="Crear nuevo proveedor" createPath="/proveedores/crear" />
 
     {providers.map(provider => (
-      <div key={provider.id} className={styles.card}>
-        <h2>{provider.commercialName}</h2>
-        <p>{provider.salesPhone}</p>
-      </div>
+      <Link key={provider.id} href="/proveedores/[id]" as={`/proveedores/${provider.id}`}>
+        <a>
+          <h2>{provider.commercialName}</h2>
+          <p>{provider.salesPhone}</p>
+        </a>
+      </Link>
     ))}
   </div>
 )

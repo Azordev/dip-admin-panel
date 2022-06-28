@@ -4,17 +4,18 @@ import { FC, useEffect, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
 
+import { BackHeaderProps } from '../BackHeader'
 import Loading from '../Loading'
 import UpdateFormLayout from './Layout'
 
-interface Props {
+interface Props extends BackHeaderProps {
   submitHandler: (_dataForm: any) => void
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
   isSubmitLoading?: boolean
 }
 
-const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSubmitLoading, UpdateForm }) => {
+const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSubmitLoading, UpdateForm, parent }) => {
   const [queryOriginalData, { loading }] = useLazyQuery(currentDataQuery)
   const { query } = useRouter()
   const { error: logError } = useLogger()
@@ -49,7 +50,7 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
   if (loading) return <Loading />
 
   return (
-    <UpdateFormLayout>
+    <UpdateFormLayout parent={parent}>
       <UpdateForm onSubmit={submitHandler} loading={isSubmitLoading} originalData={currentData} />
     </UpdateFormLayout>
   )

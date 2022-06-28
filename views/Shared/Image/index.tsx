@@ -1,7 +1,6 @@
 import Img from 'next/image'
 import React from 'react'
 
-// eslint-disable-next-line import/no-named-default
 import styles from './Image.module.scss'
 
 interface Props {

@@ -25,9 +25,9 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
-      <h1 className={`text-lg ${styles.title}`}>Ingresa a DID Peru - Portal de Administrador</h1>
+      <h1 className={`text-lg ${styles.title}`}>PANEL ADMINISTRATIVO</h1>
       <TextInput
-        placeholder="Código de Miembro"
+        placeholder="Usuario"
         {...register('memberCode', {
           required: true,
         })}

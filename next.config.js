@@ -6,7 +6,7 @@ const path = require('path')
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['img.icons8.com'],
+    domains: ['img.icons8.com', 'neufert-cdn.archdaily.net'],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, '/styles/')],

@@ -1,12 +1,14 @@
 import { FC, ReactNode } from 'react'
 
-interface Props {
+import BackHeader, { BackHeaderProps } from '../BackHeader'
+
+interface Props extends BackHeaderProps {
   children: ReactNode
 }
 
-const UpdateFormLayout: FC<Props> = ({ children }) => (
+const UpdateFormLayout: FC<Props> = ({ children, parent }) => (
   <>
-    <h2>Update Form</h2>
+    <BackHeader parent={parent} />
     {children}
   </>
 )

@@ -2,13 +2,14 @@ import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import BackHeader from '@/components/BackHeader'
 import useLogger from '@/hooks/useLogger'
 import { CREATE_PRODUCT } from '@/services/GraphQL/products/mutations'
 import { ProductEditable } from '@/services/GraphQL/products/types'
 import CreateProductLayout from '@/views/Products/Create'
 
 const Create: NextPage = () => {
-  const { push } = useRouter()
+  const { push, query } = useRouter()
   const { error: logError } = useLogger()
 
   const [createProduct, { loading, error: mutationError }] = useMutation(CREATE_PRODUCT)
@@ -22,7 +23,7 @@ const Create: NextPage = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Create Product</h1>
+      <BackHeader parent={(query.provider as string) ?? 'Productos'} parentImageUrl={query['provider-url'] as string} />
 
       <CreateProductLayout onSubmit={submitHandler} loading={loading} />
 

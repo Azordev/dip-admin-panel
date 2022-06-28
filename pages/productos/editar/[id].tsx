@@ -28,6 +28,7 @@ const EditProduct: NextPage = () => {
       submitHandler={submitHandler}
       isSubmitLoading={loading}
       UpdateForm={EditProductLayout}
+      parent="PRODUCTOS"
     />
   )
 }
