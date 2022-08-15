@@ -1,35 +1,48 @@
+@import 'colors';
+
 .sidebar {
-  background-color: #000;
-  color: #fff;
+  background-color: $black;
+  color: $white;
   display: flex;
+  font-size: 1.25rem;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
   margin: 0;
   overflow: auto;
-  padding: 10px;
+  padding: .5rem;
   position: fixed;
-  width: 200px;
+  width: 20rem;
   
   nav {
     display: flex;
     flex-direction: column;
 
     svg {
-      fill: #fff;
-      height: 100px;
-      margin: 20px auto 50px;
-      width: 100px;
+      fill: $white;
+      height: 4rem;
+      margin: 3rem auto;
+      width: 4rem;
     }
 
     a {
-      color: #fff;
-      font-size: large;
-      margin-bottom: 20px;
+      color: $white;
+      margin-bottom: 3rem;
       text-decoration: none;
+      display: flex;
+
+      span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &:first-child {
+        display: flex;
       }
   
       &:last-child {
@@ -39,15 +52,23 @@
   }
 
   button {
-    color: #fff;
+    color: $white;
+    text-align: center;
   }
 }
 
 .main {
-  background-color: #fff;
+  background-color: $white;
   height: 100vh;
-  margin-left: 200px;
+  margin-left: 20rem;
   overflow: auto;
-  padding: 0;
-  width: calc(100% - 200px);
+  padding: 2rem;
+  width: calc(100% - 20rem);
+}
+
+.icons {
+  height: 1.5rem;
+  left: 0;
+  margin-right: .5rem;
+  width: 1.5rem;
 }

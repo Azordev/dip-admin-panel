@@ -21,13 +21,14 @@ interface Icons8Props {
     | 'dotty'
     | 'nolan'
     | 'dusk'
+    | string
 }
 const Icons8: React.FC<Icons8Props> = ({ color, iconStyle, name, className = '', size = 96 }) => {
   const stylePartial = iconStyle ? iconStyle + '/' : ''
   const colorPartial = color ? (color !== 'color' ? color.replace('#', '') + '/' : color + '/') : ''
   // reference: https://img.icons8.com/
   const src = `https://img.icons8.com/${stylePartial}${colorPartial}${size}/${name}.png`
-  const classNameInherited = className ? className + ' ' : '' // creates space before class if needed
+  const classNameInherited = className ? ' ' + className : '' // creates space before class if needed
   return (
     <Image
       src={src}
