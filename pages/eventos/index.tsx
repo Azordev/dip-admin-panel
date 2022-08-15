@@ -20,7 +20,7 @@ const Events: NextPage = () => {
   return (
     <ClientOnly>
       <>
-        <ListHeader createText="Crear nuevo evento" createPath="/eventos/crear" parent="EVENTOS" />
+        <ListHeader createText="Crear nuevo evento" createPath="/eventos/crear" />
         <EventsList events={data.events} />
       </>
     </ClientOnly>

@@ -1,8 +1,12 @@
+@import 'colors';
+
 .nav {
+  background-color: $white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem 2rem;
+  font-size: 1.25rem;
 
   a {
     color: #000;
@@ -10,7 +14,16 @@
     text-decoration: none;
 
     div {
-      margin-right: 0.5rem;
+      left: unset;
+      right: 0.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
     }
+
+    span {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    };
   }
 }
