@@ -1,4 +1,4 @@
-@import 'colors';
+@import 'colors', 'forms';
 
 button {
   appearance: none;
@@ -27,7 +27,7 @@ a {
 
 input {
   border: 1px solid $gray-300;
-  border-radius: 2rem;
+  border-radius: $input-radius;
   color: $black;
   font-size: 1rem;
   margin: .5rem 0;

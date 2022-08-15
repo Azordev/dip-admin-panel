@@ -10,7 +10,7 @@ import styles from './Login.module.scss'
 
 const LoginLayout: NextPage<LoginFormProps> = ({ onSubmit, loading }) => (
   <Centered>
-    <div className={`shadow-md ${styles['login-container']}`}>
+    <div className={styles['login-container']}>
       <LogoDID className={styles.image} />
       <LoginForm onSubmit={onSubmit} loading={loading} />
     </div>
