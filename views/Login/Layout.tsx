@@ -11,7 +11,7 @@ import styles from './Login.module.scss'
 const LoginLayout: NextPage<LoginFormProps> = ({ onSubmit, loading }) => (
   <Centered>
     <div className={styles['login-container']}>
-      <h1>AWS Test</h1>
+      <h1>AWS Test 2</h1>
       <LogoDID className={styles.image} />
       <LoginForm onSubmit={onSubmit} loading={loading} />
     </div>
