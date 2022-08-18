@@ -1,16 +1,27 @@
+import formidable from 'formidable'
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
 import { CREATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EVENTS } from '@/services/GraphQL/events/queries'
-import formidable from 'formidable'
-import type { NextApiRequest, NextApiResponse } from 'next'
 
-export const getEvents = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { data } = await client.query({
-    query: EVENTS,
-  })
+export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { query } = req
+    const { data } = await client.query({
+      query: EVENTS,
+      variables: {
+        offset: Number(query?.offset) || 0,
+        limit: Number(query?.limit) || 24,
+        query: query?.query || '%',
+      },
+    })
 
-  res.json(data)
+    res.json(data)
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
 
 export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {

@@ -1,17 +1,28 @@
-import client from '@/services/GraphQL/client'
-import { CREATE_PRODUCT } from '@/services/GraphQL/products/mutations'
-import { PRODUCTS } from '@/services/GraphQL/products/queries'
 import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import client from '@/services/GraphQL/client'
+import { CREATE_PRODUCT } from '@/services/GraphQL/products/mutations'
+import { PRODUCTS } from '@/services/GraphQL/products/queries'
+
 import { addObject } from '../services/AWS/s3'
 
-export const getProducts = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { data } = await client.query({
-    query: PRODUCTS,
-  })
+export const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { query } = req
+    const { data } = await client.query({
+      query: PRODUCTS,
+      variables: {
+        offset: Number(query?.offset) || 0,
+        limit: Number(query?.limit) || 24,
+        query: query?.query || '%',
+      },
+    })
 
-  res.json(data)
+    res.json(data)
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
 
 export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
