@@ -16,9 +16,9 @@ const s3 = new S3({
   },
 })
 
-export const addObject = (file: File) => {
+export const addObject = (file: File, prefix?: String) => {
   const extName = file.originalFilename?.split('.').at(-1)
-  const fileName = `${uuid()}.${extName}`
+  const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${extName}`
   return s3
     .upload({
       Bucket: bucketName,

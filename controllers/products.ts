@@ -18,7 +18,7 @@ export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
   form.parse(req, async (_err, fields, files) => {
     const file = files.image as formidable.File
-    const { Location: imageUrl } = await addObject(file)
+    const { Location: imageUrl } = await addObject(file, 'products')
 
     await client.mutate({
       mutation: CREATE_PRODUCT,
