@@ -9,7 +9,7 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -32,7 +32,7 @@
     {
       "column": 120,
       "color": "#ff0000"
-    },
+    }
   ],
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 120,
@@ -52,7 +52,7 @@
     "**/.git": true,
     "**/.next": true,
     "**/node_modules": true,
-    "coverage": true,
+    "coverage": true
   },
   "html.autoClosingTags": true,
   "javascript.autoClosingTags": true,
@@ -65,10 +65,6 @@
     "**/coverage": true,
     "**/node_modules": true
   },
-  "stylelint.validate": [
-    "css",
-    "scss",
-    ".module.scss"
-  ],
-  "prettier.configPath": ".prettierrc.js",
+  "stylelint.validate": ["css", "scss", ".module.scss"],
+  "prettier.configPath": ".prettierrc.js"
 }
