@@ -26,17 +26,25 @@ export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
 
 export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
-  form.parse(req, async (_err, fields, files) => {
-    const file = files.image as formidable.File
-    const { Location: imageUrl } = await addObject(file, 'events')
+  form.parse(req, async (err, fields, files) => {
+    try {
+      if (err) {
+        return res.status(500).json(err)
+      }
 
-    await client.mutate({
-      mutation: CREATE_EVENT,
-      variables: { ...fields, imageUrl },
-    })
-    res.json({
-      msg: 'Event created successfully',
-      data: { ...fields, imageUrl },
-    })
+      const file = files.image as formidable.File
+      const { Location: imageUrl } = await addObject(file, 'events')
+
+      await client.mutate({
+        mutation: CREATE_EVENT,
+        variables: { ...fields, imageUrl },
+      })
+      res.json({
+        msg: 'Event created successfully',
+        data: { ...fields, imageUrl },
+      })
+    } catch (error) {
+      res.status(500).json(error)
+    }
   })
 }
