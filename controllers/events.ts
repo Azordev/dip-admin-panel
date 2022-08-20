@@ -1,17 +1,16 @@
 import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
-import { CREATE_PRODUCT } from '@/services/GraphQL/products/mutations'
-import { PRODUCTS } from '@/services/GraphQL/products/queries'
+import { CREATE_EVENT } from '@/services/GraphQL/events/mutations'
+import { EVENTS } from '@/services/GraphQL/events/queries'
 
-import { addObject } from '../services/AWS/s3'
-
-export const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
+export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
     const { data } = await client.query({
-      query: PRODUCTS,
+      query: EVENTS,
       variables: {
         offset: Number(query?.offset) || 0,
         limit: Number(query?.limit) || 24,
@@ -25,7 +24,7 @@ export const getProducts = async (req: NextApiRequest, res: NextApiResponse) => 
   }
 }
 
-export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
+export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
     try {
@@ -34,14 +33,14 @@ export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       const file = files.image as formidable.File
-      const { Location: imageUrl } = await addObject(file, 'products')
+      const { Location: imageUrl } = await addObject(file, 'events')
 
       await client.mutate({
-        mutation: CREATE_PRODUCT,
+        mutation: CREATE_EVENT,
         variables: { ...fields, imageUrl },
       })
       res.json({
-        msg: 'Product created successfully',
+        msg: 'Event created successfully',
         data: { ...fields, imageUrl },
       })
     } catch (error) {

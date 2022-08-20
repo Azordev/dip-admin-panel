@@ -8,6 +8,7 @@ export const CREATE_PRODUCT = gql`
     $available: numeric = 1
     $imageUrl: String = ""
     $offerDiscount: Int = 10
+    $basePriceSol: numeric = 0
     $providerId: uuid = ""
     $unitSystem: String = ""
     $withOffer: Boolean = false
@@ -20,6 +21,7 @@ export const CREATE_PRODUCT = gql`
         available: $available
         image_url: $imageUrl
         offer_discount: $offerDiscount
+        base_price_sol: $basePriceSol
         provider_id: $providerId
         unit_system: $unitSystem
         with_offer: $withOffer
