@@ -1,27 +1,36 @@
-import { useQuery } from '@apollo/client'
+import axios from 'axios'
 import { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 
 import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
-import useLogger from '@/hooks/useLogger'
-import { EVENTS } from '@/services/GraphQL/events/queries'
+import { Event } from '@/services/GraphQL/events/types'
 import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Events: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(EVENTS)
-  const { error: logError } = useLogger()
+  const [events, setEvents] = useState<Event[]>([])
+  const [loading, setLoading] = useState(true)
 
-  if (queryError) logError(queryError, 'pages/events/index.tsx', 'No se pudo obtener los eventos de la base de datos')
+  useEffect(() => {
+    const getEvents = async () => {
+      setLoading(true)
+      const { data } = await axios.get<{ events: Event[] }>('/api/events')
+      setEvents(data.events)
+      setLoading(false)
+    }
+
+    getEvents()
+  }, [])
 
   if (loading) return <Loading />
-  if (!data && data.events.length < 1) return <EmptyList text="No hay eventos" />
+  if (events.length < 1) return <EmptyList text="No hay eventos" />
   return (
     <ClientOnly>
       <>
         <ListHeader createText="Crear nuevo evento" createPath="/eventos/crear" />
-        <EventsList events={data.events} />
+        <EventsList events={events} />
       </>
     </ClientOnly>
   )
