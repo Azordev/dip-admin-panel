@@ -4,20 +4,20 @@
 }
 
 .logo-container {
-  grid-area: logo;
-  width: 10rem;
-  padding: 20px;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  background-color: #000;
   border-radius: .2rem;
+  display: flex;
+  grid-area: logo;
+  justify-content: center;
   margin-right: 1rem;
+  padding: 20px;
+  width: 10rem;
 }
 
 .logo {
-  color: white;
-  fill: white;
+  color: #fff;
+  fill: #fff;
 }
 
 .page-header {
@@ -52,20 +52,20 @@
 .event-item {
   background: #fff;
   color: #000;
-  padding: 1.5rem;
   display: grid;
-  grid-template-areas:  "logo title"
-                        "logo title"
-                        "logo date";
+  grid-template-areas:  'logo title'
+    'logo title'
+    'logo date';
   grid-template-rows: 1fr 1fr 1rem;
+  padding: 1.5rem;
   text-decoration: none;
 }
 
 .event-header {
   font-size: 1.3rem;
   font-weight: bold;
-  text-align: right;
   grid-area: title;
+  text-align: right;
   width: 100%;
 }
 
@@ -96,4 +96,9 @@
 
 .event-item-edit:hover {
   background: #004578;
+}
+
+.event-image {
+  height: 100px;
+  width: 100px;
 }

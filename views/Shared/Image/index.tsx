@@ -9,9 +9,19 @@ interface Props {
   [key: string]: string
 }
 
+interface Loader {
+  src: string
+  width: number
+  quality?: number
+}
+
+const loader = ({ src, width, quality }: Loader) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
+
 const Image: React.FC<Props> = ({ src, alt, className, imgClassName, ...rest }) => (
-  <div className={`${styles.container}${className ? ' ' + className : ''}`}>
-    <Img src={src} alt={alt} layout="fill" {...rest} className={imgClassName} />
+  <div className={`${styles.container}${className ? ` ${className}` : ''}`}>
+    <Img src={src} alt={alt} layout="fill" className={imgClassName} loader={loader} {...rest} />
   </div>
 )
 
