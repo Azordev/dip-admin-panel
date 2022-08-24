@@ -7,8 +7,6 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['img.icons8.com', 'neufert-cdn.archdaily.net', 'did-app-files.s3.amazonaws.com'],
-    loader: '',
-    path: 'https://did-app-files.s3.amazonaws.com/',
   },
   sassOptions: {
     includePaths: [path.join(__dirname, '/styles/')],
