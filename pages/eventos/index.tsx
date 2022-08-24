@@ -16,7 +16,7 @@ const Events: NextPage = () => {
 
   useEffect(() => {
     fetchEvents()
-  }, [fetch])
+  }, [fetchEvents])
 
   if (queryError) logError(queryError, 'pages/events/index.tsx', 'No se pudo obtener los eventos de la base de datos')
 
