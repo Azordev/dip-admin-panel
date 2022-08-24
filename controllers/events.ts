@@ -48,16 +48,27 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(500).json(err)
       }
 
-      const file = files.image as formidable.File
-      const { Location: imageUrl } = await addObject(file, 'events')
+      if (files.image) {
+        const file = files.image as formidable.File
+        const { Location: imageUrl } = await addObject(file, 'events')
+
+        await client.mutate({
+          mutation: CREATE_EVENT,
+          variables: { ...fields, imageUrl },
+        })
+        return res.json({
+          msg: 'Event created successfully',
+          data: { ...fields, imageUrl },
+        })
+      }
 
       await client.mutate({
         mutation: CREATE_EVENT,
-        variables: { ...fields, imageUrl },
+        variables: { ...fields, imageUrl: '' },
       })
-      res.json({
+      return res.json({
         msg: 'Event created successfully',
-        data: { ...fields, imageUrl },
+        data: { ...fields },
       })
     } catch (error) {
       res.status(500).json(error)
@@ -75,16 +86,31 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
         return res.status(500).json(err)
       }
 
-      const file = files.image as formidable.File
-      const { Location: imageUrl } = await addObject(file, 'events')
+      if (!eventId) {
+        return res.status(400).json({ msg: 'EventId is required' })
+      }
+
+      if (files.image) {
+        const file = files.image as formidable.File
+        const { Location: imageUrl } = await addObject(file, 'events')
+
+        await client.mutate({
+          mutation: UPDATE_EVENT,
+          variables: { ...fields, imageUrl, eventId },
+        })
+        return res.json({
+          msg: 'Event updated successfully',
+          data: { ...fields, imageUrl },
+        })
+      }
 
       await client.mutate({
         mutation: UPDATE_EVENT,
-        variables: { ...fields, imageUrl, id: eventId },
+        variables: { ...fields, imageUrl: '', id: eventId },
       })
-      res.json({
+      return res.json({
         msg: 'Event updated successfully',
-        data: { ...fields, imageUrl },
+        data: { ...fields },
       })
     } catch (error) {
       res.status(500).json(error)
