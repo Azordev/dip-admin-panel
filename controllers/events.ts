@@ -9,7 +9,7 @@ import { EVENT_BY_ID, EVENTS } from '@/services/GraphQL/events/queries'
 export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
-    const { data } = await client.query({
+    const { data, error } = await client.query({
       query: EVENTS,
       variables: {
         offset: Number(query?.offset) || 0,
@@ -18,7 +18,11 @@ export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     })
 
-    res.json(data)
+    if (error?.message) {
+      return res.status(500).json({ error: error.message })
+    }
+
+    return res.json(data)
   } catch (error) {
     res.status(500).json(error)
   }

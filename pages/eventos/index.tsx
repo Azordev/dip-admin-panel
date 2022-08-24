@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
@@ -25,12 +25,20 @@ const Events: NextPage<PageProps> = ({ events }) => {
 
 export default Events
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await axios.get('http://localhost:3000/api/events')
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const { data } = await axios.get('http://localhost:3000/api/events')
 
-  return {
-    props: {
-      events: data.events || [],
-    },
+    return {
+      props: {
+        events: data?.events || [],
+      },
+    }
+  } catch (error) {
+    return {
+      props: {
+        events: [],
+      },
+    }
   }
 }
