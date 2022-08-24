@@ -11,11 +11,11 @@ import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Events: NextPage = () => {
-  const [fetch, { data, loading, error: queryError }] = useLazyQuery(EVENTS)
+  const [fetchEvents, { data, loading, error: queryError }] = useLazyQuery(EVENTS)
   const { error: logError } = useLogger()
 
   useEffect(() => {
-    fetch()
+    fetchEvents()
   }, [fetch])
 
   if (queryError) logError(queryError, 'pages/events/index.tsx', 'No se pudo obtener los eventos de la base de datos')
