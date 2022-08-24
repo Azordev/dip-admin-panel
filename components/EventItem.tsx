@@ -4,18 +4,18 @@ import Link from 'next/link'
 import { Event } from '@/services/GraphQL/events/types'
 import { readableDate } from '@/services/utils/dateFormat'
 import styles from '@/styles/Events.module.css'
-// import Image from '@/views/Shared/Image'
+import Image from '@/views/Shared/Image'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
 const EventItem: NextPage<{ event: Event }> = ({ event }) => (
   <Link href={`/eventos/editar/${event.id}`} passHref>
     <a className={styles['event-item']}>
       <div className={styles['logo-container']}>
-        {/* {event.imageUrl ? (
+        {event.imageUrl ? (
           <Image src={event.imageUrl} className={styles['event-image']} alt={`Logo of event ${event.title}`} />
-        ) : ( */}
-        <LogoDID className={styles.logo} />
-        {/* )} */}
+        ) : (
+          <LogoDID className={styles.logo} />
+        )}
       </div>
       <h2 className={styles['event-header']}>{event.title}</h2>
 
