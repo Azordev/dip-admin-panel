@@ -1,32 +1,33 @@
-.form-container{
-padding: 2rem;
-background-color: rgb(220, 220, 220);
-width: 78vw;
-height: 100vh;
+.form-container {
+  padding: 2rem;
+  background-color: rgb(220, 220, 220);
+  width: 78vw;
+  height: 100vh;
 
 }
 
-.label{
+.label {
   font-size: 1.2rem;
   display: flex;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
 
-.input{
+.input {
   width: 50%;
   border: solid 1px white;
   background-color: white;
 
 }
 
-.button-container{
+.button-container {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  
+
 }
-.add{
+
+.add {
   background-color: rgb(158, 192, 23);
   width: 22%;
   height: 3rem;
@@ -38,15 +39,15 @@ height: 100vh;
   text-align: center;
   border-radius: 0.5rem;
   transition: 0.3s ease;
- 
+
 }
 
-.add:hover{
+.add:hover {
   background-color: rgb(136, 164, 24);
   cursor: pointer;
 }
 
-.delete{
+.delete {
   background-color: rgb(216, 24, 24);
   width: 22%;
   height: 3rem;
@@ -58,10 +59,10 @@ height: 100vh;
   text-align: center;
   border-radius: 0.5rem;
   transition: 0.3s ease;
-  
+
 }
-.delete:hover{
+
+.delete:hover {
   background-color: rgb(179, 19, 19);
   cursor: pointer;
- 
 }
