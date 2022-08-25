@@ -1,5 +1,6 @@
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { NextPage } from 'next'
+import { useEffect } from 'react'
 
 import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
@@ -10,18 +11,22 @@ import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 const Events: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(EVENTS)
+  const [fetchEvents, { data, loading, error: queryError }] = useLazyQuery(EVENTS)
   const { error: logError } = useLogger()
+
+  useEffect(() => {
+    fetchEvents()
+  }, [fetchEvents])
 
   if (queryError) logError(queryError, 'pages/events/index.tsx', 'No se pudo obtener los eventos de la base de datos')
 
   if (loading) return <Loading />
-  if (!data && data.events.length < 1) return <EmptyList text="No hay eventos" />
+  if (!data && data?.events?.length < 1) return <EmptyList text="No hay eventos" />
   return (
     <ClientOnly>
       <>
         <ListHeader createText="Crear nuevo evento" createPath="/eventos/crear" />
-        <EventsList events={data.events} />
+        <EventsList events={data?.events} />
       </>
     </ClientOnly>
   )

@@ -45,7 +45,8 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
     }
 
     if (query.id) getCurrentData(query.id as string)
-  }, [currentDataQuery, currentData, query, queryOriginalData, logError])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if (loading) return <Loading />
 
