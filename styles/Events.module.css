@@ -46,7 +46,7 @@
 .events-list {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(542px, 1fr));
 }
 
 .event-item {
@@ -58,15 +58,18 @@
                         "logo title"
                         "logo date";
   grid-template-rows: 1fr 1fr 1rem;
+  grid-template-columns: 200px 1fr;
   text-decoration: none;
 }
 
 .event-header {
   font-size: 1.3rem;
-  font-weight: bold;
-  text-align: right;
+  font-weight: 500;
   grid-area: title;
+  margin: auto;
+  text-align: left;
   width: 100%;
+  line-height: normal;
 }
 
 .event-content {
@@ -75,7 +78,7 @@
 }
 
 .event-date {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .event-description {
