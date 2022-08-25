@@ -55,7 +55,7 @@ const useLogger = () => {
     else toast(message)
   }
 
-  return { log, warn, error }
+  return { log, warn, error, toast }
 }
 
 export default useLogger
