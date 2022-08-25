@@ -1,11 +1,40 @@
 .nav {
   display: flex;
   flex-direction: row;
+  padding-right: 1rem;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  align-items: center;
+
+  
 }
 
 .back-header-image {
+  display: flex;
   height: 1.5rem !important;
   width: auto !important;
+  justify-self: flex-end;
+  
+}
+
+.button {
+  border: none;
+  font-weight: 500;
+  font-size: small;
+  padding-left: 0;
+  font-weight: 300;
+}
+
+.logo {
+  height: 1.5rem !important;
+  width: auto;
+  cursor: pointer
+  
+
+}
+
+.containerBTNLOGO {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 5px
 }

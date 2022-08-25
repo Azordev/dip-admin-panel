@@ -1,10 +1,9 @@
-import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
+import BackHeader from '@/components/BackHeader'
 import { MutableUserFormProps, UserEditable } from '@/services/GraphQL/users/types'
 const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
-  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -15,7 +14,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
 
   return (
     <div>
-      <button onClick={() => router.back()}>Regresar</button>
+      <BackHeader parent={'Socios'} />
       <form onSubmit={submitHandler}>
         <input type="text" placeholder="member_code" {...register('memberCode', { required: true })} />
         {errors.memberCode && <small className="text-red-500">{errors.memberCode.message}</small>}
