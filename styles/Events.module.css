@@ -68,8 +68,13 @@
   grid-area: title;
   margin: auto;
   text-align: left;
-  width: 100%;
+  width: 300px;
   line-height: normal;
+}
+
+.event-header h2{
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .event-content {
