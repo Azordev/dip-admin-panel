@@ -5,6 +5,7 @@ import { CREATE_ERROR } from '@/services/GraphQL/errors/mutations'
 
 const useLogger = () => {
   const [createError] = useMutation(CREATE_ERROR)
+  toast.dismiss()
 
   const error = (
     error: Error,
