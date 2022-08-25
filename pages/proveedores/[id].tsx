@@ -37,7 +37,8 @@ const Provider: NextPage = () => {
         <ListHeader
           createPath={`/productos/crear?provider=${query.id}&provider-url=${data.provider.logoUrl}`}
           createText="Añadir nuevo producto"
-          parent={data.provider.commercialName}
+          logoUrl={data.provider.logoUrl}
+          altLogo={data.provider.commercialName}
         />
         <ProviderDetail provider={data.provider} />
       </>
