@@ -10,12 +10,12 @@ import LoginLayout from './Layout'
 
 const Login: NextPage = () => {
   const [checkUserSession, { loading }] = useLazyQuery(USER_SESSION)
-  const { log, warn, error } = useLogger()
+  const { log, warn, error, toast } = useLogger()
   const router = useRouter()
 
   const onSubmit = async (formData: LoginInput) => {
     const { called, error: queryError, data } = await checkUserSession({ variables: formData })
-
+    toast.dismiss()
     if (called) {
       if (queryError) {
         error(queryError, 'Login:onSubmit', 'Error al verificar sesión...', 'SERVER_CONNECTION')
