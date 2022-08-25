@@ -32,7 +32,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading }) => {
           required: true,
         })}
       />
-      {errors.memberCode && <small className={styles.error}>El código es requerido</small>}
+      {errors.memberCode && <small className={styles.error}>El usuario es requerido</small>}
       <PasswordInput placeholder="Contraseña" {...register('password', { required: true })} />
       {errors.password && <small className={styles.error}>La contraseña es requerida</small>}
       <SubmitButton isLoading={loading} disabled={loading} text="Ingresar" />
