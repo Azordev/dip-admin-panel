@@ -23,9 +23,10 @@ const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoU
         <span>{createText}</span>
       </a>
     </Link>
-    <h1>{parent}</h1>
-    {logoUrl && (
+    {logoUrl ? (
       <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={120} height={15} objectFit="contain" />
+    ) : (
+      <h1>{parent}</h1>
     )}
   </nav>
 )
