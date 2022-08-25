@@ -43,7 +43,7 @@ const Login: NextPage = () => {
             const user = data.users[0]
             window.sessionStorage.setItem('userId', user.id)
             window.sessionStorage.setItem('user', JSON.stringify(user))
-            router.push('/')
+            setTimeout(() => router.push('/'), 200)
           } else {
             warn('Login:onSubmit', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
           }
