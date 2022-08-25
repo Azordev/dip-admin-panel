@@ -25,9 +25,13 @@ const Events: NextPage<PageProps> = ({ events }) => {
 
 export default Events
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async context => {
+  const protocol = context.req.headers['x-forwarded-proto']
+  const host = context.req.headers.host
+  const baseUrl = `${protocol}://${host}`
+
   try {
-    const { data } = await axios.get('http://localhost:3000/api/events')
+    const { data } = await axios.get(`${baseUrl}/api/events`)
 
     return {
       props: {
