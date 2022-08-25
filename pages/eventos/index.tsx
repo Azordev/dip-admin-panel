@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { GetServerSideProps, NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
@@ -7,8 +6,10 @@ import { Event } from '@/services/GraphQL/events/types'
 import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
+import { getEvents } from 'controllers/events'
+
 interface PageProps {
-  events: Event[]
+  events: Event[] | undefined
 }
 
 const Events: NextPage<PageProps> = ({ events }) => {
@@ -25,24 +26,12 @@ const Events: NextPage<PageProps> = ({ events }) => {
 
 export default Events
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const protocol = context.req.headers['x-forwarded-proto']
-  const host = context.req.headers.host
-  const baseUrl = `${protocol}://${host}`
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { events } = await getEvents()
 
-  try {
-    const { data } = await axios.get(`${baseUrl}/api/events`)
-
-    return {
-      props: {
-        events: data?.events || [],
-      },
-    }
-  } catch (error) {
-    return {
-      props: {
-        events: [],
-      },
-    }
+  return {
+    props: {
+      events: events || [],
+    },
   }
 }

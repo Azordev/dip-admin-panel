@@ -1,26 +1,32 @@
-import { useQuery } from '@apollo/client'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
-import Loading from '@/components/Loading'
-import useLogger from '@/hooks/useLogger'
-import { PRODUCTS } from '@/services/GraphQL/products/queries'
+import { Product } from '@/services/GraphQL/products/types'
 import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-const Products: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(PRODUCTS)
-  const { error: logError } = useLogger()
+import { getProducts } from 'controllers/products'
 
-  if (queryError) logError(queryError, 'pages/productos/index.tsx', 'No se pudo obtener la lista de eventos')
+interface PageProps {
+  products: Product[] | undefined
+}
 
-  if (loading) return <Loading />
-  if (!data || !data.products) return <EmptyList text="No hay suscripciones" />
+const Products: NextPage<PageProps> = ({ products }) => {
+  if (!products || products.length < 1) return <EmptyList text="No hay suscripciones" />
   return (
     <ClientOnly>
-      <ProductList products={data.products} />
+      <ProductList products={products} />
     </ClientOnly>
   )
 }
 
 export default Products
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { products } = await getProducts()
+  return {
+    props: {
+      products: products || [],
+    },
+  }
+}
