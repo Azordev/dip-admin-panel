@@ -4,8 +4,9 @@ import { FC, ReactNode } from 'react'
 import useAuth from '@/hooks/useAuth'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
-import styles from './Dashboard.module.scss'
 import Icons8 from '../../Icons8'
+
+import styles from './Dashboard.module.scss'
 
 interface Props {
   children: ReactNode
