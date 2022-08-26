@@ -1,5 +1,4 @@
 @import 'colors','fonts';
-
 $input-radius: .2rem;
 
 .form{
@@ -17,6 +16,7 @@ $input-radius: .2rem;
 }
 .input {
   width: 50%;
+  font-family: 'Visby';
   border: 1px solid $gray-250;
   background-color:  $white;
   font-size: 19px;
