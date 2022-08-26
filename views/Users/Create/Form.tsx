@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { MutableUserFormProps, UserEditable } from '@/services/GraphQL/users/types'
-import styles from '@/styles/FormPartners.module.css'
+
 const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
@@ -13,12 +13,9 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
 
   return (
     <>
-      <form className={styles['form-container']} onSubmit={submitHandler}>
-        <label className={styles.label} htmlFor="namePartner">
-          Nombre del Socio
-        </label>
+      <form onSubmit={submitHandler}>
+        <label htmlFor="namePartner">Nombre del Socio</label>
         <input
-          className={styles.input}
           id="namePartner"
           type="text"
           placeholder="Escribe el nombre del socio"
@@ -26,29 +23,21 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         />
         {errors.namePartner && <small className="text-red-100">{errors.namePartner.message}</small>}
 
-        <label className={styles.label} htmlFor="memberCode">
-          Código del Socio
-        </label>
+        <label htmlFor="memberCode">Código del Socio</label>
         <input
-          className={styles.input}
           id="memberCode"
           type="text"
-          placeholder="member_code"
+          placeholder="Escribe el código del socio"
           {...register('memberCode', { required: true })}
         />
         {errors.memberCode && <small className="text-red-100">{errors.memberCode.message}</small>}
 
-        <label className={styles.label} htmlFor="startDate">
-          Fecha de Inicio
-        </label>
-        <input className={styles.input} id="startDate" type="date" {...register('startDate', { required: true })} />
+        <label htmlFor="startDate">Fecha de Inicio</label>
+        <input id="startDate" type="date" {...register('startDate', { required: true })} />
         {errors.startDate && <small className="text-red-100">{errors.startDate.message}</small>}
 
-        <label className={styles.label} htmlFor="email">
-          Correo electrónico
-        </label>
+        <label htmlFor="email">Correo electrónico</label>
         <input
-          className={styles.input}
           id="email"
           type="text"
           placeholder="Inserte el correo electrónico"
@@ -56,24 +45,16 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         />
         {errors.email && <small className="text-red-500">{errors.email.message}</small>}
 
-        <label className={styles.label} htmlFor="password">
-          Contraseña
-        </label>
-        <input
-          id="password"
-          className={styles.input}
-          type="password"
-          placeholder="Inserte la contraseña del socio"
-          {...register('password')}
-        />
+        <label htmlFor="password">Contraseña</label>
+        <input id="password" type="password" placeholder="Inserte la contraseña del socio" {...register('password')} />
         {errors.password && <small className="text-red-500">{errors.password.message}</small>}
 
-        <div className={styles['button-container']}>
-          <button className={styles.add} type="submit">
+        <div className="button-container">
+          <button className="add" type="submit">
             Añadir
           </button>
 
-          <button className={styles.delete} type="submit">
+          <button className="delete" type="submit">
             Eliminar
           </button>
         </div>
