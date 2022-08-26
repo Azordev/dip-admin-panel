@@ -14,8 +14,11 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <label htmlFor="namePartner">Nombre del Socio</label>
+        <label className="text-size" htmlFor="namePartner">
+          Nombre del Socio
+        </label>
         <input
+          className="font-visby"
           id="namePartner"
           type="text"
           placeholder="Escribe el nombre del socio"
@@ -23,8 +26,11 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         />
         {errors.namePartner && <small className="text-red-100">{errors.namePartner.message}</small>}
 
-        <label htmlFor="memberCode">Código del Socio</label>
+        <label className="text-size" htmlFor="memberCode">
+          Código del Socio
+        </label>
         <input
+          className="font-visby"
           id="memberCode"
           type="text"
           placeholder="Escribe el código del socio"
@@ -32,12 +38,17 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         />
         {errors.memberCode && <small className="text-red-100">{errors.memberCode.message}</small>}
 
-        <label htmlFor="startDate">Fecha de Inicio</label>
-        <input id="startDate" type="date" {...register('startDate', { required: true })} />
+        <label className="text-size" htmlFor="startDate">
+          Fecha de Inicio
+        </label>
+        <input className="font-visby" id="startDate" type="date" {...register('startDate', { required: true })} />
         {errors.startDate && <small className="text-red-100">{errors.startDate.message}</small>}
 
-        <label htmlFor="email">Correo electrónico</label>
+        <label className="text-size" htmlFor="email">
+          Correo electrónico
+        </label>
         <input
+          className="font-visby"
           id="email"
           type="text"
           placeholder="Inserte el correo electrónico"
@@ -45,16 +56,24 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         />
         {errors.email && <small className="text-red-500">{errors.email.message}</small>}
 
-        <label htmlFor="password">Contraseña</label>
-        <input id="password" type="password" placeholder="Inserte la contraseña del socio" {...register('password')} />
+        <label className="text-size" htmlFor="password">
+          Contraseña
+        </label>
+        <input
+          className="font-visby"
+          id="password"
+          type="password"
+          placeholder="Inserte la contraseña del socio"
+          {...register('password')}
+        />
         {errors.password && <small className="text-red-500">{errors.password.message}</small>}
 
         <div className="button-container">
-          <button className="add" type="submit">
-            Añadir
+          <button className="add text-size" type="submit">
+            Guardar
           </button>
 
-          <button className="delete" type="submit">
+          <button className="delete text-size" type="submit">
             Eliminar
           </button>
         </div>
