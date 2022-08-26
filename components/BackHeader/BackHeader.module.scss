@@ -1,3 +1,11 @@
+@font-face {
+  font-family: Visbi;
+  font-style: medium;
+  font-weight: 700;
+  src: 'url(../../public/fonts/VisbyMedium.otf)';
+  
+}
+
 .nav {
   align-items: center;
   display: flex;
@@ -18,7 +26,10 @@
 
 .button {
   border: 0;
-  font: normal normal normal 25px/79px Visby;
+  font-family: Visbi, sans-serif;
+  font-size: 25px;
+  font-style: medium;
+  font-weight: 700;
   letter-spacing: 0;
   padding-left: 0;
   
