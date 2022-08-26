@@ -11,7 +11,7 @@ export interface BackHeaderProps {
 const BackHeader: FC<BackHeaderProps> = ({ parent, parentImageUrl }) => (
   <div>
     <nav className={styles.nav}>
-      <div className={styles.containerBTNLOGO} onClick={() => window.history.back()}>
+      <div className={styles['container-btn-logo']} onClick={() => window.history.back()}>
         <img
           className={styles.logo}
           src="https://icons.veryicon.com/png/o/application/yitao-wireless-icon-library/back-23.png"
