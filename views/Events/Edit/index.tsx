@@ -1,15 +1,17 @@
 import Image from 'next/image'
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
+import CustomSwitch from '@/components/CustomSwitch'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.css'
-
 const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalData: originalEvent }) => {
   const {
     register,
+    setValue,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<EventEditable>()
@@ -17,6 +19,24 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   const buttonText = loading ? 'Enviando' : 'Enviar'
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [type, setType] = useState(originalEvent?.type)
+
+  useEffect(() => {
+    setValue('type', 'ATTENDANCE')
+    setType(getValues('type'))
+  }, [])
+
+  const handleChange = (isCheck: any) => {
+    if (isCheck) {
+      setValue('type', 'WORKSHOP')
+      setValue('title', originalEvent?.title)
+      setValue('description', originalEvent?.description)
+      setType(getValues().type)
+      return
+    }
+    setValue('type', 'ATTENDANCE')
+    setType(getValues().type)
+  }
 
   const handleAsistentes = () => {
     // TODO: implementar funcionalidad asociada a este botón
@@ -105,14 +125,12 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           defaultValue={originalEvent?.description}
           {...register('description', { required: false })}
         ></textarea>
-        <select defaultValue={originalEvent?.type ?? ''} {...register('type', { required: true })}>
-          <option value="ATTENDANCE" selected={originalEvent?.type === 'ATTENDANCE'}>
-            Evento
-          </option>
-          <option value="WORKSHOP" selected={originalEvent?.type === 'WORKSHOP'}>
-            Convocatoria
-          </option>
-        </select>
+        <CustomSwitch
+          isChecked={type === 'WORKSHOP'}
+          onChange={handleChange}
+          firstLabel="Evento"
+          secondLabel="Convocatoria"
+        />
         <button type="submit">{buttonText}</button>
       </form>
     </>
