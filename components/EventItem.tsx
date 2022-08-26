@@ -17,8 +17,9 @@ const EventItem: NextPage<{ event: Event }> = ({ event }) => (
           <LogoDID className={styles.logo} />
         )}
       </div>
-      <h2 className={styles['event-header']}>{event.title}</h2>
-
+      <section className={styles['event-header']}>
+        <h2>{event.title}</h2>
+      </section>
       <section className={styles['event-content']}>
         <p className={styles['event-date']}>{readableDate(event.date)}</p>
       </section>
