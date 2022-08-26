@@ -7,7 +7,6 @@ form{
   width: 78vw;
   height: 100vh;
 }
-
 label {
   font-size: 1.2rem;
   display: flex;
@@ -17,7 +16,6 @@ label {
   text-align: left;
   font-size:30px
 }
-
 input {
   width: 50%;
   border: solid 1px $gray-300;
@@ -27,14 +25,12 @@ input {
   font-size: 19px;
   }
 }
-
 .button-container {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
   align-items:flex-end;
 }
-
 .add {
   background-color: $green;
   width: 30%;
@@ -51,9 +47,8 @@ input {
 @media (min-width: 768px) {
   .add{
       width: 20%;
-  }
+    }
 }
-
 .delete {
   background-color: $red;
   width: 30%;
