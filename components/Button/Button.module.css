@@ -1,0 +1,13 @@
+.button {
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 292px;
+  height: 72px;
+}
+
+.button p {
+  line-height: normal;
+}
