@@ -10,10 +10,10 @@
   justify-content: space-between;
   margin: 0;
   overflow: auto;
-  padding: .5rem;
+  padding: 0.5rem;
   position: fixed;
   width: 20rem;
-  
+
   nav {
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@
       &:first-child {
         display: flex;
       }
-  
+
       &:last-child {
         margin-bottom: 0;
       }
@@ -67,6 +67,6 @@
 .icons {
   height: 1.5rem;
   left: 0;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   width: 1.5rem;
 }
