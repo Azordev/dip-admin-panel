@@ -7,6 +7,8 @@ import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 import styles from './Dashboard.module.scss'
 import Icons8 from '../../Icons8'
 
+import icon from './white-check-bag.svg'
+
 interface Props {
   children: ReactNode
 }
@@ -29,7 +31,7 @@ const Dashboard: FC<Props> = ({ children }) => {
           </Link>
           <Link href="/proveedores" passHref>
             <a>
-              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="shopaholic" />
+              <Icons8 localSrc={icon} size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="shopaholic" />
               <span>Proveedores</span>
             </a>
           </Link>
