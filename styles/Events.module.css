@@ -46,7 +46,7 @@
 .events-list {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(542px, 1fr));
 }
 
 .event-item {
@@ -56,6 +56,7 @@
   grid-template-areas:  'logo title'
     'logo title'
     'logo date';
+  grid-template-columns: 200px 1fr;
   grid-template-rows: 1fr 1fr 1rem;
   padding: 1.5rem;
   text-decoration: none;
@@ -63,10 +64,20 @@
 
 .event-header {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 500;
   grid-area: title;
-  text-align: right;
-  width: 100%;
+  line-height: normal;
+  margin: auto;
+  text-align: left;
+  width: 300px;
+}
+
+.event-header h2 {
+  -webkit-box-orient: vertical;
+  display: box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .event-content {
@@ -75,7 +86,7 @@
 }
 
 .event-date {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .event-description {

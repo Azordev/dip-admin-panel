@@ -9,7 +9,7 @@ import ClientOnly from '@/views/Shared/ClientOnly'
 import { getEvents } from 'controllers/events'
 
 interface PageProps {
-  events: Event[] | undefined
+  events: Event[]
 }
 
 const Events: NextPage<PageProps> = ({ events }) => {
