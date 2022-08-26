@@ -28,9 +28,9 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   }
 
   useEffect(() => {
-    setValue('type', originalEvent?.type)
+    setValue('type', 'ATTENDANCE')
     setType(getValues('type'))
-  }, [originalEvent?.type])
+  }, [])
 
   return (
     <form onSubmit={submitHandler}>
@@ -53,7 +53,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         {...register('date', { required: true })}
       />
       <CustomSwitch
-        isChecked={originalEvent?.type === 'WORKSHOP'}
+        isChecked={type === 'WORKSHOP'}
         onChange={handleChange}
         firstLabel="Evento"
         secondLabel="Convocatoria"
