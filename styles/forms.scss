@@ -1,14 +1,11 @@
 @import 'colors','fonts';
 
 $input-radius: .2rem;
-
-
 form{
   padding: 2rem;
   background-color: $gray-300;
   width: 78vw;
   height: 100vh;
-
 }
 
 label {
@@ -23,15 +20,12 @@ label {
 
 input {
   width: 50%;
-  border: solid 1px #D0D0D0;
+  border: solid 1px $gray-300;
   background-color:  $white;
   font-size: 19px;
-  
   &::placeholder {
   font-size: 19px;
- 
   }
- 
 }
 
 .button-container {
@@ -39,7 +33,6 @@ input {
   gap: 1rem;
   margin-top: 1rem;
   align-items:flex-end;
-
 }
 
 .add {
@@ -61,7 +54,6 @@ input {
   }
 }
 
-
 .delete {
   background-color: $red;
   width: 30%;
@@ -74,7 +66,6 @@ input {
   border-radius: 0.5rem;
   transition: 0.3s ease;
   font-family:$font-base-sans-serif-family;
-  
 }
 @media (min-width: 768px) {
   .delete{
