@@ -1,16 +1,18 @@
-import { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
-const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
+import styles from './SaveorDelete.module.scss'
+
+const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ProductEditable>()
   const submitHandler = handleSubmit(onSubmit)
-  const buttonText = loading ? 'Enviando' : 'Enviar'
 
   return (
     <form onSubmit={submitHandler}>
@@ -22,7 +24,12 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
       <input type="text" placeholder="base_price_sol" {...register('basePriceSol', { required: true })} />
       {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
-      <button type="submit">{buttonText}</button>
+      <button className={styles.save} type="submit">
+        Guardar
+      </button>
+      <button className={styles.delete} onClick={() => reset()}>
+        Eliminar
+      </button>
     </form>
   )
 }
