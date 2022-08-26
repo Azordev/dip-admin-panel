@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
@@ -27,9 +27,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit }) => {
       <button className={styles.save} type="submit">
         Guardar
       </button>
-      <button className={styles.delete} onClick={() => reset()}>
-        Eliminar
-      </button>
+      <button className={styles.delete} onClick={() => reset()}></button>
     </form>
   )
 }
