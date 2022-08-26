@@ -1,20 +1,21 @@
 @import 'colors','fonts';
 
 $input-radius: .2rem;
-form{
+
+.form{
   padding: 2rem;
   background-color: $gray-300;
   width: 78vw;
   height: 100vh;
 }
-label {
+.label {
   display: flex;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
   font-family:$font-base-sans-serif-family;
   text-align: left;
 }
-input {
+.input {
   width: 50%;
   border: 1px solid $gray-250;
   background-color:  $white;
