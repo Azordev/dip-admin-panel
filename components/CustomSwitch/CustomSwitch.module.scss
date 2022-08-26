@@ -4,7 +4,7 @@
   align-items: flex-start;
   gap: 4px;
   width: 120px;
-  margin: 15px 0;
+  margin: 15px;
   input {
     appearance: none;
     min-width: 48px;
@@ -48,4 +48,13 @@
   color: #474343;
   display: inline;
   margin-bottom: 10px;
+}
+
+.switchLabel {
+  font-size: 30px;
+}
+
+.switchContainer {
+  display: flex;
+  align-items: center;
 }

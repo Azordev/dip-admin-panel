@@ -19,11 +19,11 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
 
   const handleChange = (isCheck: any) => {
     if (isCheck) {
-      setValue('type', 'ATTENDANCE')
+      setValue('type', 'WORKSHOP')
       setType(getValues().type)
       return
     }
-    setValue('type', 'WORKSHOP')
+    setValue('type', 'ATTENDANCE')
     setType(getValues().type)
   }
 
@@ -52,8 +52,12 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         defaultValue={originalEvent?.date.slice(0, 19) as string}
         {...register('date', { required: true })}
       />
-      <label className={styles.switchLabel}>{type === 'ATTENDANCE' ? 'Evento' : 'Convocatoria'}</label>
-      <CustomSwitch isChecked={originalEvent?.type === 'ATTENDANCE'} onChange={handleChange} />
+      <CustomSwitch
+        isChecked={originalEvent?.type === 'WORKSHOP'}
+        onChange={handleChange}
+        firstLabel="Evento"
+        secondLabel="Convocatoria"
+      />
       <button type="submit">{buttonText}</button>
     </form>
   )
