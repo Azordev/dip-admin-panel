@@ -27,7 +27,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       <button className={styles.save} type="submit">
         {buttonText}
       </button>
-      <button className={styles.delete}>Delete</button>
+      <button className={styles.delete}>Eliminar</button>
     </form>
   )
 }
