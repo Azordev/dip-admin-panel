@@ -1,9 +1,9 @@
 .nav {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  padding-right: 1rem;
   justify-content: space-between;
-  align-items: center;
+  padding-right: 1rem;
 
   
 }
@@ -11,29 +11,31 @@
 .back-header-image {
   display: flex;
   height: 1.5rem !important;
-  width: auto !important;
   justify-self: flex-end;
+  width: auto !important;
   
 }
 
 .button {
-  border: none;
-  font-weight: bold;
-  font-size: small;
+  border: 0;
+  font: normal normal normal 25px/79px Visby;
+  letter-spacing: 0;
   padding-left: 0;
+  
 }
 
 .logo {
-  height: 1.7rem !important;
+  cursor: pointer;
+  height: 38px;
+  margin-top: 3px;
   width: auto;
-  cursor: pointer
   
 
 }
 
-.containerBTNLOGO {
+.containerbtnlogo {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin-left: 5px
+  margin-left: 5px;
 }
