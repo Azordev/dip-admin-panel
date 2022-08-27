@@ -138,7 +138,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         </label>
         <textarea
           id="description"
-          placeholder="Descripción"
+          placeholder="Escribe aquí..."
           className={styles.textarea}
           defaultValue={originalEvent?.description}
           {...register('description', { required: false })}
