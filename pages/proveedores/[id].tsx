@@ -6,10 +6,16 @@ import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
 import useLogger from '@/hooks/useLogger'
+import { Product } from '@/services/GraphQL/products/types'
 import { PROVIDER_BY_ID } from '@/services/GraphQL/providers/queries'
 import { Provider as ProviderFields } from '@/services/GraphQL/providers/types'
+import ProductList from '@/views/Products/List'
 import ProviderDetail from '@/views/Providers/Detail'
 import ClientOnly from '@/views/Shared/ClientOnly'
+
+interface ProviderWithProducts extends ProviderFields {
+  products: Product[]
+}
 
 const Provider: NextPage = () => {
   const { push, query } = useRouter()
@@ -17,7 +23,7 @@ const Provider: NextPage = () => {
     data,
     loading,
     error: queryError,
-  } = useQuery<{ provider: ProviderFields }>(PROVIDER_BY_ID, {
+  } = useQuery<{ provider: ProviderWithProducts }>(PROVIDER_BY_ID, {
     variables: {
       id: query.id,
     },
@@ -41,6 +47,7 @@ const Provider: NextPage = () => {
           altLogo={data.provider.commercialName}
         />
         <ProviderDetail provider={data.provider} />
+        <ProductList products={data.provider.products} />
       </>
     </ClientOnly>
   )
