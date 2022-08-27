@@ -15,12 +15,11 @@ const EditEvent: NextPage = () => {
   const { error: logError } = useLogger()
 
   const submitHandler = async (updatedEvent: EventEditable) => {
-    console.log(updatedEvent)
-    // const formattedDate = new Date(updatedEvent.date).toISOString()
-    // await updateEvent({
-    //   variables: { ...updatedEvent, id: query.id, date: formattedDate },
-    // })
-    // push('/eventos')
+    const formattedDate = new Date(updatedEvent.date).toISOString()
+    await updateEvent({
+      variables: { ...updatedEvent, id: query.id, date: formattedDate },
+    })
+    push('/eventos')
   }
 
   if (mutationError) logError(mutationError, 'pages/eventos/editar/[id].tsx', 'Error al actualizar el evento')

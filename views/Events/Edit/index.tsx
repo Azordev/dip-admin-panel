@@ -6,7 +6,7 @@ import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
 import CustomSwitch from '@/components/CustomSwitch'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
-import styles from '@/styles/EditEvent.module.css'
+import styles from '@/styles/EditEvent.module.scss'
 const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalData: originalEvent }) => {
   const {
     register,
@@ -16,15 +16,19 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     formState: { errors },
   } = useForm<EventEditable>()
   const submitHandler = handleSubmit(onSubmit)
-  const buttonText = loading ? 'Enviando' : 'Enviar'
+  const buttonText = loading ? 'Guardando' : 'Guardar'
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [pdfFile, setPdfFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [type, setType] = useState(originalEvent?.type)
 
   useEffect(() => {
     setValue('type', 'ATTENDANCE')
+    setValue('date', originalEvent?.date.slice(0, 19) as string)
+    setValue('description', originalEvent?.description)
+    setValue('title', originalEvent?.title)
     setType(getValues('type'))
-  }, [])
+  }, [originalEvent?.date, originalEvent?.description, originalEvent?.title, setValue, getValues])
 
   const handleChange = (isCheck: any) => {
     if (isCheck) {
@@ -42,9 +46,9 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     // TODO: implementar funcionalidad asociada a este botón
   }
 
-  const handleImage = (evt: ChangeEvent<HTMLInputElement>) => {
-    if (evt.target.files?.length) {
-      const file = evt.target.files[0]
+  const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
+    const file = evt.target.files?.[0]
+    if (file?.type.includes('image')) {
       setImageFile(file)
       const reader = new FileReader()
       reader.onload = (e: ProgressEvent<FileReader>) => {
@@ -55,16 +59,29 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
       reader.readAsDataURL(file)
       return
     }
+
+    if (file?.type.includes('pdf')) {
+      setPdfFile(file)
+      return
+    }
+
     setImageFile(null)
     setImageUrl(null)
+    setPdfFile(null)
   }
 
   return (
     <>
-      <Button onClick={handleAsistentes} className={styles.button} withIcon iconName="user-group-man-man" iconSize={30}>
-        Asistentes
-      </Button>
       <form onSubmit={submitHandler} className={styles.form}>
+        <Button
+          onClick={handleAsistentes}
+          className={styles.button}
+          withIcon
+          iconName="user-group-man-man"
+          iconSize={30}
+        >
+          Asistentes
+        </Button>
         <section className={styles.section}>
           <div className={styles.inputSection}>
             <CustomInput
@@ -92,13 +109,14 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           <div className={styles.imageSection}>
             <div className={styles['container-input']}>
               <input
+                id="image-file"
                 type="file"
                 accept="image/*"
                 className={styles.inputfile}
-                {...register('imageUrl')}
-                onChange={handleImage}
+                // {...register('imageUrl')} // TODO: se debe procesar el archivo para que la url sea devuelta
+                onChange={handleFile}
               />
-              <label htmlFor="file-5">
+              <label htmlFor="image-file">
                 <figure>
                   <Image
                     width={imageUrl || originalEvent?.imageUrl ? 300 : 40}
@@ -109,7 +127,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
                   />
                 </figure>
                 <span className={styles.label}>
-                  {imageFile?.name || originalEvent?.imageUrl ? 'Cambiar imagen' : 'Agregar imagen'}
+                  {imageFile?.name || originalEvent?.imageUrl ? 'Cambiar imagen' : 'Añadir imagen'}
                 </span>
               </label>
             </div>
@@ -131,7 +149,46 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           firstLabel="Evento"
           secondLabel="Convocatoria"
         />
-        <button type="submit">{buttonText}</button>
+        <label htmlFor="pdf" className={styles.labelTitle}>
+          Añadir PDF
+        </label>
+        <div className={styles['container-input']}>
+          <input
+            type="file"
+            name="file-2"
+            id="pdf-file"
+            className={styles.inputfile}
+            accept="application/pdf"
+            onChange={handleFile}
+            // TODO: se debe procesar el archivo para que la url sea devuelta
+            // {...register('pdfUrl', { required: false })}
+          />
+          <label htmlFor="pdf-file" className={styles.pdf}>
+            <figure>
+              <Image
+                width={35}
+                height={35}
+                objectFit="contain"
+                src="https://img.icons8.com/ios/35/installing-updates--v1.png"
+                alt="Imagen del evento"
+              />
+            </figure>
+            <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
+          </label>
+        </div>
+        <section className={styles.buttonsContainer}>
+          {/* TODO: implementar funcionalidad asociada a este botón */}
+          <Button className={styles.buttonCancel} onClick={() => {}}>
+            Cancelar
+          </Button>
+          <Button className={styles.buttonSave} type="submit">
+            {buttonText}
+          </Button>
+          {/* TODO: implementar funcionalidad asociada a este botón */}
+          <Button className={styles.buttonDelete} onClick={() => {}}>
+            Eliminar
+          </Button>
+        </section>
       </form>
     </>
   )

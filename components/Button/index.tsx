@@ -3,7 +3,8 @@ import { FC, ReactNode } from 'react'
 import styles from './Button.module.css'
 interface ButtonProps {
   children: ReactNode
-  onClick: () => void
+  onClick?: () => void
+  type?: 'button' | 'submit' | 'reset'
   className?: string
   withIcon?: boolean
   iconSize?: number
@@ -19,10 +20,11 @@ const Button: FC<ButtonProps> = ({
   iconSize,
   iconName,
   iconType = 'ios-filled',
+  type = 'button',
 }) => {
   const srcIcon = `https://img.icons8.com/${iconType}/${iconSize}/${iconName}`
   return (
-    <button className={`${className} ${styles.button}`} onClick={onClick}>
+    <button type={type} className={`${className} ${styles.button}`} onClick={onClick}>
       {withIcon && <img src={srcIcon} alt={iconName} />}
       <p>{children}</p>
     </button>
