@@ -14,6 +14,7 @@ interface PageProps {
 
 const Events: NextPage<PageProps> = ({ events }) => {
   if (!events || events.length < 1) return <EmptyList text="No hay eventos" />
+
   return (
     <ClientOnly>
       <>

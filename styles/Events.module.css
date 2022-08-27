@@ -74,7 +74,7 @@
 
 .event-header h2 {
   -webkit-box-orient: vertical;
-  display: box;
+  display: flex;
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
