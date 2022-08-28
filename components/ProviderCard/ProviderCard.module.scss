@@ -1,0 +1,48 @@
+@use '../../styles/fonts.scss' as *;
+@use '../../styles/colors.scss' as c;
+@use '../../styles/mixins.scss' as m;
+
+.card-container {
+  @include m.grid(24rem);
+  padding: 40px 20px;
+
+  .card {
+    background-color: c.$white;
+    border: 1px solid c.$gray-200;
+    border-radius: .5rem;
+    display: flex;
+    height: 144px;
+    opacity: 1;
+    padding: 11px;
+    width: 397px;
+
+    .provider-logo {
+      background: c.$black;
+      border-radius: .5rem;
+      height: 122px;
+      opacity: 1;
+      width: 170px;
+    }
+
+  }
+  
+  .provider-info {
+    display: flex;
+    justify-items: space-between;
+    position: relative;
+    width: 100%;
+
+    .top-right {
+      position: absolute;
+      right: 0;
+    }
+      
+    .center {
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+    }
+  }
+}
+
+

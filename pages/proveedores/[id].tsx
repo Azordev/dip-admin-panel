@@ -5,11 +5,13 @@ import { useRouter } from 'next/router'
 import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
+import ProviderCard from '@/components/ProviderCard'
 import useLogger from '@/hooks/useLogger'
 import { PROVIDER_BY_ID } from '@/services/GraphQL/providers/queries'
 import { Provider as ProviderFields } from '@/services/GraphQL/providers/types'
-import ProviderDetail from '@/views/Providers/Detail'
 import ClientOnly from '@/views/Shared/ClientOnly'
+
+import styles from '../../components/ProviderCard/ProviderCard.module.scss'
 
 const Provider: NextPage = () => {
   const { push, query } = useRouter()
@@ -40,7 +42,20 @@ const Provider: NextPage = () => {
           logoUrl={data.provider.logoUrl}
           altLogo={data.provider.commercialName}
         />
-        <ProviderDetail provider={data.provider} />
+        <div className={styles['card-container']}>
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+          <ProviderCard provider={data.provider} />
+        </div>
       </>
     </ClientOnly>
   )
