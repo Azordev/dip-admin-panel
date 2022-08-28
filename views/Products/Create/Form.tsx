@@ -18,7 +18,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         Nombre del Producto
       </label>
       <input
-        className="input font-visby"
+        className="input-product font-visby"
         id="name"
         type="text"
         placeholder="Escriba el nombre del evento..."
@@ -32,7 +32,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       <div className="container-price">
         <p className="price">S/.</p>
         <input
-          className="input font-visby"
+          className="input-product font-visby"
           type="text"
           placeholder="00.00"
           {...register('basePriceSol', { required: true })}
