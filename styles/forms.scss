@@ -1,1 +1,80 @@
+@import 'colors','fonts';
 $input-radius: .2rem;
+
+.form-product{
+  padding: 2rem;
+  background-color: $gray-250;
+  width: 80vw;
+  height: auto;
+}
+@media (min-width: 768px) {
+  .form-product{
+    margin-left: -20rem;
+    padding: 4rem;
+    }
+}
+.container-price{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.price{
+  font-size: 19px;
+}
+.label {
+  display: flex;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  font-family:$font-base-sans-serif-family;
+  text-align: left;
+}
+.input {
+  width: 50%;
+  font-family: 'Visby';
+  border: 1px solid $gray-250;
+  background-color:  $white;
+  font-size: 19px;
+  &::placeholder {
+  font-size: 19px;
+  }
+}
+.textarea {
+  width: 80%;
+  font-family: 'Visby';
+  height: 18.7rem;
+  border: 1px solid $gray-250;
+  background-color:  $white;
+  font-size: 19px;
+  margin-top: 0.5rem;
+  padding: 2rem;
+  &::placeholder {
+  font-size: 19px;
+  color: $gray-300;
+  }
+}
+.text-size{
+  font-size: 1.875rem; /* 30px */
+}
+.font-visby{
+  font: normal 19px Visby;
+}
+.image{
+  background-color:  $white;
+  height: 18.7rem;
+  width: 18.7rem;
+  border: 1px solid $gray-250;
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
+  color: $gray-250;
+  flex-direction: column;
+  font-size: 12px;
+  svg{
+    width: 2rem;
+  }
+}
+
+
+
+
