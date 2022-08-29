@@ -5,14 +5,39 @@ $input-radius: .2rem;
   padding: 2rem;
   background-color: $gray-250;
   width: 80vw;
-  height: auto;
 }
+
 @media (min-width: 768px) {
   .form-product{
-    margin-left: -20rem;
+   //margin-left: -19rem;
     padding: 4rem;
     }
-}
+  }
+@media (min-width: 1024px) {
+  .form-product{
+    margin-left: -5rem;
+    padding: 4rem;
+    }
+  }
+@media (min-width: 1245px) {
+  .form-product{
+    margin-left: -11rem;
+    padding: 4rem;
+    }
+  }
+@media (min-width: 1400px) {
+  .form-product{
+    margin-left: -16rem;
+    padding: 4rem;
+    }
+  }
+@media (min-width: 2560px) {
+  .form-product{
+    margin-left: -52rem;
+    padding: 4rem;
+    width: 100vw;
+    }
+  }
 .container-price{
   display: flex;
   align-items: center;
@@ -72,7 +97,3 @@ $input-radius: .2rem;
     width: 2rem;
   }
 }
-
-
-
-
