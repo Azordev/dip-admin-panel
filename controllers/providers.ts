@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -5,8 +6,30 @@ import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
 import { CREATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
 import { PROVIDERS } from '@/services/GraphQL/providers/queries'
+import { Provider } from '@/services/GraphQL/providers/types'
 
-export const getProviders = async (req: NextApiRequest, res: NextApiResponse) => {
+interface GetParams {
+  limit?: number
+  offset?: number
+  query?: string
+}
+
+export const getProviders = async (
+  params?: GetParams,
+): Promise<{ providers: Provider[] | undefined; error: ApolloError | undefined }> => {
+  const { data, error } = await client.query<{ providers: Provider[] }>({
+    query: PROVIDERS,
+    variables: {
+      offset: params?.offset || 0,
+      limit: params?.limit || 24,
+      query: params?.query || '%',
+    },
+  })
+
+  return { providers: data.providers, error }
+}
+
+export const getProvidersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
     const { data } = await client.query({

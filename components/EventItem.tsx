@@ -12,7 +12,7 @@ const EventItem: NextPage<{ event: Event }> = ({ event }) => (
     <a className={styles['event-item']}>
       <div className={styles['logo-container']}>
         {event.imageUrl ? (
-          <Image className={styles['event-image']} src={event.imageUrl} alt={`Logo of event ${event.title}`} />
+          <Image src={event.imageUrl} alt={`Logo of event ${event.title}`} className={styles['event-image']} />
         ) : (
           <LogoDID className={styles.logo} />
         )}
