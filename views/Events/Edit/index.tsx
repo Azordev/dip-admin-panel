@@ -75,8 +75,15 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     setPdfFile(null)
   }
 
+  const handleAsistentes = () => {
+    // TODO: implementación del botón de asistentes
+  }
+
   return (
     <form onSubmit={submitHandler} className={styles.form}>
+      <Button onClick={handleAsistentes} className={styles.button} withIcon iconName="user-group-man-man" iconSize={40}>
+        Asistentes
+      </Button>
       <section className={styles.section}>
         <div className={styles.inputSection}>
           <CustomInput
