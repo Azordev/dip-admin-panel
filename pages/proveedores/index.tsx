@@ -1,26 +1,33 @@
-import { useQuery } from '@apollo/client'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
-import Loading from '@/components/Loading'
-import useLogger from '@/hooks/useLogger'
-import { PROVIDERS } from '@/services/GraphQL/providers/queries'
+import { Provider } from '@/services/GraphQL/providers/types'
 import ProvidersList from '@/views/Providers/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-const Providers: NextPage = () => {
-  const { data, loading, error: queryError } = useQuery(PROVIDERS)
-  const { error: logError } = useLogger()
+import { getProviders } from 'controllers/providers'
 
-  if (queryError) logError(queryError, 'pages/proveedores/index.tsx')
+interface PageProps {
+  providers: Provider[]
+}
 
-  if (loading) return <Loading />
-  if (!data || !data.providers) return <EmptyList text="La lista de proveedores esta vacía o es invalida." />
+const Providers: NextPage<PageProps> = ({ providers }) => {
+  if (!providers || providers.length < 1) return <EmptyList text="La lista de proveedores esta vacía o es invalida." />
   return (
     <ClientOnly>
-      <ProvidersList providers={data.providers} />
+      <ProvidersList providers={providers} />
     </ClientOnly>
   )
 }
 
 export default Providers
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { providers } = await getProviders()
+
+  return {
+    props: {
+      providers: providers || [],
+    },
+  }
+}

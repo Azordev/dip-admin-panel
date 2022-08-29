@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { FC, ReactNode } from 'react'
 
@@ -10,9 +11,11 @@ export interface ListHeaderProps {
   createText: string
   parent?: string | ReactNode
   parentPath?: string
+  logoUrl?: string
+  altLogo?: string
 }
 
-const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent }) => (
+const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoUrl, altLogo }) => (
   <nav className={styles.nav}>
     <Link href={createPath} passHref replace>
       <a>
@@ -20,7 +23,11 @@ const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent }) => 
         <span>{createText}</span>
       </a>
     </Link>
-    <h1>{parent}</h1>
+    {logoUrl ? (
+      <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={120} height={15} objectFit="contain" />
+    ) : (
+      <h1>{parent}</h1>
+    )}
   </nav>
 )
 

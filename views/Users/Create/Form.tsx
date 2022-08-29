@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
+import BackHeader from '@/components/BackHeader'
 import { MutableUserFormProps, UserEditable } from '@/services/GraphQL/users/types'
-
 const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
