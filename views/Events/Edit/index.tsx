@@ -44,10 +44,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     setType(getValues().type)
   }
 
-  const handleAsistentes = () => {
-    // TODO: implementar funcionalidad asociada a este botón
-  }
-
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
     if (file?.type.includes('image')) {
@@ -73,120 +69,109 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   }
 
   return (
-    <>
-      <form onSubmit={submitHandler} className={styles.form}>
-        <Button
-          onClick={handleAsistentes}
-          className={styles.button}
-          withIcon
-          iconName="user-group-man-man"
-          iconSize={40}
-        >
-          Asistentes
-        </Button>
-        <section className={styles.section}>
-          <div className={styles.inputSection}>
-            <CustomInput
-              name="title"
-              label="Nombre del evento"
-              register={register}
-              id="title"
-              type="text"
-              placeholder="Escriba el nombre del evento"
-              defaultValue={originalEvent?.title}
-              required="El nombre del evento es obligatorio"
-            >
-              {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
-            </CustomInput>
-            <CustomInput
-              name="date"
-              label="Fecha del evento"
-              register={register}
-              id="date"
-              type="datetime-local"
-              placeholder="Escriba la fecha del evento"
-              defaultValue={originalEvent?.date.slice(0, 19) as string}
-            />
-          </div>
-          <div className={styles.imageSection}>
-            <div className={styles['container-input']}>
-              <input
-                id="image-file"
-                type="file"
-                accept="image/*"
-                className={styles.inputfile}
-                // {...register('imageUrl')} // TODO: se debe procesar el archivo para que la url sea devuelta
-                onChange={handleFile}
-              />
-              <label htmlFor="image-file">
-                <figure>
-                  <Image
-                    width={imageUrl || originalEvent?.imageUrl ? 300 : 40}
-                    height={imageUrl || originalEvent?.imageUrl ? 200 : 40}
-                    objectFit="contain"
-                    src={imageUrl || originalEvent?.imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                    alt="Imagen del evento"
-                  />
-                </figure>
-                <span className={styles.label}>
-                  {imageFile?.name || originalEvent?.imageUrl ? 'Cambiar imagen' : 'Añadir imagen'}
-                </span>
-              </label>
-            </div>
-          </div>
-        </section>
-        <label htmlFor="description" className={styles.labelTitle}>
-          Descripción del evento
-        </label>
-        <textarea
-          id="description"
-          placeholder="Escribe aquí..."
-          className={styles.textarea}
-          defaultValue={originalEvent?.description}
-          {...register('description', { required: false })}
-        ></textarea>
-        <CustomSwitch
-          isChecked={type === 'WORKSHOP'}
-          onChange={handleChange}
-          firstLabel="Evento"
-          secondLabel="Convocatoria"
-        />
-        <label htmlFor="pdf" className={styles.labelTitle}>
-          Añadir PDF
-        </label>
-        <div className={styles['container-input']}>
-          <input
-            type="file"
-            name="file-2"
-            id="pdf-file"
-            className={styles.inputfile}
-            accept="application/pdf"
-            onChange={handleFile}
-            // TODO: se debe procesar el archivo para que la url sea devuelta
-            // {...register('pdfUrl', { required: false })}
+    <form onSubmit={submitHandler} className={styles.form}>
+      <section className={styles.section}>
+        <div className={styles.inputSection}>
+          <CustomInput
+            name="title"
+            label="Nombre del evento"
+            register={register}
+            id="title"
+            type="text"
+            placeholder="Escriba el nombre del evento"
+            defaultValue={originalEvent?.title}
+            required="El nombre del evento es obligatorio"
+          >
+            {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
+          </CustomInput>
+          <CustomInput
+            name="date"
+            label="Fecha del evento"
+            register={register}
+            id="date"
+            type="datetime-local"
+            placeholder="Escriba la fecha del evento"
+            defaultValue={originalEvent?.date.slice(0, 19) as string}
           />
-          <label htmlFor="pdf-file" className={styles.pdf}>
-            <figure>
-              <Icons8 name="installing-updates" iconStyle="ios" size={35} />
-            </figure>
-            <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
-          </label>
         </div>
-        <section className={styles.buttonsContainer}>
-          {/* TODO: implementar funcionalidad asociada a este botón */}
-          <Button iconName="" className={styles.buttonCancel} onClick={() => {}}>
-            Cancelar
-          </Button>
-          <Button iconName="" className={styles.buttonSave} type="submit">
-            {buttonText}
-          </Button>
-          {/* TODO: implementar funcionalidad asociada a este botón */}
-          <Button iconName="" className={styles.buttonDelete} onClick={() => {}}>
-            Eliminar
-          </Button>
-        </section>
-      </form>
-    </>
+        <div className={styles.imageSection}>
+          <div className={styles['container-input']}>
+            <input
+              id="image-file"
+              type="file"
+              accept="image/*"
+              className={styles.inputfile}
+              // {...register('imageUrl')} // TODO: se debe procesar el archivo para que la url sea devuelta
+              onChange={handleFile}
+            />
+            <label htmlFor="image-file" className={styles.image}>
+              <figure>
+                <Image
+                  width={imageUrl || originalEvent?.imageUrl ? 300 : 40}
+                  height={imageUrl || originalEvent?.imageUrl ? 200 : 40}
+                  objectFit="contain"
+                  src={imageUrl || originalEvent?.imageUrl || 'https://img.icons8.com/ios/100/image.png'}
+                  alt="Imagen del evento"
+                />
+              </figure>
+              <span className={styles.label}>
+                {imageFile?.name || originalEvent?.imageUrl ? 'Cambiar imagen' : 'Añadir imagen'}
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+      <label htmlFor="description" className={styles.labelTitle}>
+        Descripción del evento
+      </label>
+      <textarea
+        id="description"
+        placeholder="Escribe aquí..."
+        className={styles.textarea}
+        defaultValue={originalEvent?.description}
+        {...register('description', { required: false })}
+      ></textarea>
+      <CustomSwitch
+        isChecked={type === 'WORKSHOP'}
+        onChange={handleChange}
+        firstLabel="Evento"
+        secondLabel="Convocatoria"
+      />
+      <label htmlFor="pdf" className={styles.labelTitle}>
+        Añadir PDF
+      </label>
+      <div className={styles['container-input']}>
+        <input
+          type="file"
+          name="file-2"
+          id="pdf-file"
+          className={styles.inputfile}
+          accept="application/pdf"
+          onChange={handleFile}
+          // TODO: se debe procesar el archivo para que la url sea devuelta
+          // {...register('pdfUrl', { required: false })}
+        />
+        <label htmlFor="pdf-file" className={styles.pdf}>
+          <figure>
+            <Icons8 name="installing-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
+          </figure>
+          <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
+        </label>
+      </div>
+      <section className={styles.buttonsContainer}>
+        {/* TODO: implementar funcionalidad asociada a este botón */}
+        <Button iconName="" className={styles.buttonCancel} onClick={() => {}}>
+          Cancelar
+        </Button>
+        <Button iconName="" className={styles.buttonSave} type="submit">
+          {buttonText}
+        </Button>
+        {/* TODO: implementar funcionalidad asociada a este botón */}
+        <Button iconName="" className={styles.buttonDelete} onClick={() => {}}>
+          Eliminar
+        </Button>
+      </section>
+    </form>
   )
 }
 

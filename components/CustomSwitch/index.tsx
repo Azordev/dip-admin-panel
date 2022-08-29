@@ -23,12 +23,12 @@ const Switch: FC<SwitchProperties> = ({ isChecked, onChange, firstLabel, secondL
   }, [isChecked])
 
   return (
-    <div className={styles.switchContainer}>
-      {firstLabel && <label className={styles.switchLabel}>{firstLabel}</label>}
+    <div className={styles['switch-container']}>
+      {firstLabel && <label className={styles['switch-label']}>{firstLabel}</label>}
       <div className={styles.switch}>
         <input type="checkbox" checked={isCheckedState} onChange={handleChange} />
       </div>
-      {secondLabel && <label className={styles.switchLabel}>{secondLabel}</label>}
+      {secondLabel && <label className={styles['switch-label']}>{secondLabel}</label>}
     </div>
   )
 }

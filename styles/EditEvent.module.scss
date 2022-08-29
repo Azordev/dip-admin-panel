@@ -2,6 +2,8 @@
 .form {
   line-height: normal;
   padding: 0 52px;
+  background-color: $gray-25;
+  position: relative;
 }
 
 .label {
@@ -9,10 +11,14 @@
   text-align: left;
 }
 
+.btn-icon {
+  width: 35px;
+  height: 35px;
+}
+
 .container-input {
   display: flex;
   text-align: center;
-  background: $white;
   border-radius: 6px;
 
   label {
@@ -32,16 +38,34 @@
     align-items: center;
     justify-content: space-around;
     width: 230px;
+    height: 66px;
     margin: 24px 0;
     padding: 15px;
+    background-color: $gray-200;
     cursor: pointer;
     span {
+      flex: 0.7;
       font-size: 22px;
       color: $gray-800;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+    figure {
+      display: flex;
+      flex: 0.3;
+      justify-content: center;
+    }
+  }
+
+  .image {
+    width: 301px;
+    height: 301px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $white;
   }
 }
 
