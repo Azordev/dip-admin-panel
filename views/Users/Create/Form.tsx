@@ -18,7 +18,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
           Nombre del Socio
         </label>
         <input
-          className="input"
+          className="input-member font-visby"
           id="namePartner"
           type="text"
           placeholder="Escribe el nombre del socio"
@@ -30,7 +30,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
           Código del Socio
         </label>
         <input
-          className="input"
+          className="input-member font-visby"
           id="memberCode"
           type="text"
           placeholder="Escribe el código del socio"
@@ -41,14 +41,14 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         <label className="text-size label" htmlFor="startDate">
           Fecha de Inicio
         </label>
-        <input className="input" id="startDate" type="date" {...register('startDate', { required: true })} />
+        <input className="input-member" id="startDate" type="date" {...register('startDate', { required: true })} />
         {errors.startDate && <small className="text-red-100">{errors.startDate.message}</small>}
 
         <label className="text-size label" htmlFor="email">
           Correo electrónico
         </label>
         <input
-          className="input"
+          className="input-member font-visby"
           id="email"
           type="text"
           placeholder="Inserte el correo electrónico"
@@ -60,7 +60,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
           Contraseña
         </label>
         <input
-          className="input"
+          className="input-member font-visby"
           id="password"
           type="password"
           placeholder="Inserte la contraseña del socio"
