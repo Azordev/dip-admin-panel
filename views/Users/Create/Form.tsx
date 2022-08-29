@@ -10,21 +10,75 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
     formState: { errors },
   } = useForm<UserEditable>()
   const submitHandler = handleSubmit(onSubmit)
-  const buttonText = loading ? 'Enviando' : 'Enviar'
 
   return (
-    <div>
-      <BackHeader parent={'Socios'} />
-      <form onSubmit={submitHandler}>
-        <input type="text" placeholder="member_code" {...register('memberCode', { required: true })} />
-        {errors.memberCode && <small className="text-red-500">{errors.memberCode.message}</small>}
-        <input type="text" placeholder="password" {...register('password', { required: true })} />
+    <>
+      <form className="form" onSubmit={submitHandler}>
+        <label className="text-size label" htmlFor="namePartner">
+          Nombre del Socio
+        </label>
+        <input
+          className="input-member font-visby"
+          id="namePartner"
+          type="text"
+          placeholder="Escribe el nombre del socio"
+          {...register('namePartner', { required: true })}
+        />
+        {errors.namePartner && <small className="text-red-100">{errors.namePartner.message}</small>}
+
+        <label className="text-size label" htmlFor="memberCode">
+          Código del Socio
+        </label>
+        <input
+          className="input-member font-visby"
+          id="memberCode"
+          type="text"
+          placeholder="Escribe el código del socio"
+          {...register('memberCode', { required: true })}
+        />
+        {errors.memberCode && <small className="text-red-100">{errors.memberCode.message}</small>}
+
+        <label className="text-size label" htmlFor="startDate">
+          Fecha de Inicio
+        </label>
+        <input className="input-member" id="startDate" type="date" {...register('startDate', { required: true })} />
+        {errors.startDate && <small className="text-red-100">{errors.startDate.message}</small>}
+
+        <label className="text-size label" htmlFor="email">
+          Correo electrónico
+        </label>
+        <input
+          className="input-member font-visby"
+          id="email"
+          type="text"
+          placeholder="Inserte el correo electrónico"
+          {...register('email', { required: true })}
+        />
+        {errors.email && <small className="text-red-500">{errors.email.message}</small>}
+
+        <label className="text-size label" htmlFor="password">
+          Contraseña
+        </label>
+        <input
+          className="input-member font-visby"
+          id="password"
+          type="password"
+          placeholder="Inserte la contraseña del socio"
+          {...register('password')}
+        />
         {errors.password && <small className="text-red-500">{errors.password.message}</small>}
-        <input type="text" placeholder="position" {...register('position')} />
-        {errors.position && <small className="text-red-500">{errors.position.message}</small>}
-        <button type="submit">{buttonText}</button>
+
+        <div className="button-container">
+          <button className="add text-size" type="submit">
+            Guardar
+          </button>
+
+          <button className="delete text-size" type="submit">
+            Eliminar
+          </button>
+        </div>
       </form>
-    </div>
+    </>
   )
 }
 

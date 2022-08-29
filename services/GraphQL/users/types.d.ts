@@ -52,6 +52,9 @@ export interface UserBase {
 
 export interface UserEditable extends UserBase {
   memberCode?: string
+  namePartner?: string
+  startDate?: string
+  email?: string
   password?: string
   type?: string
   position?: string
