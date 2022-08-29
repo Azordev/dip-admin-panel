@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { FormEvent, useState } from 'react'
+import { FormEvent, FormEventHandler, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
 import CreateEventLayout from '@/views/Events/Create'
@@ -11,7 +11,7 @@ const Create: NextPage = () => {
   const { push } = useRouter()
   const { error: logError } = useLogger()
 
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler: FormEventHandler<HTMLFormElement> = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     try {

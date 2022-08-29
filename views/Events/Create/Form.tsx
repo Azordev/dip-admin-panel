@@ -8,11 +8,10 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
     register,
     formState: { errors },
   } = useForm<EventEditable>()
-  const submitHandler = onSubmit
   const buttonText = loading ? 'Enviando' : 'Enviar'
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={onSubmit}>
       <input type="text" placeholder="title" {...register('title', { required: true })} />
       {errors.title && <small className="text-red-500">{errors.title.message}</small>}
       <input type="text" placeholder="description" {...register('description')} />

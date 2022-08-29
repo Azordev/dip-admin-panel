@@ -13,7 +13,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     handleSubmit,
     formState: { errors },
   } = useForm<EventEditable>()
-  const submitHandler = handleSubmit(onSubmit)
   const buttonText = loading ? 'Enviando' : 'Enviar'
   const [type, setType] = useState(originalEvent?.type)
 
@@ -33,7 +32,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   }, [])
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="title"
