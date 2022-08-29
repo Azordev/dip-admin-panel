@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -8,7 +9,6 @@ import CustomSwitch from '@/components/CustomSwitch'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
-import { useRouter } from 'next/router'
 
 export interface EventEditableWithFiles extends EventEditable {
   image?: FileList
@@ -164,7 +164,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         </label>
       </div>
       <section className={styles.buttonsContainer}>
-        {/* TODO: implementar funcionalidad asociada a este botón */}
         <Button iconName="" className={styles.buttonCancel} onClick={() => router.push('/eventos')}>
           Cancelar
         </Button>
