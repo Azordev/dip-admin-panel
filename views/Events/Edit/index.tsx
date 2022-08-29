@@ -8,6 +8,7 @@ import CustomSwitch from '@/components/CustomSwitch'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
+import { useRouter } from 'next/router'
 
 export interface EventEditableWithFiles extends EventEditable {
   image?: FileList
@@ -23,6 +24,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     formState: { errors },
   } = useForm<EventEditableWithFiles>()
   const submitHandler = handleSubmit(onSubmit)
+  const router = useRouter()
   const buttonText = loading ? 'Guardando' : 'Guardar'
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [pdfFile, setPdfFile] = useState<File | null>(null)
@@ -163,7 +165,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
       </div>
       <section className={styles.buttonsContainer}>
         {/* TODO: implementar funcionalidad asociada a este botón */}
-        <Button iconName="" className={styles.buttonCancel} onClick={() => {}}>
+        <Button iconName="" className={styles.buttonCancel} onClick={() => router.push('/eventos')}>
           Cancelar
         </Button>
         <Button iconName="" className={styles.buttonSave} type="submit">
