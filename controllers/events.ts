@@ -96,7 +96,7 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
 
         await client.mutate({
           mutation: UPDATE_EVENT,
-          variables: { ...fields, imageUrl, eventId },
+          variables: { ...fields, imageUrl, id: eventId },
         })
         return res.json({
           msg: 'Event updated successfully',

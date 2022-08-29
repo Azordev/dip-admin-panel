@@ -9,6 +9,11 @@ import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
 
+export interface EventEditableWithFiles extends EventEditable {
+  image?: FileList
+  pdf?: FileList
+}
+
 const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalData: originalEvent }) => {
   const {
     register,
@@ -16,7 +21,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm<EventEditable>()
+  } = useForm<EventEditableWithFiles>()
   const submitHandler = handleSubmit(onSubmit)
   const buttonText = loading ? 'Guardando' : 'Guardar'
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -101,7 +106,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
               type="file"
               accept="image/*"
               className={styles.inputfile}
-              // {...register('imageUrl')} // TODO: se debe procesar el archivo para que la url sea devuelta
+              {...register('image')}
               onChange={handleFile}
             />
             <label htmlFor="image-file" className={styles.image}>
@@ -143,13 +148,11 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
       <div className={styles['container-input']}>
         <input
           type="file"
-          name="file-2"
           id="pdf-file"
           className={styles.inputfile}
           accept="application/pdf"
+          {...register('pdf', { required: false })}
           onChange={handleFile}
-          // TODO: se debe procesar el archivo para que la url sea devuelta
-          // {...register('pdfUrl', { required: false })}
         />
         <label htmlFor="pdf-file" className={styles.pdf}>
           <figure>
