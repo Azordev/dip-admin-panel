@@ -72,7 +72,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
   form.parse(req, async (err, fields, files) => {
     try {
       if (err) {
-        return res.status(500).json({ error: err, fields, files })
+        return res.status(500).json({ error: err, fields, files, place: 'if' })
       }
 
       if (files.image) {
@@ -98,7 +98,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
         data: { ...fields },
       })
     } catch (error) {
-      res.status(500).json({ error, fields, files })
+      res.status(500).json({ error, fields, files, place: 'catch' })
     }
   })
 }
