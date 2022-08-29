@@ -7,6 +7,8 @@ import CustomInput from '@/components/CustomInput'
 import CustomSwitch from '@/components/CustomSwitch'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
+import Icons8 from '@/views/Shared/Icons8'
+
 const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalData: originalEvent }) => {
   const {
     register,
@@ -78,7 +80,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           className={styles.button}
           withIcon
           iconName="user-group-man-man"
-          iconSize={30}
+          iconSize={40}
         >
           Asistentes
         </Button>
@@ -165,27 +167,21 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           />
           <label htmlFor="pdf-file" className={styles.pdf}>
             <figure>
-              <Image
-                width={35}
-                height={35}
-                objectFit="contain"
-                src="https://img.icons8.com/ios/35/installing-updates--v1.png"
-                alt="Imagen del evento"
-              />
+              <Icons8 name="installing-updates" iconStyle="ios" size={35} />
             </figure>
             <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
           </label>
         </div>
         <section className={styles.buttonsContainer}>
           {/* TODO: implementar funcionalidad asociada a este botón */}
-          <Button className={styles.buttonCancel} onClick={() => {}}>
+          <Button iconName="" className={styles.buttonCancel} onClick={() => {}}>
             Cancelar
           </Button>
-          <Button className={styles.buttonSave} type="submit">
+          <Button iconName="" className={styles.buttonSave} type="submit">
             {buttonText}
           </Button>
           {/* TODO: implementar funcionalidad asociada a este botón */}
-          <Button className={styles.buttonDelete} onClick={() => {}}>
+          <Button iconName="" className={styles.buttonDelete} onClick={() => {}}>
             Eliminar
           </Button>
         </section>

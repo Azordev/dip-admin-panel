@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react'
 
-import styles from './Button.module.css'
+import Icon8 from '@/views/Shared/Icons8'
+
+import styles from './Button.module.scss'
 interface ButtonProps {
   children: ReactNode
   onClick?: () => void
@@ -8,8 +10,9 @@ interface ButtonProps {
   className?: string
   withIcon?: boolean
   iconSize?: number
-  iconName?: string
-  iconType?: string
+  iconName: string
+  iconStyle?: string
+  color?: string
 }
 
 const Button: FC<ButtonProps> = ({
@@ -19,13 +22,15 @@ const Button: FC<ButtonProps> = ({
   withIcon = false,
   iconSize,
   iconName,
-  iconType = 'ios-filled',
+  iconStyle = 'ios-filled',
   type = 'button',
+  color = '#fff',
 }) => {
-  const srcIcon = `https://img.icons8.com/${iconType}/${iconSize}/${iconName}`
   return (
     <button type={type} className={`${className} ${styles.button}`} onClick={onClick}>
-      {withIcon && <img src={srcIcon} alt={iconName} />}
+      {withIcon && (
+        <Icon8 color={color} name={iconName} size={iconSize} iconStyle={iconStyle} className={styles.iconButton} />
+      )}
       <p>{children}</p>
     </button>
   )

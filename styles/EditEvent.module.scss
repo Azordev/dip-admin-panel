@@ -12,7 +12,7 @@
 .container-input {
   display: flex;
   text-align: center;
-  background: #fff;
+  background: $white;
   border-radius: 6px;
 
   label {
@@ -58,12 +58,12 @@
 .labelTitle {
   font-size: 12px;
   font-weight: normal;
-  color: #bcb8b8;
+  color: $gray-300;
   font-family: 'Visby', sans-serif;
 }
 
 .error-message {
-  color: red;
+  color: $red;
   font-size: 0.8rem;
   margin: 0.1rem 0 0.5rem 0;
   display: block;
@@ -127,7 +127,7 @@
 
 .labelTitle {
   font-size: 30px;
-  color: #010101;
+  color: $black;
 }
 
 .textarea {
