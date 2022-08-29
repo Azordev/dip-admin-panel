@@ -11,7 +11,7 @@ const ProductItem: NextPage<{ product: Product }> = ({ product }) => (
     <a className={styles['product-item']}>
       <div className={styles['image-container']}>
         {product?.imageUrl ? (
-          <Image src={product.imageUrl} alt={`image of product ${product?.name}`} className={styles.imgCont} />
+          <Image src={product.imageUrl} alt={`image of product ${product?.name}`} className={styles.image} />
         ) : (
           <LogoDID className={styles.logo} />
         )}
