@@ -24,6 +24,12 @@ export const PROVIDER_BY_ID = gql`
       ...ProviderInfoFragment
       createdAt: created_at
       updatedAt: updated_at
+      products {
+        id
+        basePriceSol: base_price_sol
+        name
+        imageUrl: image_url
+      }
     }
   }
 `
