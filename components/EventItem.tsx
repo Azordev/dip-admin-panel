@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Event } from '@/services/GraphQL/events/types'
 import { readableDate } from '@/services/utils/dateFormat'
-import styles from '@/styles/Events.module.css'
+import styles from '@/styles/Events.module.scss'
 import Image from '@/views/Shared/Image'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
@@ -12,7 +12,7 @@ const EventItem: NextPage<{ event: Event }> = ({ event }) => (
     <a className={styles['event-item']}>
       <div className={styles['logo-container']}>
         {event.imageUrl ? (
-          <Image src={event.imageUrl} alt={`Logo of event ${event.title}`} />
+          <Image className={styles['event-image']} src={event.imageUrl} alt={`Logo of event ${event.title}`} />
         ) : (
           <LogoDID className={styles.logo} />
         )}
