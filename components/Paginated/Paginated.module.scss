@@ -1,0 +1,56 @@
+@use '../../styles/colors.scss' as c;
+@use '../../styles/fonts.scss' as f;
+@use '../../styles/layout.scss' as l;
+
+.paginated-container {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  margin-top: 10px;
+  max-height: 2.5rem;
+  padding: 20px 50px;
+
+  .button {
+    border: 1px solid c.$black;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    margin: 0.25rem;
+    padding: 1rem 1.25rem;
+    text-align: center;
+
+    &:hover {
+      background-color: c.$black;
+      color: c.$white;
+    }
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      border-radius: 9999px;
+      cursor: pointer;
+      display: flex;
+      margin: 0.5rem;
+      padding: 0.75rem 1rem;
+      text-align: center;
+
+      &:hover {
+        background-color: c.$black;
+        color: c.$white;
+      }
+
+      &:active {
+        background-color: c.$black;
+        color: c.$white;
+      }
+      
+    }
+  }
+}
+
+
+
