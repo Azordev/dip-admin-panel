@@ -4,26 +4,32 @@
   background-color: $white;
   display: flex;
   flex-direction: row;
+  font-size: 1.25rem;
   justify-content: space-between;
   padding: 1rem 2rem;
-  font-size: 1.25rem;
 
   a {
-    color: #000;
+    color: $black;
     display: flex;
     text-decoration: none;
 
     div {
+      height: 2.5rem;
       left: unset;
       right: 0.5rem;
       width: 2.5rem;
-      height: 2.5rem;
     }
 
     span {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      
+      &:hover {
+        border-bottom: 2px solid $black;
+      }
     }
+
+    
   }
 }
