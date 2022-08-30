@@ -1,6 +1,4 @@
-@use '../../styles/colors.scss' as c;
-@use '../../styles/fonts.scss' as f;
-@use '../../styles/layout.scss' as l;
+@import 'colors' 'fonts' 'layout';
 
 .paginated-container {
   align-items: center;
@@ -13,7 +11,7 @@
   padding: 20px 50px;
 
   .button {
-    border: 1px solid c.$black;
+    border: 1px solid $black;
     border-radius: 0.5rem;
     cursor: pointer;
     display: flex;
@@ -22,7 +20,7 @@
     text-align: center;
 
     &:hover {
-      background-color: c.$black;
+      background-color: $black;
       color: c.$white;
     }
   }
@@ -39,13 +37,13 @@
       text-align: center;
 
       &:hover {
-        background-color: c.$black;
-        color: c.$white;
+        background-color: $black;
+        color: $white;
       }
 
       &:active {
-        background-color: c.$black;
-        color: c.$white;
+        background-color: $black;
+        color: $white;
       }
       
     }
