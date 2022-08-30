@@ -4,6 +4,10 @@
   padding: 0 52px;
   background-color: $gray-25;
   position: relative;
+  input,
+  textarea {
+    font-family: 'Visby', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 }
 
 .label {
