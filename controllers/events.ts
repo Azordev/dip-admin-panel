@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -5,11 +6,33 @@ import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
 import { CREATE_EVENT, UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EVENT_BY_ID, EVENTS } from '@/services/GraphQL/events/queries'
+import { Event } from '@/services/GraphQL/events/types'
 
-export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
+interface GetParams {
+  limit?: number
+  offset?: number
+  query?: string
+}
+
+export const getEvents = async (
+  params?: GetParams,
+): Promise<{ events: Event[] | undefined; error: ApolloError | undefined }> => {
+  const { data, error } = await client.query<{ events: Event[] }>({
+    query: EVENTS,
+    variables: {
+      offset: params?.offset || 0,
+      limit: params?.limit || 24,
+      query: params?.query || '%',
+    },
+  })
+
+  return { events: data.events, error }
+}
+
+export const getEventsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
-    const { data } = await client.query({
+    const { data, error } = await client.query({
       query: EVENTS,
       variables: {
         offset: Number(query?.offset) || 0,
@@ -18,7 +41,11 @@ export const getEvents = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     })
 
-    res.json(data)
+    if (error?.message) {
+      return res.status(500).json({ error: error.message })
+    }
+
+    return res.json(data)
   } catch (error) {
     res.status(500).json(error)
   }
