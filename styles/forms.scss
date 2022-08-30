@@ -1,48 +1,48 @@
-@import 'colors','fonts';
-$input-radius: .2rem;
+@import 'colors', 'fonts';
+$input-radius: 0.2rem;
 
 .form-product {
- padding: 2rem;
- background-color: $gray-250;
- width: 80vw;
+  padding: 2rem;
+  background-color: $gray-250;
+  width: 80vw;
 }
 @media (min-width: 768px) {
-.form-product {
- padding: 4rem;
- }
+  .form-product {
+    padding: 4rem;
+  }
 }
 @media (min-width: 1024px) {
-.form-product {
- margin-left: -5rem;
- padding: 4rem;
+  .form-product {
+    margin-left: -5rem;
+    padding: 4rem;
   }
 }
 @media (min-width: 1245px) {
-.form-product {
- margin-left: -11rem;
- padding: 4rem;
- }
+  .form-product {
+    margin-left: -11rem;
+    padding: 4rem;
+  }
 }
 @media (min-width: 1400px) {
-.form-product {
- margin-left: -18.7rem;
- padding: 4rem;
- }
+  .form-product {
+    margin-left: -18.7rem;
+    padding: 4rem;
+  }
 }
 @media (min-width: 2560px) {
-.form-product {
- margin-left: -52rem;
- padding: 4rem;
- width: 100vw;
- }
+  .form-product {
+    margin-left: -52rem;
+    padding: 4rem;
+    width: 100vw;
+  }
 }
 .container-price {
- display: flex;
- align-items: center;
- gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 .price {
- font-size: 19px;
+  font-size: 19px;
 }
 .label {
   display: flex;
@@ -57,24 +57,24 @@ $input-radius: .2rem;
   background-color: $white;
   font-size: 19px;
   &::placeholder {
-  font-size: 19px;
+    font-size: 19px;
   }
 }
 .textarea {
- width: 80%;
- height: 18.7rem;
- border: 1px solid $gray-250;
- background-color: $white;
- font-size: 19px;
- margin-top: 0.5rem;
- padding: 2rem;
-&::placeholder {
- font-size: 19px;
- color: $gray-300;
- }
+  width: 80%;
+  height: 18.7rem;
+  border: 1px solid $gray-250;
+  background-color: $white;
+  font-size: 19px;
+  margin-top: 0.5rem;
+  padding: 2rem;
+  &::placeholder {
+    font-size: 19px;
+    color: $gray-300;
+  }
 }
 .text-size {
-  font-size: 1.875rem; /* 30px */
+  font-size: 1.875rem;
 }
 .font-visby {
   font: normal 19px Visby;
@@ -91,7 +91,7 @@ $input-radius: .2rem;
   color: $gray-250;
   flex-direction: column;
   font-size: 12px;
-  svg{
+  svg {
     width: 2rem;
   }
 }
