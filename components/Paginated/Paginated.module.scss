@@ -1,4 +1,4 @@
-@import 'colors' 'fonts' 'layout';
+@import 'colors','fonts','layout';
 
 .paginated-container {
   align-items: center;
@@ -21,7 +21,7 @@
 
     &:hover {
       background-color: $black;
-      color: c.$white;
+      color: $white;
     }
   }
 
