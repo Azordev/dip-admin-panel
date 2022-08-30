@@ -23,9 +23,21 @@ $input-radius: 0.2rem;
     padding: 4rem;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1366px) {
   .form-product {
-    margin-left: -18.7rem;
+    margin-left: -15rem;
+    padding: 4rem;
+  }
+}
+@media (min-width: 1536px) {
+  .form-product {
+    margin-left: -20rem;
+    padding: 4rem;
+  }
+}
+@media (min-width: 1600px) {
+  .form-product {
+    margin-left: -22rem;
     padding: 4rem;
   }
 }
