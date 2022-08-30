@@ -1,47 +1,47 @@
 @import 'colors','fonts';
 $input-radius: .2rem;
 
-.form-product{
+.form-product {
  padding: 2rem;
  background-color: $gray-250;
  width: 80vw;
 }
 @media (min-width: 768px) {
-.form-product{
+.form-product {
  padding: 4rem;
  }
 }
 @media (min-width: 1024px) {
-.form-product{
+.form-product {
  margin-left: -5rem;
  padding: 4rem;
   }
 }
 @media (min-width: 1245px) {
-.form-product{
+.form-product {
  margin-left: -11rem;
  padding: 4rem;
  }
 }
 @media (min-width: 1400px) {
-.form-product{
- margin-left: -16rem;
+.form-product {
+ margin-left: -18.7rem;
  padding: 4rem;
  }
 }
 @media (min-width: 2560px) {
-.form-product{
+.form-product {
  margin-left: -52rem;
  padding: 4rem;
  width: 100vw;
  }
 }
-.container-price{
+.container-price {
  display: flex;
  align-items: center;
  gap: 1rem;
 }
-.price{
+.price {
  font-size: 19px;
 }
 .label {
@@ -73,13 +73,13 @@ $input-radius: .2rem;
  color: $gray-300;
  }
 }
-.text-size{
+.text-size {
   font-size: 1.875rem; /* 30px */
 }
-.font-visby{
+.font-visby {
   font: normal 19px Visby;
 }
-.image{
+.image {
   background-color: $white;
   height: 18.7rem;
   width: 18.7rem;
