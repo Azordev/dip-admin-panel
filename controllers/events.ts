@@ -77,7 +77,11 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
 
       if (files.image) {
         const file = files.image as formidable.File
-        const { Location: imageUrl } = await addObject(file, 'events')
+        const { Location: imageUrl, error: saveError } = await addObject(file, 'events')
+
+        if (saveError) {
+          return res.status(500).json({ error: saveError, fields, files, place: 'addObject' })
+        }
 
         const { errors } = await client.mutate({
           mutation: CREATE_EVENT,

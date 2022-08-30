@@ -16,14 +16,19 @@ const s3 = new S3({
   },
 })
 
-export const addObject = (file: File, prefix?: String) => {
-  const extName = file?.originalFilename?.split('.').at(-1)
-  const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${extName}`
-  return s3
-    .upload({
-      Bucket: bucketName,
-      Key: fileName,
-      Body: fs.createReadStream(file.filepath),
-    })
-    .promise()
+export const addObject = async (file: File, prefix?: String) => {
+  try {
+    const extName = file?.originalFilename?.split('.').at(-1)
+    const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${extName}`
+    const { Location } = await s3
+      .upload({
+        Bucket: bucketName,
+        Key: fileName,
+        Body: fs.createReadStream(file.filepath),
+      })
+      .promise()
+    return { Location }
+  } catch (error) {
+    return { error }
+  }
 }
