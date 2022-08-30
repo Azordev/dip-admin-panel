@@ -85,7 +85,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
 
         const { errors } = await client.mutate({
           mutation: CREATE_EVENT,
-          variables: { ...fields, imageUrl },
+          variables: { ...fields, imageUrl: imageUrl || '' },
         })
 
         if (errors) {
