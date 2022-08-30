@@ -10,7 +10,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     register,
     setValue,
     getValues,
-    handleSubmit,
     formState: { errors },
   } = useForm<EventEditable>()
   const buttonText = loading ? 'Enviando' : 'Enviar'
