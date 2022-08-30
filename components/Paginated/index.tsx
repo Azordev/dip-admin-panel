@@ -41,21 +41,18 @@ function Paginated(/* {
               if (currentPage === number)
                 return ( */}
           <li
-            className="py-1 px-3 m-1 flex text-center shadow-lg border-b-4 border-secondary rounded-lg"
             key={1}
             /* onClick={() => paginated(number)} */
           >
             {1}
           </li>
           <li
-            className="py-1 px-3 m-1 flex text-center shadow-lg border-b-4 border-secondary rounded-lg"
             key={1}
             /* onClick={() => paginated(number)} */
           >
             {2}
           </li>
           <li
-            className="py-1 px-3 m-1 flex text-center shadow-lg border-b-4 border-secondary rounded-lg"
             key={1}
             /* onClick={() => paginated(number)} */
           >
