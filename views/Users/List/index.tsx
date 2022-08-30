@@ -1,16 +1,10 @@
-import { useRouter } from 'next/router'
 import { FC } from 'react'
 
 import { User } from '@/services/GraphQL/users/types'
 
 const UsersList: FC<{ users: User[] }> = ({ users }) => {
-  const { push } = useRouter()
   return (
     <>
-      <header>
-        <h1>Usuarios</h1>
-        <button onClick={() => push('/socios/crear')}>Crear Usuario</button>
-      </header>
       <div>
         <div>
           {users.map((user: User) => (

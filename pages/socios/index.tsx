@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
+import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
 import { USERS } from '@/services/GraphQL/users/queries'
 import ClientOnly from '@/views/Shared/ClientOnly'
@@ -14,7 +15,10 @@ const Users: NextPage = () => {
   if (!data || data.users.length < 1) return <EmptyList text="La lista de usuarios esta vacía o es invalida." />
   return (
     <ClientOnly>
-      <UsersList users={data.users} />
+      <>
+        <ListHeader createText="Añadir Socio" createPath="/socios/crear" />
+        <UsersList users={data.users} />
+      </>
     </ClientOnly>
   )
 }
