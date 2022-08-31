@@ -11,10 +11,10 @@ const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || process.env.S3_SECR
 
 const s3 = new S3({
   region,
-  credentials: {
-    accessKeyId,
-    secretAccessKey,
-  },
+  // credentials: {
+  //   accessKeyId,
+  //   secretAccessKey,
+  // },
   signatureVersion: 'v4',
 })
 
