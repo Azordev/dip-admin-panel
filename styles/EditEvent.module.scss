@@ -1,4 +1,4 @@
-@import 'colors';
+@import 'colors', 'fonts';
 .form {
   line-height: normal;
   padding: 0 52px;
@@ -6,7 +6,7 @@
   position: relative;
   input,
   textarea {
-    font-family: 'Visby', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Visby', $font-base-sans-serif-family;
   }
 }
 
