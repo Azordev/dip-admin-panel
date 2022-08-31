@@ -6,15 +6,15 @@ import { v4 as uuid } from 'uuid'
 
 const bucketName = process.env.S3_BUCKET_NAME || ''
 const region = process.env.S3_BUCKET_REGION
-const accessKeyId = process.env.AWS_ACCESS_KEY || process.env.S3_ACCESS_KEY || ''
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || process.env.S3_SECRET_KEY || ''
+const accessKeyId = process.env.S3_ACCESS_KEY || ''
+const secretAccessKey = process.env.S3_SECRET_KEY || ''
 
 const s3 = new S3({
   region,
-  // credentials: {
-  //   accessKeyId,
-  //   secretAccessKey,
-  // },
+  credentials: {
+    accessKeyId,
+    secretAccessKey,
+  },
   signatureVersion: 'v4',
 })
 

@@ -72,7 +72,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
   form.parse(req, async (err, fields, files) => {
     try {
       if (err) {
-        return res.status(500).json({ error: err, fields, files, place: 'if' })
+        return res.status(500).json({ error: err, fields, files })
       }
 
       if (files.image) {
@@ -80,7 +80,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
         const { Location: imageUrl, error: saveError } = await addObject(file, 'events')
 
         if (saveError) {
-          return res.status(500).json({ error: saveError, fields, files, place: 'addObject' })
+          return res.status(500).json({ error: saveError, fields, files })
         }
 
         const { errors } = await client.mutate({
@@ -107,7 +107,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
         data: { ...fields },
       })
     } catch (error) {
-      res.status(500).json({ error, fields, files, place: 'catch' })
+      res.status(500).json({ error, fields, files })
     }
   })
 }
