@@ -2,10 +2,12 @@ import Link from 'next/link'
 import { FC, ReactNode } from 'react'
 
 import useAuth from '@/hooks/useAuth'
+import Eventos from '@/views/SVGs/Eventos/Eventos'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
-import styles from './Dashboard.module.scss'
 import Icons8 from '../../Icons8'
+
+import styles from './Dashboard.module.scss'
 
 interface Props {
   children: ReactNode
@@ -23,7 +25,7 @@ const Dashboard: FC<Props> = ({ children }) => {
           </Link>
           <Link href="/eventos" passHref>
             <a>
-              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="health-calendar" />
+              <Eventos />
               <span>Eventos</span>
             </a>
           </Link>
