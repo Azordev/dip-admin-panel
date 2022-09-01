@@ -1,25 +1,33 @@
-import { useMutation } from '@apollo/client'
+import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { FormEvent, FormEventHandler, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
-import { CREATE_EVENT } from '@/services/GraphQL/events/mutations'
-import { EventEditable } from '@/services/GraphQL/events/types'
 import CreateEventLayout from '@/views/Events/Create'
 
 const Create: NextPage = () => {
-  const [createEvent, { loading, error: mutationError }] = useMutation(CREATE_EVENT)
+  const [loading, setLoading] = useState(false)
   const { push } = useRouter()
   const { error: logError } = useLogger()
 
-  const submitHandler = async (newEvent: EventEditable) => {
-    newEvent.date = new Date(newEvent.date).toISOString()
-
-    createEvent({ variables: newEvent })
-    push('/eventos')
+  const submitHandler: FormEventHandler<HTMLFormElement> = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const form = new FormData(e.target as HTMLFormElement)
+      await axios.post('/api/events', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      push('/eventos')
+      setLoading(false)
+    } catch (error) {
+      logError(error as Error, 'pages/eventos/crear.tsx', 'Error al crear el evento')
+      setLoading(false)
+    }
   }
-
-  if (mutationError) logError(mutationError, 'pages/eventos/crear.tsx', 'Error al crear el evento')
 
   return <CreateEventLayout onSubmit={submitHandler} loading={loading} />
 }

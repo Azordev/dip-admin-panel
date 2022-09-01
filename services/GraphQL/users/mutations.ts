@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_ADMIN = gql`
-  mutation ($email: String!, $password: String, $avatarUrl: String) {
+  mutation ($memberCode: String!, $password: String, $avatarUrl: String) {
     user: insert_users_one(
-      object: { username: $email, password: $password, type: "ADMIN", is_active: true, avatar_url: $avatarUrl }
+      object: { member_code: $memberCode, password: $password, type: "ADMIN", is_active: true, avatar_url: $avatarUrl }
     ) {
       id
       updatedAt: updated_at
@@ -13,9 +13,16 @@ export const CREATE_ADMIN = gql`
 
 // This creates also the member
 export const CREATE_USER_MEMBER = gql`
-  mutation ($username: String!, $password: String, $avatarUrl: String, $type: String, $position: String) {
+  mutation ($memberCode: String!, $password: String, $avatarUrl: String, $type: String, $position: String) {
     user: insert_users_one(
-      object: { username: $username, password: $password, type: $type, is_active: true, avatar_url: $avatarUrl }
+      object: {
+        member_code: $memberCode
+        password: $password
+        type: $type
+        is_active: true
+        avatar_url: $avatarUrl
+        position: $position
+      }
     ) {
       id
       updatedAt: updated_at
@@ -24,10 +31,25 @@ export const CREATE_USER_MEMBER = gql`
 `
 
 export const UPDATE_USER = gql`
-  mutation ($id: uuid!, $memberCode: String, $password: String, $isActive: boolean, $avatarUrl: String) {
+  mutation (
+    $id: uuid!
+    $memberCode: String
+    $password: String
+    $isActive: Boolean
+    $avatarUrl: String
+    $position: String
+    $type: String
+  ) {
     user: update_users_by_pk(
       pk_columns: { id: $id }
-      _set: { member_code: $memberCode, password: $password, is_active: $isActive, avatar_url: $avatarUrl }
+      _set: {
+        member_code: $memberCode
+        password: $password
+        is_active: $isActive
+        avatar_url: $avatarUrl
+        position: $position
+        type: $type
+      }
     ) {
       id
       isActive: is_active
