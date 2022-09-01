@@ -17,6 +17,7 @@ $gray: $gray-500;
 $backdrop: rgba(0, 0, 0, 0.3);
 
 $red: #f44336;
+$red-dark: #f5282f;
 $pink: #e91e63;
 $orange: #ff9800;
 $purple: #9c27b0;
@@ -24,13 +25,16 @@ $blue: #2196f3;
 $blue-light: #03a9f4;
 $blue-dark: #0277bd;
 $green: #4caf50;
+$green-confirm: #b2bf55;
 
 $primary: $gray-900;
 $secondary: $blue;
 $tertiary: $purple;
 $warning: $orange;
 $error: $red;
+$delete: $red-dark;
 $success: $green;
+$submit: $green-confirm;
 $info: $blue;
 $link: $blue-dark;
 $link-hover: $blue;

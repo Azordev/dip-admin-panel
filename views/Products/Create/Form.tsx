@@ -5,7 +5,7 @@ import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/pro
 
 import styles from './SaveorDelete.module.scss'
 
-const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit }) => {
+const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
     handleSubmit,
@@ -25,9 +25,11 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit }) => {
       <input type="text" placeholder="base_price_sol" {...register('basePriceSol', { required: true })} />
       {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
       <button className={styles.save} type="submit">
-        Guardar
+        {loading ? 'Guardando' : 'Guardar'}
       </button>
-      <button className={styles.delete} onClick={() => reset()}></button>
+      <button className={styles.delete} onClick={() => reset()}>
+        Eliminar
+      </button>
     </form>
   )
 }
