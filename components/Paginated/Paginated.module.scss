@@ -2,10 +2,10 @@
 
 .paginated-container {
   align-items: center;
-  bottom: 0;
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+  margin-bottom: 10px;
   margin-top: 10px;
   max-height: 43px;
   padding: 20px 50px;
@@ -15,17 +15,17 @@
     width: 144px;
 
     label {
-      color: #393939;
-      font: normal normal normal 16px/25px Poppins;
+      color: $text-gray;
+      font: normal normal normal 16px/25px $font-base-poppins-family;
       letter-spacing: 0;
       opacity: 1;
-      text-align: left;
+      text-align: center;
     }
   }
 
   .button {
     background: $white 0% 0% no-repeat padding-box;
-    border: 1px solid #393939;
+    border: 1px solid $text-gray;
     cursor: pointer;
     height: 43px;
     opacity: 1;
@@ -33,8 +33,8 @@
     text-align: center;
     
     span {
-      color: #393939;
-      font: normal normal normal 13px/20px Poppins;
+      color: $text-gray;
+      font: normal normal normal 13px/20px $font-base-poppins-family;
       letter-spacing: 0;
       opacity: 1;
       text-align: center;
@@ -45,7 +45,7 @@
     display: flex;
     
     .pages-list {
-      background: #f5f5f5 0% 0% no-repeat padding-box;
+      background: $gray-100 0% 0% no-repeat padding-box;
       border-radius: 22px;
       display: flex;
       height: 43px;
@@ -55,25 +55,33 @@
 
     }
 
+    .active {
+      background: $gray-hover 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      color: $white;
+      opacity: 1;
+    }
+
     li {
-      color: #393939;
+      color: $text-gray;
       cursor: pointer;
       display: flex;
-      font: normal normal normal 13px/20px Poppins;
+      font: normal normal normal 13px/20px $font-base-poppins-family;
       letter-spacing: 0;
       opacity: 1;
       padding: 12px 20px;
       text-align: center;
 
       &:hover {
-        background: #545454 0% 0% no-repeat padding-box;
+        background: $gray-hover 0% 0% no-repeat padding-box;
         border-radius: 20px;
         color: $white;
         opacity: 1;
       }
 
       &:active {
-        background: #545454 0% 0% no-repeat padding-box;
+        background: $gray-hover 0% 0% no-repeat padding-box;
+        border-radius: 20px;
         color: $white;
         opacity: 1;
       }

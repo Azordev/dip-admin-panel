@@ -3,8 +3,13 @@ import { FC } from 'react'
 
 import { User } from '@/services/GraphQL/users/types'
 
-const UsersList: FC<{ users: User[] }> = ({ users }) => {
+const UsersList: FC<{ users: User[]; indexOfFirstPartner: number; indexOfLastPartner: number }> = ({
+  users,
+  indexOfFirstPartner,
+  indexOfLastPartner,
+}) => {
   const { push } = useRouter()
+  const sliceUsers = users.slice(indexOfFirstPartner, indexOfLastPartner)
   return (
     <>
       <header>
@@ -13,7 +18,7 @@ const UsersList: FC<{ users: User[] }> = ({ users }) => {
       </header>
       <div>
         <div>
-          {users.map((user: User) => (
+          {sliceUsers.map((user: User) => (
             <div key={user.id}>
               <h2>{user.memberCode}</h2>
               <p>{user.position}</p>
