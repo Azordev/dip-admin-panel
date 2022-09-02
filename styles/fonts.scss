@@ -1,11 +1,61 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: 'Visby';
+  font-style: normal;
+  font-weight: 400;
+  src: url('~/public/assets/fonts/VisbyCF-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Visby';
+  font-style: italic;
+  font-weight: 400;
+  src: url('~/public/assets/fonts/VisbyCF-RegularOblique.otf');
+}
+
+@font-face {
+  font-family: 'Visby';
+  font-style: normal;
+  font-weight: 700;
+  src: url('~/public/assets/fonts/VisbyCF-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Visby';
+  font-style: italic;
+  font-weight: 700;
+  src: url('~/public/assets/fonts/VisbyCF-BoldOblique.otf');
+}
+
+@font-face {
+  font-family: 'Visby';
+  font-style: italic;
+  font-weight: 500;
+  src: url('~/public/assets/fonts/VisbyCF-MediumOblique.otf');
+}
+
+@font-face {
+  font-family: 'Visby';
+  font-style: normal;
+  font-weight: 500;
+  src: url('~/public/assets/fonts/VisbyCF-Medium.otf');
+}
+
+@font-face {
+  font-family: 'Visby';
+  font-style: normal;
+  font-weight: 600;
+  src: url('~/public/assets/fonts/VisbyCF-DemiBold.otf');
+}
+
 $font-base-size: 16px;
 $font-base-line-height: 1rem;
 $font-base-sans-serif-family: Helvetica, Arial, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 $font-base-serif-family: Georgia, Cambria, Times, Times New Roman, serif;
 $font-base-poppins-family: Poppins;
 $font-base-monospace-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+$font-visby: Visby;
 $font-base-weight: 400;
 $font-base-style: normal;
 $font-base-variant: normal;
