@@ -1,6 +1,7 @@
 @import 'colors', 'fonts';
 $input-radius: 0.2rem;
 
+
 .form-product {
   padding: 2rem;
   background-color: $gray-250;
@@ -51,8 +52,10 @@ $input-radius: 0.2rem;
 .price {
   font-size: 19px;
 }
+
 .label {
   display: flex;
+  font-family: $font-base-sans-serif-family;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
   font-family: $font-base-sans-serif-family;
@@ -67,6 +70,17 @@ $input-radius: 0.2rem;
     font-size: 19px;
   }
 }
+
+.input-member {
+  background-color: $white;
+  border: 1px solid $gray-250;
+  font-size: 19px;
+  width: 50%;
+  &::placeholder {
+    font-size: 19px;
+  }
+}
+
 .textarea {
   width: 80%;
   height: 18.7rem;
@@ -80,11 +94,58 @@ $input-radius: 0.2rem;
     color: $gray-300;
   }
 }
-.text-size {
-  font-size: 1.875rem;
+
+
+
+
+.button-container {
+  align-items: flex-end;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
+
+.add {
+  background-color: $green;
+  border: unset;
+  border-radius: 0.5rem;
+  color: $white;
+  font-family: $font-base-sans-serif-family;
+  height: 3rem;
+  text-align: center;
+  transition: 0.3s ease;
+  width: 30%;
+}
+@media (min-width: 768px) {
+  .add {
+    width: 20%;
+  }
+}
+
+.delete {
+  background-color: $red;
+  border: unset;
+  border-radius: 0.5rem;
+  color: $white;
+  font-family: $font-base-sans-serif-family;
+  height: 3rem;
+  text-align: center;
+  transition: 0.3s ease;
+  width: 30%;
+}
+@media (min-width: 768px) {
+  .delete {
+    width: 20%;
+  }
+}
+
+.text-size {
+  font-size: 1.875rem; /* 30px */
+}
+
 .font-visby {
-  font: normal 19px Visby;
+  font: normal 19px $font-visby;
+
 }
 .image {
   background-color: $white;
