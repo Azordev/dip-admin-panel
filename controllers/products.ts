@@ -3,7 +3,7 @@ import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import client from '@/services/GraphQL/client'
-import { CREATE_PRODUCT, UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
+import { CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
 import { PRODUCTS } from '@/services/GraphQL/products/queries'
 import { Product } from '@/services/GraphQL/products/types'
 
@@ -73,7 +73,7 @@ export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
   })
 }
 
-export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => {
+export const updateProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
     try {
@@ -86,16 +86,37 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
       const file = files.image as formidable.File
       const { Location: imageUrl } = await addObject(file, 'products')
 
-      await client.mutate({
+      const { data } = await client.mutate({
         mutation: UPDATE_PRODUCT,
         variables: { ...fields, imageUrl, id: eventId },
       })
+
+      if (!data?.update_products_by_pk) {
+        return res.status(404).json({ msg: 'Product not found' })
+      }
+
       res.json({
         msg: 'Product updated successfully',
         data: { ...fields, imageUrl },
       })
     } catch (error) {
-      res.status(500).json(error)
+      return res.status(500).json(error)
     }
   })
+}
+
+export const deleteProduct = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { query } = req
+    const { data } = await client.mutate({
+      mutation: DELETE_PRODUCT,
+      variables: {
+        id: query.id,
+      },
+    })
+
+    res.json(data)
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }

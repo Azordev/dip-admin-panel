@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
-import { CREATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
+import { CREATE_PROVIDER, DEACTIVATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
 import { PROVIDERS } from '@/services/GraphQL/providers/queries'
 import { Provider } from '@/services/GraphQL/providers/types'
 
@@ -70,4 +70,17 @@ export const createProvider = (req: NextApiRequest, res: NextApiResponse) => {
       res.status(500).json(error)
     }
   })
+}
+
+export const disableProvider = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { id } = req.query
+    await client.mutate({
+      mutation: DEACTIVATE_PROVIDER,
+      variables: { id },
+    })
+    res.json({ msg: 'Provider disabled successfully' })
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }

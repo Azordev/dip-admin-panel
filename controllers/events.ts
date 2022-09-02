@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
-import { CREATE_EVENT, UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
+import { CREATE_EVENT, DEACTIVATE_EVENT, UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EVENT_BY_ID, EVENTS } from '@/services/GraphQL/events/queries'
 import { Event } from '@/services/GraphQL/events/types'
 
@@ -143,4 +143,21 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
       res.status(500).json(error)
     }
   })
+}
+
+export const deleteEvent = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id } = req.query
+  if (!id) {
+    return res.status(400).json({ msg: 'EventId is required' })
+  }
+
+  try {
+    await client.mutate({
+      mutation: DEACTIVATE_EVENT,
+      variables: { id },
+    })
+    return res.json({ msg: 'Event deleted successfully' })
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
