@@ -19,7 +19,8 @@
     "prettier": "prettier --write pages services views components utils hooks --config ./.prettierrc.js",
     "prettier:ci": "prettier --check --config ./.prettierrc.js",
     "check": "npm run prettier && npm run eslint && npm run stylelint",
-    "lefthook": "lefthook run lint"
+    "lefthook": "lefthook run lint",
+    "do": "do something"
   },
   "prettier": {
     "stylelintIntegration": true
