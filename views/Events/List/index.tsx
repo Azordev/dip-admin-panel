@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import EventItem from '@/components/EventItem'
 import { Event } from '@/services/GraphQL/events/types'
-import styles from '@/styles/Events.module.css'
+import styles from '@/styles/Events.module.scss'
 
 const EventsList: FC<{ events: Event[] }> = ({ events }) => (
   <div className={styles.container}>

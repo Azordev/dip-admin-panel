@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Event } from '@/services/GraphQL/events/types'
 import { readableDate } from '@/services/utils/dateFormat'
-import styles from '@/styles/Events.module.css'
+import styles from '@/styles/Events.module.scss'
 import Image from '@/views/Shared/Image'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
