@@ -64,7 +64,10 @@ export const createProvider = (req: NextApiRequest, res: NextApiResponse) => {
       })
       res.json({
         msg: 'Provider created successfully',
-        data: { ...fields, logoUrl },
+        data: {
+          ...fields,
+          logoUrl: logoUrl || '',
+        },
       })
     } catch (error) {
       res.status(500).json(error)

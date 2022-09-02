@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import React from 'react'
 
 export const eventInfo = gql`
   fragment EventInfoFragment on events {
@@ -47,7 +48,7 @@ export interface Event extends EventEditable {
 }
 
 export interface MutableEventFormProps {
-  onSubmit: (_formData: EventEditable) => void
+  onSubmit: (_e: React.FormEvent<HTMLFormElement>) => void
   loading: boolean
   originalData?: Event
 }

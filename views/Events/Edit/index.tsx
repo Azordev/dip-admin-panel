@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
@@ -23,7 +23,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     handleSubmit,
     formState: { errors },
   } = useForm<EventEditableWithFiles>()
-  const submitHandler = handleSubmit(onSubmit)
+  const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<EventEditableWithFiles>)
   const router = useRouter()
   const buttonText = loading ? 'Guardando' : 'Guardar'
   const [imageFile, setImageFile] = useState<File | null>(null)

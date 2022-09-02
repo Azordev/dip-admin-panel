@@ -1,9 +1,7 @@
 name: Security
 on:
   push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main, dev, feat/*]
+    branches: [dev]
 jobs:
   Security-And-Code-Scanning:
     runs-on: ubuntu-latest
