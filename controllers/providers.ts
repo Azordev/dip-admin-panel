@@ -79,7 +79,7 @@ export const disableProvider = async (req: NextApiRequest, res: NextApiResponse)
       mutation: DEACTIVATE_PROVIDER,
       variables: { id },
     })
-    res.json({ msg: 'Provider disabled successfully' })
+    res.status(204).json({ msg: 'Provider disabled successfully' })
   } catch (error) {
     res.status(500).json(error)
   }

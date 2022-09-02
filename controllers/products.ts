@@ -95,7 +95,7 @@ export const updateProduct = async (req: NextApiRequest, res: NextApiResponse) =
         return res.status(404).json({ msg: 'Product not found' })
       }
 
-      res.json({
+      res.status(204).json({
         msg: 'Product updated successfully',
         data: { ...fields, imageUrl },
       })
@@ -108,15 +108,15 @@ export const updateProduct = async (req: NextApiRequest, res: NextApiResponse) =
 export const deleteProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
-    const { data } = await client.mutate({
+    await client.mutate({
       mutation: DELETE_PRODUCT,
       variables: {
         id: query.id,
       },
     })
 
-    res.json(data)
+    return res.status(204).json({ msg: 'Product deleted successfully' })
   } catch (error) {
-    res.status(500).json(error)
+    return res.status(500).json(error)
   }
 }

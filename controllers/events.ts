@@ -123,9 +123,9 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
 
         await client.mutate({
           mutation: UPDATE_EVENT,
-          variables: { ...fields, imageUrl, eventId },
+          variables: { ...fields, imageUrl, id: eventId },
         })
-        return res.json({
+        return res.status(204).json({
           msg: 'Event updated successfully',
           data: { ...fields, imageUrl },
         })
@@ -135,7 +135,7 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
         mutation: UPDATE_EVENT,
         variables: { ...fields, imageUrl: '', id: eventId },
       })
-      return res.json({
+      return res.status(204).json({
         msg: 'Event updated successfully',
         data: { ...fields },
       })
@@ -156,7 +156,7 @@ export const deleteEvent = async (req: NextApiRequest, res: NextApiResponse) => 
       mutation: DEACTIVATE_EVENT,
       variables: { id },
     })
-    return res.json({ msg: 'Event deleted successfully' })
+    return res.status(204).json({ msg: 'Event deleted successfully' })
   } catch (error) {
     res.status(500).json(error)
   }
