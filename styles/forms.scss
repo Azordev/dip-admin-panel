@@ -1,7 +1,6 @@
 @import 'colors', 'fonts';
 $input-radius: 0.2rem;
 
-
 .form-product {
   padding: 2rem;
   background-color: $gray-250;
@@ -52,7 +51,6 @@ $input-radius: 0.2rem;
 .price {
   font-size: 19px;
 }
-
 .label {
   display: flex;
   font-family: $font-base-sans-serif-family;
@@ -70,7 +68,6 @@ $input-radius: 0.2rem;
     font-size: 19px;
   }
 }
-
 .input-member {
   background-color: $white;
   border: 1px solid $gray-250;
@@ -94,17 +91,12 @@ $input-radius: 0.2rem;
     color: $gray-300;
   }
 }
-
-
-
-
 .button-container {
   align-items: flex-end;
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
-
 .add {
   background-color: $green;
   border: unset;
@@ -121,7 +113,6 @@ $input-radius: 0.2rem;
     width: 20%;
   }
 }
-
 .delete {
   background-color: $red;
   border: unset;
