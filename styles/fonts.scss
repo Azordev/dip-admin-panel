@@ -59,11 +59,9 @@ $font-base-weight: 400;
 $font-base-style: normal;
 $font-base-variant: normal;
 
-
-
 @font-face {
   font-family: 'Visby' serif;
-  src: url('../public/assets/fonts/VisbyRegular.otf');
+  src: url('~/public/assets/fonts/VisbyRegular.otf');
   font-weight: 500;
   font-style: normal;
 }
