@@ -4,7 +4,7 @@ import { User } from '@/services/GraphQL/users/types'
 
 import styles from './Paginated.module.scss'
 
-const Paginated: FC<{
+interface PaginatedPartnersProps {
   users: User[]
   PartnersPerPage: number
   totalPartnersLength: number
@@ -12,7 +12,8 @@ const Paginated: FC<{
   CurrentPage: number
   indexOfFirstPartner: number
   indexOfLastPartner: number
-}> = ({
+}
+const Paginated: FC<PaginatedPartnersProps> = ({
   PartnersPerPage,
   totalPartnersLength,
   setCurrentPage,
