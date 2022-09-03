@@ -42,7 +42,7 @@
   }
 }
 
-.switchLabel {
+.switch-label {
   color: $gray-800;
   display: inline;
   font-size: 30px;
@@ -50,7 +50,8 @@
   line-height: normal;
 }
 
-.switchContainer {
+.switch-container {
   display: flex;
   align-items: center;
+  margin: 30px 0;
 }
