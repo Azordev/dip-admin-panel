@@ -1,0 +1,13 @@
+@use 'colors';
+
+.container {
+  margin: 20px 24px 0px 24px;
+}
+
+.active {
+  color: colors.$success;
+}
+
+.inactive {
+  color: colors.$error;
+}
