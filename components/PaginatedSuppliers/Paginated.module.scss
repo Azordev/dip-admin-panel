@@ -1,0 +1,96 @@
+@import 'colors','fonts','layout';
+
+.paginated-container {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 10px 50px;
+  max-height: 43px;
+  padding: 20px auto;
+  position: fixed;
+  width: 1085px;
+
+  .pages-number {
+    height: 19px;
+    width: 144px;
+
+    label {
+      color: $text-gray;
+      font: normal normal normal 16px/25px $font-base-poppins-family;
+      letter-spacing: 0;
+      opacity: 1;
+      text-align: center;
+    }
+  }
+
+  .button {
+    background: $white 0% 0% no-repeat padding-box;
+    border: 1px solid $text-gray;
+    cursor: pointer;
+    height: 43px;
+    opacity: 1;
+    padding: 12px 19px;
+    text-align: center;
+    
+    span {
+      color: $text-gray;
+      font: normal normal normal 13px/20px $font-base-poppins-family;
+      letter-spacing: 0;
+      opacity: 1;
+      text-align: center;
+    }
+  }
+
+  ul {
+    display: flex;
+    
+    .pages-list {
+      background: $gray-100 0% 0% no-repeat padding-box;
+      border-radius: 22px;
+      display: flex;
+      height: 43px;
+      margin: 0 5px;
+      opacity: 1;
+      text-align: center;
+
+    }
+
+    .active {
+      background: $gray-hover 0% 0% no-repeat padding-box;
+      border-radius: 20px;
+      color: $white;
+      opacity: 1;
+    }
+
+    li {
+      color: $text-gray;
+      cursor: pointer;
+      display: flex;
+      font: normal normal normal 13px/20px $font-base-poppins-family;
+      letter-spacing: 0;
+      opacity: 1;
+      padding: 12px 20px;
+      text-align: center;
+
+      &:hover {
+        background: $gray-hover 0% 0% no-repeat padding-box;
+        border-radius: 20px;
+        color: $white;
+        opacity: 1;
+      }
+
+      &:active {
+        background: $gray-hover 0% 0% no-repeat padding-box;
+        border-radius: 20px;
+        color: $white;
+        opacity: 1;
+      }
+      
+    }
+  }
+}
+
+
+
