@@ -12,7 +12,7 @@ import UsersList from '@/views/Users/List'
 const Users: NextPage = () => {
   const { data, loading } = useQuery(USERS)
   const [CurrentPage, setCurrentPage] = useState(1)
-  const PartnersPerPage = 2
+  const PartnersPerPage = 12
   const indexOfLastPartner = CurrentPage * PartnersPerPage
   const indexOfFirstPartner = indexOfLastPartner - PartnersPerPage
 
