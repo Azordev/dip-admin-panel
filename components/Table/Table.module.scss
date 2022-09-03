@@ -1,0 +1,30 @@
+@use 'colors' as colors;
+@use 'fonts';
+
+.container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table {
+  background-color: colors.$white;
+  border-collapse: collapse;
+}
+
+.thead {
+  border-bottom: 2px solid colors.$gray-100;
+  border-radius: 20px;
+}
+
+.th {
+  padding: 1rem;
+  color: colors.$text-black;
+  font-weight: 600;
+  text-align: center;
+}
+
+.td {
+  padding: 1.5rem;
+  text-align: center;
+  vertical-align: middle;
+}
