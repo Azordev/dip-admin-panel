@@ -43,6 +43,7 @@ const UsersList: FC<{
     return users.map((user) => {
       const name = `${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`;
       const isActive = Boolean(user?.isActive);
+      const code = `#${user.memberCode}`;
 
       const Active = () => (
         <span className={isActive ? styles.active : styles.inactive}>
@@ -53,7 +54,7 @@ const UsersList: FC<{
       return {
         id: user.id,
         items: [
-          user.id,
+          code,
           user.createdAt,
           name,
           user.memberInfo?.email,
