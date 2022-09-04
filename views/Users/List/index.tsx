@@ -30,6 +30,7 @@ const UsersList: FC<{ users: User[] }> = ({ users: dbUsers }) => {
     return users.map(user => {
       const name = `${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`
       const isActive = Boolean(user?.isActive)
+      const code = `#${user.memberCode}`
 
       const Active = () => (
         <span className={isActive ? styles.active : styles.inactive}>{isActive ? 'Activo' : 'Inactivo'}</span>
@@ -38,7 +39,7 @@ const UsersList: FC<{ users: User[] }> = ({ users: dbUsers }) => {
       return {
         id: user.id,
         items: [
-          user.id,
+          code,
           user.createdAt,
           name,
           user.memberInfo?.email,
