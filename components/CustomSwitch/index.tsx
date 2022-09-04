@@ -7,9 +7,10 @@ interface SwitchProperties {
   isChecked: boolean
   firstLabel?: string
   secondLabel?: string
+  size?: 'sm' | 'xl' // default: sm
 }
 
-const Switch: FC<SwitchProperties> = ({ isChecked, onChange, firstLabel, secondLabel }) => {
+const Switch: FC<SwitchProperties> = ({ isChecked, onChange, firstLabel, secondLabel, size = 'sm' }) => {
   const [isCheckedState, setIsCheckedState] = useState(isChecked)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +26,7 @@ const Switch: FC<SwitchProperties> = ({ isChecked, onChange, firstLabel, secondL
   return (
     <div className={styles['switch-container']}>
       {firstLabel && <label className={styles['switch-label']}>{firstLabel}</label>}
-      <div className={styles.switch}>
+      <div className={styles[`switch-${size}`]}>
         <input type="checkbox" checked={isCheckedState} onChange={handleChange} />
       </div>
       {secondLabel && <label className={styles['switch-label']}>{secondLabel}</label>}
