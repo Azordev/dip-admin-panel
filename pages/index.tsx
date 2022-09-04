@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router'
+
 const DIDAdminPanel = () => {
-  return <h1>DID Admin Panel</h1>
+  const { push } = useRouter()
+  push('/eventos')
 }
 
 export default DIDAdminPanel
