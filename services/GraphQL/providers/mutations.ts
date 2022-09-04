@@ -34,10 +34,23 @@ export const CREATE_PROVIDER = gql`
 
 // TODO: check if it needs more fields
 export const UPDATE_PROVIDER = gql`
-  mutation ($id: uuid!, $commercialName: String, $salesEmail: String, $salesPhone: String, $address: String) {
+  mutation (
+    $id: uuid!
+    $commercialName: String
+    $salesEmail: String
+    $salesPhone: String
+    $address: String
+    $logoUrl: String
+  ) {
     provider: update_providers_by_pk(
       pk_columns: { id: $id }
-      _set: { commercial_name: $commercialName, sales_email: $salesEmail, sales_phone: $salesPhone, address: $address }
+      _set: {
+        commercial_name: $commercialName
+        sales_email: $salesEmail
+        sales_phone: $salesPhone
+        address: $address
+        logo_url: $logoUrl
+      }
     ) {
       isActive: is_active
     }

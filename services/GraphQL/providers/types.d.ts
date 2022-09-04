@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client'
 
+import { Product } from '@/services/GraphQL/products/types'
+
 export const providerInfo = gql`
   fragment ProviderInfoFragment on providers {
     commercialName: commercial_name
@@ -27,6 +29,7 @@ export interface ProviderEditable extends ProviderBase {
   orderIndex?: number
   plan?: string
   isActive?: boolean
+  products?: Product[]
 }
 
 export interface Provider extends ProviderBase {
