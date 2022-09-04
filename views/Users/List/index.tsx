@@ -1,32 +1,54 @@
-import { FC, useMemo } from 'react'
+import { FC, useCallback, useMemo, useState } from "react";
 
-import Switch from '@/components/CustomSwitch'
-import ListHeader from '@/components/ListHeader'
-import Table, { TableData } from '@/components/Table'
-import { User } from '@/services/GraphQL/users/types'
+import ListHeader from "@/components/ListHeader";
+import Table, { TableData } from "@/components/Table";
+import TableActions from "@/components/Table/Actions";
+import { User } from "@/services/GraphQL/users/types";
 
-import styles from './userlist.module.scss'
+import styles from "./userlist.module.scss";
 
-const UsersList: FC<{ users: User[]; indexOfFirstPartner: number; indexOfLastPartner: number }> = ({
-  users,
-  indexOfFirstPartner,
-  indexOfLastPartner,
-}) => {
-  const headers = ['CÓDIGO', 'Fecha', 'Socio', 'Correo electrónico', 'Contraseña', 'Estado']
-  const sliceUsers = users.slice(indexOfFirstPartner, indexOfLastPartner)
+const UsersList: FC<{
+  users: User[];
+  indexOfFirstPartner: number;
+  indexOfLastPartner: number;
+}> = ({ users: dbUsers, indexOfFirstPartner, indexOfLastPartner }) => {
+  const [users, setUsers] = useState(
+    dbUsers.slice(indexOfFirstPartner, indexOfLastPartner)
+  );
+  const headers = [
+    "CÓDIGO",
+    "Fecha",
+    "Socio",
+    "Correo electrónico",
+    "Contraseña",
+    "Estado",
+  ];
+
+  const handleSwitchUser = useCallback(
+    (value: boolean, userId: User["id"]) => {
+      const newUsers = users.map((user) => {
+        if (user.id === userId) {
+          return { ...user, isActive: value };
+        }
+        return user;
+      });
+
+      setUsers(newUsers);
+      // TODO: ACTUALIZAR ESTADO ACTIVO DE USUARIO EN LA BASE DE DATOS
+    },
+    [users]
+  );
 
   const data: TableData[] = useMemo(() => {
-    return sliceUsers.map(user => {
-      const name = `${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`
+    return users.map((user) => {
+      const name = `${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`;
+      const isActive = Boolean(user?.isActive);
+
       const Active = () => (
-        <span className={user.isActive ? styles.active : styles.inactive}>{user.isActive ? 'Activo' : 'Inactivo'}</span>
-      )
-      const Actions = () => (
-        <div>
-          <Switch isChecked={user?.isActive ?? false} onChange={value => console.log(value)} />
-          <button>Edit</button>
-        </div>
-      )
+        <span className={isActive ? styles.active : styles.inactive}>
+          {isActive ? "Activo" : "Inactivo"}
+        </span>
+      );
 
       return {
         id: user.id,
@@ -35,22 +57,29 @@ const UsersList: FC<{ users: User[]; indexOfFirstPartner: number; indexOfLastPar
           user.createdAt,
           name,
           user.memberInfo?.email,
-          '**********',
+          "**********",
           <Active key={`active-${user.id}`} />,
-          <Actions key={`actions-${user.id}`} />,
+          <TableActions
+            key={`actions-${user.id}`}
+            showSwitch
+            editLink={`/socios/editar/${user.id}`}
+            onSwitchChange={(value) => handleSwitchUser(value, user.id)}
+            isCheckedSwitch={isActive}
+          />,
         ],
-      }
-    })
-  }, [sliceUsers])
+      };
+    });
+  }, [users, handleSwitchUser]);
 
   return (
-    <div className={styles['userlist-container']}>
+    <div className={styles["userlist-container"]}>
       <ListHeader createText="Añadir socio" createPath="/socios/crear" />
       <div className={styles.container}>
         <Table headers={headers} data={data} />
       </div>
+      {/* TODO: Colocar paginacion */}
     </div>
-  )
-}
+  );
+};
 
-export default UsersList
+export default UsersList;
