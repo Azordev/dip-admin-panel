@@ -1,13 +1,13 @@
-@use 'colors';
+@import 'colors';
 
 .container {
   margin: 20px 24px 0px 24px;
 }
 
 .active {
-  color: colors.$success;
+  color: $success;
 }
 
 .inactive {
-  color: colors.$error;
+  color: $error;
 }

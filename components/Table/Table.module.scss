@@ -1,5 +1,4 @@
-@use 'colors' as colors;
-@use 'fonts';
+@import 'colors';
 
 .container {
   overflow-x: auto;
@@ -7,18 +6,19 @@
 }
 
 .table {
-  background-color: colors.$white;
+  background-color: $white;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .thead {
-  border-bottom: 2px solid colors.$gray-100;
+  border-bottom: 2px solid $gray-100;
   border-radius: 20px;
 }
 
 .th {
   padding: 1rem;
-  color: colors.$text-black;
+  color: $text-black;
   font-weight: 600;
   text-align: center;
 }
