@@ -1,13 +1,14 @@
 @import 'colors', 'fonts', 'layout';
 
 .container {
-  overflow-x: auto;
+  background-color: $white;
+  overflow: auto;
+  height: 100%;
   width: 100%;
   font-family: $font-poppins;
 }
 
 .table {
-  background-color: $white;
   border-collapse: collapse;
   width: 100%;
 }
@@ -30,13 +31,16 @@
 }
 
 .td {
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   text-align: center;
   vertical-align: middle;
-  white-space: nowrap;
   font-size: 13px;
 
-  @include mq(xl) {
-    padding: 1.5rem;
+  &:first-of-type {
+    padding-left: 1rem;
+  }
+
+  &:last-of-type {
+    padding-right: 1rem;
   }
 }
