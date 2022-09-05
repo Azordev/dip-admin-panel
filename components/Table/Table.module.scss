@@ -1,6 +1,4 @@
-@import 'colors';
-@import 'fonts';
-@import 'layout';
+@import 'colors', 'fonts', 'layout';
 
 .container {
   overflow-x: auto;
@@ -26,7 +24,7 @@
   font-weight: $font-semibold-weight;
   text-align: center;
 
-  @include mq(xl){
+  @include mq(xl) {
     padding: 1rem;
   }
 }
