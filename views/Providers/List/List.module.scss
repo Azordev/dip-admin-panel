@@ -1,0 +1,19 @@
+@import 'colors';
+
+.container {
+  height: 100vh; //TODO: It should calc with the navigation height
+  overflow: hidden;
+}
+
+.table-container {
+  padding: 19px 25px;
+  height: 100%;
+}
+
+.active {
+  color: $green-active;
+}
+
+.inactive {
+  color: $error;
+}
