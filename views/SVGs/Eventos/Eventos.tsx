@@ -9,8 +9,6 @@ const Eventos: React.FC<{ className?: string }> = ({ className }) => (
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
-    width="124.813px"
-    height="124.813px"
     viewBox="0 0 124.813 124.813"
     className={styles['cls-2']}
   >
