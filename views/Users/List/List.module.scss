@@ -4,8 +4,12 @@
   margin: 20px 24px 0px 24px;
 }
 
+.status {
+  padding: 0rem 1.5rem;
+}
+
 .active {
-  color: $success;
+  color: $green-active;
 }
 
 .inactive {

@@ -33,7 +33,9 @@ const UsersList: FC<{ users: User[] }> = ({ users: dbUsers }) => {
       const code = `#${user.memberCode}`
 
       const Active = () => (
-        <span className={isActive ? styles.active : styles.inactive}>{isActive ? 'Activo' : 'Inactivo'}</span>
+        <span className={`${styles.status} ${isActive ? styles.active : styles.inactive}`}>
+          {isActive ? 'Activo' : 'Inactivo'}
+        </span>
       )
 
       return {
