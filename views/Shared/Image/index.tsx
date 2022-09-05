@@ -1,5 +1,5 @@
 import Img from 'next/image'
-import React from 'react'
+import { FC } from 'react'
 
 import styles from './Image.module.scss'
 
@@ -9,7 +9,7 @@ interface Props {
   [key: string]: string
 }
 
-const Image: React.FC<Props> = ({ src, alt, className, imgClassName, ...rest }) => (
+const Image: FC<Props> = ({ src, alt, className, imgClassName, ...rest }) => (
   <div className={`${styles.container}${className ? ' ' + className : ''}`}>
     <Img src={src} alt={alt} layout="fill" {...rest} className={imgClassName} />
   </div>

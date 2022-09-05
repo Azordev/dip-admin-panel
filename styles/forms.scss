@@ -1,1 +1,79 @@
+@import 'colors','fonts';
 $input-radius: .2rem;
+
+.form {
+  background-color: $gray-300;
+  height: 100vh;
+  padding: 2rem;
+  width: 78vw;
+}
+
+.label {
+  display: flex;
+  font-family: $font-base-sans-serif-family;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.input-member {
+  background-color: $white;
+  border: 1px solid $gray-250;
+  font-size: 19px;
+  width: 50%;
+
+  &::placeholder {
+    font-size: 19px;
+  }
+}
+
+.button-container {
+  align-items: flex-end;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.add {
+  background-color: $green;
+  border: unset;
+  border-radius: 0.5rem;
+  color: $white;
+  font-family: $font-base-sans-serif-family;
+  height: 3rem;
+  text-align: center;
+  transition: 0.3s ease;
+  width: 30%;
+}
+@media (min-width: 768px) {
+  .add {
+    width: 20%;
+  }
+}
+
+.delete {
+  background-color: $red;
+  border: unset;
+  border-radius: 0.5rem;
+  color: $white;
+  font-family: $font-base-sans-serif-family;
+  height: 3rem;
+  text-align: center;
+  transition: 0.3s ease;
+  width: 30%;
+}
+@media (min-width: 768px) {
+  .delete {
+    width: 20%;
+  }
+}
+
+.text-size {
+  font-size: 1.875rem; /* 30px */
+}
+
+.font-visby {
+  font: normal 19px $font-visby;
+}
+
+

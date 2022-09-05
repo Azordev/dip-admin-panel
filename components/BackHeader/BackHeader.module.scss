@@ -1,11 +1,39 @@
+@import 'fonts';
+
 .nav {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding-right: 1rem;
 }
 
 .back-header-image {
+  display: flex;
   height: 1.5rem !important;
+  justify-self: flex-end;
   width: auto !important;
+}
+
+.button {
+  border: 0;
+  font-family: $font-visby;
+  font-size: 25px;
+  font-style: medium;
+  letter-spacing: 0;
+  padding-left: 0;
+}
+
+.logo {
+  cursor: pointer;
+  height: 38px;
+  margin-top: 3px;
+  width: auto;
+}
+
+.container-btn-logo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-left: 5px;
 }

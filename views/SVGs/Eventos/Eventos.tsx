@@ -1,14 +1,9 @@
 import React from 'react'
 
+import styles from './Eventos.module.scss'
+
 const Eventos: React.FC<{ className?: string }> = ({ className }) => (
-  <svg
-    version="1.1"
-    id="Layer_1"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
-    className={className}
-    style={{ width: '25px', padding: '3px', margin: '3px' }}
-  >
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={styles['cls-2']}>
     <g>
       <g>
         <path

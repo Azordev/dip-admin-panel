@@ -4,11 +4,11 @@ pre-commit:
   colors: false
   commands:
     prettier:
-      glob: '*.{js,jsx}'
+      glob: '*.{js,jsx,ts,tsx}'
       run: npm run prettier:ci {staged_files}
       exclude: ".prettierrc.js"
     eslint:
-      glob: '*.{js,jsx}'
+      glob: '*.{js,jsx,ts,tsx}'
       run: npm run eslint:ci {staged_files}
     stylelint:
       glob: './**/*.styled.jsx' # For CSS-in-JS
