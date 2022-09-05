@@ -10,8 +10,7 @@ interface ActionsProps {
   editLink: string
   showSwitch?: boolean
   isCheckedSwitch?: boolean
-  // eslint-disable-next-line no-unused-vars
-  onSwitchChange?: (value: boolean) => void
+  onSwitchChange?: (_value: boolean) => void
 }
 
 const Actions: FC<ActionsProps> = ({ editLink, showSwitch, isCheckedSwitch, onSwitchChange }) => {
