@@ -28,13 +28,13 @@ const PaginatedSuppliers: FC<PaginatedSuppliersProps> = ({
   }
   const slicedProviders = providers.slice(indexOfFirstProvider, indexOfLastProvider)
   return (
-    <div className={styles['paginated-container']}>
-      <div className={styles['pages-number']}>
-        <label>
-          {slicedProviders.length * CurrentPage} of {totalProvidersLength}
-        </label>
-      </div>
-      <div className={styles.right}>
+    <div className={styles.container}>
+      <div className={styles['paginated-container']}>
+        <div className={styles['pages-number']}>
+          <label>
+            {slicedProviders.length * CurrentPage} of {totalProvidersLength}
+          </label>
+        </div>
         <ul>
           <div
             className={styles.button}
