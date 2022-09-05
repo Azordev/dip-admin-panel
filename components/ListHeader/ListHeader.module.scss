@@ -25,5 +25,25 @@
       flex-direction: column;
       justify-content: center;
     }
+
+    & > span {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: #000;
+        transform: scale(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+      }
+    }
+
+    &:hover > span::before {
+      transform: scale(1);
+    }
   }
 }
