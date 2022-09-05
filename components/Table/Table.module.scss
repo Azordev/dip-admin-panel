@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'fonts';
+@import 'layout';
 
 .container {
   overflow-x: auto;
@@ -19,17 +20,25 @@
 }
 
 .th {
-  @extend .text-sm;
-  padding: 1rem;
+  padding: 1rem 0.25rem;
   color: $text-black;
+  font-size: 15px;
   font-weight: $font-semibold-weight;
   text-align: center;
+
+  @include mq(xl){
+    padding: 1rem;
+  }
 }
 
 .td {
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
   font-size: 13px;
+
+  @include mq(xl) {
+    padding: 1.5rem;
+  }
 }
