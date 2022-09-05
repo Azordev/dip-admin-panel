@@ -28,11 +28,27 @@
 
     & > span {
       position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: $black;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
     }
 
     &:hover > span {
-      box-shadow: 0px 2px 0px $black;
+      color: rgba($black, 0.5);
     }
     
+    &:hover > span::before {
+      transform: scaleX(1);
+    }
+
   }
 }
