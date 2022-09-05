@@ -6,7 +6,7 @@ import Loading from '@/components/Loading'
 import { USERS } from '@/services/GraphQL/users/queries'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-import UsersContainers from 'containers/UsersContainers'
+import UsersContainers from 'containers/Socios/UsersContainers'
 
 const Users: NextPage = () => {
   const { data, loading } = useQuery(USERS)
