@@ -3,6 +3,8 @@ import { FC } from 'react'
 
 import { User } from '@/services/GraphQL/users/types'
 
+import styles from './userlist.module.scss'
+
 const UsersList: FC<{ users: User[]; indexOfFirstPartner: number; indexOfLastPartner: number }> = ({
   users,
   indexOfFirstPartner,
@@ -11,7 +13,7 @@ const UsersList: FC<{ users: User[]; indexOfFirstPartner: number; indexOfLastPar
   const { push } = useRouter()
   const sliceUsers = users.slice(indexOfFirstPartner, indexOfLastPartner)
   return (
-    <>
+    <div className={styles['userlist-container']}>
       <header>
         <h1>Usuarios</h1>
         <button onClick={() => push('/socios/crear')}>Crear Usuario</button>
@@ -26,7 +28,7 @@ const UsersList: FC<{ users: User[]; indexOfFirstPartner: number; indexOfLastPar
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
