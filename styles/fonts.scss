@@ -4,49 +4,49 @@
   font-family: 'Visby';
   font-style: normal;
   font-weight: 400;
-  src: url('~/public/assets/fonts/VisbyCF-Regular.otf');
+  src: url('/assets/fonts/VisbyCF-Regular.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: italic;
   font-weight: 400;
-  src: url('~/public/assets/fonts/VisbyCF-RegularOblique.otf');
+  src: url('/assets/fonts/VisbyCF-RegularOblique.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 700;
-  src: url('~/public/assets/fonts/VisbyCF-Bold.otf');
+  src: url('/assets/fonts/VisbyCF-Bold.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: italic;
   font-weight: 700;
-  src: url('~/public/assets/fonts/VisbyCF-BoldOblique.otf');
+  src: url('/assets/fonts/VisbyCF-BoldOblique.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: italic;
   font-weight: 500;
-  src: url('~/public/assets/fonts/VisbyCF-MediumOblique.otf');
+  src: url('/assets/fonts/VisbyCF-MediumOblique.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 500;
-  src: url('~/public/assets/fonts/VisbyCF-Medium.otf');
+  src: url('/assets/fonts/VisbyCF-Medium.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 600;
-  src: url('~/public/assets/fonts/VisbyCF-DemiBold.otf');
+  src: url('/assets/fonts/VisbyCF-DemiBold.otf');
 }
 
 $font-base-size: 16px;
@@ -59,11 +59,6 @@ $font-visby: Visby;
 $font-base-weight: 400;
 $font-base-style: normal;
 $font-base-variant: normal;
-
-@font-face {
-  font-family: 'Visby' serif;
-  font-style: normal;
-}
 
 .text-xs {
   font-size: 0.75rem; /* 12px */

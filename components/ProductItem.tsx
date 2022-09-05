@@ -7,7 +7,7 @@ import Icons8 from '@/views/Shared/Icons8'
 import Image from '@/views/Shared/Image'
 
 const ProductItem: NextPage<{ product: Product }> = ({ product }) => (
-  <Link href={`/producto/editar/${product?.id}`} passHref>
+  <Link href={`/productos/editar/${product?.id}`} passHref>
     <a className={styles['product-item']}>
       <div className={styles['image-container']}>
         {product?.imageUrl ? (
