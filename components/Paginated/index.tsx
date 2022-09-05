@@ -28,13 +28,13 @@ const Paginated: FC<PaginatedPartnersProps> = ({
   }
   const slicedPartners = users.slice(indexOfFirstPartner, indexOfLastPartner)
   return (
-    <div className={styles['paginated-container']}>
-      <div className={styles['pages-number']}>
-        <label>
-          {slicedPartners.length * CurrentPage} of {totalPartnersLength}
-        </label>
-      </div>
-      <div className={styles.right}>
+    <div className={styles.container}>
+      <div className={styles['paginated-container']}>
+        <div className={styles['pages-number']}>
+          <label>
+            {slicedPartners.length * CurrentPage} of {totalPartnersLength}
+          </label>
+        </div>
         <ul>
           <div
             className={styles.button}
