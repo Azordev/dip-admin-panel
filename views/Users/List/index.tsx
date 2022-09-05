@@ -46,7 +46,11 @@ const UsersList: FC<{
       const code = `#${user.memberCode}`;
 
       const Active = () => (
-        <span className={isActive ? styles.active : styles.inactive}>
+        <span
+          className={`${styles.status} ${
+            isActive ? styles.active : styles.inactive
+          }`}
+        >
           {isActive ? "Activo" : "Inactivo"}
         </span>
       );
