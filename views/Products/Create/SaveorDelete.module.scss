@@ -1,0 +1,47 @@
+@import '../../../styles/colors';
+
+
+.save {
+  background: $submit;
+  border-color: #b2bf55;
+  border-radius: 5px;
+  color: #f3f3f3;
+  font-family: Helvetica;
+  font-size: 30px;
+  height: 72px;
+  margin-right: 5px;
+  text-align: center;
+  transition: 0.3s ease opacity;
+  width: 252px;
+ 
+  &:hover {
+    opacity: 0.9;
+    
+
+  }
+}
+
+
+
+.delete {
+  background-color: $red-dark;
+  border-color: #f5282f;
+  border-radius: 5px;
+  color: #f3f3f3;
+  font-family: Helvetica;
+  font-size: 30px;
+  height: 72px;
+  text-align: center;
+  transition: 0.3s ease opacity;
+  width: 252px;
+
+  &:hover {
+    opacity: 0.9;
+    
+
+  }
+ 
+}
+
+
+
