@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { FC } from 'react'
 
 import Switch from '@/components/CustomSwitch'
-import Icons8 from '@/views/Shared/Icons8'
+
+import EditIcon from '../Icons/EditIcon'
 
 import styles from './Actions.module.scss'
 
@@ -23,8 +24,8 @@ const Actions: FC<ActionsProps> = ({ editLink, showSwitch, isCheckedSwitch, onSw
         />
       )}
       <Link href={editLink}>
-        <a>
-          <Icons8 name="edit--v1" iconStyle="material" color="#636363" />
+        <a className={styles.edit}>
+          <EditIcon height="26px" width="30px" />
         </a>
       </Link>
     </div>

@@ -1,12 +1,11 @@
-@import 'colors';
-@import 'layout';
+@import 'colors', 'layout';
 
 .container {
   margin: 20px 24px 0px 24px;
 }
 
 .status {
-  padding: 0rem;
+  padding: 0;
 
   @include mq(xl) {
     padding: 0rem 1.5rem;
