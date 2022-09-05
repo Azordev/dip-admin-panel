@@ -1,8 +1,10 @@
 @import 'colors';
+@import 'fonts';
 
 .container {
   overflow-x: auto;
   width: 100%;
+  font-family: $font-poppins;
 }
 
 .table {
@@ -17,9 +19,10 @@
 }
 
 .th {
+  @extend .text-sm;
   padding: 1rem;
   color: $text-black;
-  font-weight: 600;
+  font-weight: $font-semibold-weight;
   text-align: center;
 }
 
@@ -27,4 +30,6 @@
   padding: 1.5rem;
   text-align: center;
   vertical-align: middle;
+  white-space: nowrap;
+  font-size: 13px;
 }

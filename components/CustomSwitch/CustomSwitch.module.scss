@@ -22,7 +22,7 @@
       &::before {
         left: unset;
         transform: translateX(calc($width - $height));
-        background-color: $green;
+        background-color: $green-active;
       }
     }
 
