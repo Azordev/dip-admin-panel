@@ -1,8 +1,14 @@
-import { useRouter } from 'next/router'
-
 const DIDAdminPanel = () => {
-  const { push } = useRouter()
-  push('/eventos')
+  return <h1>DID Admin Panel</h1>
+}
+
+export async function getStaticProps() {
+  return {
+    redirect: {
+      permanent: false,
+      destination: '/eventos',
+    },
+  }
 }
 
 export default DIDAdminPanel
