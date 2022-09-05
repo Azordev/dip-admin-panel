@@ -1,11 +1,16 @@
 @import 'colors';
+@import 'layout';
 
 .container {
   margin: 20px 24px 0px 24px;
 }
 
 .status {
-  padding: 0rem 1.5rem;
+  padding: 0rem;
+
+  @include mq(xl) {
+    padding: 0rem 1.5rem;
+  }
 }
 
 .active {
