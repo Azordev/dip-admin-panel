@@ -1,36 +1,27 @@
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-// const MySwal = withReactContent(Swal)
 
-export default function Modal(str) {
+export default function Modal(str: string, callback: { (confirmed: boolean): void; (arg0: boolean): void }) {
   return Swal.fire({
-    customClass: {
-      title: 'swalTitle',
-    },
     allowOutsideClick: () => !Swal.isLoading(),
-    cancelButtonColor: '#AFABAB',
-    confirmButtonColor: '#B2BF55',
+    backdrop: 'rgba(0, 0, 0, 0.7)',
     confirmButtonText: 'Aceptar',
-    height: 874,
     input: 'text',
     inputValidator: value => {
-      if (value !== 'ELIMINAR') {
-        return 'You need to write something!'
+      if (!value) {
+        return 'Ingresa una palabra'
+      } else if (value !== 'ELIMINAR') {
+        return 'Palabra incorrecta'
       }
     },
-    inputValue: 'ELIMINAR',
-    padding: '58px 140px',
-    preConfirm: str => {},
+    inputPlaceholder: 'ELIMINAR',
+    padding: '50px 120px 40px',
     showCancelButton: true,
-    showLoaderOnConfirm: true,
-    text: `Si desea eliminar este ${str}, escriba ELIMINAR en el siguiente recuadro.`,
+    html: '<p>Si desea eliminar este, escriba <span>ELIMINAR</span> en el siguiente recuadro.</p>',
     title: `¿Desea eliminar este ${str}?`,
     width: 874,
-  }).then(result => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: 'Evento eliminado',
-      })
+  }).then(confirmed => {
+    if (confirmed.value == 'ELIMINAR') {
+      return callback(confirmed.isConfirmed)
     }
   })
 }
