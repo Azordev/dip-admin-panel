@@ -44,6 +44,15 @@
   grid-template-rows: 1fr 1fr 1rem;
   grid-template-columns: 200px 1fr;
   text-decoration: none;
+  transition: .3s ease;
+  &:hover{
+    color: $white;
+    background: $black;
+    box-shadow: inset 0 0 20px;
+    outline-color: rgba(49, 138, 172, 0);
+    outline-offset: 80px;
+    text-shadow: 1px 1px 6px $white;
+  }
 }
 
 .event-image {
