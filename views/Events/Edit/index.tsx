@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
 import CustomSwitch from '@/components/CustomSwitch'
+import Modal from '@/components/Modal'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
@@ -38,6 +39,13 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     setValue('title', originalEvent?.title)
     setType(getValues('type'))
   }, [originalEvent?.date, originalEvent?.description, originalEvent?.title, setValue, getValues])
+
+  // useEffect(() => {
+  //   if (eliminar) {
+  //     Modal()
+  //   }
+  // }),
+  //   [eliminar]
 
   const handleChange = (isCheck: any) => {
     if (isCheck) {
@@ -77,6 +85,10 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
 
   const handleAsistentes = () => {
     // TODO: implementación del botón de asistentes
+  }
+
+  const showModal = () => {
+    Modal('evento')
   }
 
   return (
@@ -185,7 +197,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           {buttonText}
         </Button>
         {/* TODO: implementar funcionalidad asociada a este botón */}
-        <Button iconName="" className={styles.buttonDelete} onClick={() => {}}>
+        <Button iconName="" className={styles.buttonDelete} onClick={showModal}>
           Eliminar
         </Button>
       </section>
