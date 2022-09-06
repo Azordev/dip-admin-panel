@@ -4,7 +4,7 @@ import { FC } from 'react'
 import styles from './BackHeader.module.scss'
 
 export interface BackHeaderProps {
-  parent: string
+  parent?: string
   parentImageUrl?: string
 }
 

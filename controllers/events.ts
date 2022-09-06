@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
-import { CREATE_EVENT, UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
+import { CREATE_EVENT, DEACTIVATE_EVENT, UPDATE_EVENT } from '@/services/GraphQL/events/mutations'
 import { EVENT_BY_ID, EVENTS } from '@/services/GraphQL/events/queries'
 import { Event } from '@/services/GraphQL/events/types'
 
@@ -72,17 +72,26 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
   form.parse(req, async (err, fields, files) => {
     try {
       if (err) {
-        return res.status(500).json(err)
+        return res.status(500).json({ error: err, fields, files })
       }
 
       if (files.image) {
         const file = files.image as formidable.File
-        const { Location: imageUrl } = await addObject(file, 'events')
+        const { Location: imageUrl, error: saveError } = await addObject(file, 'events')
 
-        await client.mutate({
+        if (saveError) {
+          return res.status(500).json({ error: saveError, fields, files })
+        }
+
+        const { errors } = await client.mutate({
           mutation: CREATE_EVENT,
-          variables: { ...fields, imageUrl },
+          variables: { ...fields, imageUrl: imageUrl || '' },
         })
+
+        if (errors) {
+          return res.status(500).json({ errors })
+        }
+
         return res.json({
           msg: 'Event created successfully',
           data: { ...fields, imageUrl },
@@ -98,7 +107,7 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
         data: { ...fields },
       })
     } catch (error) {
-      res.status(500).json(error)
+      res.status(500).json({ error, fields, files })
     }
   })
 }
@@ -123,9 +132,9 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
 
         await client.mutate({
           mutation: UPDATE_EVENT,
-          variables: { ...fields, imageUrl, eventId },
+          variables: { ...fields, imageUrl, id: eventId },
         })
-        return res.json({
+        return res.status(204).json({
           msg: 'Event updated successfully',
           data: { ...fields, imageUrl },
         })
@@ -135,7 +144,7 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
         mutation: UPDATE_EVENT,
         variables: { ...fields, imageUrl: '', id: eventId },
       })
-      return res.json({
+      return res.status(204).json({
         msg: 'Event updated successfully',
         data: { ...fields },
       })
@@ -143,4 +152,21 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
       res.status(500).json(error)
     }
   })
+}
+
+export const deleteEvent = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id } = req.query
+  if (!id) {
+    return res.status(400).json({ msg: 'EventId is required' })
+  }
+
+  try {
+    await client.mutate({
+      mutation: DEACTIVATE_EVENT,
+      variables: { id },
+    })
+    return res.status(204).json({ msg: 'Event deleted successfully' })
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }

@@ -5,12 +5,11 @@ import useAuth from '@/hooks/useAuth'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
 import Icons8 from '../../Icons8'
-import stylesIcons8 from '../../Icons8/Icons8.module.scss'
-
-import iconProv from './ic_prov.svg'
 import Image from '../../Image'
 
+import stylesIcons8 from '../../Icons8/Icons8.module.scss'
 import styles from './Dashboard.module.scss'
+import iconProv from './ic_prov.svg'
 
 interface Props {
   children: ReactNode
@@ -23,18 +22,18 @@ const Dashboard: FC<Props> = ({ children }) => {
       <aside className={styles.sidebar}>
         <nav>
           <Link href="/" passHref>
-            <a>
+            <a className={styles.logo}>
               <LogoDID />
             </a>
           </Link>
           <Link href="/eventos" passHref>
-            <a>
+            <a className={styles.link}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="health-calendar" />
               <span>Eventos</span>
             </a>
           </Link>
           <Link href="/proveedores" passHref>
-            <a>
+            <a className={styles.link}>
               <Image
                 src={iconProv}
                 alt={`shopaholic icon`}
@@ -45,7 +44,7 @@ const Dashboard: FC<Props> = ({ children }) => {
             </a>
           </Link>
           <Link href="/socios" passHref>
-            <a>
+            <a className={styles.link}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
               <span>Socios</span>
             </a>
