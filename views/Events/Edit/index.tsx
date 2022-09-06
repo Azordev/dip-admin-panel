@@ -40,13 +40,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
     setType(getValues('type'))
   }, [originalEvent?.date, originalEvent?.description, originalEvent?.title, setValue, getValues])
 
-  // useEffect(() => {
-  //   if (eliminar) {
-  //     Modal()
-  //   }
-  // }),
-  //   [eliminar]
-
   const handleChange = (isCheck: any) => {
     if (isCheck) {
       setValue('type', 'WORKSHOP')
