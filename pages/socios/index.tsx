@@ -5,16 +5,17 @@ import EmptyList from '@/components/EmptyList'
 import Loading from '@/components/Loading'
 import { USERS } from '@/services/GraphQL/users/queries'
 import ClientOnly from '@/views/Shared/ClientOnly'
-import UsersList from '@/views/Users/List'
+
+import UsersContainers from 'containers/Socios/UsersContainers'
 
 const Users: NextPage = () => {
   const { data, loading } = useQuery(USERS)
 
   if (loading) return <Loading />
-  if (!data || data.users.length < 1) return <EmptyList text="La lista de usuarios esta vacía o es invalida." />
+  if (!data || data.length < 1) return <EmptyList text="La lista de usuarios esta vacía o es invalida." />
   return (
     <ClientOnly>
-      <UsersList users={data.users} />
+      <UsersContainers users={data.users} />
     </ClientOnly>
   )
 }
