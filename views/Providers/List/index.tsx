@@ -6,7 +6,7 @@ import { Provider } from '@/services/GraphQL/providers/types'
 
 const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => (
   <div>
-    <ListHeader createText="Crear nuevo proveedor" createPath="/proveedores/crear" />
+    <ListHeader createText="Añadir nuevo proveedor" createPath="/proveedores/crear" />
 
     {providers.map(provider => (
       <Link key={provider.id} href="/proveedores/[id]" as={`/proveedores/${provider.id}`}>
