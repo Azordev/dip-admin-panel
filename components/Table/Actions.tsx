@@ -15,20 +15,19 @@ interface ActionsProps {
 }
 
 const Actions: FC<ActionsProps> = ({ editLink, showSwitch, isCheckedSwitch, onSwitchChange }) => (
-    <div className={styles.container}>
-      {showSwitch && (
-        <Switch
-          isChecked={Boolean(isCheckedSwitch)}
-          onChange={isChecked => onSwitchChange && onSwitchChange(isChecked)}
-        />
-      )}
-      <Link href={editLink}>
-        <a className={styles.edit}>
-          <EditIcon height="26px" width="30px" />
-        </a>
-      </Link>
-    </div>
-  )
-}
+  <div className={styles.container}>
+    {showSwitch && (
+      <Switch
+        isChecked={Boolean(isCheckedSwitch)}
+        onChange={isChecked => onSwitchChange && onSwitchChange(isChecked)}
+      />
+    )}
+    <Link href={editLink}>
+      <a className={styles.edit}>
+        <EditIcon height="26px" width="30px" />
+      </a>
+    </Link>
+  </div>
+)
 
 export default Actions

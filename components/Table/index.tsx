@@ -12,34 +12,32 @@ interface Props {
   data: TableData[]
 }
 
-const Table: FC<Props> = ({ data, headers }) => {
-  return (
-    <div className={styles.container}>
-      <table className={styles.table}>
-        <thead className={styles.thead}>
-          <tr>
-            {headers.map((header, id) => (
-              <th scope="col" className={styles.th} key={`table-header-${header}-${id}`}>
-                {header}
-              </th>
+const Table: FC<Props> = ({ data, headers }) => (
+  <div className={styles.container}>
+    <table className={styles.table}>
+      <thead className={styles.thead}>
+        <tr>
+          {headers.map((header, id) => (
+            <th scope="col" className={styles.th} key={`table-header-${header}-${id}`}>
+              {header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {data.map(row => (
+          <tr key={row.id}>
+            {row.items.map((item, i) => (
+              <td className={styles.td} key={`table-rows-${row.id}-${i}`}>
+                {item}
+              </td>
             ))}
           </tr>
-        </thead>
-
-        <tbody>
-          {data.map(row => (
-            <tr key={row.id}>
-              {row.items.map((item, i) => (
-                <td className={styles.td} key={`table-rows-${row.id}-${i}`}>
-                  {item}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
+        ))}
+      </tbody>
+    </table>
+  </div>
+)
 
 export default Table
