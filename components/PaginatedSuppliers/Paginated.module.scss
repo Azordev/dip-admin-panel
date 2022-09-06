@@ -1,5 +1,10 @@
 @import 'colors','fonts','layout';
 
+
+.relative {
+  position: relative;
+}
+
 .container {
   bottom: calc(-82% + 40px);
   position: relative;
@@ -11,7 +16,7 @@
 
   label {
     color: $text-gray;
-    font: normal normal normal 16px/25px $font-base-poppins-family;
+    font: normal normal normal 16px/25px $font-visby;
     letter-spacing: 0;
     opacity: 1;
     text-align: center;
@@ -26,6 +31,7 @@
   left: 0;
   list-style-type: none;
   margin: 10px 50px;
+  margin-bottom: 0;
   max-height: 43px;
   overflow: auto;
   padding: 20px auto;
@@ -43,7 +49,7 @@
     
     span {
       color: $text-gray;
-      font: normal normal normal 13px/20px $font-base-poppins-family;
+      font: normal normal normal 13px/20px $font-visby;
       letter-spacing: 0;
       opacity: 1;
       text-align: center;
@@ -75,7 +81,7 @@
       color: $text-gray;
       cursor: pointer;
       display: flex;
-      font: normal normal normal 13px/20px $font-base-poppins-family;
+      font: normal normal normal 13px/20px $font-visby;
       letter-spacing: 0;
       opacity: 1;
       padding: 12px 20px;
@@ -98,6 +104,9 @@
     }
   }
 }
+
+
+
 
 
 
