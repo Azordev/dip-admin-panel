@@ -42,7 +42,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
-    'import/no-cycle': ['warn', { maxDepth: 3 }],
+    'import/no-cycle': 'off',
     'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true }],
     'import/order': [
       'error',

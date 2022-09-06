@@ -1,54 +1,48 @@
-import { useQuery } from '@apollo/client'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
-import Loading from '@/components/Loading'
-import useLogger from '@/hooks/useLogger'
-import { Product } from '@/services/GraphQL/products/types'
-import { PROVIDER_BY_ID } from '@/services/GraphQL/providers/queries'
-import { Provider as ProviderFields } from '@/services/GraphQL/providers/types'
+import { ProviderEditable } from '@/services/GraphQL/providers/types'
 import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-interface ProviderWithProducts extends ProviderFields {
-  products: Product[]
+import { getProvider } from 'controllers/providers'
+
+type PageProps = {
+  provider: ProviderEditable
 }
 
-const Provider: NextPage = () => {
-  const { push, query } = useRouter()
-  const {
-    data,
-    loading,
-    error: queryError,
-  } = useQuery<{ provider: ProviderWithProducts }>(PROVIDER_BY_ID, {
-    variables: {
-      id: query.id,
-    },
-  })
-  const { error: LogError } = useLogger()
+const Provider: NextPage<PageProps> = ({ provider }) => {
+  const { query } = useRouter()
 
-  if (queryError) {
-    LogError(queryError, 'Provider.tsx', 'useQuery(PROVIDER_BY_ID)', 'UNEXPECTED')
-    push('/proveedores')
-  }
-
-  if (loading) return <Loading />
-  if (!data || !data.provider) return <EmptyList text="El proveedor esta vacío o es invalido." />
+  if (!provider.products || provider.products.length < 1)
+    return <EmptyList text="El proveedor esta vacío o es invalido." />
   return (
     <ClientOnly>
       <>
         <ListHeader
-          createPath={`/productos/crear?provider=${query.id}&provider-url=${data.provider.logoUrl}`}
+          createPath={`/productos/crear?provider=${query.id}&provider-url=${provider.logoUrl}`}
           createText="Añadir nuevo producto"
-          logoUrl={data.provider.logoUrl}
-          altLogo={data.provider.commercialName}
+          logoUrl={provider.logoUrl}
+          altLogo={provider.commercialName}
         />
-        <ProductList products={data.provider.products} />
+        <ProductList products={provider.products} />
       </>
     </ClientOnly>
   )
 }
 
 export default Provider
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { id } = query
+
+  const { provider } = await getProvider(id as string)
+
+  return {
+    props: {
+      provider,
+    },
+  }
+}
