@@ -10,6 +10,7 @@ export const EVENTS = gql`
       offset: $offset
       where: {
         _or: [{ description: { _ilike: $query } }, { details: { _ilike: $query } }, { title: { _ilike: $query } }]
+        is_active: { _eq: true }
       }
       order_by: { title: asc }
     ) {
