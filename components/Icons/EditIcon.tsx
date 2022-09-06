@@ -2,8 +2,7 @@ import { FC, SVGProps } from 'react'
 
 interface EditIconProps extends SVGProps<SVGSVGElement> {}
 
-const EditIcon: FC<EditIconProps> = props => {
-  return (
+const EditIcon: FC<EditIconProps> = props => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...props}>
       <path
         fill="currentColor"
