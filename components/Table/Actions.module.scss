@@ -1,4 +1,4 @@
-@import 'layout';
+@import 'layout', 'colors';
 
 .container {
   align-items: center;
@@ -11,5 +11,5 @@
 }
 
 .edit {
-  color: #636363;
+  color: $gray-650;
 }

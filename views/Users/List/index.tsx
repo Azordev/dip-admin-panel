@@ -64,7 +64,7 @@ const UsersList: FC<{
   }, [users, handleSwitchUser])
 
   return (
-    <div className={styles['userlist-container']}>
+    <div className={styles.container}>
       <ListHeader createText="Añadir socio" createPath="/socios/crear" />
       <div className={styles.users}>
         <Table headers={headers} data={data} />

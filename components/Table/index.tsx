@@ -18,8 +18,8 @@ const Table: FC<Props> = ({ data, headers }) => {
       <table className={styles.table}>
         <thead className={styles.thead}>
           <tr>
-            {headers.map(header => (
-              <th scope="col" className={styles.th} key={header}>
+            {headers.map((header, id) => (
+              <th scope="col" className={styles.th} key={`table-header-${header}-${id}`}>
                 {header}
               </th>
             ))}
@@ -30,7 +30,7 @@ const Table: FC<Props> = ({ data, headers }) => {
           {data.map(row => (
             <tr key={row.id}>
               {row.items.map((item, i) => (
-                <td className={styles.td} key={`${row.id}-${i}`}>
+                <td className={styles.td} key={`table-rows-${row.id}-${i}`}>
                   {item}
                 </td>
               ))}
