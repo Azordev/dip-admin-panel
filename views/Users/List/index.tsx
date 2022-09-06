@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from 'react'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
 import ListHeader from '@/components/ListHeader'
 import Table, { TableData } from '@/components/Table'
@@ -63,13 +63,16 @@ const UsersList: FC<{
     })
   }, [users, handleSwitchUser])
 
+  useEffect(() => {
+    setUsers(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
+  }, [dbUsers, indexOfFirstPartner, indexOfLastPartner])
+
   return (
     <div className={styles.container}>
       <ListHeader createText="Añadir socio" createPath="/socios/crear" />
       <div className={styles.users}>
         <Table headers={headers} data={data} />
       </div>
-      {/* TODO: Colocar paginacion */}
     </div>
   )
 }

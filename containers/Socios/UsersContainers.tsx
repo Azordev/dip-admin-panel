@@ -11,7 +11,7 @@ interface PaginatedProps {
 
 const UsersContainers: FC<PaginatedProps> = ({ users }) => {
   const [CurrentPage, setCurrentPage] = useState(1)
-  const PartnersPerPage = 12
+  const PartnersPerPage = 5
   const indexOfLastPartner = CurrentPage * PartnersPerPage
   const indexOfFirstPartner = indexOfLastPartner - PartnersPerPage
   return (
