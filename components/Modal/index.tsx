@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 
-export default function Modal(str: string, callback: { (confirmed: boolean): void; (arg0: boolean): void }) {
+export default function Modal(str: string, callback: any) {
   return Swal.fire({
     allowOutsideClick: () => !Swal.isLoading(),
     backdrop: 'rgba(0, 0, 0, 0.7)',
@@ -20,8 +20,12 @@ export default function Modal(str: string, callback: { (confirmed: boolean): voi
     title: `¿Desea eliminar este ${str}?`,
     width: 874,
   }).then(confirmed => {
-    if (confirmed.value == 'ELIMINAR') {
-      return callback(confirmed.isConfirmed)
+    if (confirmed.value === 'ELIMINAR') {
+      // eslint-disable-next-line promise/no-callback-in-promise
+      callback(confirmed.isConfirmed)
+      return Swal.fire('Eliminado!')
+    } else {
+      return false
     }
   })
 }

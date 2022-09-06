@@ -90,7 +90,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   const showModal = () => {
     Modal('evento', (confirmed: boolean) => {
       if (confirmed) {
-        alert('Eliminado')
         // Add petition Delete
       }
     })
