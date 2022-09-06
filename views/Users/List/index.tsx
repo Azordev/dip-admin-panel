@@ -66,7 +66,7 @@ const UsersList: FC<{
   return (
     <div className={styles['userlist-container']}>
       <ListHeader createText="Añadir socio" createPath="/socios/crear" />
-      <div className={styles.container}>
+      <div className={styles.users}>
         <Table headers={headers} data={data} />
       </div>
       {/* TODO: Colocar paginacion */}
