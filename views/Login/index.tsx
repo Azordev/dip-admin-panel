@@ -38,9 +38,8 @@ const Login: NextPage = () => {
             setTimeout(() => router.reload(), 1000)
             return
           }
-          if (data.users[0]?.isActive) {
+          if (data.users[0]?.isActive && (data.users[0]?.providerInfo?.id || data.users[0]?.memberInfo?.id)) {
             const user = data.users[0]
-            console.log(user)
 
             if (user?.type === 'PROVIDER') {
               log(
