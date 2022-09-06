@@ -1,7 +1,7 @@
 @import 'colors';
 
 .container {
-  height: calc(100vh - var(--header-height)); //TODO: It should calc with the navigation height
+  height: calc(100vh - var(--header-height));
 }
 
 .table-container {
