@@ -60,9 +60,9 @@ const UsersList: FC<{ users: User[] }> = ({ users: dbUsers }) => {
   }, [users, handleSwitchUser])
 
   return (
-    <div>
+    <div className={styles.container}>
       <ListHeader createText="Añadir socio" createPath="/socios/crear" />
-      <div className={styles.container}>
+      <div className={styles.users}>
         <Table headers={headers} data={data} />
       </div>
       {/* TODO: Colocar paginacion */}
