@@ -14,8 +14,7 @@ interface ActionsProps {
   onSwitchChange?: (_value: boolean) => void
 }
 
-const Actions: FC<ActionsProps> = ({ editLink, showSwitch, isCheckedSwitch, onSwitchChange }) => {
-  return (
+const Actions: FC<ActionsProps> = ({ editLink, showSwitch, isCheckedSwitch, onSwitchChange }) => (
     <div className={styles.container}>
       {showSwitch && (
         <Switch
