@@ -38,14 +38,31 @@ const Login: NextPage = () => {
             setTimeout(() => router.reload(), 1000)
             return
           }
-          if (data.users[0]?.isActive && data.users[0]?.memberInfo?.email) {
-            log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
+          if (data.users[0]?.isActive) {
             const user = data.users[0]
-            window.sessionStorage.setItem('userId', user.id)
-            window.sessionStorage.setItem('user', JSON.stringify(user))
-            setTimeout(() => router.push('/'), 200)
-          } else {
-            warn('Login:onSubmit', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
+            console.log(user)
+
+            if (user?.type === 'PROVIDER') {
+              log(
+                'Login:useEffect',
+                'Usuario encontrado en base de datos, procediendo a verificar sesión...',
+                'SUCCESS',
+              )
+              window.sessionStorage.setItem('userId', user.id)
+              window.sessionStorage.setItem('user', JSON.stringify(user))
+              setTimeout(() => router.push('/'), 200)
+            } else if (user?.memberInfo?.email) {
+              log(
+                'Login:useEffect',
+                'Usuario encontrado en base de datos, procediendo a verificar sesión...',
+                'SUCCESS',
+              )
+              window.sessionStorage.setItem('userId', user.id)
+              window.sessionStorage.setItem('user', JSON.stringify(user))
+              setTimeout(() => router.push('/'), 200)
+            } else {
+              warn('Login:onSubmit', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
+            }
           }
         }
       }

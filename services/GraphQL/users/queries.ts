@@ -10,7 +10,7 @@ export const USER_SESSION = gql`
     users(
       where: {
         _and: [
-          { type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] } }
+          { type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN", "PROVIDER"] } }
           { member_code: { _eq: $memberCode } }
           { password: { _eq: $password } }
         ]
