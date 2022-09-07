@@ -17,7 +17,7 @@ export interface ListHeaderProps {
 
 const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoUrl, altLogo }) => (
   <nav className={styles.nav}>
-    <Link href={createPath} passHref replace>
+    <Link href={createPath} passHref>
       <a>
         <Icons8 name="plus--v1" iconStyle="ios" />
         <span className={styles.title}>{createText}</span>
