@@ -1,9 +1,5 @@
 @import 'colors', 'layout';
 
-.container {
-  height: calc(100vh - var(--header-height));
-}
-
 .users {
   height: 100%;
   padding: 20px 24px;

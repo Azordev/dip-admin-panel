@@ -1,12 +1,8 @@
 @import 'colors';
 
-.container {
-  height: calc(100vh - var(--header-height));
-}
-
 .table-container {
-  padding: 19px 25px;
   height: 100%;
+  padding: 19px 25px;
 }
 
 .active {
