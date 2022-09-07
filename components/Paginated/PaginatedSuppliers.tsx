@@ -22,10 +22,8 @@ const PaginatedSuppliers: FC<PaginatedSuppliersProps> = ({
   indexOfFirstProvider,
   indexOfLastProvider,
 }) => {
-  const pageNumbers = []
-  for (let i = 1; i <= Math.ceil(totalProvidersLength / ProvidersPerPage); i++) {
-    pageNumbers.push(i)
-  }
+  const pageNumber = Math.ceil(totalProvidersLength / ProvidersPerPage)
+  const pageNumbers = Array.from({ length: pageNumber }, (_, index) => index + 1)
   const slicedProviders = providers.slice(indexOfFirstProvider, indexOfLastProvider)
   return (
     <div className={styles.container}>
@@ -61,7 +59,7 @@ const PaginatedSuppliers: FC<PaginatedSuppliersProps> = ({
           <div
             className={styles.button}
             onClick={() => {
-              if (CurrentPage !== Math.ceil(totalProvidersLength / ProvidersPerPage)) setCurrentPage(CurrentPage + 1)
+              if (CurrentPage !== pageNumber) setCurrentPage(CurrentPage + 1)
             }}
           >
             <span>Siguiente</span>
