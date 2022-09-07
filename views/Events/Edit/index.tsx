@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
 import CustomSwitch from '@/components/CustomSwitch'
-import Modal from '@/components/Modal'
+import DeleteModal from '@/components/DeleteModal'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
@@ -81,7 +81,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   }
 
   const showModal = () => {
-    Modal('evento', (confirmed: boolean) => {
+    DeleteModal('evento', (confirmed: boolean) => {
       if (confirmed) {
         // Add petition Delete
       }
