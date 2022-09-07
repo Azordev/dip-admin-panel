@@ -30,6 +30,24 @@ export const CREATE_USER_MEMBER = gql`
   }
 `
 
+export const CREATE_PROVIDER_USER = gql`
+  mutation ($memberCode: String!, $password: String, $avatarUrl: String) {
+    user: insert_users_one(
+      object: {
+        member_code: $memberCode
+        password: $password
+        type: "PROVIDER"
+        is_active: true
+        avatar_url: $avatarUrl
+        position: "PROVIDER"
+      }
+    ) {
+      id
+      updatedAt: updated_at
+    }
+  }
+`
+
 export const UPDATE_USER = gql`
   mutation (
     $id: uuid!
