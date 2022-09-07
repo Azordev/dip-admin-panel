@@ -1,52 +1,103 @@
 @charset "UTF-8";
 
+// Visby font faces
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/fonts/VisbyCF-Regular.otf');
+  src: url('/assets/fonts/visby/VisbyCF-Regular.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: italic;
   font-weight: 400;
-  src: url('/assets/fonts/VisbyCF-RegularOblique.otf');
+  src: url('/assets/fonts/visby/VisbyCF-RegularOblique.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 700;
-  src: url('/assets/fonts/VisbyCF-Bold.otf');
+  src: url('/assets/fonts/visby/VisbyCF-Bold.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: italic;
   font-weight: 700;
-  src: url('/assets/fonts/VisbyCF-BoldOblique.otf');
+  src: url('/assets/fonts/visby/VisbyCF-BoldOblique.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: italic;
   font-weight: 500;
-  src: url('/assets/fonts/VisbyCF-MediumOblique.otf');
+  src: url('/assets/fonts/visby/VisbyCF-MediumOblique.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 500;
-  src: url('/assets/fonts/VisbyCF-Medium.otf');
+  src: url('/assets/fonts/visby/VisbyCF-Medium.otf');
 }
 
 @font-face {
   font-family: 'Visby';
   font-style: normal;
   font-weight: 600;
-  src: url('/assets/fonts/VisbyCF-DemiBold.otf');
+  src: url('/assets/fonts/visby/VisbyCF-DemiBold.otf');
+}
+
+// poppins font faces
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/assets/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/assets/fonts/poppins/Poppins-MediumItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/assets/fonts/poppins/Poppins-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/assets/fonts/poppins/Poppins-SemiBoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/assets/fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  src: url('/assets/fonts/poppins/Poppins-BoldItalic.ttf');
 }
 
 $font-base-size: 16px;
@@ -56,7 +107,9 @@ $font-base-serif-family: Georgia, Cambria, Times, Times New Roman, serif;
 $font-base-poppins-family: Poppins;
 $font-base-monospace-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 $font-visby: Visby;
+$font-poppins: Poppins;
 $font-base-weight: 400;
+$font-semibold-weight: 600;
 $font-base-style: normal;
 $font-base-variant: normal;
 

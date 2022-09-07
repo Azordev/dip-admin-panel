@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
-import { ImageSVG } from './AddImageSVG'
+import { AddImageSVG } from './AddImageSVG'
+
 import styles from './SaveorDelete.module.scss'
 
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
@@ -59,7 +60,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         className="image font-visby"
         // {...register('imageUrl', { required: true })}
       >
-        {ImageSVG}
+        {AddImageSVG}
         Añadir imagen
       </label>
       {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}

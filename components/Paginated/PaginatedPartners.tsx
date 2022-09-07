@@ -13,7 +13,7 @@ interface PaginatedPartnersProps {
   indexOfFirstPartner: number
   indexOfLastPartner: number
 }
-const Paginated: FC<PaginatedPartnersProps> = ({
+const PaginatedPartners: FC<PaginatedPartnersProps> = ({
   PartnersPerPage,
   totalPartnersLength,
   setCurrentPage,
@@ -70,4 +70,4 @@ const Paginated: FC<PaginatedPartnersProps> = ({
   )
 }
 
-export default Paginated
+export default PaginatedPartners

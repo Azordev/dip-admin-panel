@@ -11,6 +11,9 @@
   line-height: $font-base-line-height;
   scroll-behavior: smooth;
 
+  // variables
+  --header-height: 72px;
+
   @media (prefers-reduced-motion: reduce) {
     *,
     ::before,

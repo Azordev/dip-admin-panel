@@ -161,12 +161,15 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         defaultValue={originalEvent?.description}
         {...register('description', { required: false })}
       ></textarea>
-      <CustomSwitch
-        isChecked={type === 'WORKSHOP'}
-        onChange={handleChange}
-        firstLabel="Evento"
-        secondLabel="Convocatoria"
-      />
+      <div className={styles['switch-section']}>
+        <CustomSwitch
+          isChecked={type === 'WORKSHOP'}
+          onChange={handleChange}
+          firstLabel="Evento"
+          secondLabel="Convocatoria"
+          size="xl"
+        />
+      </div>
       <label htmlFor="pdf" className={styles.labelTitle}>
         Añadir PDF
       </label>

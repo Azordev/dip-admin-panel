@@ -1,11 +1,7 @@
-@import 'colors','fonts','layout';
+@import 'colors', 'fonts', 'layout';
 
 .relative {
-  position: relative;
-}
-
-.container {
-  bottom: calc(-50vh - 10px);
+  height: 100vh;
   position: relative;
 }
 
@@ -29,10 +25,8 @@
   justify-content: space-between;
   left: 0;
   list-style-type: none;
-  margin: 10px 50px;
-  margin-bottom: 0;
+  margin: 30px 50px;
   max-height: 43px;
-  overflow: auto;
   padding: 20px auto;
   position: absolute;
   right: 0;
@@ -45,7 +39,7 @@
     opacity: 1;
     padding: 12px 19px;
     text-align: center;
-    
+
     span {
       color: $text-gray;
       font: normal normal normal 13px/20px $font-visby;
@@ -57,7 +51,7 @@
 
   ul {
     display: flex;
-    
+
     .pages-list {
       background: $gray-100 0% 0% no-repeat padding-box;
       border-radius: 22px;
@@ -66,7 +60,6 @@
       margin: 0 5px;
       opacity: 1;
       text-align: center;
-
     }
 
     .active {
@@ -75,7 +68,7 @@
       color: $white;
       opacity: 1;
     }
-
+    
     li {
       color: $text-gray;
       cursor: pointer;
@@ -103,6 +96,3 @@
     }
   }
 }
-
-
-

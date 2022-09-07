@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
+import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
 import { USERS } from '@/services/GraphQL/users/queries'
 import ClientOnly from '@/views/Shared/ClientOnly'
