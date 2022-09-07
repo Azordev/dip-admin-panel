@@ -10,11 +10,11 @@ export default function DeleteModal(itemName: string, confirmButtonText: any) {
     inputPlaceholder: 'ELIMINAR',
     padding: '50px 120px 40px',
     showCancelButton: true,
-    html: '<p>Si desea eliminar este,' + itemName + ' escriba <span>ELIMINAR</span> en el siguiente recuadro.</p>',
+    html: `<p>Si desea eliminar este ${itemName}, escriba <span>ELIMINAR</span> en el siguiente recuadro.</p>`,
     title: `¿Desea eliminar este ${itemName}?`,
     width: 874,
   }).then(confirmed => {
-    if (confirmed.value === 'ELIMINAR') {
+    if (/^eliminar$/i.test(confirmed.value)) {
       // eslint-disable-next-line promise/no-callback-in-promise
       confirmButtonText(confirmed.isConfirmed)
       return MySwal.fire('Eliminado!', '', 'success')
