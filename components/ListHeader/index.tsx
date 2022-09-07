@@ -20,7 +20,7 @@ const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoU
     <Link href={createPath} passHref replace>
       <a>
         <Icons8 name="plus--v1" iconStyle="ios" />
-        <span>{createText}</span>
+        <span className={styles.title}>{createText}</span>
       </a>
     </Link>
     {logoUrl ? (
