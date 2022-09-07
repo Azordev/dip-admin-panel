@@ -1,6 +1,5 @@
 import { FC, useCallback, useMemo, useState } from 'react'
 
-import ListHeader from '@/components/ListHeader'
 import Table, { TableData } from '@/components/Table'
 import Actions from '@/components/Table/Actions'
 import { Provider } from '@/services/GraphQL/providers/types'
@@ -55,8 +54,6 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers: dbProviders }
 
   return (
     <div className={styles.container}>
-      <ListHeader createText="Crear nuevo proveedor" createPath="/proveedores/crear" />
-
       <div className={styles['table-container']}>
         <Table headers={headers} data={data} />
       </div>

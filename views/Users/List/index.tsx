@@ -1,6 +1,5 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
-import ListHeader from '@/components/ListHeader'
 import Table, { TableData } from '@/components/Table'
 import TableActions from '@/components/Table/Actions'
 import { User } from '@/services/GraphQL/users/types'
@@ -69,7 +68,6 @@ const UsersList: FC<{
 
   return (
     <div className={styles.container}>
-      <ListHeader createText="Añadir socio" createPath="/socios/crear" />
       <div className={styles.users}>
         <Table headers={headers} data={data} />
       </div>
