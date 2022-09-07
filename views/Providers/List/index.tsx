@@ -53,7 +53,7 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers: dbProviders }
   }, [providers, handleSwitchProvider])
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles['table-container']}>
         <Table headers={headers} data={data} />
       </div>

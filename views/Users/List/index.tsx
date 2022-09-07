@@ -67,7 +67,7 @@ const UsersList: FC<{
   }, [dbUsers, indexOfFirstPartner, indexOfLastPartner])
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles.users}>
         <Table headers={headers} data={data} />
       </div>
