@@ -14,12 +14,16 @@ const CreateProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading })
 
   return (
     <form onSubmit={submitHandler}>
-      <input type="text" placeholder="Comercial Name" {...register('commercialName', { required: true })} />
+      <input
+        type="text"
+        placeholder="Escriba el nombre de la empresa"
+        {...register('commercialName', { required: true })}
+      />
       {errors.commercialName && <span>This field is required</span>}
-      <input type="text" placeholder="WhatsApp Phone" {...register('salesPhone')} />
+      <input type="date" placeholder="DD/MM/AAAA" {...register('salesPhone')} />
       {errors.salesPhone && <span>This field is required</span>}
-      <input type="number" min={0} placeholder="Order Index" {...register('orderIndex')} />
-      <input type="text" placeholder="Plan" {...register('plan')} />
+      <input type="text" min={0} placeholder="Escriba el usuario" {...register('orderIndex')} />
+      <input type="text" placeholder="Escriba la contraseña" {...register('plan')} />
       <input type="text" placeholder="Logo URL" {...register('logoUrl')} />
       <button type="submit">{buttonText}</button>
     </form>
