@@ -38,30 +38,23 @@ const Login: NextPage = () => {
             setTimeout(() => router.reload(), 1000)
             return
           }
-          if (data.users[0]?.isActive && (data.users[0]?.providerInfo?.id || data.users[0]?.memberInfo?.id)) {
+
+          const userIsValid: boolean =
+            data.users[0]?.isActive && (data.users[0]?.providerInfo?.id || data.users[0]?.memberInfo?.id)
+
+          if (userIsValid) {
             const user = data.users[0]
 
+            log('Login:useEffect', 'Usuario encontrado en base de datos, procediendo a verificar sesión...', 'SUCCESS')
+            window.sessionStorage.setItem('userId', user.id)
+            window.sessionStorage.setItem('user', JSON.stringify(user))
+
             if (user?.type === 'PROVIDER') {
-              log(
-                'Login:useEffect',
-                'Usuario encontrado en base de datos, procediendo a verificar sesión...',
-                'SUCCESS',
-              )
-              window.sessionStorage.setItem('userId', user.id)
-              window.sessionStorage.setItem('user', JSON.stringify(user))
-              setTimeout(() => router.push('/'), 200)
-            } else if (user?.memberInfo?.email) {
-              log(
-                'Login:useEffect',
-                'Usuario encontrado en base de datos, procediendo a verificar sesión...',
-                'SUCCESS',
-              )
-              window.sessionStorage.setItem('userId', user.id)
-              window.sessionStorage.setItem('user', JSON.stringify(user))
-              setTimeout(() => router.push('/'), 200)
-            } else {
-              warn('Login:onSubmit', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
+              window.sessionStorage.setItem('providerId', user?.providerInfo?.id)
             }
+            setTimeout(() => router.push('/'), 200)
+          } else {
+            warn('Login:onSubmit', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
           }
         }
       }
