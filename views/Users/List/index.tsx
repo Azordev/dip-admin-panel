@@ -69,7 +69,7 @@ const UsersList: FC<{
 
   return (
     <div className={styles.container}>
-      <ListHeader createText="Añadir socio" createPath="/socios/crear" />
+      <ListHeader createText="Añadir Socio" createPath="/socios/crear" />
       <div className={styles.users}>
         <Table headers={headers} data={data} />
       </div>

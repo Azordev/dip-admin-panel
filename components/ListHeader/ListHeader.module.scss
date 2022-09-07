@@ -4,27 +4,52 @@
   background-color: $white;
   display: flex;
   flex-direction: row;
+  font-size: 1.25rem;
   justify-content: space-between;
   padding: 1rem 2rem;
-  font-size: 1.25rem;
   height: var(--header-height);
 
   a {
-    color: #000;
+    color: $black;
     display: flex;
     text-decoration: none;
 
     div {
+      height: 2.5rem;
       left: unset;
       right: 0.5rem;
       width: 2.5rem;
-      height: 2.5rem;
     }
 
-    span {
+    .title {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
+      
+      &:hover {
+        color: $black;
+      }
+
+      &::before {
+        background-color: $black;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        width: 100%;
+      }
+      
+      &:hover::before {
+        transform: scaleX(1);
+      }
+      
     }
+
+    
   }
 }

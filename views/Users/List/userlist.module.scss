@@ -1,19 +1,19 @@
 @import 'colors', 'layout';
 
 .container {
-  height: calc(98vh - var(--header-height));
+  height: calc(100vh - var(--header-height));
 }
 
 .users {
-  padding: 20px 24px;
   height: 100%;
+  padding: 20px 24px;
 }
 
 .status {
   padding: 0;
 
   @include mq(xl) {
-    padding: 0rem 1.5rem;
+    padding: 0 1.5rem;
   }
 }
 
