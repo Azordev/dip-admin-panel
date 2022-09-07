@@ -1,16 +1,17 @@
 import { gql } from '@apollo/client'
 
 import { eventInfo } from '../events/types.d'
-import { memberInfo, usersInfo } from './types.d'
+import { memberInfo, providerInfo, usersInfo } from './types.d'
 
 export const USER_SESSION = gql`
   ${usersInfo}
   ${memberInfo}
+  ${providerInfo}
   query login($password: String!, $memberCode: String!) {
     users(
       where: {
         _and: [
-          { type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] } }
+          { type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN", "PROVIDER"] } }
           { member_code: { _eq: $memberCode } }
           { password: { _eq: $password } }
         ]
@@ -19,6 +20,9 @@ export const USER_SESSION = gql`
       ...UserInfoFragment
       memberInfo: member_info {
         ...MemberInfoFragment
+      }
+      providerInfo: provider_info {
+        ...ProviderInfoFragment
       }
     }
   }
