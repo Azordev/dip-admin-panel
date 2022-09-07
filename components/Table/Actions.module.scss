@@ -1,0 +1,15 @@
+@import 'layout', 'colors';
+
+.container {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+
+  @include mq(xl) {
+    gap: 20px;
+  }
+}
+
+.edit {
+  color: $gray-650;
+}

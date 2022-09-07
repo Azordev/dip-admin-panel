@@ -1,5 +1,18 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
+import useAuth from '@/hooks/useAuth'
+
 const DIDAdminPanel = () => {
-  return <h1>DID Admin Panel</h1>
+  const router = useRouter()
+  const { user } = useAuth()
+  useEffect(() => {
+    if (user?.type === 'ADMIN') {
+      router.push('/eventos')
+    } else if (user?.type === 'PROVIDER') {
+      router.push('/productos')
+    }
+  })
 }
 
 export default DIDAdminPanel
