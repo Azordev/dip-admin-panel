@@ -7,6 +7,7 @@ import client from '@/services/GraphQL/client'
 import { CREATE_PROVIDER, DEACTIVATE_PROVIDER, UPDATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
 import { PROVIDER_BY_ID, PROVIDERS } from '@/services/GraphQL/providers/queries'
 import { Provider, ProviderEditable } from '@/services/GraphQL/providers/types'
+import { CREATE_PROVIDER_USER } from '@/services/GraphQL/users/mutations'
 
 interface GetParams {
   limit?: number
@@ -66,19 +67,42 @@ export const createProvider = (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(500).json(err)
       }
 
-      const file = files.logo as formidable.File
-      const { Location: logoUrl } = await addObject(file, 'providers')
+      const logo = files.logo as formidable.File
+      const { Location: logoUrl } = await addObject(logo, 'providers')
+
+      const { data, errors: userErrors } = await client.mutate({
+        mutation: CREATE_PROVIDER_USER,
+        variables: {
+          memberCode: fields.memberCode,
+          password: fields.password,
+          avatarUrl: logoUrl,
+        },
+      })
+
+      if (userErrors) {
+        return res.status(500).json(userErrors)
+      }
+
+      const newProvider = {
+        commercialName: fields.commercialName,
+        addres: fields.address,
+        salesPhone: fields.salesPhone,
+        b2bEmail: fields.b2bEmail,
+        salesEmail: fields.salesEmail,
+        b2bPhone: fields.b2bPhone,
+        legalName: fields.legalName,
+        details: fields.details,
+        userId: data?.user?.id,
+        logoUrl,
+      }
 
       await client.mutate({
         mutation: CREATE_PROVIDER,
-        variables: { ...fields, logoUrl },
+        variables: newProvider,
       })
-      res.json({
+      return res.json({
         msg: 'Provider created successfully',
-        data: {
-          ...fields,
-          logoUrl: logoUrl || '',
-        },
+        data: { ...newProvider, memberCode: fields.memberCode },
       })
     } catch (error) {
       res.status(500).json(error)
