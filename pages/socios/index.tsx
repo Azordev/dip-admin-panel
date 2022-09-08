@@ -1,23 +1,29 @@
-import { useQuery } from '@apollo/client'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 
 import EmptyList from '@/components/EmptyList'
-import Loading from '@/components/Loading'
-import { USERS } from '@/services/GraphQL/users/queries'
+import { User } from '@/services/GraphQL/users/types'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
 import UsersContainers from 'containers/Socios/UsersContainers'
+import { getMembers } from 'controllers/members'
 
-const Users: NextPage = () => {
-  const { data, loading } = useQuery(USERS)
-
-  if (loading) return <Loading />
-  if (!data || data.length < 1) return <EmptyList text="La lista de usuarios esta vacía o es invalida." />
+const Users: NextPage<{ users: User[] }> = ({ users }) => {
+  if (!users || users.length < 1) return <EmptyList text="La lista de usuarios esta vacía o es invalida." />
   return (
     <ClientOnly>
-      <UsersContainers users={data.users} />
+      <UsersContainers users={users} />
     </ClientOnly>
   )
 }
 
 export default Users
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users } = await getMembers()
+
+  return {
+    props: {
+      users: users || [],
+    },
+  }
+}
