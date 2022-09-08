@@ -1,6 +1,5 @@
 @import '../../../styles/colors';
 
-
 .save {
   background: $submit;
   border-color: #b2bf55;
@@ -13,15 +12,11 @@
   text-align: center;
   transition: 0.3s ease opacity;
   width: 252px;
- 
+
   &:hover {
     opacity: 0.9;
-    
-
   }
 }
-
-
 
 .delete {
   background-color: $red-dark;
@@ -37,11 +32,5 @@
 
   &:hover {
     opacity: 0.9;
-    
-
   }
- 
 }
-
-
-

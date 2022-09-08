@@ -1,0 +1,14 @@
+@import 'colors';
+
+.table-container {
+  height: 100%;
+  padding: 19px 25px;
+}
+
+.active {
+  color: $green-active;
+}
+
+.inactive {
+  color: $error;
+}
