@@ -19,6 +19,8 @@ const s3 = new S3({
 })
 
 export const addObject = async (file: File, prefix?: String) => {
+  if (!file) return { Location: '' }
+
   try {
     const extName = file?.originalFilename?.split('.').at(-1)
     const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${extName}`

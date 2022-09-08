@@ -2,16 +2,16 @@ import { gql } from '@apollo/client'
 
 export const CREATE_PROVIDER = gql`
   mutation (
-    $commercialName: String!
+    $commercialName: String
     $address: String
     $salesPhone: String
-    $b2bPhone: String!
+    $b2bPhone: String
     $salesEmail: String
-    $b2bEmail: String!
+    $b2bEmail: String
     $legalName: String
     $details: String
-    $isActive: Boolean
     $logoUrl: String
+    $userId: uuid
   ) {
     provider: insert_providers_one(
       object: {
@@ -23,11 +23,13 @@ export const CREATE_PROVIDER = gql`
         b2b_email: $b2bEmail
         legal_name: $legalName
         details: $details
-        is_active: $isActive
         logo_url: $logoUrl
+        user_id: $userId
+        is_active: true
       }
     ) {
       isActive: is_active
+      id
     }
   }
 `
