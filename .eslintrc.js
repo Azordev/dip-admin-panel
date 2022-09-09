@@ -37,6 +37,7 @@ module.exports = {
         trailingComma: 'all',
         bracketSpacing: true,
         arrowParens: 'avoid',
+        endOfLine: 'auto',
       },
     ],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',

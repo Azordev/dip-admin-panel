@@ -13,22 +13,27 @@ export interface ListHeaderProps {
   parentPath?: string
   logoUrl?: string
   altLogo?: string
+  nameIcon?: string
 }
 
-const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoUrl, altLogo }) => (
-  <nav className={styles.nav}>
-    <Link href={createPath} passHref replace>
-      <a>
-        <Icons8 name="plus--v1" iconStyle="ios" />
-        <span className={styles.title}>{createText}</span>
-      </a>
-    </Link>
-    {logoUrl ? (
-      <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={120} height={15} objectFit="contain" />
-    ) : (
-      <h1>{parent}</h1>
-    )}
-  </nav>
-)
+const ListHeader: FC<ListHeaderProps> = props => {
+  const { createPath, createText, parent, logoUrl, altLogo, nameIcon } = props
+  const customName = nameIcon || 'plus--v1'
 
+  return (
+    <nav className={styles.nav}>
+      <Link href={createPath} passHref replace>
+        <a>
+          <Icons8 name={customName} iconStyle="ios" />
+          <span className={styles.title}>{createText}</span>
+        </a>
+      </Link>
+      {logoUrl ? (
+        <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={120} height={15} objectFit="contain" />
+      ) : (
+        <h1>{parent}</h1>
+      )}
+    </nav>
+  )
+}
 export default ListHeader
