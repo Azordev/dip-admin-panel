@@ -46,29 +46,37 @@
   text-decoration: none;
   transition: .3s ease;
   position: relative;  
- 
- &:hover{
- color: $black;
-  .line{
+  .line {
     display: inline-block;
     position: relative;
   }
-  .line:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 4px;
-    bottom: 0;
-    left: 0;
+
+  .line::after {
     background-color: $black;
+    bottom: 0;
+    content: '';
+    height: 4px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.6s ease-out;
-    transform: scaleX(1);
-    transform-origin: bottom left;
+    width: 100%;
   }
-}
-}
+
+  &:hover {
+    color: $black;
+    
+    .line::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+  }
+
+
+
 
 .event-image {
   width: 100%;
