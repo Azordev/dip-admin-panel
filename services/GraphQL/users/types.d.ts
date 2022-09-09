@@ -46,6 +46,21 @@ export interface Member extends MemberBase {
   }
 }
 
+export interface ProviderBase {
+  id: string
+  createdAt?: string
+  updatedAt?: string
+  address?: string
+  commercialName?: string
+  salesPhone?: string
+  b2bPhone?: string
+  salesEmail?: string
+  b2bEmail?: string
+  legalName?: string
+  logoUrl?: string
+  catalogUrl?: string
+}
+
 export const usersInfo = gql`
   fragment UserInfoFragment on users {
     id
@@ -92,6 +107,10 @@ export interface User extends UserBase {
       count: number
     }
   }
+}
+
+export interface ProviderUser extends User {
+  providerInfo?: ProviderBase
 }
 
 export interface LoginInput {

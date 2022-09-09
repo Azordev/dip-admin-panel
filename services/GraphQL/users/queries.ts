@@ -45,8 +45,35 @@ export const USER_BY_ID = gql`
 export const USERS = gql`
   ${usersInfo}
   ${memberInfo}
+  ${providerInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     users(limit: $limit, offset: $offset, order_by: { member_code: asc }, where: { member_code: { _ilike: $query } }) {
+      ...UserInfoFragment
+      memberInfo: member_info {
+        ...MemberInfoFragment
+      }
+      providerInfo: provider_info {
+        ...ProviderInfoFragment
+      }
+      frontendErrors: frontend_errors_aggregate {
+        stats: aggregate {
+          count
+        }
+      }
+    }
+  }
+`
+
+export const MEMBER_USERS = gql`
+  ${usersInfo}
+  ${memberInfo}
+  query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
+    users(
+      limit: $limit
+      offset: $offset
+      order_by: { member_code: asc }
+      where: { member_code: { _ilike: $query }, type: { _eq: "MEMBER" } }
+    ) {
       ...UserInfoFragment
       memberInfo: member_info {
         ...MemberInfoFragment
