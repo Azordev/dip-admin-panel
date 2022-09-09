@@ -14,9 +14,10 @@ import iconProv from './ic_prov.svg'
 interface Props {
   children: ReactNode
 }
+
 const Dashboard: FC<Props> = ({ children }) => {
   const { logOut } = useAuth()
-  const classNameInherited = styles.icons ? ' ' + styles.icons : '' // creates space before class if needed
+
   return (
     <>
       <aside className={styles.sidebar}>
@@ -47,6 +48,18 @@ const Dashboard: FC<Props> = ({ children }) => {
             <a className={styles.link}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
               <span>Socios</span>
+            </a>
+          </Link>
+          <Link href="/productos" passHref>
+            <a className={styles.link}>
+              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="open-parcel" />
+              <span>Productos</span>
+            </a>
+          </Link>
+          <Link href="/perfil" passHref>
+            <a className={styles.link}>
+              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
+              <span>Perfil</span>
             </a>
           </Link>
         </nav>

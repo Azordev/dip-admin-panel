@@ -4,6 +4,7 @@ import { UseFormRegister } from 'react-hook-form'
 import { EventEditable } from '@/services/GraphQL/events/types'
 
 import styles from './CustomInput.module.scss'
+
 interface InputProps {
   register: UseFormRegister<EventEditable>
   id: string
@@ -28,8 +29,8 @@ const CustomInput: FC<InputProps> = ({
   children,
 }) => {
   return (
-    <div className={styles.customInput}>
-      <label htmlFor={id} className={styles.labelInput}>
+    <div className={styles['custom-input']}>
+      <label htmlFor={id} className={styles['label-input']}>
         {label}
       </label>
       <input

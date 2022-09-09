@@ -1,27 +1,54 @@
-@import 'fonts';
+@import 'fonts', 'colors';
 
 .nav {
   align-items: center;
+  background-color: $white;
   display: flex;
   flex-direction: row;
+  font-size: 1.25rem;
   justify-content: space-between;
-  padding-right: 1rem;
+  padding: 1rem 2rem;
+
+  a {
+    color: $black;
+    display: flex;
+    text-decoration: none;
+    
+    .button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+        
+      &:hover {
+        color: $black;
+      }
+  
+      &::before {
+        background-color: $black;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        width: 100%;
+      }
+    
+      &:hover::before {
+        transform: scaleX(1);
+      }  
+    }
+  }
 }
 
 .back-header-image {
   display: flex;
-  height: 1.5rem !important;
+  height: 33px;
   justify-self: flex-end;
   width: auto !important;
-}
-
-.button {
-  border: 0;
-  font-family: $font-visby;
-  font-size: 25px;
-  font-style: medium;
-  letter-spacing: 0;
-  padding-left: 0;
 }
 
 .logo {
