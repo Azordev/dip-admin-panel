@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FC, ReactNode } from 'react'
 
 import useAuth from '@/hooks/useAuth'
@@ -16,7 +17,10 @@ interface Props {
 }
 const Dashboard: FC<Props> = ({ children }) => {
   const { logOut } = useAuth()
-  const classNameInherited = styles.icons ? ' ' + styles.icons : '' // creates space before class if needed
+  const { pathname } = useRouter()
+
+  const checkIsActive = (url: string): boolean => pathname.startsWith(url)
+
   return (
     <>
       <aside className={styles.sidebar}>
@@ -27,13 +31,13 @@ const Dashboard: FC<Props> = ({ children }) => {
             </a>
           </Link>
           <Link href="/eventos" passHref>
-            <a className={styles.link}>
+            <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="health-calendar" />
               <span>Eventos</span>
             </a>
           </Link>
           <Link href="/proveedores" passHref>
-            <a className={styles.link}>
+            <a className={`${styles.link} ${checkIsActive('/proveedores') ? styles.active : ''}`}>
               <Image
                 src={iconProv}
                 alt={`shopaholic icon`}
@@ -44,7 +48,7 @@ const Dashboard: FC<Props> = ({ children }) => {
             </a>
           </Link>
           <Link href="/socios" passHref>
-            <a className={styles.link}>
+            <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
               <span>Socios</span>
             </a>
