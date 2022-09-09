@@ -29,8 +29,8 @@ const CustomInput: FC<InputProps> = ({
   children,
 }) => {
   return (
-    <div className={styles['custom-input']}>
-      <label htmlFor={id} className={styles['label-input']}>
+    <div className={styles.customInput}>
+      <label htmlFor={id} className={styles.labelInput}>
         {label}
       </label>
       <input

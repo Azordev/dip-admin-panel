@@ -18,7 +18,7 @@
 
 .label-input {
   color: $gray-850;
-  font-size: 30px;
+  @extend .text-3xl;
 }
 
 .input {
