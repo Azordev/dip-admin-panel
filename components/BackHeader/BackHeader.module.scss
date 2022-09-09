@@ -1,6 +1,7 @@
-@import 'fonts', 'colors', 'utilities';
+@import 'fonts', 'colors', 'layout';
 
 .nav {
+  background-color: $white;
   align-items: center;
   background-color: $white;
   display: flex;
@@ -62,5 +63,4 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-left: 5px;
 }
