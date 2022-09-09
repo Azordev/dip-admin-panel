@@ -60,7 +60,7 @@ const ProfileForm = () => {
         </div>
       </section>
       <section className={styles['buttons-container']}>
-        <Button iconName="" className={styles['button-cancel']} onClick={() => router.push('/')}>
+        <Button iconName="" className={styles['button-cancel']} onClick={() => router.push('/productos')}>
           Cancelar
         </Button>
         <Button iconName="" className={styles['button-save']} type="submit">
