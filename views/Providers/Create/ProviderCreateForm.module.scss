@@ -1,0 +1,24 @@
+@import 'layout';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 44px 30px 85px 30px;
+
+  @include mq(xl) {
+    padding-left: 62px;
+    padding-right: 62px;
+  }
+}
+
+.input-container {
+  max-width: 583px;
+}
+
+.buttons-container {
+  display: flex;
+  margin-top: auto;
+  gap: 14px;
+  flex-wrap: wrap;
+}
