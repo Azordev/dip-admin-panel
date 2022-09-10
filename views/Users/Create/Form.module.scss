@@ -1,0 +1,89 @@
+@import 'colors', 'fonts';
+
+.form {
+  background-color: $gray-25;
+  line-height: normal;
+  padding: 45px 71px;
+  position: relative;
+
+  input,
+  textarea {
+    font-family: $font-visby, $font-base-sans-serif-family;
+  }
+}
+
+.custom-input {
+  margin-bottom: 23px;
+}
+
+.label-input {
+  color: $gray-850;
+  @extend .text-3xl;
+}
+
+.input {
+  margin: 10px 0;
+}
+
+.container-input {
+  border-radius: 6px;
+  display: flex;
+  margin-bottom: 22px;
+  margin-top: 10px;
+  text-align: center;
+
+  label {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .image {
+    align-items: center;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    height: 301px;
+    justify-content: center;
+    width: 301px;
+  }
+}
+
+.input-file {
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0.1px;
+  z-index: -1;
+}
+
+.label,
+.label-title {
+  color: $gray-300;
+  font-family: 'Visby', sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.error-message {
+  color: $red;
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.1rem;
+}
+
+.section {
+  display: flex;
+
+  .input-section {
+    flex: 0.6;
+  }
+}

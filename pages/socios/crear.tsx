@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import BackHeader from '@/components/BackHeader'
 import useLogger from '@/hooks/useLogger'
 import { CREATE_USER_MEMBER } from '@/services/GraphQL/users/mutations'
 import { UserEditable } from '@/services/GraphQL/users/types'
@@ -20,9 +21,8 @@ const Create: NextPage = () => {
   if (mutationError) logError(mutationError, 'pages/socios/crear.tsx', 'Error al crear el usuario')
 
   return (
-    <div className="container">
-      <h1 className="title">Create User</h1>
-
+    <div>
+      <BackHeader />
       <CreateUserLayout onSubmit={submitHandler} loading={loading} />
     </div>
   )
