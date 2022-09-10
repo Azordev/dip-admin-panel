@@ -18,7 +18,7 @@ const EventItem: NextPage<{ event: Event }> = ({ event }) => (
         )}
       </div>
       <section className={styles['event-header']}>
-        <h2>{event.title}</h2>
+        <h2 className={styles.line}>{event.title}</h2>
       </section>
       <section className={styles['event-content']}>
         <p className={styles['event-date']}>{readableDate(event.date)}</p>

@@ -85,3 +85,29 @@
     object-fit: contain;
   }
 }
+
+.line{
+    display: inline-block;
+    position: relative;
+    padding-bottom: 0.6rem;
+    transition: .3s ease;
+    &:hover{
+      font-size: 1.5rem;
+    }
+    &:after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 4px;
+      bottom: 0;
+      left: 0;
+      background-color: $white;
+      transform-origin: bottom right;
+      transition: transform 0.6s ease-out;
+  }
+  &:hover:after{
+      transform: scaleX(1);
+      transform-origin: bottom left;
+  }
+}
