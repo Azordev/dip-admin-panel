@@ -32,7 +32,7 @@ const Dashboard: FC<Props> = ({ children }) => {
             </a>
           </Link>
           <Link href="/eventos" passHref>
-            <a className={styles.link}>
+            <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
               <Eventos />
               <span>Eventos</span>
             </a>
