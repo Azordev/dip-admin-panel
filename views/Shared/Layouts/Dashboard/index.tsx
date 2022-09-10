@@ -53,13 +53,13 @@ const Dashboard: FC<Props> = ({ children }) => {
             </a>
           </Link>
           <Link href="/productos" passHref>
-            <a className={styles.link}>
+            <a className={`${styles.link} ${checkIsActive('/productos') ? styles.active : ''}`}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="open-parcel" />
               <span>Productos</span>
             </a>
           </Link>
           <Link href="/perfil" passHref>
-            <a className={styles.link}>
+            <a className={`${styles.link} ${checkIsActive('/perfil') ? styles.active : ''}`}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
               <span>Perfil</span>
             </a>
