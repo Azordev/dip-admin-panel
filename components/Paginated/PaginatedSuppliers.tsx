@@ -8,7 +8,7 @@ interface PaginatedSuppliersProps {
   providers: Provider[]
   ProvidersPerPage: number
   totalProvidersLength: number
-  setCurrentPage: (value: number) => void
+  setCurrentPage: (_value: number) => void
   CurrentPage: number
   indexOfFirstProvider: number
   indexOfLastProvider: number

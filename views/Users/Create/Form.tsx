@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import BackHeader from '@/components/BackHeader'
 import { MutableUserFormProps, UserEditable } from '@/services/GraphQL/users/types'
 const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
   const {
@@ -10,6 +9,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
     formState: { errors },
   } = useForm<UserEditable>()
   const submitHandler = handleSubmit(onSubmit)
+  const buttonText = loading ? 'Enviando' : 'Enviar'
 
   return (
     <>
@@ -70,7 +70,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
 
         <div className="button-container">
           <button className="add text-size" type="submit">
-            Guardar
+            {buttonText}
           </button>
 
           <button className="delete text-size" type="submit">

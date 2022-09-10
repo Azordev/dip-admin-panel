@@ -8,7 +8,7 @@ interface PaginatedPartnersProps {
   users: User[]
   PartnersPerPage: number
   totalPartnersLength: number
-  setCurrentPage: (value: number) => void
+  setCurrentPage: (_value: number) => void
   CurrentPage: number
   indexOfFirstPartner: number
   indexOfLastPartner: number
