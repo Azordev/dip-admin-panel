@@ -30,7 +30,6 @@ const EditProvider: NextPage = () => {
       submitHandler={submitHandler}
       isSubmitLoading={loading}
       UpdateForm={EditProviderLayout}
-      parent="PROVEEDORES"
     />
   )
 }
