@@ -1,7 +1,5 @@
 import React from 'react'
 
-import styles from './Eventos.module.scss'
-
 const Eventos: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     version="1.1"
@@ -10,7 +8,7 @@ const Eventos: React.FC<{ className?: string }> = ({ className }) => (
     x="0px"
     y="0px"
     viewBox="0 0 124.813 124.813"
-    className={styles['cls-2']}
+    style={{ width: '35px', fill: 'white' }}
   >
     <g>
       <g>
