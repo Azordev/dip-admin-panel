@@ -8,7 +8,7 @@ import CreateEventForm from './Form'
 
 const CreateEventLayout: FC<MutableEventFormProps> = ({ onSubmit, loading }) => (
   <>
-    <BackHeader parent="" />
+    <BackHeader to="/eventos" />
     <div className={styles.container}>
       <CreateEventForm onSubmit={onSubmit} loading={loading} />
     </div>
