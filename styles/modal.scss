@@ -1,0 +1,57 @@
+@import 'colors', 'fonts';
+
+.swal2-modal {
+  .swal2-title {
+    color: $black;
+    font-family: $font-visby;
+    font-size: 38px;
+    font-weight: 800;
+  }
+
+  .swal2-html-container {
+    color: $black;
+    font-family: $font-visby;
+    font-size: 25px;
+    text-align: left;
+
+    span {
+      font-weight: 800;
+    }
+  }
+
+  .swal2-input {
+    border: 1px solid $gray-250;
+    font-family: $font-base-sans-serif-family;
+    font-size: 24px;
+    height: 88px;
+    padding: 0 1.5em;
+
+    &::placeholder {
+      color: $gray-300;
+      font-family: $font-base-sans-serif-family;
+      font-size: 24px;
+      height: 88px;
+    }
+  }
+
+  .swal2-actions {
+    font-size: 30px;
+    gap: 20px;
+    
+    button {
+      border-radius: 5px;
+      height: 72px;
+      padding: 15px 1rem;
+      text-align: center;
+      width: 252px;
+    }
+
+    .swal2-confirm {
+      background-color: $green-confirm;
+    }
+
+    .swal2-cancel {
+      background-color: $gray-550;
+    }
+  }
+}

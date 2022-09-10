@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
 import CustomSwitch from '@/components/CustomSwitch'
+import DeleteModal from '@/components/DeleteModal'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
@@ -77,6 +78,14 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
 
   const handleAsistentes = () => {
     // TODO: implementación del botón de asistentes
+  }
+
+  const showModal = () => {
+    DeleteModal('evento', (confirmed: boolean) => {
+      if (confirmed) {
+        // Add petition Delete
+      }
+    })
   }
 
   return (
@@ -152,12 +161,15 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         defaultValue={originalEvent?.description}
         {...register('description', { required: false })}
       ></textarea>
-      <CustomSwitch
-        isChecked={type === 'WORKSHOP'}
-        onChange={handleChange}
-        firstLabel="Evento"
-        secondLabel="Convocatoria"
-      />
+      <div className={styles['switch-section']}>
+        <CustomSwitch
+          isChecked={type === 'WORKSHOP'}
+          onChange={handleChange}
+          firstLabel="Evento"
+          secondLabel="Convocatoria"
+          size="xl"
+        />
+      </div>
       <label htmlFor="pdf" className={styles.labelTitle}>
         Añadir PDF
       </label>
@@ -185,7 +197,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           {buttonText}
         </Button>
         {/* TODO: implementar funcionalidad asociada a este botón */}
-        <Button iconName="" className={styles.buttonDelete} onClick={() => {}}>
+        <Button iconName="" className={styles.buttonDelete} onClick={showModal}>
           Eliminar
         </Button>
       </section>

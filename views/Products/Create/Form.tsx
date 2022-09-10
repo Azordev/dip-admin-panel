@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
+import { AddImageSVG } from './AddImageSVG'
+
 import styles from './SaveorDelete.module.scss'
 
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
@@ -15,13 +17,54 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
   const submitHandler = handleSubmit(onSubmit)
 
   return (
-    <form onSubmit={submitHandler}>
-      <input type="text" placeholder="name" {...register('name', { required: true })} />
-      {errors.name && <small className="text-red-500">{errors.name.message}</small>}
-      <input type="text" placeholder="description" {...register('description', { required: true })} />
+    <form className="form-product" onSubmit={submitHandler}>
+      <label className="text-size label" htmlFor="name">
+        Nombre del Producto
+      </label>
+      <input
+        className="input-product font-visby"
+        id="name"
+        type="text"
+        placeholder="Escriba el nombre del evento..."
+        {...register('name', { required: true })}
+      />
+
+      <label className="text-size label" htmlFor="basePriceSol">
+        Precio del producto
+      </label>
+
+      <div className="container-price">
+        <p className="price">S/.</p>
+        <input
+          className="input-product font-visby"
+          type="text"
+          placeholder="00.00"
+          {...register('basePriceSol', { required: true })}
+        />
+        {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
+      </div>
+
+      <label className="text-size label" htmlFor="description">
+        Descripción del producto
+      </label>
+      <textarea
+        className="textarea font-visby"
+        id="description"
+        placeholder="Escribe aquí..."
+        {...register('description', { required: true })}
+      />
       {errors.description && <small className="text-red-500">{errors.description.message}</small>}
-      <input type="text" placeholder="image_url" {...register('imageUrl', { required: true })} />
+
+      <label className="text-size label">Añadir imagen del producto</label>
+      <label
+        className="image font-visby"
+        // {...register('imageUrl', { required: true })}
+      >
+        {AddImageSVG}
+        Añadir imagen
+      </label>
       {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
+
       <input type="text" placeholder="base_price_sol" {...register('basePriceSol', { required: true })} />
       {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
       <button className={styles.save} type="submit">

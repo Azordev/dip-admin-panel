@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const useAuth = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<any>(null)
   const { push } = useRouter()
 
   useEffect(() => {

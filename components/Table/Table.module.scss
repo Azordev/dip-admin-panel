@@ -1,0 +1,46 @@
+@import 'colors', 'fonts', 'layout';
+
+.container {
+  background-color: $white;
+  overflow: auto;
+  max-height: 100%;
+  width: 100%;
+  font-family: $font-poppins;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.thead {
+  border-bottom: 2px solid $gray-100;
+  border-radius: 20px;
+}
+
+.th {
+  padding: 1rem 0.25rem;
+  color: $text-black;
+  font-size: 15px;
+  font-weight: $font-semibold-weight;
+  text-align: center;
+
+  @include mq(xl) {
+    padding: 1rem;
+  }
+}
+
+.td {
+  padding: 1rem 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 13px;
+
+  &:first-of-type {
+    padding-left: 1rem;
+  }
+
+  &:last-of-type {
+    padding-right: 1rem;
+  }
+}

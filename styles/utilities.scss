@@ -1,0 +1,29 @@
+.hover {
+  span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  
+    &:hover {
+      color: $black;
+    }
+
+    &::before {
+      background-color: $black;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 2px;
+      left: 0;
+      position: absolute;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+  
+    &:hover::before {
+      transform: scaleX(1);
+    }
+  }
+}
