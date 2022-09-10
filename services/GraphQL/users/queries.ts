@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client'
 
 import { eventInfo } from '../events/types.d'
-import { memberInfo, providerInfo, usersInfo } from './types.d'
+import { providerInfo } from '../providers/types.d'
+import { memberInfo, usersInfo } from './types.d'
 
 export const USER_SESSION = gql`
   ${usersInfo}

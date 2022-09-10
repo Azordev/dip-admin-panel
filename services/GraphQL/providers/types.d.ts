@@ -4,9 +4,15 @@ import { Product } from '@/services/GraphQL/products/types'
 
 export const providerInfo = gql`
   fragment ProviderInfoFragment on providers {
+    id
+    address
     commercialName: commercial_name
-    isActive: is_active
+    b2bPhone: b2b_phone
+    salesEmail: sales_email
+    b2bEmail: b2b_email
+    legalName: legal_name
     logoUrl: logo_url
+    catalogUrl: catalog_url
     salesPhone: sales_phone # use for whatsapp number
     plan
     orderIndex: order_index
