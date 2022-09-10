@@ -16,7 +16,8 @@
     "stylelint": "stylelint --config .stylelintrc.json './**/*.{css,scss}'",
     "eslint": "eslint pages services views components utils hooks --color --cache -f table",
     "eslint:js:fix": "eslint pages services views components utils hooks --fix",
-    "prettier": "prettier --write pages services views components utils hooks --config ./.prettierrc.js",
+    "prettier": "prettier --check components containers controllers hooks pages services utils views --config ./.prettierrc.js",
+    "prettier:fix": "prettier --write components containers controllers hooks pages services utils views --config ./.prettierrc.js",
     "prettier:ci": "prettier --check --config ./.prettierrc.js",
     "check": "npm run prettier && npm run eslint && npm run stylelint",
     "lefthook": "lefthook run lint"
