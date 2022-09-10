@@ -4,6 +4,7 @@ import { UseFormRegister } from 'react-hook-form'
 import { EventEditable } from '@/services/GraphQL/events/types'
 
 import styles from './CustomInput.module.scss'
+
 interface InputProps {
   register: UseFormRegister<EventEditable>
   id: string

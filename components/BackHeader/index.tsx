@@ -9,23 +9,23 @@ export interface BackHeaderProps {
 }
 
 const BackHeader: FC<BackHeaderProps> = ({ parent, parentImageUrl }) => (
-  <div>
-    <nav className={styles.nav}>
-      <div className={styles['container-btn-logo']} onClick={() => window.history.back()}>
+  <nav className={styles.nav}>
+    <div className={styles['container-btn-logo']} onClick={() => window.history.back()}>
+      <a>
         <img
           className={styles.logo}
           src="https://icons.veryicon.com/png/o/application/yitao-wireless-icon-library/back-23.png"
           alt=""
         />
-        <button className={styles.button}>Regresar</button>
-      </div>
-      {parentImageUrl ? (
-        <img src={parentImageUrl} alt={parent} className={styles['back-header-image']} />
-      ) : (
-        <div>{parent}</div>
-      )}
-    </nav>
-  </div>
+        <span className={styles.button}>Regresar</span>
+      </a>
+    </div>
+    {parentImageUrl ? (
+      <img src={parentImageUrl} alt={parent} className={styles['back-header-image']} />
+    ) : (
+      <div>{parent}</div>
+    )}
+  </nav>
 )
 
 export default BackHeader

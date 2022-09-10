@@ -16,12 +16,11 @@ import iconProv from './ic_prov.svg'
 interface Props {
   children: ReactNode
 }
+
 const Dashboard: FC<Props> = ({ children }) => {
   const { logOut } = useAuth()
   const { pathname } = useRouter()
-
   const checkIsActive = (url: string): boolean => pathname.startsWith(url)
-
   return (
     <>
       <aside className={styles.sidebar}>
@@ -52,6 +51,18 @@ const Dashboard: FC<Props> = ({ children }) => {
             <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
               <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
               <span>Socios</span>
+            </a>
+          </Link>
+          <Link href="/productos" passHref>
+            <a className={`${styles.link} ${checkIsActive('/productos') ? styles.active : ''}`}>
+              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="open-parcel" />
+              <span>Productos</span>
+            </a>
+          </Link>
+          <Link href="/perfil" passHref>
+            <a className={`${styles.link} ${checkIsActive('/perfil') ? styles.active : ''}`}>
+              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
+              <span>Perfil</span>
             </a>
           </Link>
         </nav>
