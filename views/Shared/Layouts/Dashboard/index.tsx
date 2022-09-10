@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { FC, ReactNode } from 'react'
 
 import useAuth from '@/hooks/useAuth'
+import Eventos from '@/views/SVGs/Eventos/Eventos'
 import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 
 import Icons8 from '../../Icons8'
@@ -32,7 +33,7 @@ const Dashboard: FC<Props> = ({ children }) => {
           </Link>
           <Link href="/eventos" passHref>
             <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
-              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="health-calendar" />
+              <Eventos />
               <span>Eventos</span>
             </a>
           </Link>
