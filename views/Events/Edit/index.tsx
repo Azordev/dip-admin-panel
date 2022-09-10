@@ -101,7 +101,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         Asistentes
       </Button>
       <section className={styles.section}>
-        <div className={styles.inputSection}>
+        <div className={styles['input-section']}>
           <CustomInput
             name="title"
             label="Nombre del evento"
@@ -124,13 +124,13 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
             defaultValue={originalEvent?.date.slice(0, 19) as string}
           />
         </div>
-        <div className={styles.imageSection}>
+        <div className={styles['image-section']}>
           <div className={styles['container-input']}>
             <input
               id="image-file"
               type="file"
               accept="image/*"
-              className={styles.inputfile}
+              className={styles['input-file']}
               {...register('image')}
               onChange={handleFile}
             />
@@ -151,7 +151,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           </div>
         </div>
       </section>
-      <label htmlFor="description" className={styles.labelTitle}>
+      <label htmlFor="description" className={styles['label-title']}>
         Descripción del evento
       </label>
       <textarea
@@ -170,14 +170,14 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           size="xl"
         />
       </div>
-      <label htmlFor="pdf" className={styles.labelTitle}>
+      <label htmlFor="pdf" className={styles['label-title']}>
         Añadir PDF
       </label>
       <div className={styles['container-input']}>
         <input
           type="file"
           id="pdf-file"
-          className={styles.inputfile}
+          className={styles['input-file']}
           accept="application/pdf"
           {...register('pdf', { required: false })}
           onChange={handleFile}
@@ -189,15 +189,15 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
         </label>
       </div>
-      <section className={styles.buttonsContainer}>
-        <Button iconName="" className={styles.buttonCancel} onClick={() => router.push('/eventos')}>
+      <section className={styles['buttons-container']}>
+        <Button iconName="" className={styles['button-cancel']} onClick={() => router.push('/eventos')}>
           Cancelar
         </Button>
-        <Button iconName="" className={styles.buttonSave} type="submit">
+        <Button iconName="" className={styles['button-save']} type="submit">
           {buttonText}
         </Button>
         {/* TODO: implementar funcionalidad asociada a este botón */}
-        <Button iconName="" className={styles.buttonDelete} onClick={showModal}>
+        <Button iconName="" className={styles['button-delete']} onClick={showModal}>
           Eliminar
         </Button>
       </section>
