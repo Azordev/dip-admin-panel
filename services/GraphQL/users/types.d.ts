@@ -9,6 +9,21 @@ export const memberInfo = gql`
   }
 `
 
+export const providerInfo = gql`
+  fragment ProviderInfoFragment on providers {
+    id
+    address
+    commercialName: commercial_name
+    salesPhone: sales_phone
+    b2bPhone: b2b_phone
+    salesEmail: sales_email
+    b2bEmail: b2b_email
+    legalName: legal_name
+    logoUrl: logo_url
+    catalogUrl: catalog_url
+  }
+`
+
 export interface MemberBase {
   email: string
   firstNames?: string
@@ -29,6 +44,21 @@ export interface Member extends MemberBase {
       count: number
     }
   }
+}
+
+export interface ProviderBase {
+  id: string
+  createdAt?: string
+  updatedAt?: string
+  address?: string
+  commercialName?: string
+  salesPhone?: string
+  b2bPhone?: string
+  salesEmail?: string
+  b2bEmail?: string
+  legalName?: string
+  logoUrl?: string
+  catalogUrl?: string
 }
 
 export const usersInfo = gql`
@@ -77,6 +107,10 @@ export interface User extends UserBase {
       count: number
     }
   }
+}
+
+export interface ProviderUser extends User {
+  providerInfo?: ProviderBase
 }
 
 export interface LoginInput {
