@@ -19,11 +19,11 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
-
+        
       &:hover {
         color: $black;
       }
-
+  
       &::before {
         background-color: $black;
         bottom: 0;
