@@ -17,8 +17,8 @@
 }
 
 .label-input {
-  color: $gray-850;
   @extend .text-3xl;
+  color: $gray-850;
 }
 
 .input {
@@ -67,7 +67,7 @@
 .label,
 .label-title {
   color: $gray-300;
-  font-family: 'Visby', sans-serif;
+  font-family: $font-visby, $font-base-sans-serif-family;
   font-size: 12px;
   font-weight: normal;
 }
