@@ -1,43 +1,44 @@
 @import 'colors';
 
-@mixin create_switch($height, $width) {
-  display: flex;
+@mixin create-switch($height, $width) {
   align-items: flex-start;
+  display: flex;
   gap: 4px;
   width: $width;
+
   input {
     appearance: none;
-    min-width: 48px;
-    margin: 0;
+    background-color: $white;
+    border: 0.5px solid $gray-300;
+    border-radius: 32px;
+    cursor: pointer;
     display: flex;
+    height: $height;
+    margin: 0;
+    min-width: 48px;
     padding: 0;
     position: relative;
-    background-color: $white;
-    border-radius: 32px;
-    border: 0.5px solid $gray-300;
-    height: $height;
-    cursor: pointer;
 
     &:checked {
       &::before {
+        background-color: $green-active;
         left: unset;
         transform: translateX(calc($width - $height));
-        background-color: $green-active;
       }
     }
 
     &::before {
-      content: '';
-      position: absolute;
-      height: $height;
-      width: $height;
-      top: 0px;
-      left: 0px;
-      bottom: 0px;
-      margin: auto;
       background-color: $gray-300;
-      transition: all 0.3s;
       border-radius: 50%;
+      bottom: 0;
+      content: '';
+      height: $height;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      transition: all 0.3s;
+      width: $height;
     }
   }
 }
@@ -45,13 +46,13 @@
 .switch-sm {
   $switch-h: 24px;
   $switch-w: 48px;
-  @include create_switch($switch-h, $switch-w);
+  @include create-switch($switch-h, $switch-w);
 }
 
 .switch-xl {
   $switch-h: 60px;
   $switch-w: 120px;
-  @include create_switch($switch-h, $switch-w);
+  @include create-switch($switch-h, $switch-w);
 }
 
 // other sections
@@ -59,12 +60,12 @@
   color: $gray-800;
   display: inline;
   font-size: 30px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: normal;
 }
 
 .switch-container {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 15px;
 }

@@ -2,6 +2,9 @@
 @import 'animations', 'base_components', 'colors', 'fonts', 'forms', 'grid', 'layout', 'mixins', 'modal', 'navigation', 'type', 'utilities';
 
 :root {
+
+  // variables
+  --header-height: 72px;
   background: $bg-gray;
   color: $black;
   font-family: $font-base-sans-serif-family;
@@ -10,9 +13,6 @@
   -webkit-font-smoothing: antialiased;
   line-height: $font-base-line-height;
   scroll-behavior: smooth;
-
-  // variables
-  --header-height: 72px;
 
   @media (prefers-reduced-motion: reduce) {
     *,

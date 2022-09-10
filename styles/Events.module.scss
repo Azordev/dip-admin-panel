@@ -1,23 +1,25 @@
 @import 'colors';
+
 .container {
   margin: 1.5rem auto;
   max-width: 1200px;
 }
 
 .logo-container {
-  grid-area: logo;
-  width: 10rem;
-  height: 10rem;
-  background-color: $black;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  background-color: $black;
   border-radius: 0.2rem;
+  display: flex;
+  grid-area: logo;
+  height: 10rem;
+  justify-content: center;
   margin-right: 1rem;
+  width: 10rem;
+
   svg {
-    width: 100%;
     height: 100%;
     padding: 10px;
+    width: 100%;
   }
 }
 
@@ -35,17 +37,18 @@
 .event-item {
   background: $white;
   color: $black;
-  padding: 1.5rem;
   display: grid;
   grid-template-areas:
     'logo title'
     'logo title'
     'logo date';
-  grid-template-rows: 1fr 1fr 1rem;
   grid-template-columns: 200px 1fr;
+  grid-template-rows: 1fr 1fr 1rem;
+  padding: 1.5rem;
+  position: relative;
   text-decoration: none;
   transition: .3s ease;
-  position: relative;  
+
   .line {
     display: inline-block;
     position: relative;
@@ -73,31 +76,32 @@
       transform-origin: bottom left;
     }
   }
-  }
+}
 
 
 
 
 .event-image {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 
 .event-header {
   font-size: 1.3rem;
   font-weight: 500;
   grid-area: title;
+  line-height: normal;
   margin: auto;
   text-align: left;
   width: 300px;
-  line-height: normal;
+
   h2 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
     -webkit-box-orient: vertical;
+    display: box;
     -webkit-line-clamp: 3;
+    overflow: hidden;
     padding-bottom: 0.5rem;
+    text-overflow: ellipsis;
     transition: .5s ease;
   }
 }
@@ -110,5 +114,3 @@
 .event-date {
   font-weight: 500;
 }
-
-

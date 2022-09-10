@@ -29,7 +29,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button type={type} className={`${className} ${styles.button}`} onClick={onClick}>
       {withIcon && (
-        <Icon8 color={color} name={iconName} size={iconSize} iconStyle={iconStyle} className={styles.iconButton} />
+        <Icon8 color={color} name={iconName} size={iconSize} iconStyle={iconStyle} className={styles['icon-button']} />
       )}
       <p>{children}</p>
     </button>
