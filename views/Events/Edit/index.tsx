@@ -77,7 +77,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   }
 
   const handleAsistentes = () => {
-    router.push(`/asistentes/${originalEvent?.id}`)
+    router.push(`/eventos/asistentes/${originalEvent?.id}`)
   }
 
   const showModal = () => {
