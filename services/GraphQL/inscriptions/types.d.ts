@@ -17,12 +17,33 @@ export interface InscriptionEditable {
 export interface Inscription {
   id: string
   member: {
-    first_names: string
-    last_names: string
+    firstNames: string
+    lastNames: string
     id: string
     email: string
+    user: {
+      isActive: boolean
+      memberCode: string
+      createdAt: string
+    }
   }
   event: Event
+  updatedAt: string
+}
+
+export interface Attendee {
+  id: string
+  member: {
+    id: string
+    email: string
+    firstNames: string
+    lastNames: string
+    user: {
+      isActive: boolean
+      memberCode: string
+      createdAt: string
+    }
+  }
   updatedAt: string
 }
 

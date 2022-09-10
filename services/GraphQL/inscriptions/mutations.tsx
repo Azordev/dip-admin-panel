@@ -9,7 +9,7 @@ export const CREATE_INSCRIPTION = gql`
 `
 
 export const DELETE_INSCRIPTION = gql`
-  mutation ($id: String!) {
+  mutation ($id: uuid!) {
     delete_inscriptions_by_pk(id: $id) {
       id
     }

@@ -41,3 +41,23 @@ export const INSCRIPTION_BY_ID = gql`
     }
   }
 `
+
+export const ATTENDEES = gql`
+  query ($eventId: uuid!) {
+    inscriptions(where: { event_id: { _eq: $eventId } }) {
+      id
+      member: attendee_member {
+        id
+        email
+        firstNames: first_names
+        lastNames: last_names
+        user {
+          isActive: is_active
+          memberCode: member_code
+          createdAt: created_at
+        }
+      }
+      updatedAt: updated_at
+    }
+  }
+`

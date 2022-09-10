@@ -1,5 +1,4 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { useState } from 'react'
 
 import EmptyList from '@/components/EmptyList'
 import { Provider } from '@/services/GraphQL/providers/types'
