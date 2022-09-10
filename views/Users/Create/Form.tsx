@@ -10,7 +10,6 @@ import { MutableUserFormProps, UserEditable } from '@/services/GraphQL/users/typ
 import styles from './Form.module.scss'
 
 const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
-  const router = useRouter()
   const showModal = () => {
     DeleteModal('socio', (confirmed: boolean) => {
       if (confirmed) {
@@ -24,7 +23,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
     formState: { errors },
   } = useForm<UserEditable>()
   const submitHandler = handleSubmit(onSubmit)
-
+  const buttonText = loading ? 'Añadiendo' : 'Añadir'
   return (
     <>
       <form className={styles.form} onSubmit={submitHandler}>
@@ -99,7 +98,7 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
         </section>
         <section className={style['buttons-container']}>
           <Button iconName="" className={style['button-save']} type="submit">
-            Añadir
+            {buttonText}
           </Button>
           <Button iconName="" className={style['button-delete']} onClick={showModal}>
             Eliminar
