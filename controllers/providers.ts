@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { addObject } from '@/services/AWS/s3'
 import client from '@/services/GraphQL/client'
-import { CREATE_PROVIDER, DEACTIVATE_PROVIDER, UPDATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
+import { CREATE_PROVIDER, TOGGLE_PROVIDER, UPDATE_PROVIDER } from '@/services/GraphQL/providers/mutations'
 import { PROVIDER_BY_ID, PROVIDERS } from '@/services/GraphQL/providers/queries'
 import { Provider, ProviderEditable } from '@/services/GraphQL/providers/types'
 import { CREATE_PROVIDER_USER } from '@/services/GraphQL/users/mutations'
@@ -147,15 +147,17 @@ export const updateProvider = async (req: NextApiRequest, res: NextApiResponse) 
   })
 }
 
-export const disableProvider = async (req: NextApiRequest, res: NextApiResponse) => {
+export const toggleProvider = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query
+    const isActive = !(req.query['is-active'] === 'true' || false)
     await client.mutate({
-      mutation: DEACTIVATE_PROVIDER,
-      variables: { id },
+      mutation: TOGGLE_PROVIDER,
+      variables: { id, isActive },
     })
-    res.status(204).json({ msg: 'Provider disabled successfully' })
+    res.status(200).json({ msg: 'Provider toggled  successfully' })
   } catch (error) {
+    console.error(error)
     res.status(500).json(error)
   }
 }

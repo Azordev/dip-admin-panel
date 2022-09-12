@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from 'react'
+import { FC, useMemo } from 'react'
 
 import Table, { TableData } from '@/components/Table'
 import Actions from '@/components/Table/Actions'
@@ -6,23 +6,15 @@ import { Provider } from '@/services/GraphQL/providers/types'
 
 import styles from './List.module.scss'
 
-const ProvidersList: FC<{ providers: Provider[] }> = ({ providers: dbProviders }) => {
-  const [providers, setProviders] = useState(dbProviders)
+const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => {
   const headers = ['Rango', 'Fecha', 'Empresa', 'Usuario', 'Contraseña', 'Estado']
 
-  const handleSwitchProvider = useCallback(
-    (value: boolean, providerId: Provider['id']) => {
-      const newProviders = providers.map(provider => {
-        if (provider.id === providerId) {
-          return { ...provider, isActive: value }
-        }
-        return provider
-      })
-
-      setProviders(newProviders)
-    },
-    [providers],
-  )
+  const handleSwitchProvider = async (isActive: boolean, providerId: Provider['id']) => {
+    await fetch(`/api/providers/${providerId}?is-active=${isActive}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ isActive }),
+    })
+  }
 
   const data: TableData[] = useMemo(() => {
     const Active = ({ active }: { active: boolean }) => {
@@ -30,16 +22,17 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers: dbProviders }
     }
 
     return providers.map(provider => {
+      console.log(provider)
       const isActive = Boolean(provider?.isActive)
       return {
         id: provider.id,
         items: [
-          provider.id,
+          provider.orderIndex,
           provider.createdAt,
           provider.commercialName,
-          'email@gmail.com',
+          provider.b2bEmail,
           '**********',
-          <Active key={`${provider.id}-active`} active={isActive} />,
+          <Active key={`${provider.id}-active-${isActive}`} active={isActive} />,
           <Actions
             key={`${provider.id}-actions`}
             editLink={`/proveedores/editar/${provider.id}`}
@@ -50,7 +43,7 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers: dbProviders }
         ],
       }
     })
-  }, [providers, handleSwitchProvider])
+  }, [providers])
 
   return (
     <div>

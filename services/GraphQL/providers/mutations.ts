@@ -59,9 +59,9 @@ export const UPDATE_PROVIDER = gql`
   }
 `
 
-export const DEACTIVATE_PROVIDER = gql`
-  mutation ($id: uuid!) {
-    provider: update_providers_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
+export const TOGGLE_PROVIDER = gql`
+  mutation ($id: uuid!, $isActive: Boolean) {
+    provider: update_providers_by_pk(pk_columns: { id: $id }, _set: { is_active: $isActive }) {
       isActive: is_active
     }
   }

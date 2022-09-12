@@ -16,6 +16,7 @@ export const providerInfo = gql`
     salesPhone: sales_phone # use for whatsapp number
     plan
     orderIndex: order_index
+    isActive: is_active
   }
 `
 
@@ -24,6 +25,7 @@ export interface ProviderBase {
   isActive: boolean
   logoUrl: string
   salesPhone: string
+  b2bEmail: string
   plan: string
   orderIndex: number
 }
