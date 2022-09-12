@@ -5,12 +5,13 @@ import useAuth from '@/hooks/useAuth'
 
 const DIDAdminPanel = () => {
   const router = useRouter()
-  const { user } = useAuth()
+  const { user, isProvider } = useAuth()
   useEffect(() => {
-    if (user?.type === 'ADMIN') {
-      router.push('/eventos')
-    } else if (user?.type === 'PROVIDER') {
+    if (isProvider) {
       router.push('/productos')
+    }
+    if (user?.type === 'ADMIN' || user?.type === 'TEST_ADMIN') {
+      router.push('/eventos')
     }
   })
 }

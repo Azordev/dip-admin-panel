@@ -18,11 +18,10 @@ interface Props {
 }
 
 const Dashboard: FC<Props> = ({ children }) => {
-  const { logOut, isProvider, user } = useAuth()
+  const { logOut, user } = useAuth()
   const { pathname } = useRouter()
   const checkIsActive = (url: string): boolean => pathname.startsWith(url)
 
-  console.log(user, isProvider)
   return (
     <>
       <aside className={styles.sidebar}>
