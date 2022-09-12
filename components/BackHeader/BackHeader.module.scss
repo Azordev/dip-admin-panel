@@ -19,11 +19,11 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
-        
+
       &:hover {
         color: $black;
       }
-  
+
       &::before {
         background-color: $black;
         bottom: 0;
@@ -36,10 +36,10 @@
         transition: transform 0.3s ease;
         width: 100%;
       }
-    
+
       &:hover::before {
         transform: scaleX(1);
-      }  
+      }
     }
   }
 }
