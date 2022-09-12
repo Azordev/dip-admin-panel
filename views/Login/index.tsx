@@ -40,9 +40,11 @@ const Login: NextPage = () => {
           }
 
           const userIsValid: boolean =
-            data.users[0]?.isActive && (data.users[0]?.providerInfo?.id || data.users[0]?.memberInfo?.id)
+            data.users[0]?.isActive &&
+            (data.users[0]?.type === 'PROVIDER' ||
+              data.users[0]?.type === 'ADMIN' ||
+              data.users[0]?.type === 'TEST_ADMIN')
 
-          console.log(data.users)
           if (userIsValid) {
             const user = data.users[0]
 
@@ -55,7 +57,7 @@ const Login: NextPage = () => {
             }
             setTimeout(() => router.push('/'), 200)
           } else {
-            warn('Login:onSubmit', 'Usuario no activo, contactar con el administrador...', 'AUTHORIZATION')
+            warn('Login:onSubmit', 'Usuario no activo o no valido, contactar con el administrador...', 'AUTHORIZATION')
           }
         }
       }
