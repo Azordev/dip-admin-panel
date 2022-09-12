@@ -3,10 +3,6 @@ import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
-import { AddImageSVG } from './AddImageSVG'
-
-import styles from './SaveorDelete.module.scss'
-
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
@@ -28,11 +24,9 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         placeholder="Escriba el nombre del evento..."
         {...register('name', { required: true })}
       />
-
       <label className="text-size label" htmlFor="basePriceSol">
         Precio del producto
       </label>
-
       <div className="container-price">
         <p className="price">S/.</p>
         <input
@@ -43,7 +37,6 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         />
         {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
       </div>
-
       <label className="text-size label" htmlFor="description">
         Descripción del producto
       </label>
@@ -56,21 +49,12 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       {errors.description && <small className="text-red-500">{errors.description.message}</small>}
 
       <label className="text-size label">Añadir imagen del producto</label>
-      <label
-        className="image font-visby"
-        // {...register('imageUrl', { required: true })}
-      >
-        {AddImageSVG}
-        Añadir imagen
-      </label>
+      <label className="image font-visby">Añadir imagen</label>
       {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
-
-      <input type="text" placeholder="base_price_sol" {...register('basePriceSol', { required: true })} />
-      {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
-      <button className={styles.save} type="submit">
+      <button className="save" type="submit">
         {loading ? 'Guardando' : 'Guardar'}
       </button>
-      <button className={styles.delete} onClick={() => reset()}>
+      <button className="delete" onClick={() => reset()}>
         Eliminar
       </button>
     </form>
