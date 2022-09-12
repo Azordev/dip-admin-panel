@@ -21,6 +21,7 @@ const Dashboard: FC<Props> = ({ children }) => {
   const { logOut, user } = useAuth()
   const { pathname } = useRouter()
   const checkIsActive = (url: string): boolean => pathname.startsWith(url)
+  const isAdmin = user?.type === 'ADMIN' || user?.type === 'TEST_ADMIN'
 
   return (
     <>
@@ -31,34 +32,33 @@ const Dashboard: FC<Props> = ({ children }) => {
               <LogoDID />
             </a>
           </Link>
-          {user?.type === 'ADMIN' ||
-            (user?.type === 'TEST_ADMIN' && (
-              <>
-                <Link href="/eventos" passHref>
-                  <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
-                    <Eventos />
-                    <span>Eventos</span>
-                  </a>
-                </Link>
-                <Link href="/proveedores" passHref>
-                  <a className={`${styles.link} ${checkIsActive('/proveedores') ? styles.active : ''}`}>
-                    <Image
-                      src={iconProv}
-                      alt={`shopaholic icon`}
-                      className={`${stylesIcons8.icon} ${styles.icons}`}
-                      imgClassName={`icon shopaholic`}
-                    />
-                    <span>Proveedores</span>
-                  </a>
-                </Link>
-                <Link href="/socios" passHref>
-                  <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
-                    <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
-                    <span>Socios</span>
-                  </a>
-                </Link>
-              </>
-            ))}
+          {isAdmin && (
+            <>
+              <Link href="/eventos" passHref>
+                <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
+                  <Eventos />
+                  <span>Eventos</span>
+                </a>
+              </Link>
+              <Link href="/proveedores" passHref>
+                <a className={`${styles.link} ${checkIsActive('/proveedores') ? styles.active : ''}`}>
+                  <Image
+                    src={iconProv}
+                    alt={`shopaholic icon`}
+                    className={`${stylesIcons8.icon} ${styles.icons}`}
+                    imgClassName={`icon shopaholic`}
+                  />
+                  <span>Proveedores</span>
+                </a>
+              </Link>
+              <Link href="/socios" passHref>
+                <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
+                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
+                  <span>Socios</span>
+                </a>
+              </Link>
+            </>
+          )}
           {user?.type === 'PROVIDER' && (
             <>
               <Link href="/productos" passHref>
