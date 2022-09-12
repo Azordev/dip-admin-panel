@@ -99,10 +99,10 @@ export const UPDATE_MEMBER = gql`
   }
 `
 
-export const DEACTIVATE_USER = gql`
-  mutation ($id: uuid!) {
-    user: update_users_by_pk(pk_columns: { id: $id }, _set: { is_active: false }) {
-      is_active
+export const TOGGLE_USER = gql`
+  mutation ($id: uuid!, $isActive: Boolean) {
+    user: update_users_by_pk(pk_columns: { id: $id }, _set: { is_active: $isActive }) {
+      isActive: is_active
     }
   }
 `

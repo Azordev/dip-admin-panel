@@ -14,7 +14,11 @@ const UsersList: FC<{
   const [users, setUsers] = useState(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
   const headers = ['CÓDIGO', 'Fecha', 'Socio', 'Correo electrónico', 'Contraseña', 'Estado']
 
-  const handleSwitchUser = useCallback(
+  const handleSwitchUser = async (isActive: boolean, userId: User['id']) => {
+    await fetch(`/api/members/${userId}?is-active=${!isActive}`, { method: 'PATCH' })
+  }
+
+  useCallback(
     (value: boolean, userId: User['id']) => {
       const newUsers = users.map(user => {
         if (user.id === userId) {
@@ -60,7 +64,7 @@ const UsersList: FC<{
         ],
       }
     })
-  }, [users, handleSwitchUser])
+  }, [users])
 
   useEffect(() => {
     setUsers(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
