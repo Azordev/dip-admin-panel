@@ -8,7 +8,6 @@ interface ButtonProps {
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
   className?: string
-  withIcon?: boolean
   iconSize?: number
   iconName?: string
   iconStyle?: string
@@ -19,7 +18,6 @@ const Button: FC<ButtonProps> = ({
   children,
   onClick,
   className,
-  withIcon = false,
   iconSize,
   iconName,
   iconStyle = 'ios-filled',
@@ -28,7 +26,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <button type={type} className={`${className} ${styles.button}`} onClick={onClick}>
-      {withIcon && iconName && (
+      {!!iconName && (
         <Icon8 color={color} name={iconName} size={iconSize} iconStyle={iconStyle} className={styles['icon-button']} />
       )}
       <p>{children}</p>
