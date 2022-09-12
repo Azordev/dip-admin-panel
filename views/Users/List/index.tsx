@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/router'
+import { FC, useMemo } from 'react'
 
 import Table, { TableData } from '@/components/Table'
 import TableActions from '@/components/Table/Actions'
@@ -10,28 +11,14 @@ const UsersList: FC<{
   users: User[]
   indexOfFirstPartner: number
   indexOfLastPartner: number
-}> = ({ users: dbUsers, indexOfFirstPartner, indexOfLastPartner }) => {
-  const [users, setUsers] = useState(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
+}> = ({ users }) => {
+  const { reload } = useRouter()
   const headers = ['CÓDIGO', 'Fecha', 'Socio', 'Correo electrónico', 'Contraseña', 'Estado']
 
   const handleSwitchUser = async (isActive: boolean, userId: User['id']) => {
     await fetch(`/api/members/${userId}?is-active=${!isActive}`, { method: 'PATCH' })
+    reload()
   }
-
-  useCallback(
-    (value: boolean, userId: User['id']) => {
-      const newUsers = users.map(user => {
-        if (user.id === userId) {
-          return { ...user, isActive: value }
-        }
-        return user
-      })
-
-      setUsers(newUsers)
-      // TODO: ACTUALIZAR ESTADO ACTIVO DE USUARIO EN LA BASE DE DATOS
-    },
-    [users],
-  )
 
   const data: TableData[] = useMemo(() => {
     return users.map(user => {
@@ -64,11 +51,8 @@ const UsersList: FC<{
         ],
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
-
-  useEffect(() => {
-    setUsers(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
-  }, [dbUsers, indexOfFirstPartner, indexOfLastPartner])
 
   return (
     <div>

@@ -12,7 +12,6 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => {
   const handleSwitchProvider = async (isActive: boolean, providerId: Provider['id']) => {
     await fetch(`/api/providers/${providerId}?is-active=${isActive}`, {
       method: 'PATCH',
-      body: JSON.stringify({ isActive }),
     })
   }
 
