@@ -7,7 +7,7 @@ import CreateProviderForm from './Form'
 
 const CreateProviderLayout: FC<MutableProviderUserFormProps> = ({ onSubmit, loading }) => (
   <div className="flex flex-col hhfull">
-    <BackHeader to="/proveedores"/>
+    <BackHeader to="/proveedores" />
 
     <CreateProviderForm onSubmit={onSubmit} loading={loading} />
   </div>
