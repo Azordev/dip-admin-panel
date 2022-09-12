@@ -81,9 +81,11 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   }
 
   const showModal = () => {
-    DeleteModal('evento', (confirmed: boolean) => {
+    DeleteModal('evento', async (confirmed: boolean) => {
       if (confirmed) {
         // Add petition Delete
+        await fetch(`/api/events/${originalEvent?.id}`, { method: 'DELETE' })
+        router.push('/eventos')
       }
     })
   }
