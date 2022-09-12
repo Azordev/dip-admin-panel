@@ -4,6 +4,7 @@ export const memberInfo = gql`
   fragment MemberInfoFragment on members {
     id
     email
+    # user
     firstNames: first_names
     lastNames: last_names
   }

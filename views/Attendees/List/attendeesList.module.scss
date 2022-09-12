@@ -1,0 +1,26 @@
+@import 'colors', 'layout';
+
+.attendees {
+  height: 100%;
+  padding: 20px 24px;
+}
+
+.status {
+  padding: 0;
+
+  @include mq(xl) {
+    padding: 0 1.5rem;
+  }
+}
+
+.active {
+  color: $green-active;
+}
+
+.inactive {
+  color: $error;
+}
+
+.delete-button {
+  cursor: pointer;
+}

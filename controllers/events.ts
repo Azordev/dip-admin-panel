@@ -51,7 +51,20 @@ export const getEventsAPI = async (req: NextApiRequest, res: NextApiResponse) =>
   }
 }
 
-export const getEvent = async (req: NextApiRequest, res: NextApiResponse) => {
+export const getEvent = async (
+  eventId: string,
+): Promise<{ event: Event | undefined; error: ApolloError | undefined }> => {
+  const { data, error } = await client.query<{ event: Event }>({
+    query: EVENT_BY_ID,
+    variables: {
+      id: eventId,
+    },
+  })
+
+  return { event: data.event, error }
+}
+
+export const getEventAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
     const { data } = await client.query({
