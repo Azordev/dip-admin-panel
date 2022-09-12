@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 
 import DeleteModal from '@/components/DeleteModal'
@@ -6,6 +7,7 @@ import DeleteModal from '@/components/DeleteModal'
 import styles from './attendeesList.module.scss'
 
 const DeleteAttendee: FC<{ member: string; inscriptionId: string }> = ({ member, inscriptionId }) => {
+  const { reload } = useRouter()
   const [confirmDelete, setConfirmDelete] = useState(false)
 
   useEffect(() => {
@@ -16,14 +18,19 @@ const DeleteAttendee: FC<{ member: string; inscriptionId: string }> = ({ member,
     if (confirmDelete) {
       deleteInscription()
     }
-  }, [confirmDelete, inscriptionId])
+  }, [confirmDelete, inscriptionId, reload])
+
+  const deletAttendee = async () => {
+    await DeleteModal(`la inscripción de ${member}`, setConfirmDelete)
+    reload()
+  }
 
   return (
     <svg
       viewBox="351.207 218.448 20 20"
       width={20}
       height={20}
-      onClick={() => DeleteModal(`la inscripción de ${member}`, setConfirmDelete)}
+      onClick={() => deletAttendee()}
       className={styles['delete-button']}
     >
       <path
