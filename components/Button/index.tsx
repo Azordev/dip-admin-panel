@@ -10,7 +10,7 @@ interface ButtonProps {
   className?: string
   withIcon?: boolean
   iconSize?: number
-  iconName: string
+  iconName?: string
   iconStyle?: string
   color?: string
 }
@@ -28,7 +28,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <button type={type} className={`${className} ${styles.button}`} onClick={onClick}>
-      {withIcon && (
+      {withIcon && iconName && (
         <Icon8 color={color} name={iconName} size={iconSize} iconStyle={iconStyle} className={styles['icon-button']} />
       )}
       <p>{children}</p>

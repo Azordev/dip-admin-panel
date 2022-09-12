@@ -25,7 +25,7 @@ const CustomInput = <T,>({
   defaultValue,
   required = false,
   children,
-}: InputProps<T>): ReactNode => {
+}: InputProps<T>): JSX.Element => {
   return (
     <div className={styles['custom-input']}>
       <label htmlFor={id} className={styles['label-input']}>

@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { SubmitHandler } from 'react-hook-form'
 
 export const memberInfo = gql`
   fragment MemberInfoFragment on members {
@@ -95,8 +96,10 @@ export interface User extends UserBase {
   }
 }
 
-export interface ProviderUser extends User {
-  providerInfo?: ProviderBase
+export interface ProviderUser extends User, ProviderBase {}
+
+export interface ProviderUserEditable extends Partial<ProviderUser> {
+  password?: string
 }
 
 export interface LoginInput {
@@ -119,4 +122,10 @@ export interface MutableMemberFormProps {
   onSubmit: (_formData: MemberEditable) => void
   loading: boolean
   originalData?: Member
+}
+
+export interface MutableProviderUserFormProps {
+  onSubmit: SubmitHandler<ProviderUserEditable>
+  loading: boolean
+  originalData?: ProviderUser
 }
