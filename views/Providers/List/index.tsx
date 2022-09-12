@@ -21,7 +21,6 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => {
     }
 
     return providers.map(provider => {
-      console.log(provider)
       const isActive = Boolean(provider?.isActive)
       return {
         id: provider.id,

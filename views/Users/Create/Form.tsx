@@ -3,19 +3,11 @@ import { useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import style from '@/components/Button/Button.module.scss'
-import DeleteModal from '@/components/DeleteModal'
 import { MutableUserFormProps, UserEditable } from '@/services/GraphQL/users/types'
 
 import styles from './Form.module.scss'
 
 const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
-  const showModal = () => {
-    DeleteModal('socio', (confirmed: boolean) => {
-      if (confirmed) {
-        console.log('abrió modal')
-      }
-    })
-  }
   const {
     register,
     handleSubmit,
@@ -99,10 +91,6 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
           <Button iconName="" className={style['button-save']} type="submit">
             {buttonText}
           </Button>
-          <Button iconName="" className={style['button-delete']} onClick={showModal}>
-            Eliminar
-          </Button>
-          {/* TODO: implementar funcionalidad asociada a este botón */}
         </section>
       </form>
     </>
