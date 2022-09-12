@@ -15,7 +15,7 @@ export interface ListHeaderProps {
   altLogo?: string
 }
 
-const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoUrl, altLogo }) => (
+const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, logoUrl, altLogo }) => (
   <nav className={styles.nav}>
     <Link href={createPath} passHref>
       <a>
@@ -26,7 +26,7 @@ const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, parent, logoU
     {logoUrl ? (
       <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={120} height={15} objectFit="contain" />
     ) : (
-      <h1>{parent}</h1>
+      <h1>{altLogo}</h1>
     )}
   </nav>
 )

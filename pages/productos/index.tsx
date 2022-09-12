@@ -1,6 +1,9 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 import EmptyList from '@/components/EmptyList'
+import ListHeader from '@/components/ListHeader'
+import useAuth from '@/hooks/useAuth'
 import { Product } from '@/services/GraphQL/products/types'
 import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
@@ -12,10 +15,19 @@ interface PageProps {
 }
 
 const Products: NextPage<PageProps> = ({ products }) => {
+  const { user } = useAuth()
   if (!products || products.length < 1) return <EmptyList text="No hay suscripciones" />
   return (
     <ClientOnly>
-      <ProductList products={products} />
+      <>
+        <ListHeader
+          createPath={`/productos/crear`}
+          createText="Añadir nuevo producto"
+          logoUrl={user?.providerInfo.logoUrl}
+          altLogo={user?.providerInfo.commercialName}
+        />
+        <ProductList products={products} />
+      </>
     </ClientOnly>
   )
 }
