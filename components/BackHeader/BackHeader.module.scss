@@ -15,11 +15,11 @@
     text-decoration: none;
 
     .button {
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
-      cursor: pointer;
 
       &:hover {
         color: $black;
