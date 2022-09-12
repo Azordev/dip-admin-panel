@@ -22,7 +22,7 @@ const Create: NextPage = () => {
 
   return (
     <div>
-      <BackHeader />
+      <BackHeader to="/socios" />
       <CreateUserLayout onSubmit={submitHandler} loading={loading} />
     </div>
   )
