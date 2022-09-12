@@ -1,18 +1,16 @@
 import { FC } from 'react'
 
 import BackHeader from '@/components/BackHeader'
-import { MutableProviderFormProps } from '@/services/GraphQL/providers/types'
-import styles from '@/styles/Home.module.css'
+import { MutableProviderUserFormProps } from '@/services/GraphQL/users/types'
 
 import CreateProviderForm from './Form'
 
-const CreateProviderLayout: FC<MutableProviderFormProps> = ({ onSubmit, loading }) => (
-  <>
+const CreateProviderLayout: FC<MutableProviderUserFormProps> = ({ onSubmit, loading }) => (
+  <div className="flex flex-col hhfull">
     <BackHeader to="/proveedores" />
-    <div className={styles.container}>
-      <CreateProviderForm onSubmit={onSubmit} loading={loading} />
-    </div>
-  </>
+
+    <CreateProviderForm onSubmit={onSubmit} loading={loading} />
+  </div>
 )
 
 export default CreateProviderLayout

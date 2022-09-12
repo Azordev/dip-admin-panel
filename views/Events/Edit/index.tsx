@@ -93,7 +93,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
       <Button
         onClick={handleAsistentes}
         className={styles.button}
-        withIcon
         iconStyle="material"
         iconName="user-group-man-man--v1"
         iconSize={40}

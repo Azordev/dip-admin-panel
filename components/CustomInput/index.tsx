@@ -1,33 +1,31 @@
-import { FC, ReactNode } from 'react'
-import { UseFormRegister } from 'react-hook-form'
-
-import { EventEditable } from '@/services/GraphQL/events/types'
+import { ReactNode } from 'react'
+import { Path, UseFormRegister } from 'react-hook-form'
 
 import styles from './CustomInput.module.scss'
 
-interface InputProps {
-  register: UseFormRegister<EventEditable>
+type InputProps<T> = {
+  register: UseFormRegister<T>
   id: string
-  type: string
+  type?: string
   label: string
-  name: 'title' | 'date' | 'description' | 'type'
+  name: Path<T>
   placeholder: string
-  defaultValue: string | number | undefined
+  defaultValue?: string | number
   required?: boolean | string
   children?: ReactNode
 }
 
-const CustomInput: FC<InputProps> = ({
+const CustomInput = <T,>({
   register,
   id,
-  type,
+  type = 'text',
   label,
   name,
   placeholder,
   defaultValue,
   required = false,
   children,
-}) => {
+}: InputProps<T>): JSX.Element => {
   return (
     <div className={styles['custom-input']}>
       <label htmlFor={id} className={styles['label-input']}>

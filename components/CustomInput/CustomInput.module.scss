@@ -1,4 +1,4 @@
-@import 'colors';
+@import 'colors', 'fonts';
 
 .custom-input {
   margin-bottom: 23px;
@@ -11,4 +11,6 @@
 
 .input {
   margin: 10px 0;
+  font-size: 19px;
+  font-family: $font-visby;
 }

@@ -1,4 +1,4 @@
-@import 'fonts', 'colors', 'utilities';
+@import 'fonts', 'colors';
 
 .nav {
   align-items: center;
@@ -19,6 +19,7 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
+      cursor: pointer;
 
       &:hover {
         color: $black;
@@ -62,5 +63,4 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-left: 5px;
 }

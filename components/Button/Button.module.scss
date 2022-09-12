@@ -8,6 +8,12 @@
   height: 72px;
   justify-content: space-evenly;
   width: 292px;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
 }
 
 .button p {
@@ -17,46 +23,6 @@
 .icon-button {
   height: 33px;
   width: 33px;
-}
-
-.buttons-container {
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 1rem;
-
-  .button2,
-  .button-cancel,
-  .button-delete,
-  .button-save {
-    background-color: $blue-king;
-    border-radius: 5px;
-    border-style: none;
-    font-size: 30px;
-    margin: 22px 0;
-    padding: 15px 1rem;
-  }
-
-  .button-cancel,
-  .button-delete,
-  .button-save {
-    width: 252px;
-  }
-
-  .button-cancel {
-    background-color: $gray-300;
-    margin-right: 15px;
-  }
-
-  .button-save {
-    background-color: $green-confirm;
-    margin-right: 15px;
-  }
-
-  .button-delete {
-    background-color: $red;
-    margin-right: 15px;
-  }
 }
 
 .buttons-container {
