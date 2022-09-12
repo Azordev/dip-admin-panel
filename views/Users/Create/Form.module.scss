@@ -17,8 +17,9 @@
 }
 
 .label-input {
-  color: $gray-850;
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
   @extend .text-3xl;
+  color: $gray-850;
 }
 
 .input {

@@ -18,9 +18,11 @@ interface Props {
 }
 
 const Dashboard: FC<Props> = ({ children }) => {
-  const { logOut } = useAuth()
+  const { logOut, isProvider, user } = useAuth()
   const { pathname } = useRouter()
   const checkIsActive = (url: string): boolean => pathname.startsWith(url)
+
+  console.log()
   return (
     <>
       <aside className={styles.sidebar}>
@@ -30,41 +32,48 @@ const Dashboard: FC<Props> = ({ children }) => {
               <LogoDID />
             </a>
           </Link>
-          <Link href="/eventos" passHref>
-            <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
-              <Eventos />
-              <span>Eventos</span>
-            </a>
-          </Link>
-          <Link href="/proveedores" passHref>
-            <a className={`${styles.link} ${checkIsActive('/proveedores') ? styles.active : ''}`}>
-              <Image
-                src={iconProv}
-                alt={`shopaholic icon`}
-                className={`${stylesIcons8.icon} ${styles.icons}`}
-                imgClassName={`icon shopaholic`}
-              />
-              <span>Proveedores</span>
-            </a>
-          </Link>
-          <Link href="/socios" passHref>
-            <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
-              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
-              <span>Socios</span>
-            </a>
-          </Link>
-          <Link href="/productos" passHref>
-            <a className={`${styles.link} ${checkIsActive('/productos') ? styles.active : ''}`}>
-              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="open-parcel" />
-              <span>Productos</span>
-            </a>
-          </Link>
-          <Link href="/perfil" passHref>
-            <a className={`${styles.link} ${checkIsActive('/perfil') ? styles.active : ''}`}>
-              <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
-              <span>Perfil</span>
-            </a>
-          </Link>
+          {!(isProvider || user?.providerInfo?.id) ? (
+            <>
+              <Link href="/eventos" passHref>
+                <a className={`${styles.link} ${checkIsActive('/eventos') ? styles.active : ''}`}>
+                  <Eventos />
+                  <span>Eventos</span>
+                </a>
+              </Link>
+              <Link href="/proveedores" passHref>
+                <a className={`${styles.link} ${checkIsActive('/proveedores') ? styles.active : ''}`}>
+                  <Image
+                    src={iconProv}
+                    alt={`shopaholic icon`}
+                    className={`${stylesIcons8.icon} ${styles.icons}`}
+                    imgClassName={`icon shopaholic`}
+                  />
+                  <span>Proveedores</span>
+                </a>
+              </Link>
+              <Link href="/socios" passHref>
+                <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
+                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
+                  <span>Socios</span>
+                </a>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/productos" passHref>
+                <a className={`${styles.link} ${checkIsActive('/productos') ? styles.active : ''}`}>
+                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="open-parcel" />
+                  <span>Productos</span>
+                </a>
+              </Link>
+              <Link href="/perfil" passHref>
+                <a className={`${styles.link} ${checkIsActive('/perfil') ? styles.active : ''}`}>
+                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
+                  <span>Perfil</span>
+                </a>
+              </Link>
+            </>
+          )}
         </nav>
         <button className={styles.button} onClick={logOut}>
           Cerrar Sesión

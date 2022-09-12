@@ -42,6 +42,7 @@ const Login: NextPage = () => {
           const userIsValid: boolean =
             data.users[0]?.isActive && (data.users[0]?.providerInfo?.id || data.users[0]?.memberInfo?.id)
 
+          console.log(data.users)
           if (userIsValid) {
             const user = data.users[0]
 
