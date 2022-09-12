@@ -2,10 +2,15 @@
 
 .nav {
   align-items: center;
+  background-color: white;
   display: flex;
   flex-direction: row;
+  height: 150px;
   justify-content: space-between;
   padding-right: 1rem;
+
+  
+  
 }
 
 .back-header-image {

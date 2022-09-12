@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -6,7 +5,6 @@ import BackHeader from '@/components/BackHeader'
 import { MutableProviderFormProps, ProviderEditable } from '@/services/GraphQL/providers/types'
 
 const CreateProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading }) => {
-  const { push, query } = useRouter()
   const {
     register,
     handleSubmit,
@@ -17,7 +15,6 @@ const CreateProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading })
 
   return (
     <>
-      <BackHeader parent={(query.provider as string) ?? 'Provider'} parentImageUrl={query['provider-url'] as string} />
       <form onSubmit={submitHandler}>
         <input type="text" placeholder="Comercial Name" {...register('commercialName', { required: true })} />
         {errors.commercialName && <span>This field is required</span>}
