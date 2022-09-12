@@ -8,7 +8,7 @@ const useAuth = () => {
 
   useEffect(() => {
     const unparsedUser = window?.sessionStorage?.getItem('user') ?? null
-    const providerId = () => window?.sessionStorage?.getItem('providerId')
+    const providerId = window?.sessionStorage?.getItem('providerId')
     if (unparsedUser) {
       setUser(JSON.parse(unparsedUser))
       setIsProvider(!!providerId)
