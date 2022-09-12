@@ -66,14 +66,6 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
     setPdfFile(null)
   }
 
-  const showModal = () => {
-    DeleteModal('evento', (confirmed: boolean) => {
-      if (confirmed) {
-        // Add petition Delete
-      }
-    })
-  }
-
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <section className={styles.section}>
