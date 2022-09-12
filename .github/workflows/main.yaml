@@ -30,9 +30,9 @@ jobs:
       - name: spelling
         run: yarn spelling:ci .
       - name: eslint
-        run: yarn eslint:ci pages
+        run: yarn eslint:ci components containers controllers hooks pages services utils views
       - name: prettier
-        run: yarn prettier:ci pages
+        run: yarn prettier:ci components containers controllers hooks pages services utils views
       # - name: test
       #   run: yarn test
       - name: build
