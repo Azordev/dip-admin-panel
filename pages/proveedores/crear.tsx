@@ -20,7 +20,7 @@ const Create: NextPage = () => {
         ...newProvider,
         b2bPhone: newProvider.b2bPhone ?? 'NA',
         address: newProvider.address ?? 'NA',
-        b2bEmail: newProvider.b2bEmail ?? 'NA',
+        b2bEmail: newProvider.b2bEmail ? newProvider.b2bEmail : newProvider.salesEmail || 'NA',
         salesEmail: newProvider.salesEmail ?? 'NA',
         legalName: newProvider.legalName ?? 'NA',
       }
