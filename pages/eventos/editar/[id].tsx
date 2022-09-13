@@ -43,6 +43,7 @@ const EditEvent: NextPage = () => {
       submitHandler={submitHandler}
       isSubmitLoading={loading}
       UpdateForm={UpdateEvent}
+      queryName="event"
     />
   )
 }

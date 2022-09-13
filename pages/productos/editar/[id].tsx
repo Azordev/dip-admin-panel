@@ -3,20 +3,22 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import UpdateFormContainer from '@/components/UpdateForm'
+import useAuth from '@/hooks/useAuth'
 import useLogger from '@/hooks/useLogger'
 import { UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
 import { PRODUCT_BY_ID } from '@/services/GraphQL/products/queries'
 import { ProductEditable } from '@/services/GraphQL/products/types'
-import EditProductLayout from '@/views/Products/Edit'
+import EditProductForm from '@/views/Products/Edit'
 
 const EditProduct: NextPage = () => {
+  const { user, isProvider } = useAuth()
   const { push, query } = useRouter()
   const { error: logError } = useLogger()
 
   const [updateProduct, { loading, error: mutationError }] = useMutation(UPDATE_PRODUCT)
 
   const submitHandler = async (updatedProduct: ProductEditable) => {
-    await updateProduct({ variables: { ...updatedProduct, id: query.id } })
+    await updateProduct({ variables: { ...updatedProduct, providerId: isProvider, id: query.id } })
     push('/productos')
   }
 
@@ -27,8 +29,10 @@ const EditProduct: NextPage = () => {
       currentDataQuery={PRODUCT_BY_ID}
       submitHandler={submitHandler}
       isSubmitLoading={loading}
-      UpdateForm={EditProductLayout}
-      parent="PRODUCTOS"
+      UpdateForm={EditProductForm}
+      parentImageUrl={user?.providerInfo.logoUrl}
+      commercialName={user?.providerInfo.commercialName}
+      queryName="product"
     />
   )
 }
