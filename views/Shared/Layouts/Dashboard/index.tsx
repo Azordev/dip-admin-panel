@@ -18,7 +18,7 @@ interface Props {
 }
 
 const Dashboard: FC<Props> = ({ children }) => {
-  const { logOut, user } = useAuth()
+  const { logOut, user, isProvider } = useAuth()
   const { pathname } = useRouter()
   const checkIsActive = (url: string): boolean => pathname.startsWith(url)
   const isAdmin = user?.type === 'ADMIN' || user?.type === 'TEST_ADMIN'
@@ -67,7 +67,7 @@ const Dashboard: FC<Props> = ({ children }) => {
                   <span>Productos</span>
                 </a>
               </Link>
-              <Link href="/perfil" passHref>
+              <Link href={`/perfil/${isProvider}`} passHref>
                 <a className={`${styles.link} ${checkIsActive('/perfil') ? styles.active : ''}`}>
                   <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
                   <span>Perfil</span>
