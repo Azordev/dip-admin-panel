@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const useAuth = () => {
   const [user, setUser] = useState<any>(null)
-  const [isProvider, setIsProvider] = useState<boolean>(false)
+  const [isProvider, setIsProvider] = useState<string>('')
   const { push } = useRouter()
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const useAuth = () => {
     const providerId = window?.sessionStorage?.getItem('providerId')
     if (unparsedUser) {
       setUser(JSON.parse(unparsedUser))
-      setIsProvider(!!providerId)
+      setIsProvider(providerId || '')
     } else {
       push('/ingresar')
     }
