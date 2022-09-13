@@ -24,6 +24,31 @@ export const PRODUCTS = gql`
   }
 `
 
+export const PRODUCTS_BY_PROVIDER = gql`
+  ${productInfo}
+  query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0, $providerId: uuid) {
+    products(
+      limit: $limit
+      offset: $offset
+      order_by: { name: asc }
+      where: {
+        provider_id: { _eq: $providerId }
+        _or: [{ description: { _ilike: $query } }, { name: { _ilike: $query } }]
+      }
+    ) {
+      id
+      ...ProductInfoFragment
+      categories: product_categories_aggregate {
+        stats: aggregate {
+          count
+        }
+      }
+      createdAt: created_at
+      updatedAt: updated_at
+    }
+  }
+`
+
 export const PRODUCT_BY_ID = gql`
   ${productInfo}
   query ($id: uuid!) {

@@ -1,18 +1,32 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import axios from 'axios'
+import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 
 import EmptyList from '@/components/EmptyList'
 import { Product } from '@/services/GraphQL/products/types'
 import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-import { getProducts } from 'controllers/products'
+const Products: NextPage = () => {
+  const [products, setProducts] = useState<Product[]>([])
 
-interface PageProps {
-  products: Product[] | undefined
-}
+  useEffect(() => {
+    const getProducts = async () => {
+      const providerId = sessionStorage.getItem('providerId')
+      console.log(providerId)
 
-const Products: NextPage<PageProps> = ({ products }) => {
-  if (!products || products.length < 1) return <EmptyList text="No hay suscripciones" />
+      const { data } = await axios.get<{ products: Product[] }>('/api/providers/products', {
+        headers: {
+          providerId: providerId || '',
+        },
+      })
+      setProducts(data.products)
+    }
+
+    getProducts()
+  }, [])
+
+  if (!products || products.length < 1) return <EmptyList text="No hay productos" />
   return (
     <ClientOnly>
       <ProductList products={products} />
@@ -21,12 +35,3 @@ const Products: NextPage<PageProps> = ({ products }) => {
 }
 
 export default Products
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { products } = await getProducts()
-  return {
-    props: {
-      products: products || [],
-    },
-  }
-}

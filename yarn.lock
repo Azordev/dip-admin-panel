@@ -3054,7 +3054,7 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-sdk@^2.1213.0:
+aws-sdk@2.1213.0:
   version "2.1213.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1213.0.tgz#efdbe52c72e6879348650ff9a69ab55ef948b6f3"
   integrity sha512-ZfrUfhlLjwvQ6QTbg8lR4+SRFHaivzZMmfpS+64YzafcKjwc7rklYqiyh4MPTSmdNZkErgaAykYpXPMuTiWBug==
@@ -3589,7 +3589,7 @@ babel-preset-current-node-syntax@^1.0.0:
     "@babel/plugin-syntax-optional-chaining" "^7.8.3"
     "@babel/plugin-syntax-top-level-await" "^7.8.3"
 
-babel-preset-env@^1.7.0:
+babel-preset-env@1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.7.0.tgz#dea79fa4ebeb883cd35dab07e260c1c9c04df77a"
   integrity sha512-9OR2afuKDneX2/q2EurSftUYM0xGu4O2D9adAhVfADDhrYDaxXV0rBbevVYoY9n6nyX1PmQW/0jtpJvUNr9CHg==
