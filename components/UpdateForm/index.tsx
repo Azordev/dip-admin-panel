@@ -13,9 +13,20 @@ interface Props extends BackHeaderProps {
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
   isSubmitLoading?: boolean
+  commercialName?: string
+  queryName: string
+  parentImageUrl?: string
 }
 
-const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSubmitLoading, UpdateForm, parent }) => {
+const UpdateFormContainer: FC<Props> = ({
+  currentDataQuery,
+  submitHandler,
+  isSubmitLoading,
+  UpdateForm,
+  commercialName,
+  queryName,
+  parentImageUrl,
+}) => {
   const [queryOriginalData, { loading }] = useLazyQuery(currentDataQuery)
   const { query } = useRouter()
   const { error: logError } = useLogger()
@@ -39,8 +50,7 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
       }
 
       if (called && originalData) {
-        const { event } = originalData
-        setCurrentData(event)
+        setCurrentData(originalData[queryName])
       }
     }
 
@@ -51,7 +61,7 @@ const UpdateFormContainer: FC<Props> = ({ currentDataQuery, submitHandler, isSub
   if (loading) return <Loading />
 
   return (
-    <UpdateFormLayout parent={parent}>
+    <UpdateFormLayout commercialName={commercialName} parentImageUrl={parentImageUrl}>
       <UpdateForm onSubmit={submitHandler} loading={isSubmitLoading} originalData={currentData} />
     </UpdateFormLayout>
   )
