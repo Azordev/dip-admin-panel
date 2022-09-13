@@ -27,7 +27,7 @@ const Create: NextPage = () => {
     <div className="container">
       <BackHeader
         to={'../productos'}
-        parent={user?.providerInfo.commercialName}
+        commercialName={user?.providerInfo.commercialName}
         parentImageUrl={user?.providerInfo.logoUrl}
       />
       <CreateProductLayout onSubmit={submitHandler} loading={loading} />
