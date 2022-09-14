@@ -33,32 +33,21 @@ const PaginatedSuppliers: FC<PaginatedSuppliersProps> = ({
         </label>
       </div>
       <ul>
-        <div
-          className={styles.button}
-          onClick={() => CurrentPage !== 1 && setCurrentPage(CurrentPage - 1)}
-        >
+        <div className={styles.button} onClick={() => CurrentPage !== 1 && setCurrentPage(CurrentPage - 1)}>
           <span>Antes</span>
         </div>
         <div className={styles['pages-list']}>
-          {pageNumbers &&
-            pageNumbers.map(page =>
-              CurrentPage === page ? (
-                <li className={styles.active} key={page} onClick={() => setCurrentPage(page)}>
-                  {page}
-                </li>
-              ) : (
-                <li key={page} onClick={() => setCurrentPage(page)}>
-                  {page}
-                </li>
-              ),
-            )}
+          {pageNumbers?.map(page => (
+            <li
+              className={CurrentPage === page ? styles.active : ''}
+              key={page}
+              onClick={() => CurrentPage !== page && setCurrentPage(page)}
+            >
+              {page}
+            </li>
+          ))}
         </div>
-        <div
-          className={styles.button}
-          onClick={() => {
-            if (CurrentPage !== pageNumber) setCurrentPage(CurrentPage + 1)
-          }}
-        >
+        <div className={styles.button} onClick={() => CurrentPage !== pageNumber && setCurrentPage(CurrentPage + 1)}>
           <span>Siguiente</span>
         </div>
       </ul>
