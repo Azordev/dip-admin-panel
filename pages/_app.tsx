@@ -19,18 +19,43 @@ const DIDAdminPanel = ({ Component, pageProps: { ...pageProps } }: AppProps) => 
       <Head>
         <title>DID Panel Administrativo</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" name="title" content="DID Panel Administrativo" />
+
+        {/* <!-- HTML Meta Tags --> */}
+        <title>DID Panel Administrativo</title>
+        <meta
+          name="description"
+          content="Somos la Asociación de Diseñadores de Interiores del Perú. Unidos para promover el interiorismo peruano, basado en nuestra creatividad y cultura."
+        />
+
+        {/* <!-- Facebook Meta Tags --> */}
+        <meta property="og:url" content="https://www.did-admin.tk/" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="DID Panel" />
+        <meta property="og:title" content="DID Panel Administrativo" />
+        <meta
+          property="og:description"
+          content="Somos la Asociación de Diseñadores de Interiores del Perú. Unidos para promover el interiorismo peruano, basado en nuestra creatividad y cultura."
+        />
         <meta
           property="og:image"
           content="https://static.wixstatic.com/media/539145_8d634facac56459abe42ab5d47fa4f74~mv2.jpg/v1/fill/w_2500,h_1668,al_c/539145_8d634facac56459abe42ab5d47fa4f74~mv2.jpg"
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="DID Panel" />
+
+        {/* <!-- Twitter Meta Tags --> */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="did-admin.tk" />
+        <meta property="twitter:url" content="https://www.did-admin.tk/" />
+        <meta name="twitter:title" content="DID Panel Administrativo" />
         <meta
-          property="og:description"
-          name="description"
+          name="twitter:description"
           content="Somos la Asociación de Diseñadores de Interiores del Perú. Unidos para promover el interiorismo peruano, basado en nuestra creatividad y cultura."
         />
+        <meta
+          name="twitter:image"
+          content="https://static.wixstatic.com/media/539145_8d634facac56459abe42ab5d47fa4f74~mv2.jpg/v1/fill/w_2500,h_1668,al_c/539145_8d634facac56459abe42ab5d47fa4f74~mv2.jpg"
+        />
+
         <meta
           name="keywords"
           content="peru, design, diseñadores, Diseño de interiores, Asociación Perú, Interior Designs Peru"
