@@ -35,9 +35,7 @@ const PaginatedSuppliers: FC<PaginatedSuppliersProps> = ({
       <ul>
         <div
           className={styles.button}
-          onClick={() => {
-            if (CurrentPage !== 1) setCurrentPage(CurrentPage - 1)
-          }}
+          onClick={() => CurrentPage !== 1 && setCurrentPage(CurrentPage - 1)}
         >
           <span>Antes</span>
         </div>
