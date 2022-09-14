@@ -7,5 +7,5 @@ export const config = {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') uploadFile(req, res)
+  if (req.method === 'POST') uploadFile(req, res)
 }
