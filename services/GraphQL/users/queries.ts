@@ -16,6 +16,7 @@ export const USER_SESSION = gql`
           { member_code: { _eq: $memberCode } }
           { password: { _eq: $password } }
         ]
+        _or: [{ type: { _in: ["ADMIN", "SUPER_ADMIN", "TEST_ADMIN"] } }, { provider_info: { id: { _is_null: false } } }]
       }
     ) {
       ...UserInfoFragment
