@@ -37,13 +37,11 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
 
   return (
     <form className="form-product" onSubmit={submitHandler}>
-      {console.log(errors)}
       <label className="text-size label" htmlFor="name">
         Nombre del Producto
       </label>
       <input
         className="input-product font-visby"
-        name="name"
         id="name"
         type="text"
         placeholder="Escriba el nombre del evento..."
