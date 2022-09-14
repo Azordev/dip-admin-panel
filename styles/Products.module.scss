@@ -76,3 +76,11 @@
     object-fit: contain;
   }
 }
+
+.center-text {
+  align-items: center;
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  width: 100%;
+}
