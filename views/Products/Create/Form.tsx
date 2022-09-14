@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import CurrencyInput from 'react-currency-input-field'
 import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
@@ -29,11 +30,15 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       </label>
       <div className="container-price">
         <p className="price">S/.</p>
-        <input
-          className="input-product font-visby"
-          type="text"
-          placeholder="00.00"
+        <CurrencyInput
           {...register('basePriceSol', { required: true })}
+          allowNegativeValue={false}
+          className="input-product font-visby"
+          decimalSeparator="."
+          disableGroupSeparators={true}
+          fixedDecimalLength={2}
+          id="basePriceSol"
+          placeholder="00.00"
         />
         {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
       </div>
