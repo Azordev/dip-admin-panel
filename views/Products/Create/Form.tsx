@@ -1,13 +1,16 @@
+import dynamic from 'next/dynamic'
 import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
+  const CurrencyInput = dynamic(() => import('input-currency-react').then(mod => mod.CurrencyInput), { ssr: false })
   const {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<ProductEditable>()
   const submitHandler = handleSubmit(onSubmit)
@@ -29,11 +32,21 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       </label>
       <div className="container-price">
         <p className="price">S/.</p>
-        <input
-          className="input-product font-visby"
-          type="text"
-          placeholder="00.00"
-          {...register('basePriceSol', { required: true })}
+        <Controller
+          name="basePriceSol"
+          control={control}
+          render={() => (
+            <CurrencyInput
+              className="input-product font-visby"
+              value="0"
+              style={{ textAlign: 'left' }}
+              options={{
+                precision: 2,
+                style: 'decimal',
+              }}
+              {...register('basePriceSol', { required: true })}
+            />
+          )}
         />
         {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
       </div>
