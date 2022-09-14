@@ -6,11 +6,11 @@ import styles from './BackHeader.module.scss'
 
 export interface BackHeaderProps {
   to?: string
-  parent?: string
+  commercialName?: string
   parentImageUrl?: string
 }
 
-const BackHeader: FC<BackHeaderProps> = ({ to, parent, parentImageUrl }) => {
+const BackHeader: FC<BackHeaderProps> = ({ to, commercialName, parentImageUrl }) => {
   const { push, back } = useRouter()
 
   return (
@@ -26,9 +26,9 @@ const BackHeader: FC<BackHeaderProps> = ({ to, parent, parentImageUrl }) => {
         </a>
       </div>
       {parentImageUrl ? (
-        <img src={parentImageUrl} alt={parent} className={styles['back-header-image']} />
+        <img src={parentImageUrl} alt={commercialName} className={styles['back-header-image']} />
       ) : (
-        <div>{parent}</div>
+        <div>{commercialName}</div>
       )}
     </nav>
   )

@@ -1,12 +1,16 @@
-import axios from 'axios'
 import Image from 'next/image'
 import { ChangeEvent, FC, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
 
-import styles from './SaveorDelete.module.scss'
+// import styles from './SaveorDelete.module.scss'
+
+interface ProductEditableWithImg extends ProductEditable {
+  image?: FileList
+}
+
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
@@ -15,8 +19,8 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ProductEditable>()
-  const submitHandler = handleSubmit(onSubmit)
+  } = useForm<ProductEditableWithImg>()
+  const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<ProductEditableWithImg>)
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
     if (file?.type.includes('image')) {
@@ -33,11 +37,13 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
 
   return (
     <form className="form-product" onSubmit={submitHandler}>
+      {console.log(errors)}
       <label className="text-size label" htmlFor="name">
         Nombre del Producto
       </label>
       <input
         className="input-product font-visby"
+        name="name"
         id="name"
         type="text"
         placeholder="Escriba el nombre del evento..."
@@ -48,7 +54,6 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       <label className="text-size label" htmlFor="basePriceSol">
         Precio del producto
       </label>
-
       <div className="container-price">
         <p className="price">S/.</p>
         <input
@@ -56,7 +61,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
           type="text"
           id="basePriceSol"
           placeholder="00.00"
-          {...register('name', { required: { value: true, message: 'Debe colocar un precio' } })}
+          {...register('basePriceSol', { required: { value: true, message: 'Debe colocar un precio' } })}
         />
       </div>
       {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
@@ -73,14 +78,14 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       {errors.description && <small className="text-red-500">{errors.description.message}</small>}
 
       <label className="text-size label">Añadir imagen del producto</label>
-      <div className={stylesInput['image-section']}>
+      <div>
         <div className={stylesInput['container-input']}>
           <input
             id="image-file"
             type="file"
             accept="image/*"
             className={stylesInput['input-file']}
-            {...register('imageUrl')}
+            {...register('image')}
             onChange={handleFile}
           />
           <label htmlFor="image-file" className={stylesInput.image}>
@@ -99,16 +104,10 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       </div>
       {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
 
-      <input
-        type="text"
-        placeholder="base_price_sol"
-        {...register('basePriceSol', { required: { value: true, message: 'Debe colocar un precio' } })}
-      />
-      {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
-      <button className={styles.save} type="submit">
+      <button className="save" type="submit">
         {loading ? 'Guardando' : 'Guardar'}
       </button>
-      <button className={styles.delete} onClick={() => reset()}>
+      <button className="delete" onClick={() => reset()}>
         Eliminar
       </button>
     </form>

@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import client from '@/services/GraphQL/client'
 import { CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
-import { PRODUCTS } from '@/services/GraphQL/products/queries'
+import { PRODUCTS, PRODUCTS_BY_PROVIDER } from '@/services/GraphQL/products/queries'
 import { Product } from '@/services/GraphQL/products/types'
 
 import { addObject } from '../services/AWS/s3'
@@ -30,6 +30,32 @@ export const getProducts = async (
   return { products: data.products, error }
 }
 
+export const getProviderProducts = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { query, headers } = req
+
+    if (!headers.providerid) {
+      return res.status(400).json({ error: 'Missing providerId' })
+    }
+
+    const { data } = await client.query({
+      query: PRODUCTS_BY_PROVIDER,
+      variables: {
+        offset: Number(query?.offset) || 0,
+        limit: Number(query?.limit) || 24,
+        query: query?.query || '%',
+        providerId: headers.providerid,
+      },
+    })
+
+    console.log(data)
+
+    res.json(data)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export const getProductsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
@@ -50,6 +76,7 @@ export const getProductsAPI = async (req: NextApiRequest, res: NextApiResponse) 
 
 export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
+  console.log('hola')
   form.parse(req, async (err, fields, files) => {
     try {
       if (err) {

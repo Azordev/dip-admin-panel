@@ -86,9 +86,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
         <Button type="submit" className={btnStyles['button-save']}>
           {buttonText}
         </Button>
-        <Button type="button" className={btnStyles['button-delete']}>
-          Eliminar
-        </Button>
       </div>
     </form>
   )

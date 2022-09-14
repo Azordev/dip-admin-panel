@@ -6,9 +6,9 @@ interface Props extends BackHeaderProps {
   children: ReactNode
 }
 
-const UpdateFormLayout: FC<Props> = ({ children, parent }) => (
+const UpdateFormLayout: FC<Props> = ({ children, commercialName, parentImageUrl }) => (
   <>
-    <BackHeader parent={parent} />
+    <BackHeader commercialName={commercialName} parentImageUrl={parentImageUrl} />
     {children}
   </>
 )
