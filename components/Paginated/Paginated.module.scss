@@ -1,8 +1,9 @@
 @import 'colors', 'fonts', 'layout';
 
 .relative {
-  height: 100vh;
-  position: relative;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
 }
 
 .pages-number {
@@ -20,16 +21,11 @@
 
 .paginated-container {
   align-items: center;
-  bottom: 0;
   display: flex;
   justify-content: space-between;
-  left: 0;
   list-style-type: none;
-  margin: 30px 50px;
+  margin: auto 50px 30px;
   max-height: 43px;
-  padding: 20px auto;
-  position: absolute;
-  right: 0;
 
   .button {
     background: $white 0% 0% no-repeat padding-box;
