@@ -28,7 +28,7 @@ const BackHeader: FC<BackHeaderProps> = ({ to, commercialName, parentImageUrl })
       {parentImageUrl ? (
         <img src={parentImageUrl} alt={commercialName} className={styles['back-header-image']} />
       ) : (
-        <div>{commercialName}</div>
+        <div className={styles.title}>{commercialName}</div>
       )}
     </nav>
   )
