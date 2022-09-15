@@ -13,6 +13,7 @@ interface ProductEditableWithImg extends ProductEditable {
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const MAX_FILE_SIZE = 8000000
   const {
     register,
     handleSubmit,
@@ -22,7 +23,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
   const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<ProductEditableWithImg>)
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
-    if (file && file.size >= 8000000) {
+    if (file && file.size >= MAX_FILE_SIZE) {
       return Swal.fire('Error', 'Imagen excede el tamaño maximo (8MB)', 'error')
     }
     if (file?.type.includes('image')) {
@@ -49,7 +50,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         placeholder="Escriba el nombre del evento..."
         {...register('name', { required: { value: true, message: 'El campo no puede estar vacio' } })}
       />
-      {errors.name && <small className="text-red-500">{errors.name.message}</small>}
+      {errors.name && <small className={stylesInput['error-message']}>{errors.name.message}</small>}
 
       <label className="text-size label" htmlFor="basePriceSol">
         Precio del producto
@@ -64,7 +65,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
           {...register('basePriceSol', { required: { value: true, message: 'Debe colocar un precio' } })}
         />
       </div>
-      {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
+      {errors.basePriceSol && <small className={stylesInput['error-message']}>{errors.basePriceSol.message}</small>}
 
       <label className="text-size label" htmlFor="description">
         Descripción del producto
@@ -75,7 +76,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         placeholder="Escribe aquí..."
         {...register('description', { required: { value: true, message: 'El campo no puede estar vacio' } })}
       />
-      {errors.description && <small className="text-red-500">{errors.description.message}</small>}
+      {errors.description && <small className={stylesInput['error-message']}>{errors.description.message}</small>}
 
       <label className="text-size label">Añadir imagen del producto</label>
       <div>
@@ -83,7 +84,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
           <input
             id="image-file"
             type="file"
-            accept="image/*"
+            accept="image/x-png,image/gif,image/jpeg"
             className={stylesInput['input-file']}
             {...register('image')}
             onChange={handleFile}
@@ -99,11 +100,11 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
               />
             </figure>
             <span className={stylesInput.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
-            <span>*Max 8MB Size</span>
+            <span className={stylesInput.label}>*Max 8MB Size</span>
           </label>
         </div>
       </div>
-      {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
+      {errors.imageUrl && <small className={stylesInput['error-message']}>{errors.imageUrl.message}</small>}
 
       <button className="save" type="submit">
         {loading ? 'Guardando' : 'Guardar'}

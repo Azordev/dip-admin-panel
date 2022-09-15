@@ -13,6 +13,7 @@ interface ProductEditableWithImg extends ProductEditable {
 const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, loading }) => {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const MAX_FILE_SIZE = 8000000
   const {
     register,
     setValue,
@@ -31,7 +32,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
 
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
-    if (file && file.size >= 8000000) {
+    if (file && file.size >= MAX_FILE_SIZE) {
       return Swal.fire('Error', 'Imagen excede el tamaño maximo (8MB)', 'error')
     }
     if (file?.type.includes('image')) {
@@ -87,7 +88,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           <input
             id="image-file"
             type="file"
-            accept="image/*"
+            accept="image/x-png,image/gif,image/jpeg"
             className={stylesInput['input-file']}
             {...register('image')}
             onChange={handleFile}
