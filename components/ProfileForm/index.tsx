@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
