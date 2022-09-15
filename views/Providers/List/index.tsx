@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 
 import Table, { TableData } from '@/components/Table'
 import Actions from '@/components/Table/Actions'
@@ -6,7 +6,12 @@ import { Provider } from '@/services/GraphQL/providers/types'
 
 import styles from './List.module.scss'
 
-const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => {
+const ProvidersList: FC<{
+  providers: Provider[]
+  indexOfLastProvider: number
+  indexOfFirstProvider: number
+}> = ({ providers: dbProviders, indexOfLastProvider, indexOfFirstProvider }) => {
+  const [providers, setProviders] = useState(dbProviders.slice(indexOfFirstProvider, indexOfLastProvider))
   const headers = ['Rango', 'Fecha', 'Empresa', 'Usuario', 'Contraseña', 'Estado']
 
   const handleSwitchProvider = async (isActive: boolean, providerId: Provider['id']) => {
@@ -42,6 +47,9 @@ const ProvidersList: FC<{ providers: Provider[] }> = ({ providers }) => {
       }
     })
   }, [providers])
+  useEffect(() => {
+    setProviders(dbProviders.slice(indexOfFirstProvider, indexOfLastProvider))
+  }, [dbProviders, indexOfFirstProvider, indexOfLastProvider])
 
   return (
     <div>
