@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import CurrencyFormat from 'react-currency-format'
 import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
@@ -8,9 +9,14 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<ProductEditable>()
   const submitHandler = handleSubmit(onSubmit)
+
+  const handlePrice = (e: { value: any }) => {
+    setValue('basePriceSol', e.value)
+  }
 
   return (
     <form className="form-product" onSubmit={submitHandler}>
@@ -18,7 +24,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         Nombre del Producto
       </label>
       <input
-        className="input-product font-visby"
+        className={`input-product font-visby ${errors.name && 'error'}`}
         id="name"
         type="text"
         placeholder="Escriba el nombre del evento..."
@@ -29,24 +35,30 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       </label>
       <div className="container-price">
         <p className="price">S/.</p>
-        <input
-          className="input-product font-visby"
+        <CurrencyFormat
+          fixedDecimalScale={true}
+          decimalScale={2}
+          className={`input-product font-visby ${errors.basePriceSol && 'error'}`}
           type="text"
+          allowNegative={false}
+          isNumericString={true}
           placeholder="00.00"
-          {...register('basePriceSol', { required: true })}
+          onValueChange={handlePrice}
+          {...register('basePriceSol', {
+            required: true,
+            validate: value => value !== 0,
+          })}
         />
-        {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
       </div>
       <label className="text-size label" htmlFor="description">
         Descripción del producto
       </label>
       <textarea
-        className="textarea font-visby"
+        className={`textarea font-visby ${errors.description && 'error'}`}
         id="description"
         placeholder="Escribe aquí..."
-        {...register('description', { required: true })}
+        {...register('description')}
       />
-      {errors.description && <small className="text-red-500">{errors.description.message}</small>}
 
       <label className="text-size label">Añadir imagen del producto</label>
       <label className="image font-visby">Añadir imagen</label>
