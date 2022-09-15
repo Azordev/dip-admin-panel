@@ -4,9 +4,12 @@
   display: flex;
   justify-content: center;
   margin: 3rem auto;
-  max-width: 1200px;
+  max-width: 1800px;
   padding-left: 3.75rem;
   padding-right: 3.75rem;
+  @media (max-width: 2000px) {
+    max-width: 1200px;
+  }
   @media (max-width: 1600px) {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -19,6 +22,10 @@
   grid-area: image;
   height: 10rem;
   overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
   
   .logo {
     background-color: $black;
@@ -56,7 +63,20 @@
   padding: 1.05rem 1.5rem 1.05rem 1.05rem;
   position: relative;
   text-decoration: none;
-  width: calc(50% - 0.5rem);
+  width: calc(33% - 0.5rem);
+  
+  @media (max-width: 2000px) {
+    width: calc(50% - 0.5rem);
+  }
+  
+  @media (max-width: 1600px) {
+    grid-template-columns: 150px 1fr;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 190px 1fr;
+    width: 100%;
+  }
 
   .line {
     position: relative;
@@ -83,14 +103,6 @@
       transform-origin: bottom left;
     }
   }
-  @media (max-width: 1024px) {
-    grid-template-columns: 190px 1fr;
-    width: 100%;
-  }
-  @media (max-width: 1600px) {
-    grid-template-columns: 150px 1fr;
-  }
-
 }
 
 .event-header {
