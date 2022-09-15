@@ -10,6 +10,7 @@ import DeleteModal from '@/components/DeleteModal'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
+import Picture from '@/views/SVGs/Picture'
 
 export interface EventEditableWithFiles extends EventEditable {
   image?: FileList
@@ -137,13 +138,11 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
             />
             <label htmlFor="image-file" className={styles.image}>
               <figure>
-                <Image
-                  width={imageUrl || originalEvent?.imageUrl ? 300 : 40}
-                  height={imageUrl || originalEvent?.imageUrl ? 200 : 40}
-                  objectFit="contain"
-                  src={imageUrl || originalEvent?.imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                  alt="Imagen del evento"
-                />
+                {imageUrl ? (
+                  <Image width={300} height={200} objectFit="contain" src={imageUrl} alt="Imagen del evento" />
+                ) : (
+                  <Picture />
+                )}
               </figure>
               <span className={styles.label}>
                 {imageFile?.name || originalEvent?.imageUrl ? 'Cambiar imagen' : 'Añadir imagen'}

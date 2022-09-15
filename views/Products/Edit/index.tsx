@@ -1,7 +1,9 @@
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
+import styles from '@/styles/EditEvent.module.scss'
 
 const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData }) => {
   const {
@@ -59,12 +61,14 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData }
         <label className="text-size label">Añadir imagen del producto</label>
         <label className="image font-visby">Añadir imagen</label>
         {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
-        <button className="save" type="submit">
-          Guardar
-        </button>
-        <button className="delete" onClick={showModal}>
-          Eliminar
-        </button>
+        <div className="button-container">
+          <Button className={styles['button-save']} type="submit">
+            Guardar
+          </Button>
+          <Button className={styles['button-delete']} onClick={showModal}>
+            Eliminar
+          </Button>
+        </div>
       </form>
     </div>
   )
