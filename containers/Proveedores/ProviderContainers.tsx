@@ -12,7 +12,7 @@ interface PaginatedSuppliersProps {
 
 const ProviderContainers: FC<PaginatedSuppliersProps> = ({ providers }) => {
   const [CurrentPage, setCurrentPage] = useState(1)
-  const ProvidersPerPage = 11
+  const ProvidersPerPage = 12
   const indexOfLastProvider = CurrentPage * ProvidersPerPage
   const indexOfFirstProvider = indexOfLastProvider - ProvidersPerPage
   return (
