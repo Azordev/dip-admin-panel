@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { FormEvent, FormEventHandler, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 import BackHeader from '@/components/BackHeader'
 import useAuth from '@/hooks/useAuth'
