@@ -25,7 +25,7 @@ const Category: NextPage = () => {
     push('/categorias')
   }
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
   if (!data || !data.category) return <EmptyItem text="La categoría esta vacía o es invalida" />
   return (
     <ClientOnly>

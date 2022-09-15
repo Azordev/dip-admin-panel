@@ -25,7 +25,7 @@ const User: NextPage = () => {
     push('/socios')
   }
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
   if (!data || !data.user) return <EmptyItem text="El usuario esta vacío o es invalido." />
 
   return (
