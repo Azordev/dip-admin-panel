@@ -35,3 +35,11 @@
 .flex-col {
   flex-direction: column;
 }
+
+.center-text {
+  align-items: center;
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  width: 100%;
+}
