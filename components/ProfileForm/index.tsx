@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import { MutableProviderFormProps, ProviderEditable } from '@/services/GraphQL/providers/types'
+import Picture from '@/views/SVGs/Picture'
 
 import styles from './ProfileForm.module.scss'
 
@@ -29,13 +30,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
         <input id="image-file" type="file" accept="image/*" className={styles['input-file']} />
         <label htmlFor="image-file" className={styles.image}>
           <figure>
-            <Image
-              width={40}
-              height={40}
-              objectFit="contain"
-              src="https://img.icons8.com/ios/100/image.png"
-              alt="Imagen del perfil  "
-            />
+            <Picture />
           </figure>
           <span className={styles.label}> {'Añadir imagen'} </span>
         </label>
