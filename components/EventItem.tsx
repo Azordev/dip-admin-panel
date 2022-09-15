@@ -10,7 +10,7 @@ import LogoDID from '@/views/SVGs/LogoDID/LogoDID'
 const EventItem: NextPage<{ event: Event }> = ({ event }) => (
   <Link href={`/eventos/editar/${event.id}`} passHref>
     <a className={styles['event-item']}>
-      <div className={styles['logo-container']}>
+      <div className={styles['image-container']}>
         {event.imageUrl ? (
           <Image src={event.imageUrl} alt={`Logo of event ${event.title}`} className={styles['event-image']} />
         ) : (
