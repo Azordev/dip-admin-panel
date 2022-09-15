@@ -11,6 +11,7 @@ import styles from './ProviderCreateForm.module.scss'
 const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<ProviderUserEditable>()
@@ -86,6 +87,9 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
         <Button type="submit" className={btnStyles['button-save']}>
           {buttonText}
         </Button>
+        <button onClick={() => reset()} className={`${btnStyles['button-delete']} delete`}>
+          Cancelar
+        </button>
       </div>
     </form>
   )
