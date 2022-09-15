@@ -14,6 +14,7 @@ import Icons8 from '@/views/Shared/Icons8'
 export interface EventEditableWithFiles extends EventEditable {
   image?: FileList
   pdf?: FileList
+  time?: string
 }
 
 const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalData: originalEvent }) => {
@@ -30,27 +31,17 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [pdfFile, setPdfFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
-  const [type, setType] = useState(originalEvent?.type)
+  const [isWorkshop, setIsWorkshop] = useState<boolean>(false)
 
   useEffect(() => {
-    setValue('type', 'ATTENDANCE')
-    setValue('date', originalEvent?.date.slice(0, 19) as string)
+    setValue('type', originalEvent?.type === 'WORKSHOP')
+    setValue('date', originalEvent?.date.split('T')[0] as string)
+    setValue('time', originalEvent?.date.split('T')[1].slice(0, -9) as string)
     setValue('description', originalEvent?.description)
     setValue('title', originalEvent?.title)
-    setType(getValues('type'))
-  }, [originalEvent?.date, originalEvent?.description, originalEvent?.title, setValue, getValues])
 
-  const handleChange = (isCheck: any) => {
-    if (isCheck) {
-      setValue('type', 'WORKSHOP')
-      setValue('title', originalEvent?.title)
-      setValue('description', originalEvent?.description)
-      setType(getValues().type)
-      return
-    }
-    setValue('type', 'ATTENDANCE')
-    setType(getValues().type)
-  }
+    setIsWorkshop(originalEvent?.type === 'WORKSHOP')
+  }, [originalEvent?.date, originalEvent?.description, originalEvent?.title, setValue, getValues, originalEvent?.type])
 
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
@@ -115,15 +106,27 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           >
             {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
           </CustomInput>
-          <CustomInput
-            name="date"
-            label="Fecha del evento"
-            register={register}
-            id="date"
-            type="datetime-local"
-            placeholder="Escriba la fecha del evento"
-            defaultValue={originalEvent?.date.slice(0, 19) as string}
-          />
+          <label htmlFor="date" className={styles['label-title']}>
+            Fecha del evento
+          </label>
+          <div className={styles['datetime-container']}>
+            <input
+              className={styles['input-date']}
+              {...register('date', { required: true })}
+              id="date"
+              type="date"
+              placeholder="Escriba la fecha del evento"
+              defaultValue={originalEvent?.date.split('T')[0]}
+            />
+            <input
+              className={styles['input-time']}
+              {...register('time', { required: true })}
+              id="time"
+              type="time"
+              placeholder="Escriba la hora del evento"
+              defaultValue={originalEvent?.date.split('T')[1].slice(0, -9)}
+            />
+          </div>
         </div>
         <div className={styles['image-section']}>
           <div className={styles['container-input']}>
@@ -164,8 +167,10 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
       ></textarea>
       <div className={styles['switch-section']}>
         <CustomSwitch
-          isChecked={type === 'WORKSHOP'}
-          onChange={handleChange}
+          register={register}
+          name="type"
+          isChecked={isWorkshop}
+          onChange={() => setIsWorkshop(prevValue => !prevValue)}
           firstLabel="Evento"
           secondLabel="Convocatoria"
           size="xl"

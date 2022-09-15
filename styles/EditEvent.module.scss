@@ -1,4 +1,4 @@
-@import 'colors', 'fonts';
+@import 'colors', 'fonts', 'forms';
 
 .form {
   background-color: $gray-25;
@@ -168,4 +168,35 @@
 
 .switch-section {
   margin: 45px 0;
+}
+
+
+.datetime-container {
+  border-radius: $input-radius;
+  display: flex;
+  margin: 8px 0;
+
+  &:focus-within {
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.input-date {
+  border-radius: $input-radius 0 0 $input-radius;
+  border-right: 0;
+  margin: 0;
+
+  &:focus {
+    box-shadow: unset;
+  }
+}
+
+.input-time {
+  border-left: 0;
+  border-radius: 0 $input-radius $input-radius 0;
+  margin: 0;
+
+  &:focus {
+    box-shadow: unset;
+  }
 }
