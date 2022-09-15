@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { createProduct, getProductsAPI } from '../../../controllers/products'
+import { createProduct, getProductsAPI, updateProduct } from '../../../controllers/products'
 
 export const config = {
   api: { bodyParser: false },

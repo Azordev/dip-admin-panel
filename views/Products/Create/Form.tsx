@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { ChangeEvent, FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import Swal from 'sweetalert2'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
@@ -23,6 +24,9 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
   const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<ProductEditableWithImg>)
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
+    if (file && file.size >= 8000000) {
+      return Swal.fire('Error', 'Imagen excede el tamaño maximo (8MB)', 'error')
+    }
     if (file?.type.includes('image')) {
       setImageFile(file)
       const reader = new FileReader()
@@ -97,6 +101,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
               />
             </figure>
             <span className={stylesInput.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
+            <span>*Max 8MB Size</span>
           </label>
         </div>
       </div>
