@@ -11,16 +11,20 @@ const Create: NextPage = () => {
   const { push } = useRouter()
   const { error: logError } = useLogger()
 
-  const submitHandler: FormEventHandler<HTMLFormElement> = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const submitHandler: FormEventHandler<HTMLFormElement> = async (event: FormEvent<HTMLFormElement>) => {
     setLoading(true)
+    const formData = new FormData()
+
+    Object.entries(event).forEach(([key, value]) => {
+      if (key === 'image' || key === 'pdf') {
+        formData.set(key, value[0])
+      } else {
+        formData.set(key, value)
+      }
+    })
+
     try {
-      const form = new FormData(e.target as HTMLFormElement)
-      await axios.post('/api/events', form, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
+      await axios.post('/api/events', formData)
       push('/eventos')
       setLoading(false)
     } catch (error) {

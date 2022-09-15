@@ -60,7 +60,7 @@ const UpdateFormContainer: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
 
   return (
     <UpdateFormLayout commercialName={commercialName} parentImageUrl={parentImageUrl}>

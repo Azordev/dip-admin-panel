@@ -19,7 +19,7 @@ const Product: NextPage = () => {
     push('/productos')
   }
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
   if (!data || !data.product) return <EmptyItem text="El producto esta vacío o es invalido." />
   return (
     <ClientOnly>
