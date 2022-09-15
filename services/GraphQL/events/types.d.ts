@@ -30,7 +30,8 @@ export interface EventBase {
 
 export interface EventEditable extends EventBase {
   title?: string
-  type?: string
+  type?: boolean | string
+  time?: string
   imageUrl?: string
   requirementsUrl?: string
 }
