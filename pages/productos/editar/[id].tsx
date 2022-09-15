@@ -32,7 +32,7 @@ const EditProduct: NextPage = () => {
 
       push('/productos')
     } catch (error) {
-      logError(error as Error, 'pages/productos/crear.tsx', 'Error al editar el producto')
+      logError(error as Error, 'pages/productos/editar.tsx', 'Error al editar el producto')
       setLoading(false)
     }
   }
