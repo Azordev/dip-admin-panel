@@ -18,7 +18,7 @@ const s3 = new S3({
   signatureVersion: 'v4',
 })
 
-export const addObject = async (file: File, prefix?: String) => {
+export const addObject = async (file: File, prefix?: string) => {
   if (!file) return { Location: '' }
 
   try {

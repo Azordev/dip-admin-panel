@@ -28,8 +28,6 @@ const Products: NextPage = () => {
     getProducts()
   }, [])
 
-  if (!products || products.length < 1) return <EmptyList text="No hay productos" />
-
   return (
     <ClientOnly>
       <>
@@ -39,7 +37,7 @@ const Products: NextPage = () => {
           logoUrl={user?.providerInfo.logoUrl}
           altLogo={user?.providerInfo.commercialName}
         />
-        <ProductList products={products} />
+        {!products || products.length < 1 ? <EmptyList text="No hay productos" /> : <ProductList products={products} />}
       </>
     </ClientOnly>
   )
