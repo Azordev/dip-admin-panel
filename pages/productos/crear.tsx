@@ -28,7 +28,7 @@ const Create: NextPage = () => {
       push('/productos')
       setLoading(false)
     } catch (error) {
-      logError(error as Error, 'pages/productos/crear.tsx', 'Error al crear el evento')
+      logError(error as Error, 'pages/productos/crear.tsx', 'Error al crear el producto')
       setLoading(false)
     }
   }

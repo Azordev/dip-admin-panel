@@ -6,8 +6,6 @@ import Swal from 'sweetalert2'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
 
-// import styles from './SaveorDelete.module.scss'
-
 interface ProductEditableWithImg extends ProductEditable {
   image?: FileList
 }
@@ -97,7 +95,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
                 height={imageUrl ? 200 : 40}
                 objectFit="contain"
                 src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                alt="Imagen del evento"
+                alt="Imagen del producto"
               />
             </figure>
             <span className={stylesInput.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
