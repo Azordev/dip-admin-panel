@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react'
+import CurrencyFormat from 'react-currency-format'
 import { useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
@@ -20,6 +21,10 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData }
 
   const showModal = () => {}
 
+  const handlePrice = (e: { value: any }) => {
+    setValue('basePriceSol', e.value)
+  }
+
   return (
     <div className="container">
       <form className="form-product" onSubmit={submitHandler}>
@@ -27,7 +32,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData }
           Nombre del Producto
         </label>
         <input
-          className="input-product font-visby"
+          className={`input-product font-visby ${errors.name && 'error'}`}
           id="name"
           type="text"
           placeholder="Escriba el nombre del producto..."
@@ -38,19 +43,26 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData }
         </label>
         <div className="container-price">
           <p className="price">S/.</p>
-          <input
-            className="input-product font-visby"
+          <CurrencyFormat
+            fixedDecimalScale={true}
+            decimalScale={2}
+            className={`input-product font-visby ${errors.basePriceSol && 'error'}`}
             type="text"
+            allowNegative={false}
+            isNumericString={true}
             placeholder="00.00"
-            {...register('basePriceSol', { required: true })}
+            onValueChange={handlePrice}
+            {...register('basePriceSol', {
+              required: true,
+              validate: value => value !== 0,
+            })}
           />
-          {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
         </div>
         <label className="text-size label" htmlFor="description">
           Descripción del producto
         </label>
         <textarea
-          className="textarea font-visby"
+          className={`textarea font-visby ${errors.description && 'error'}`}
           id="description"
           placeholder="Escribe aquí..."
           {...register('description', { required: true })}
