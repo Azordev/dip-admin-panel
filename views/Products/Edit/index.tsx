@@ -71,7 +71,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
             placeholder="00.00"
             {...register('basePriceSol', { required: true })}
           />
-          {errors.basePriceSol && <small className="text-red-500">{errors.basePriceSol.message}</small>}
+          {errors.basePriceSol && <small className={stylesInput['error-message']}>{errors.basePriceSol.message}</small>}
         </div>
         <label className="text-size label" htmlFor="description">
           Descripción del producto
@@ -82,7 +82,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           placeholder="Escribe aquí..."
           {...register('description', { required: true })}
         />
-        {errors.description && <small className="text-red-500">{errors.description.message}</small>}
+        {errors.description && <small className={stylesInput['error-message']}>{errors.description.message}</small>}
         <label className="text-size label">Añadir imagen del producto</label>
         <div className={stylesInput['container-input']}>
           <input
@@ -106,7 +106,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
             <span className={stylesInput.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
           </label>
         </div>
-        {errors.image && <small className="text-red-500">{errors.image.message}</small>}
+        {errors.image && <small className={stylesInput['error-message']}>{errors.image.message}</small>}
         <button className="save" type="submit">
           {loading ? 'Guardando' : 'Guardar'}
         </button>
