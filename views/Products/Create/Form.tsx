@@ -1,11 +1,10 @@
-import dynamic from 'next/dynamic'
+import { CurrencyInput } from 'input-currency-react'
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
-  const CurrencyInput = dynamic(() => import('input-currency-react').then(mod => mod.CurrencyInput), { ssr: false })
   const {
     register,
     handleSubmit,
