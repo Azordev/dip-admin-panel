@@ -19,6 +19,9 @@ export interface MemberBase {
 
 export interface MemberEditable extends MemberBase {
   email: string
+  memberCode?: string
+  createdAt?: string
+  password?: string
 }
 
 export interface Member extends MemberBase {
@@ -121,7 +124,7 @@ export interface MutableUserFormProps {
 export interface MutableMemberFormProps {
   onSubmit: (_formData: MemberEditable) => void
   loading: boolean
-  originalData?: Member
+  originalData?: User
 }
 
 export interface MutableProviderUserFormProps {
