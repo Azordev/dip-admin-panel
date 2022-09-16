@@ -2,6 +2,7 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import Swal from 'sweetalert2'
 
 import BackHeader from '@/components/BackHeader'
 import useAuth from '@/hooks/useAuth'
@@ -24,6 +25,13 @@ const Create: NextPage = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+      })
+      Swal.fire({
+        title: 'Producto creado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
       })
       push('/productos')
       setLoading(false)

@@ -1,8 +1,8 @@
-import { useMutation } from '@apollo/client'
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import Swal from 'sweetalert2'
 
 import UpdateFormContainer from '@/components/UpdateForm'
 import useAuth from '@/hooks/useAuth'
@@ -23,13 +23,18 @@ const EditProduct: NextPage = () => {
     try {
       const form = new FormData(e.target as HTMLFormElement)
       form.append('providerId', `${user.providerInfo.id}`)
-
       await axios.put(`/api/products/${query.id}`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-
+      Swal.fire({
+        title: 'Producto actualizado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      })
       push('/productos')
     } catch (error) {
       logError(error as Error, 'pages/productos/editar.tsx', 'Error al editar el producto')
