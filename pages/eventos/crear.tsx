@@ -1,30 +1,33 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { FormEvent, FormEventHandler, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
 import CreateEventLayout from '@/views/Events/Create'
+import { EventEditableWithFiles } from '@/views/Events/Create/Form'
+
+const isEventOrWorkshop = (type: boolean | undefined): string => (type ? 'WORKSHOP' : 'ATTENDANCE')
 
 const Create: NextPage = () => {
   const [loading, setLoading] = useState(false)
   const { push } = useRouter()
   const { error: logError } = useLogger()
 
-  const submitHandler: FormEventHandler<HTMLFormElement> = async (event: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (formValues: EventEditableWithFiles, e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setLoading(true)
-    const formData = new FormData()
-
-    Object.entries(event).forEach(([key, value]) => {
-      if (key === 'image' || key === 'pdf') {
-        formData.set(key, value[0])
-      } else {
-        formData.set(key, value)
-      }
-    })
 
     try {
-      await axios.post('/api/events', formData)
+      const form = new FormData(e.target as HTMLFormElement)
+      form.set('type', isEventOrWorkshop(form.get('type') as unknown as boolean))
+      form.set('date', formValues.date.concat('T', formValues.time || '00:00', ':00'))
+
+      await axios.post('/api/events', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       push('/eventos')
       setLoading(false)
     } catch (error) {
