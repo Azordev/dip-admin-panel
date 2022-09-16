@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import client from '@/services/GraphQL/client'
-import { TOGGLE_USER } from '@/services/GraphQL/users/mutations'
+import { CREATE_MEMBER, CREATE_USER_MEMBER, TOGGLE_USER } from '@/services/GraphQL/users/mutations'
 import { MEMBER_USERS } from '@/services/GraphQL/users/queries'
 import { User } from '@/services/GraphQL/users/types'
 
@@ -38,6 +38,42 @@ export const toggleMember = async (req: NextApiRequest, res: NextApiResponse) =>
     res.status(200).json({ msg: 'Member toggled  successfully' })
   } catch (error) {
     console.error(error)
+    res.status(500).json(error)
+  }
+}
+
+export const createMember = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { body } = req
+    const { data, errors: userErrors } = await client.mutate({
+      mutation: CREATE_USER_MEMBER,
+      variables: {
+        memberCode: body.memberCode,
+        password: body.password,
+        position: body.position,
+        type: body.type,
+      },
+    })
+
+    if (userErrors) {
+      return res.status(500).json(userErrors)
+    }
+
+    const newMember = {
+      firstNames: body.namePartner,
+      email: body.email,
+      userId: data?.user?.id,
+    }
+
+    await client.mutate({
+      mutation: CREATE_MEMBER,
+      variables: newMember,
+    })
+    return res.json({
+      msg: 'Member created successfully',
+      data: { ...newMember },
+    })
+  } catch (error) {
     res.status(500).json(error)
   }
 }
