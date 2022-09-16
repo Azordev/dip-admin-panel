@@ -9,12 +9,14 @@ import { EVENT_BY_ID } from '@/services/GraphQL/events/queries'
 import { EventEditable } from '@/services/GraphQL/events/types'
 import UpdateEvent from '@/views/Events/Edit'
 
+const isEventOrWorkshop = (type: boolean | undefined): string => (type ? 'WORKSHOP' : 'ATTENDANCE')
+
 const EditEvent: NextPage = () => {
   const { push, query } = useRouter()
   const { error: logError } = useLogger()
   const [loading, setLoading] = useState(false)
   const submitHandler = async (updatedEvent: EventEditable) => {
-    const formattedDate = new Date(updatedEvent.date).toISOString()
+    const formattedDate = updatedEvent.date.concat('T', updatedEvent?.time || '00:00', ':00')
     const formData = new FormData()
 
     Object.entries(updatedEvent).forEach(([key, value]) => {
@@ -25,6 +27,7 @@ const EditEvent: NextPage = () => {
       }
     })
     formData.set('date', formattedDate)
+    formData.set('type', isEventOrWorkshop(updatedEvent.type as boolean))
 
     try {
       setLoading(true)

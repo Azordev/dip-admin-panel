@@ -1,12 +1,14 @@
-import { FC } from 'react'
+import { FC, FormEvent } from 'react'
 
 import BackHeader from '@/components/BackHeader'
-import { MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/Home.module.css'
 
-import CreateEventForm from './Form'
+import CreateEventForm, { EventEditableWithFiles } from './Form'
 
-const CreateEventLayout: FC<MutableEventFormProps> = ({ onSubmit, loading }) => (
+const CreateEventLayout: FC<{
+  onSubmit: (_data: EventEditableWithFiles, _e: FormEvent<HTMLFormElement>) => void
+  loading: boolean
+}> = ({ onSubmit, loading }) => (
   <>
     <BackHeader to="/eventos" />
     <div className={styles.container}>
