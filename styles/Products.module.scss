@@ -35,6 +35,9 @@
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(397px, 1fr));
+  height: 82vh;
+  overflow-y: auto;
+  padding: 19px 25px;
 }
 
 .product-item {
