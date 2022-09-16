@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import Swal from 'sweetalert2'
 
 import UpdateFormContainer from '@/components/UpdateForm'
 import useAuth from '@/hooks/useAuth'
@@ -19,6 +20,13 @@ const EditProduct: NextPage = () => {
 
   const submitHandler = async (updatedProduct: ProductEditable) => {
     await updateProduct({ variables: { ...updatedProduct, providerId: isProvider, id: query.id } })
+    Swal.fire({
+      title: 'Producto actualizado',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
     push('/productos')
   }
 

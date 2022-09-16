@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import Swal from 'sweetalert2'
 
 import BackHeader from '@/components/BackHeader'
 import useAuth from '@/hooks/useAuth'
@@ -17,7 +18,14 @@ const Create: NextPage = () => {
   const [createProduct, { loading, error: mutationError }] = useMutation(CREATE_PRODUCT)
 
   const submitHandler = async (newProduct: ProductEditable) => {
-    createProduct({ variables: { ...newProduct, providerId: isProvider } })
+    await createProduct({ variables: { ...newProduct, providerId: isProvider } })
+    Swal.fire({
+      title: 'Producto creado',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
     push('/productos')
   }
 
