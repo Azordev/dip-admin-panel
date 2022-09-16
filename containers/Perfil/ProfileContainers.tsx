@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import Swal from 'sweetalert2'
 
 import ProfileForm from '@/components/ProfileForm'
 import UpdateFormContainer from '@/components/UpdateForm'
@@ -18,6 +19,13 @@ const ProfileContainers: NextPage = () => {
   const submitHandler = async (updatedProduct: ProviderEditable) => {
     await updateProvider({ variables: { ...updatedProduct, id: query.id } })
     push('/productos')
+    Swal.fire({
+      title: 'Perfil actualizado',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
   }
 
   if (mutationError) logError(mutationError, 'pages/perfil/editar/[id].tsx', 'Error al actualizar el perfil')
