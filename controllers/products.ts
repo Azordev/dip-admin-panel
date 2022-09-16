@@ -1,6 +1,7 @@
 import { ApolloError } from '@apollo/client'
 import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import NextCors from 'nextjs-cors'
 
 import client from '@/services/GraphQL/client'
 import { CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
@@ -57,6 +58,12 @@ export const getProviderProducts = async (req: NextApiRequest, res: NextApiRespo
 }
 
 export const getProductsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
+  await NextCors(req, res, {
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    origin: '*',
+    optionsSuccessStatus: 200,
+  })
+
   try {
     const { query } = req
     const { data } = await client.query({
