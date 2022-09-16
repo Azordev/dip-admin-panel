@@ -92,6 +92,9 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
           <Button iconName="" className={btnStyle['button-save']} type="submit">
             {buttonText}
           </Button>
+          <Button iconName="" className={btnStyle['button-delete']} type="button">
+            Eliminar
+          </Button>
         </section>
       </form>
     </form>

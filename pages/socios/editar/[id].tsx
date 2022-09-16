@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import BackHeader from '@/components/BackHeader'
 import useLogger from '@/hooks/useLogger'
 import { UPDATE_MEMBER } from '@/services/GraphQL/users/mutations'
 import { MemberEditable } from '@/services/GraphQL/users/types'
@@ -27,7 +28,10 @@ const EditUserInformation: NextPage = () => {
     )
 
   return (
-    <EditUserAndMember submitMember={submitMemberHandler} updateUserMutationLoading={updaterMemberMutationLoading} />
+    <div>
+      <BackHeader to="/eventos" />
+      <EditUserAndMember submitMember={submitMemberHandler} updateUserMutationLoading={updaterMemberMutationLoading} />
+    </div>
   )
 }
 
