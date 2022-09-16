@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { FormEvent } from 'react'
 
 import { Provider } from '../providers/types.d'
 
@@ -37,7 +38,7 @@ export interface Product extends ProductBase {
 }
 
 export interface MutableProductFormProps {
-  onSubmit: (_formData: ProductEditable) => void
+  onSubmit: (_values: ProductEditable, _e: FormEvent<HTMLFormElement>) => void
   loading: boolean
   originalData?: Product
 }

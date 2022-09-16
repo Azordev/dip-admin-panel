@@ -12,13 +12,17 @@ interface PaginatedSuppliersProps {
 
 const ProviderContainers: FC<PaginatedSuppliersProps> = ({ providers }) => {
   const [CurrentPage, setCurrentPage] = useState(1)
-  const ProvidersPerPage = 3
+  const ProvidersPerPage = 12
   const indexOfLastProvider = CurrentPage * ProvidersPerPage
   const indexOfFirstProvider = indexOfLastProvider - ProvidersPerPage
   return (
     <div className={styles.relative}>
       <ListHeader createText="Crear nuevo proveedor" createPath="/proveedores/crear" />
-      <ProvidersList providers={providers} />
+      <ProvidersList
+        providers={providers}
+        indexOfLastProvider={indexOfLastProvider}
+        indexOfFirstProvider={indexOfFirstProvider}
+      />
       <PaginatedSuppliers
         ProvidersPerPage={ProvidersPerPage}
         totalProvidersLength={providers.length}
