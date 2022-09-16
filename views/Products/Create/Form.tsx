@@ -1,9 +1,9 @@
-import CurrencyFormat from 'react-currency-format'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useState } from 'react'
+import CurrencyFormat from 'react-currency-format'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
-
 
 import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
@@ -19,13 +19,12 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
   const MAX_FILE_SIZE = 8000000
   const {
     register,
-    reset,
     setValue,
     handleSubmit,
     formState: { errors },
-
   } = useForm<ProductEditableWithImg>()
   const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<ProductEditableWithImg>)
+  const router = useRouter()
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
     if (file && file.size >= MAX_FILE_SIZE) {
@@ -42,7 +41,6 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       reader.readAsDataURL(file)
     }
   }
-
 
   const handlePrice = (e: { value: any }) => {
     setValue('basePriceSol', e.value)
@@ -80,12 +78,9 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
           {...register('basePriceSol', {
             required: true,
             validate: value => value !== 0,
-            message: 'Debe colocar un precio'
           })}
         />
       </div>
-      {errors.basePriceSol && <small className={stylesInput['error-message']}>{errors.basePriceSol.message}</small>}
-
       <label className="text-size label" htmlFor="description">
         Descripción del producto
       </label>
@@ -125,14 +120,14 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         </div>
       </div>
       {errors.imageUrl && <small className={stylesInput['error-message']}>{errors.imageUrl.message}</small>}
-
-      <button className="save" type="submit">
-        {loading ? 'Guardando' : 'Guardar'}
-      </button>
-      <button className="delete" onClick={() => reset()}>
-        Eliminar
-      </button>
-
+      <div className="button-container">
+        <Button className={stylesInput['button-save']} type="submit">
+          {loading ? 'Guardando' : 'Guardar'}
+        </Button>
+        <Button className={stylesInput['button-cancel']} onClick={() => router.push('/productos')}>
+          Cancelar
+        </Button>
+      </div>
     </form>
   )
 }

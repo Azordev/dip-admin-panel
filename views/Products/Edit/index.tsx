@@ -1,14 +1,12 @@
 import Image from 'next/image'
-import CurrencyFormat from 'react-currency-format'
 import { ChangeEvent, FC, useEffect, useState } from 'react'
+import CurrencyFormat from 'react-currency-format'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 
 import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
-
 import stylesInput from '@/styles/EditEvent.module.scss'
-
 
 interface ProductEditableWithImg extends ProductEditable {
   image?: FileList
@@ -86,7 +84,6 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
             })}
           />
           {errors.basePriceSol && <small className={stylesInput['error-message']}>{errors.basePriceSol.message}</small>}
-
         </div>
         <label className="text-size label" htmlFor="description">
           Descripción del producto
@@ -123,13 +120,14 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           </label>
         </div>
         {errors.image && <small className={stylesInput['error-message']}>{errors.image.message}</small>}
-        <button className="save" type="submit">
-          {loading ? 'Guardando' : 'Guardar'}
-        </button>
-        <button className="delete" onClick={showModal}>
-          Eliminar
-        </button>
-
+        <div className="button-container">
+          <Button className={stylesInput['button-save']} type="submit">
+            Guardar
+          </Button>
+          <Button className={stylesInput['button-delete']} onClick={showModal}>
+            Eliminar
+          </Button>
+        </div>
       </form>
     </div>
   )
