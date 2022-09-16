@@ -28,6 +28,7 @@ export interface ProviderBase {
   b2bEmail: string
   plan: string
   orderIndex: number
+  catalogUrl?: string
 }
 
 export interface ProviderEditable extends ProviderBase {

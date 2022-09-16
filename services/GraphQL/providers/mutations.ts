@@ -43,6 +43,7 @@ export const UPDATE_PROVIDER = gql`
     $salesPhone: String
     $address: String
     $logoUrl: String
+    $catalogUrl: String
   ) {
     provider: update_providers_by_pk(
       pk_columns: { id: $id }
@@ -52,6 +53,7 @@ export const UPDATE_PROVIDER = gql`
         sales_phone: $salesPhone
         address: $address
         logo_url: $logoUrl
+        catalog_url: $catalogUrl
       }
     ) {
       isActive: is_active

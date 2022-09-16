@@ -22,8 +22,16 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
   useEffect(() => {
     setValue('commercialName', originalData?.commercialName)
     setValue('salesPhone', originalData?.salesPhone)
+    setValue('catalogUrl', originalData?.catalogUrl)
+
     setImageUrl(originalData?.logoUrl)
-  }, [originalData?.commercialName, originalData?.salesPhone, originalData?.logoUrl, setValue])
+  }, [
+    originalData?.commercialName,
+    originalData?.salesPhone,
+    originalData?.logoUrl,
+    originalData?.catalogUrl,
+    setValue,
+  ])
 
   const MAX_FILE_SIZE = 800000
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +74,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
           </figure>
           <span className={styles.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
         </label>
+        {errors.logoUrl && <small className={styles['error-message']}>{errors.logoUrl.message}</small>}
       </div>
       <section className={styles.section}>
         <div className={styles['input-section']}>
@@ -76,9 +85,11 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
               placeholder="Escriba el nombre de la Marca Comercial"
               id="title"
               type="text"
-              {...register('commercialName')}
+              {...register('commercialName', { required: { value: true, message: 'El campo no puede estar vacio' } })}
             />
-            {errors.commercialName && <small className="text-red-500">{errors.commercialName.message}</small>}
+            {errors.commercialName && (
+              <small className={styles['error-message']}>{errors.commercialName.message}</small>
+            )}
           </div>
           <div className={styles['custom-input']}>
             <label className={styles['label-input']}>Número de WhatsApp</label>
@@ -87,13 +98,21 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
               placeholder="Inserte número de WhatsApp del proveedor..."
               id="title"
               type="number"
-              {...register('salesPhone')}
+              {...register('salesPhone', { required: { value: true, message: 'El campo no puede estar vacio' } })}
             />
-            {errors.salesPhone && <small className="text-red-500">{errors.salesPhone.message}</small>}
+            {errors.salesPhone && <small className={styles['error-message']}>{errors.salesPhone.message}</small>}
           </div>
           <div className={styles['custom-input']}>
             <label className={styles['label-input']}>Link del catálogo</label>
-            <input className={styles.input} placeholder="Inserta el enlace de tu catálogo web" id="title" type="text" />
+            <input
+              className={styles.input}
+              placeholder="Inserta el enlace de tu catálogo web"
+              id="catalogo"
+              type="text"
+              {...register('catalogUrl', { required: { value: true, message: 'El campo no puede estar vacio' } })}
+            />
+
+            {errors.catalogUrl && <small className={styles['error-message']}>{errors.catalogUrl.message}</small>}
           </div>
         </div>
       </section>
