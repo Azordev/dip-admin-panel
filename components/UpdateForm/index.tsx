@@ -3,8 +3,6 @@ import { useRouter } from 'next/router'
 import { FC, FormEvent, useEffect, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
-import { ProductEditable } from '@/services/GraphQL/products/types'
-import { ProviderEditable } from '@/services/GraphQL/providers/types'
 
 import { BackHeaderProps } from '../BackHeader'
 import Loading from '../Loading'

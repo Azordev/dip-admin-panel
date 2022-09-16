@@ -3,11 +3,9 @@ import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 
-import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
-
 import stylesInput from '@/styles/EditEvent.module.scss'
-
+import Picture from '@/views/SVGs/Picture'
 
 interface ProductEditableWithImg extends ProductEditable {
   image?: FileList
@@ -99,13 +97,11 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           />
           <label htmlFor="image-file" className={stylesInput.image}>
             <figure>
-              <Image
-                width={imageUrl ? 300 : 40}
-                height={imageUrl ? 200 : 40}
-                objectFit="contain"
-                src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                alt="Imagen del evento"
-              />
+              {imageUrl ? (
+                <Image width={300} height={200} objectFit="contain" src={imageUrl} alt="Imagen del producto" />
+              ) : (
+                <Picture />
+              )}
             </figure>
             <span className={stylesInput.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
           </label>
@@ -117,7 +113,6 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
         <button className="delete" onClick={showModal}>
           Eliminar
         </button>
-
       </form>
     </div>
   )

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+
 import { FormEvent, useState } from 'react'
 
 import ProfileForm from '@/components/ProfileForm'
@@ -14,10 +15,12 @@ const ProfileContainers: NextPage = () => {
   const { user } = useAuth()
   const { push, query } = useRouter()
   const { error: logError } = useLogger()
+
   const [loading, setLoading] = useState<boolean>()
   const submitHandler = async (values: ProviderEditable, e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+
 
     const form = new FormData(e.target as HTMLFormElement)
     form.append('id', `${user.providerInfo.id}`)
