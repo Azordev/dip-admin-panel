@@ -67,10 +67,10 @@
 }
 
 .title {
+  max-width: 250px;
   overflow: hidden;
   padding-right: 1.25rem;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 250px;
 }
