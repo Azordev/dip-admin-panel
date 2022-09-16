@@ -1,15 +1,19 @@
 import { DocumentNode, useLazyQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useState } from 'react'
+import { FC, FormEvent, useEffect, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
+import { ProductEditable } from '@/services/GraphQL/products/types'
+import { ProviderEditable } from '@/services/GraphQL/providers/types'
 
 import { BackHeaderProps } from '../BackHeader'
 import Loading from '../Loading'
 import UpdateFormLayout from './Layout'
 
 interface Props extends BackHeaderProps {
-  submitHandler: (_e: any, _dataForm: any) => void
+
+  submitHandler: (_values: any, _e: any>) => void
+
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
   isSubmitLoading?: boolean
@@ -58,7 +62,7 @@ const UpdateFormContainer: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
 
   return (
     <UpdateFormLayout commercialName={commercialName} parentImageUrl={parentImageUrl}>

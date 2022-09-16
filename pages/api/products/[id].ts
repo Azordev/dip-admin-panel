@@ -7,6 +7,6 @@ export const config = {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'PUT') updateProduct(req, res)
   if (req.method === 'DELETE') deleteProduct(req, res)
+  if (req.method === 'PUT') updateProduct(req, res)
 }

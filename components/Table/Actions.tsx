@@ -18,6 +18,7 @@ const Actions: FC<ActionsProps> = ({ editLink, showSwitch, isCheckedSwitch, onSw
   <div className={styles.container}>
     {showSwitch && (
       <Switch
+        name="type"
         isChecked={Boolean(isCheckedSwitch)}
         onChange={isChecked => onSwitchChange && onSwitchChange(isChecked)}
       />

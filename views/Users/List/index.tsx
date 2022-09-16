@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { FC, useMemo } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 
 import Table, { TableData } from '@/components/Table'
 import TableActions from '@/components/Table/Actions'
@@ -11,7 +11,8 @@ const UsersList: FC<{
   users: User[]
   indexOfFirstPartner: number
   indexOfLastPartner: number
-}> = ({ users }) => {
+}> = ({ users: dbUsers, indexOfFirstPartner, indexOfLastPartner }) => {
+  const [users, setUsers] = useState(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
   const { reload } = useRouter()
   const headers = ['CÓDIGO', 'Fecha', 'Socio', 'Correo electrónico', 'Contraseña', 'Estado']
 
@@ -53,6 +54,10 @@ const UsersList: FC<{
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
+
+  useEffect(() => {
+    setUsers(dbUsers.slice(indexOfFirstPartner, indexOfLastPartner))
+  }, [dbUsers, indexOfFirstPartner, indexOfLastPartner])
 
   return (
     <div>

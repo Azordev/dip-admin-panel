@@ -1,45 +1,39 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import CustomInput from '@/components/CustomInput'
 import CustomSwitch from '@/components/CustomSwitch'
-import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
+import { EventEditable } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
+import Picture from '@/views/SVGs/Picture'
 
 export interface EventEditableWithFiles extends EventEditable {
   image?: FileList
   pdf?: FileList
+  time?: string
 }
 
-const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
+const CreateEventForm: FC<{
+  onSubmit: (_data: EventEditableWithFiles, _e: FormEvent<HTMLFormElement>) => void
+  loading: boolean
+}> = ({ onSubmit, loading }) => {
   const {
     register,
-    setValue,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<EventEditableWithFiles>()
+
   const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<EventEditableWithFiles>)
   const router = useRouter()
   const buttonText = loading ? 'Guardando' : 'Guardar'
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [pdfFile, setPdfFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
-  const [type, setType] = useState('WORKSHOP')
-
-  const handleChange = (isCheck: boolean) => {
-    if (isCheck) {
-      setValue('type', 'WORKSHOP')
-      setType(getValues().type as string)
-      return
-    }
-    setValue('type', 'ATTENDANCE')
-    setType(getValues().type as string)
-  }
+  const [isWorkshop, setIsWorkshop] = useState<boolean>(false)
 
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
@@ -77,19 +71,31 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
             type="text"
             placeholder="Escriba el nombre del evento"
             defaultValue=""
-            required="El nombre del evento es obligatorio"
+            required={true}
           >
             {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
           </CustomInput>
-          <CustomInput
-            name="date"
-            label="Fecha del evento"
-            register={register}
-            id="date"
-            type="datetime-local"
-            placeholder="Escriba la fecha del evento"
-            defaultValue={new Date().toISOString().slice(0, 19) as string}
-          />
+          <label htmlFor="date" className={styles['label-title']}>
+            Fecha del evento
+          </label>
+          <div className={styles['datetime-container']}>
+            <input
+              className={styles['input-date']}
+              {...register('date', { required: true })}
+              id="date"
+              type="date"
+              placeholder="Escriba la fecha del evento"
+              defaultValue={new Date().toISOString().split('T')[0]}
+            />
+            <input
+              className={styles['input-time']}
+              {...register('time', { required: true })}
+              id="time"
+              type="time"
+              placeholder="Escriba la hora del evento"
+              defaultValue={new Date().toLocaleTimeString('es-Es').slice(0, -3)}
+            />
+          </div>
         </div>
         <div className={styles['image-section']}>
           <div className={styles['container-input']}>
@@ -103,13 +109,11 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
             />
             <label htmlFor="image-file" className={styles.image}>
               <figure>
-                <Image
-                  width={imageUrl ? 300 : 40}
-                  height={imageUrl ? 200 : 40}
-                  objectFit="contain"
-                  src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                  alt="Imagen del evento"
-                />
+                {imageUrl ? (
+                  <Image width={300} height={200} objectFit="contain" src={imageUrl} alt="Imagen del evento" />
+                ) : (
+                  <Picture />
+                )}
               </figure>
               <span className={styles.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
             </label>
@@ -128,8 +132,10 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
       ></textarea>
       <div className={styles['switch-section']}>
         <CustomSwitch
-          isChecked={type === 'WORKSHOP'}
-          onChange={handleChange}
+          register={register}
+          name="type"
+          isChecked={isWorkshop}
+          onChange={() => setIsWorkshop(prevValue => !prevValue)}
           firstLabel="Evento"
           secondLabel="Convocatoria"
           size="xl"
@@ -155,10 +161,10 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
         </label>
       </div>
       <section className={styles['buttons-container']}>
-        <Button iconName="" className={styles['button-cancel']} onClick={() => router.push('/eventos')}>
+        <Button className={styles['button-cancel']} onClick={() => router.push('/eventos')}>
           Cancelar
         </Button>
-        <Button iconName="" className={styles['button-save']} type="submit">
+        <Button className={styles['button-save']} type="submit">
           {buttonText}
         </Button>
       </section>
