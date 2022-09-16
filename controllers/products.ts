@@ -76,6 +76,7 @@ export const getProductsAPI = async (req: NextApiRequest, res: NextApiResponse) 
 
 export const createProduct = (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
+
   form.parse(req, async (err, fields, files) => {
     try {
       if (err) {
