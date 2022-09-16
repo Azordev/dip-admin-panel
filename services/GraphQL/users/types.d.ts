@@ -60,6 +60,7 @@ export const usersInfo = gql`
 `
 
 export interface UserBase {
+  id?: string
   memberCode: string
   type: string
   isActive: boolean

@@ -34,27 +34,23 @@ export const CREATE_PROVIDER = gql`
   }
 `
 
-// TODO: check if it needs more fields
 export const UPDATE_PROVIDER = gql`
   mutation (
-    $id: uuid!
-    $commercialName: String
-    $salesEmail: String
-    $salesPhone: String
-    $address: String
-    $logoUrl: String
+    $userId: uuid!
+    $providerId: uuid!
+    $memberCode: String!
+    $commercialName: String!
+    $salesEmail: String!
+    $password: String!
   ) {
-    provider: update_providers_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        commercial_name: $commercialName
-        sales_email: $salesEmail
-        sales_phone: $salesPhone
-        address: $address
-        logo_url: $logoUrl
-      }
+    update_users_by_pk(pk_columns: { id: $userId }, _set: { member_code: $memberCode, password: $password }) {
+      is_active
+    }
+    update_providers_by_pk(
+      pk_columns: { id: $providerId }
+      _set: { commercial_name: $commercialName, b2b_email: $salesEmail }
     ) {
-      isActive: is_active
+      is_active
     }
   }
 `

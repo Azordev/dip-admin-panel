@@ -20,6 +20,7 @@ export const providerInfo = gql`
     orderIndex: order_index
     isActive: is_active
     user_info {
+      id
       memberCode: member_code
       password
     }
@@ -37,6 +38,8 @@ export interface ProviderBase {
 }
 
 export interface ProviderEditable extends ProviderBase {
+  userId?: string
+  providerId?: string
   commercialName?: string
   logoUrl?: string
   salesPhone?: string
