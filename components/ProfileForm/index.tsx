@@ -1,15 +1,14 @@
-import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 
 import Button from '@/components/Button'
 import { MutableProviderFormProps, ProviderEditable } from '@/services/GraphQL/providers/types'
-import Picture from '@/views/SVGs/Picture'
 
 import styles from './ProfileForm.module.scss'
 
-const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) => {
+const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loading }) => {
   const {
     register,
     setValue,
@@ -57,7 +56,6 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
         />
         <label htmlFor="image-file" className={styles.image}>
           <figure>
-
             <Image
               width={imageUrl ? 300 : 40}
               height={imageUrl ? 200 : 40}
@@ -65,7 +63,6 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
               src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
               alt="Logo del Proveedor"
             />
-
           </figure>
           <span className={styles.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
         </label>
@@ -105,7 +102,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
           Cancelar
         </Button>
         <Button iconName="" className={styles['button-save']} type="submit">
-          Guardar
+          {loading ? 'Guardando' : 'Guardar'}
         </Button>
       </section>
     </form>

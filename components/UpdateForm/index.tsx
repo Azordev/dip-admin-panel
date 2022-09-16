@@ -11,8 +11,7 @@ import Loading from '../Loading'
 import UpdateFormLayout from './Layout'
 
 interface Props extends BackHeaderProps {
-
-  submitHandler: (_values: any, _e: any>) => void
+  submitHandler: (_values: any, _e: FormEvent<HTMLFormElement>) => void
 
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
@@ -62,7 +61,7 @@ const UpdateFormContainer: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (loading) return <Loading className="center-text" />
+  if (loading) return <Loading />
 
   return (
     <UpdateFormLayout commercialName={commercialName} parentImageUrl={parentImageUrl}>
