@@ -19,7 +19,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
   const MAX_FILE_SIZE = 8000000
   const {
     register,
-    reset
+    reset,
     handleSubmit,
     formState: { errors },
 
