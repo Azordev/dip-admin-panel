@@ -1,16 +1,19 @@
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
+import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
+import styles from '@/styles/EditEvent.module.scss'
 
 const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<ProductEditable>()
   const submitHandler = handleSubmit(onSubmit)
+  const router = useRouter()
 
   return (
     <form className="form-product" onSubmit={submitHandler}>
@@ -51,12 +54,14 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       <label className="text-size label">Añadir imagen del producto</label>
       <label className="image font-visby">Añadir imagen</label>
       {errors.imageUrl && <small className="text-red-500">{errors.imageUrl.message}</small>}
-      <button className="save" type="submit">
-        {loading ? 'Guardando' : 'Guardar'}
-      </button>
-      <button className="delete" onClick={() => reset()}>
-        Eliminar
-      </button>
+      <div className="button-container">
+        <Button className={styles['button-save']} type="submit">
+          {loading ? 'Guardando' : 'Guardar'}
+        </Button>
+        <Button className={styles['button-cancel']} onClick={() => router.push('/productos')}>
+          Cancelar
+        </Button>
+      </div>
     </form>
   )
 }
