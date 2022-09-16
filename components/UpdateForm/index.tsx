@@ -12,7 +12,7 @@ import UpdateFormLayout from './Layout'
 
 interface Props extends BackHeaderProps {
 
-  submitHandler: (_values: any, _e: any>) => void
+  submitHandler: (_values: any, _e: any) => void
 
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
