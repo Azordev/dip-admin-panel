@@ -2,6 +2,7 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import Swal from 'sweetalert2'
 
 import useLogger from '@/hooks/useLogger'
 import CreateEventLayout from '@/views/Events/Create'
@@ -27,6 +28,13 @@ const Create: NextPage = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+      })
+      Swal.fire({
+        title: 'Evento creado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
       })
       push('/eventos')
       setLoading(false)
