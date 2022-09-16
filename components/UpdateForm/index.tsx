@@ -9,7 +9,7 @@ import Loading from '../Loading'
 import UpdateFormLayout from './Layout'
 
 interface Props extends BackHeaderProps {
-  submitHandler: (_dataForm: any) => void
+  submitHandler: (_e: any, _dataForm: any) => void
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
   isSubmitLoading?: boolean

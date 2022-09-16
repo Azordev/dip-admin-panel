@@ -32,7 +32,7 @@ export interface ProviderBase {
 
 export interface ProviderEditable extends ProviderBase {
   commercialName?: string
-  logoUrl?: string
+  logo?: string
   salesPhone?: string
   orderIndex?: number
   plan?: string
