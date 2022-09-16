@@ -65,6 +65,7 @@ export interface UserBase {
   isActive: boolean
   position?: string
   avatarUrl?: string
+  password?: string
 }
 
 export interface UserEditable extends UserBase {
