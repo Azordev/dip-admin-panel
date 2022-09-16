@@ -14,7 +14,7 @@ const Categories: NextPage = () => {
 
   if (queryError) logError(queryError, 'pages/categorias/index.tsx', 'No se pudo obtener la categoría.')
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
   if (!data && data.categories.length < 1) return <EmptyList text="No hay categorías aun, por favor crear una" />
   return (
     <ClientOnly>

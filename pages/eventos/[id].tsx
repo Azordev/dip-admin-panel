@@ -19,7 +19,7 @@ const Event: NextPage = () => {
     push('/eventos')
   }
 
-  if (loading) return <Loading />
+  if (loading) return <Loading className="center-text" />
   if (!data || !data.event) return <EmptyItem text="El evento esta vacío o es invalido." />
   return (
     <ClientOnly>
