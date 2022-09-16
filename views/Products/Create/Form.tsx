@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
+import Picture from '@/views/SVGs/Picture'
 
 interface ProductEditableWithImg extends ProductEditable {
   image?: FileList
@@ -104,13 +105,11 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
           />
           <label htmlFor="image-file" className={stylesInput.image}>
             <figure>
-              <Image
-                width={imageUrl ? 300 : 40}
-                height={imageUrl ? 200 : 40}
-                objectFit="contain"
-                src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                alt="Imagen del producto"
-              />
+              {imageUrl ? (
+                <Image width={300} height={200} objectFit="contain" src={imageUrl} alt="Imagen del producto" />
+              ) : (
+                <Picture />
+              )}
             </figure>
             <span className={stylesInput.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
             <span className={stylesInput.label}>*Max 8MB Size</span>
