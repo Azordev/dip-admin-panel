@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
@@ -9,6 +9,7 @@ import CustomSwitch from '@/components/CustomSwitch'
 import { EventEditable, MutableEventFormProps } from '@/services/GraphQL/events/types'
 import styles from '@/styles/EditEvent.module.scss'
 import Icons8 from '@/views/Shared/Icons8'
+import Picture from '@/views/SVGs/Picture'
 
 export interface EventEditableWithFiles extends EventEditable {
   image?: FileList
@@ -29,7 +30,12 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [pdfFile, setPdfFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
-  const [type, setType] = useState('WORKSHOP')
+  const [type, setType] = useState<string | undefined>('WORKSHOP')
+
+  useEffect(() => {
+    setValue('type', 'WORKSHOP')
+    setType(getValues().type)
+  }, [getValues, setValue])
 
   const handleChange = (isCheck: boolean) => {
     if (isCheck) {
@@ -77,7 +83,7 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
             type="text"
             placeholder="Escriba el nombre del evento"
             defaultValue=""
-            required="El nombre del evento es obligatorio"
+            required={true}
           >
             {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
           </CustomInput>
@@ -86,9 +92,9 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
             label="Fecha del evento"
             register={register}
             id="date"
-            type="datetime-local"
-            placeholder="Escriba la fecha del evento"
-            defaultValue={new Date().toISOString().slice(0, 19) as string}
+            type="date"
+            placeholder="DD/MM/AAAA"
+            required={true}
           />
         </div>
         <div className={styles['image-section']}>
@@ -103,13 +109,11 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
             />
             <label htmlFor="image-file" className={styles.image}>
               <figure>
-                <Image
-                  width={imageUrl ? 300 : 40}
-                  height={imageUrl ? 200 : 40}
-                  objectFit="contain"
-                  src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-                  alt="Imagen del evento"
-                />
+                {imageUrl ? (
+                  <Image width={300} height={200} objectFit="contain" src={imageUrl} alt="Imagen del evento" />
+                ) : (
+                  <Picture />
+                )}
               </figure>
               <span className={styles.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
             </label>
@@ -155,10 +159,10 @@ const CreateEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading }) => {
         </label>
       </div>
       <section className={styles['buttons-container']}>
-        <Button iconName="" className={styles['button-cancel']} onClick={() => router.push('/eventos')}>
+        <Button className={styles['button-cancel']} onClick={() => router.push('/eventos')}>
           Cancelar
         </Button>
-        <Button iconName="" className={styles['button-save']} type="submit">
+        <Button className={styles['button-save']} type="submit">
           {buttonText}
         </Button>
       </section>
