@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
-import { Path, UseFormRegister } from 'react-hook-form'
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 
 import styles from './CustomInput.module.scss'
 
-type InputProps<T> = {
+type InputProps<T extends FieldValues> = {
   register: UseFormRegister<T>
   id: string
   type?: string
@@ -15,7 +15,7 @@ type InputProps<T> = {
   children?: ReactNode
 }
 
-const CustomInput = <T,>({
+const CustomInput = <T extends FieldValues>({
   register,
   id,
   type = 'text',
