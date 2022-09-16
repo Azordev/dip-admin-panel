@@ -121,8 +121,8 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
         </div>
         {errors.image && <small className={stylesInput['error-message']}>{errors.image.message}</small>}
         <div className="button-container">
-          <Button className={stylesInput['button-save']} type="submit">
-            Guardar
+          <Button disabled={loading} className={stylesInput['button-save']} type="submit">
+            {loading ? 'Guardando' : 'Guardar'}
           </Button>
           <Button className={stylesInput['button-delete']} onClick={showModal}>
             Eliminar

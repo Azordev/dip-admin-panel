@@ -42,9 +42,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
     }
   }
 
-  const handlePrice = (e: { value: any }) => {
-    setValue('basePriceSol', e.value)
-  }
+  const handlePrice = (e: { value: any }) => setValue('basePriceSol', e.value)
 
   return (
     <form className="form-product" onSubmit={submitHandler}>
@@ -121,7 +119,7 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       </div>
       {errors.imageUrl && <small className={stylesInput['error-message']}>{errors.imageUrl.message}</small>}
       <div className="button-container">
-        <Button className={stylesInput['button-save']} type="submit">
+        <Button disabled={loading} className={stylesInput['button-save']} type="submit">
           {loading ? 'Guardando' : 'Guardar'}
         </Button>
         <Button className={stylesInput['button-cancel']} onClick={() => router.push('/productos')}>

@@ -5,6 +5,7 @@ import Icon8 from '@/views/Shared/Icons8'
 import styles from './Button.module.scss'
 interface ButtonProps {
   children: ReactNode
+  disabled?: boolean | undefined
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
   className?: string
@@ -16,6 +17,7 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({
   children,
+  disabled,
   onClick,
   className,
   iconSize,
@@ -25,7 +27,7 @@ const Button: FC<ButtonProps> = ({
   color = '#fff',
 }) => {
   return (
-    <button type={type} className={`${className} ${styles.button}`} onClick={onClick}>
+    <button disabled={disabled} type={type} className={`${className} ${styles.button}`} onClick={onClick}>
       {!!iconName && (
         <Icon8 color={color} name={iconName} size={iconSize} iconStyle={iconStyle} className={styles['icon-button']} />
       )}
