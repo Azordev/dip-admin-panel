@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 import { Product } from '@/services/GraphQL/products/types'
 import styles from '@/styles/Products.module.scss'
-import Icons8 from '@/views/Shared/Icons8'
 import Image from '@/views/Shared/Image'
+import Picture from '@/views/SVGs/Picture'
 
 const ProductItem: NextPage<{ product: Product }> = ({ product }) => (
   <Link href={`/productos/editar/${product?.id}`} passHref>
@@ -13,7 +13,7 @@ const ProductItem: NextPage<{ product: Product }> = ({ product }) => (
         {product?.imageUrl ? (
           <Image src={product.imageUrl} alt={`image of product ${product?.name}`} className={styles.image} />
         ) : (
-          <Icons8 name="image--v2" iconStyle="pastel-glyph" size={196} />
+          <Picture />
         )}
       </div>
       <section className={styles['product-name']}>
