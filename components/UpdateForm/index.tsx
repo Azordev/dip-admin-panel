@@ -1,6 +1,6 @@
 import { DocumentNode, useLazyQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { FC, FormEvent, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import useLogger from '@/hooks/useLogger'
 
@@ -9,7 +9,7 @@ import Loading from '../Loading'
 import UpdateFormLayout from './Layout'
 
 interface Props extends BackHeaderProps {
-  submitHandler: (_dataForm: any, _e: FormEvent<HTMLFormElement>) => void
+  submitHandler: (_e: any, _dataForm: any) => void
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
   isSubmitLoading?: boolean

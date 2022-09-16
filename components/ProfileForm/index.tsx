@@ -18,13 +18,14 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
     formState: { errors },
   } = useForm<ProviderEditable>()
   const submitHandler = handleSubmit(onSubmit)
+  const [imageUrl, setImageUrl] = useState<string | undefined>()
+  const [imageFile, setImageFile] = useState<File | null>()
   useEffect(() => {
     setValue('commercialName', originalData?.commercialName)
     setValue('salesPhone', originalData?.salesPhone)
-  }, [originalData?.commercialName, originalData?.salesPhone, setValue])
+    setImageUrl(originalData?.logoUrl)
+  }, [originalData?.commercialName, originalData?.salesPhone, originalData?.logoUrl, setValue])
 
-  const [imageUrl, setImageUrl] = useState<string | null>()
-  const [imageFile, setImageFile] = useState<File | null>()
   const MAX_FILE_SIZE = 800000
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
@@ -60,8 +61,8 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
               width={imageUrl ? 300 : 40}
               height={imageUrl ? 200 : 40}
               objectFit="contain"
-              src={originalData?.logoUrl || imageUrl || 'https://img.icons8.com/ios/100/image.png'}
-              alt="Imagen del evento"
+              src={imageUrl || 'https://img.icons8.com/ios/100/image.png'}
+              alt="Logo del Proveedor"
             />
           </figure>
           <span className={styles.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
@@ -70,10 +71,10 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
       <section className={styles.section}>
         <div className={styles['input-section']}>
           <div className={styles['custom-input']}>
-            <label className={styles['label-input']}>Nombre de la</label>
+            <label className={styles['label-input']}>Nombre de la Marca</label>
             <input
               className={styles.input}
-              placeholder="Escriba el nombre del evento"
+              placeholder="Escriba el nombre de la Marca Comercial"
               id="title"
               type="text"
               {...register('commercialName')}
