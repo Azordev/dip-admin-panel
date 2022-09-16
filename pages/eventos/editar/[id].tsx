@@ -2,6 +2,7 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Swal from 'sweetalert2'
 
 import UpdateFormContainer from '@/components/UpdateForm'
 import useLogger from '@/hooks/useLogger'
@@ -34,6 +35,13 @@ const EditEvent: NextPage = () => {
       await axios.put(`/api/events/${query.id}`, formData)
       setLoading(false)
       push(`/eventos`)
+      Swal.fire({
+        title: 'Evento actualizado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      })
     } catch (error: any) {
       setLoading(false)
       logError(error, 'pages/eventos/editar/[id].tsx', 'Error al actualizar el evento')
