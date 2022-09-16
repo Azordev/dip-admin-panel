@@ -3,6 +3,7 @@ import { ChangeEvent, FC, useEffect, useState } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
+
 import Button from '@/components/Button'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
@@ -78,6 +79,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
             isNumericString={true}
             placeholder="00.00"
             onValueChange={handlePrice}
+            value={originalData?.basePriceSol}
             {...register('basePriceSol', {
               required: true,
               validate: value => value !== 0,

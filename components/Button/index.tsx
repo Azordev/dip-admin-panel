@@ -5,7 +5,7 @@ import Icon8 from '@/views/Shared/Icons8'
 import styles from './Button.module.scss'
 interface ButtonProps {
   children: ReactNode
-  disabled?: boolean | undefined
+  disabled?: boolean
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
   className?: string
