@@ -75,6 +75,14 @@ export const UPDATE_USER = gql`
   }
 `
 
+export const CREATE_MEMBER = gql`
+  mutation ($email: String, $userId: uuid, $firstNames: String) {
+    member: insert_members_one(object: { email: $email, user_id: $userId, first_names: $firstNames }) {
+      id
+    }
+  }
+`
+
 export const UPDATE_MEMBER = gql`
   mutation (
     $memberId: uuid!
