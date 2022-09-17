@@ -41,7 +41,6 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
 
     DeleteModal(message, async (confirmed: boolean) => {
       if (confirmed) {
-        // Add petition Delete
         await axios.delete(`/api/products/${originalData?.id}`)
         router.push('/productos')
       }
