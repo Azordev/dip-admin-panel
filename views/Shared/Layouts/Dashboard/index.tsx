@@ -40,6 +40,12 @@ const Dashboard: FC<Props> = ({ children }) => {
                   <span>Eventos</span>
                 </a>
               </Link>
+              <Link href="/socios" passHref>
+                <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
+                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
+                  <span>Socios</span>
+                </a>
+              </Link>
               <Link href="/proveedores" passHref>
                 <a className={`${styles.link} ${checkIsActive('/proveedores') ? styles.active : ''}`}>
                   <Image
@@ -49,12 +55,6 @@ const Dashboard: FC<Props> = ({ children }) => {
                     imgClassName={`icon shopaholic`}
                   />
                   <span>Proveedores</span>
-                </a>
-              </Link>
-              <Link href="/socios" passHref>
-                <a className={`${styles.link} ${checkIsActive('/socios') ? styles.active : ''}`}>
-                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="groups" />
-                  <span>Socios</span>
                 </a>
               </Link>
             </>
