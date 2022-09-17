@@ -18,7 +18,7 @@ const Paginated = <T extends object>(props: PaginatedProps<T>) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles['paginated-container']}>
+      <div className={`${styles['paginated-container']} ${styles['paginated-container-relative']}`}>
         <div className={styles['pages-number']}>
           <label>
             {indexOfFirst + 1} a {indexOfLast} de {totalItemsLength}

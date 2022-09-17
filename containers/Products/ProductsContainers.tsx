@@ -4,9 +4,9 @@ import EmptyList from '@/components/EmptyList'
 import ListHeader from '@/components/ListHeader'
 import Loading from '@/components/Loading'
 import Paginated from '@/components/Paginated/Paginated'
-import styles from '@/components/Paginated/Paginated.module.scss'
 import useAuth from '@/hooks/useAuth'
 import { Product } from '@/services/GraphQL/products/types'
+import styles from '@/styles/Products.module.scss'
 import ProductList from '@/views/Products/List'
 
 interface PaginatedProps {
@@ -26,7 +26,7 @@ const ProductsContainers: FC<PaginatedProps> = props => {
 
   const showProductList = () =>
     products?.length > 0 ? (
-      <>
+      <div className={styles['product-container']}>
         <ProductList products={products} />
         <Paginated
           itemsPerPage={productsPerPage}
@@ -37,7 +37,7 @@ const ProductsContainers: FC<PaginatedProps> = props => {
           indexOfFirst={indexOfFirst}
           indexOfLast={indexOfLast}
         />
-      </>
+      </div>
     ) : (
       <EmptyList className="center-text" text="No hay productos" />
     )
