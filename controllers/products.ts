@@ -138,7 +138,7 @@ export const deleteProduct = async (req: NextApiRequest, res: NextApiResponse) =
     const { id } = query
 
     if (!id) {
-      return res.status(400).json({ msg: 'EventId is required' })
+      return res.status(400).json({ msg: 'Product id is required' })
     }
 
     await client.mutate({
