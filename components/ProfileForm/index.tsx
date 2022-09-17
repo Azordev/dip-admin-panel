@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -29,9 +30,19 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData }) =
         <input id="image-file" type="file" accept="image/*" className={styles['input-file']} />
         <label htmlFor="image-file" className={styles.image}>
           <figure>
-            <Picture />
+            {originalData?.logoUrl ? (
+              <Image
+                width={300}
+                height={200}
+                objectFit="contain"
+                src={originalData?.logoUrl}
+                alt="Imagen del proveedor"
+              />
+            ) : (
+              <Picture />
+            )}
           </figure>
-          <span className={styles.label}> {'Añadir imagen'} </span>
+          <span className={styles.label}>{originalData?.logoUrl ? 'Cambiar imagen' : 'Añadir imagen'}</span>
         </label>
       </div>
       <section className={styles.section}>
