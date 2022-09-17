@@ -23,12 +23,10 @@ const Products: NextPage = () => {
   const getProducts = useCallback(async (limit: number, offset: number) => {
     const providerId = sessionStorage.getItem('providerId')
     const { data } = await axios.get<ProductResponse>('/api/providers/products', {
-      headers: {
-        providerId: providerId || '',
-      },
       params: {
         limit,
         offset,
+        providerId: providerId || '',
       },
     })
     setProducts(data.products)
