@@ -23,7 +23,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
     setValue('commercialName', originalData?.commercialName)
     setValue('salesPhone', originalData?.salesPhone)
     setValue('catalogUrl', originalData?.catalogUrl)
-
+    setValue('logo', originalData?.logoUrl || 'https://img.icons8.com/ios/100/image.png')
     setImageUrl(originalData?.logoUrl)
   }, [
     originalData?.commercialName,
@@ -36,6 +36,10 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
   const MAX_FILE_SIZE = 800000
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
+
+    if (file && !file.type.includes('png')) {
+      return Swal.fire('Error', 'Solo imagenes en formato PNG son aceptadas', 'error')
+    }
     if (file && file.size >= MAX_FILE_SIZE) {
       return Swal.fire('Error', 'Imagen excede el tamaño maximo (8MB)', 'error')
     }
@@ -57,7 +61,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
         <input
           id="image-file"
           type="file"
-          accept="image/*"
+          accept="image/png"
           className={styles['input-file']}
           {...register('logo')}
           onChange={handleFile}

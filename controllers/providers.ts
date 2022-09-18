@@ -119,10 +119,21 @@ export const updateProvider = async (req: NextApiRequest, res: NextApiResponse) 
         return res.status(500).json(err)
       }
 
+      const file = files.logo as formidable.File
       if (files.logo) {
-        const file = files.logo as formidable.File
+        if (file.mimetype?.includes('application') && fields.logoUrl) {
+          await client.mutate({
+            mutation: UPDATE_PROVIDER,
+            variables: { ...fields, id },
+          })
+          return res.status(204).json({
+            msg: 'Event updated successfully',
+            data: { ...fields },
+          })
+        }
+      }
+      if (files.logo && file.mimetype?.includes('image')) {
         const { Location: logoUrl } = await addObject(file, 'providers')
-
         await client.mutate({
           mutation: UPDATE_PROVIDER,
           variables: { ...fields, logoUrl, id },
