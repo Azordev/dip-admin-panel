@@ -68,7 +68,6 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
         />
         <label htmlFor="image-file" className={styles.image}>
           <figure>
-
             <Image
               width={imageUrl ? 300 : 40}
               height={imageUrl ? 200 : 40}
@@ -78,7 +77,6 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
             />
           </figure>
           <span className={styles.label}>{imageFile?.name ? 'Cambiar imagen' : 'Añadir imagen'}</span>
-
         </label>
         {errors.logoUrl && <small className={styles['error-message']}>{errors.logoUrl.message}</small>}
       </div>

@@ -21,7 +21,6 @@ const ProfileContainers: NextPage = () => {
     e.preventDefault()
     setLoading(true)
 
-
     const form = new FormData(e.target as HTMLFormElement)
 
     form.append('id', `${user.providerInfo.id}`)

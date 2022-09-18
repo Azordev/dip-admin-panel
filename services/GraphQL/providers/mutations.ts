@@ -36,7 +36,6 @@ export const CREATE_PROVIDER = gql`
 
 export const UPDATE_PROVIDER = gql`
   mutation (
-
     $id: uuid!
     $commercialName: String
     $salesEmail: String
@@ -55,7 +54,6 @@ export const UPDATE_PROVIDER = gql`
         logo_url: $logoUrl
         catalog_url: $catalogUrl
       }
-
     ) {
       is_active
     }
