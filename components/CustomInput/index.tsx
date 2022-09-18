@@ -11,7 +11,6 @@ type InputProps<T extends FieldValues> = {
   name: Path<T>
   placeholder: string
   defaultValue?: string | number
-  mandatory?: boolean
   children?: ReactNode
 }
 
