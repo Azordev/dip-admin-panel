@@ -1,4 +1,4 @@
-@import 'layout';
+@import 'layout', 'colors';
 
 .container {
   display: flex;
@@ -21,4 +21,8 @@
   flex-wrap: wrap;
   gap: 14px;
   margin-top: auto;
+}
+
+.error-message {
+  color: $red;
 }

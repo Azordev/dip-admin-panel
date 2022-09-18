@@ -7,8 +7,12 @@
   svg {
     background-color: $black;
     height: 100%;
-    padding: 10px;
+    padding: 2.5rem;
     width: 100%;
+    
+    path {
+      fill: $white;
+    }
   }
 }
 
@@ -19,6 +23,7 @@
   display: flex;
   justify-content: center;
   min-width: 123px;
+  overflow: hidden;
 }
 
 .logo {

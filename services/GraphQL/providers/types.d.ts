@@ -2,6 +2,8 @@ import { gql } from '@apollo/client'
 
 import { Product } from '@/services/GraphQL/products/types'
 
+import { UserBase } from '../users/types'
+
 export const providerInfo = gql`
   fragment ProviderInfoFragment on providers {
     id
@@ -17,6 +19,11 @@ export const providerInfo = gql`
     plan
     orderIndex: order_index
     isActive: is_active
+    user_info {
+      id
+      memberCode: member_code
+      password
+    }
   }
 `
 
@@ -32,11 +39,17 @@ export interface ProviderBase {
 }
 
 export interface ProviderEditable extends ProviderBase {
+  userId?: string
+  providerId?: string
   commercialName?: string
   logo?: string
   salesPhone?: string
   orderIndex?: number
   plan?: string
+  createdAt?: string
+  memberCode?: string
+  salesEmail?: string
+  password?: string
   isActive?: boolean
   products?: Product[]
 }
@@ -45,6 +58,7 @@ export interface Provider extends ProviderBase {
   id: string
   createdAt?: string
   updatedAt?: string
+  user_info?: UserBase
 }
 
 export interface MutableProviderFormProps {
