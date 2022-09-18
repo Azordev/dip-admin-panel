@@ -29,7 +29,7 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           name="commercialName"
           required
         >
-          {errors.commercialName && <span>El nombre es requerido.</span>}
+          {errors.commercialName && <span className={styles['error-message']}>El nombre es requerido.</span>}
         </CustomInput>
       </div>
       <div className={styles['input-container']}>
@@ -42,7 +42,7 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           required
           type="date"
         >
-          {errors.createdAt && <span>La fecha de inicio es requerida.</span>}
+          {errors.createdAt && <span className={styles['error-message']}>La fecha de inicio es requerida.</span>}
         </CustomInput>
       </div>
       <div className={styles['input-container']}>
@@ -54,7 +54,7 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           name="memberCode"
           required
         >
-          {errors.memberCode && <span>El nombre de usuario es requerido.</span>}
+          {errors.memberCode && <span className={styles['error-message']}>El nombre de usuario es requerido.</span>}
         </CustomInput>
       </div>
       <div className={styles['input-container']}>
@@ -67,7 +67,7 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           required
           type="email"
         >
-          {errors.salesEmail && <span>El correo es requerido.</span>}
+          {errors.salesEmail && <span className={styles['error-message']}>El correo es requerido.</span>}
         </CustomInput>
       </div>
       <div className={styles['input-container']}>
@@ -80,7 +80,7 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           required
           type="password"
         >
-          {errors.password && <span>La contraseña es requerida</span>}
+          {errors.password && <span className={styles['error-message']}>La contraseña es requerida</span>}
         </CustomInput>
       </div>
       <div className={btnStyles['buttons-container']}>

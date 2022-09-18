@@ -1,5 +1,7 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useState } from 'react'
+import CurrencyFormat from 'react-currency-format'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 
@@ -18,11 +20,12 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
   const MAX_FILE_SIZE = 8000000
   const {
     register,
-    reset,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<ProductEditableWithImg>()
   const submitHandler = handleSubmit(onSubmit as unknown as SubmitHandler<ProductEditableWithImg>)
+  const router = useRouter()
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
     if (file && file.size >= MAX_FILE_SIZE) {
@@ -40,13 +43,15 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
     }
   }
 
+  const handlePrice = (e: { value: any }) => setValue('basePriceSol', e.value)
+
   return (
     <form className="form-product" onSubmit={submitHandler}>
       <label className="text-size label" htmlFor="name">
         Nombre del Producto
       </label>
       <input
-        className="input-product font-visby"
+        className={`input-product font-visby ${errors.name && 'error'}`}
         id="name"
         type="text"
         placeholder="Escriba el nombre del evento..."
@@ -59,21 +64,27 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
       </label>
       <div className="container-price">
         <p className="price">S/.</p>
-        <input
-          className="input-product font-visby"
+        <CurrencyFormat
+          fixedDecimalScale={true}
+          decimalScale={2}
+          className={`input-product font-visby ${errors.basePriceSol && 'error'}`}
           type="text"
+          allowNegative={false}
+          isNumericString={true}
           id="basePriceSol"
           placeholder="00.00"
-          {...register('basePriceSol', { required: { value: true, message: 'Debe colocar un precio' } })}
+          onValueChange={handlePrice}
+          {...register('basePriceSol', {
+            required: true,
+            validate: value => value !== 0,
+          })}
         />
       </div>
-      {errors.basePriceSol && <small className={stylesInput['error-message']}>{errors.basePriceSol.message}</small>}
-
       <label className="text-size label" htmlFor="description">
         Descripción del producto
       </label>
       <textarea
-        className="textarea font-visby"
+        className={`textarea font-visby ${errors.description && 'error'}`}
         id="description"
         placeholder="Escribe aquí..."
         {...register('description', { required: { value: true, message: 'El campo no puede estar vacio' } })}
@@ -106,13 +117,14 @@ const CreateProductForm: FC<MutableProductFormProps> = ({ onSubmit, loading }) =
         </div>
       </div>
       {errors.imageUrl && <small className={stylesInput['error-message']}>{errors.imageUrl.message}</small>}
-
-      <button className="save" type="submit">
-        {loading ? 'Guardando' : 'Guardar'}
-      </button>
-      <button className="delete" onClick={() => reset()}>
-        Eliminar
-      </button>
+      <div className="button-container">
+        <Button disabled={loading} className={stylesInput['button-save']} type="submit">
+          {loading ? 'Guardando' : 'Guardar'}
+        </Button>
+        <Button className={stylesInput['button-cancel']} onClick={() => router.push('/productos')}>
+          Cancelar
+        </Button>
+      </div>
     </form>
   )
 }
