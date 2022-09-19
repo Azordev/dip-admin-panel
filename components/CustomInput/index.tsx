@@ -11,7 +11,7 @@ type InputProps<T extends FieldValues> = {
   name: Path<T>
   placeholder: string
   defaultValue?: string | number
-  required?: boolean | string
+  required?: string
   children?: ReactNode
 }
 
@@ -23,7 +23,7 @@ const CustomInput = <T extends FieldValues>({
   name,
   placeholder,
   defaultValue,
-  required = false,
+  required = 'El campo no puede estar vacio',
   children,
 }: InputProps<T>): JSX.Element => {
   return (
@@ -37,7 +37,7 @@ const CustomInput = <T extends FieldValues>({
         id={id}
         type={type}
         defaultValue={defaultValue}
-        {...register(name, { required })}
+        {...register(name, { required: { value: true, message: required } })}
       />
       {children}
     </div>

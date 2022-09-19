@@ -32,7 +32,6 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Nombre de la empresa"
             register={register}
             name="commercialName"
-            required
             defaultValue={originalProvider?.commercialName}
           >
             {errors.commercialName && <span>El nombre es requerido.</span>}
@@ -45,7 +44,6 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Fecha de inicio"
             register={register}
             name="createdAt"
-            required
             type="date"
             defaultValue={originalProvider?.createdAt?.split('T')[0]}
           >
@@ -59,7 +57,6 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Usuario"
             register={register}
             name="memberCode"
-            required
             defaultValue={originalProvider?.user_info?.memberCode}
           >
             {errors.memberCode && <span>El nombre de usuario es requerido.</span>}
@@ -72,7 +69,6 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Correo Electrónico"
             register={register}
             name="salesEmail"
-            required
             type="email"
             defaultValue={originalProvider?.b2bEmail}
           >
@@ -86,7 +82,6 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Contraseña"
             register={register}
             name="password"
-            required
             type="password"
             defaultValue={originalProvider?.user_info?.password}
           >
