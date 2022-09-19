@@ -126,7 +126,7 @@ export const updateProvider = async (req: NextApiRequest, res: NextApiResponse) 
             mutation: UPDATE_PROVIDER,
             variables: { ...fields, id },
           })
-          return res.status(204).json({
+          return res.status(200).json({
             msg: 'Event updated successfully',
             data: { ...fields },
           })
@@ -138,7 +138,7 @@ export const updateProvider = async (req: NextApiRequest, res: NextApiResponse) 
           mutation: UPDATE_PROVIDER,
           variables: { ...fields, logoUrl, id },
         })
-        return res.status(204).json({
+        return res.status(200).json({
           msg: 'Event updated successfully',
           data: { ...fields, logoUrl },
         })
@@ -148,7 +148,7 @@ export const updateProvider = async (req: NextApiRequest, res: NextApiResponse) 
         mutation: UPDATE_PROVIDER,
         variables: { ...fields, logoUrl: '' },
       })
-      res.status(204).json({
+      res.status(200).json({
         msg: 'Provider updated successfully',
         data: { ...fields },
       })
