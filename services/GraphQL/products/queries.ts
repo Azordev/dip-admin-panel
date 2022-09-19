@@ -27,10 +27,20 @@ export const PRODUCTS = gql`
 export const PRODUCTS_BY_PROVIDER = gql`
   ${productInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0, $providerId: uuid) {
+    products_aggregate(
+      where: {
+        provider_id: { _eq: $providerId }
+        _or: [{ description: { _ilike: $query } }, { name: { _ilike: $query } }]
+      }
+    ) {
+      aggregate {
+        totalCount: count
+      }
+    }
     products(
       limit: $limit
       offset: $offset
-      order_by: { name: asc }
+      order_by: { created_at: desc }
       where: {
         provider_id: { _eq: $providerId }
         _or: [{ description: { _ilike: $query } }, { name: { _ilike: $query } }]

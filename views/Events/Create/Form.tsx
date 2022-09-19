@@ -23,6 +23,7 @@ const CreateEventForm: FC<{
 }> = ({ onSubmit, loading }) => {
   const {
     register,
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<EventEditableWithFiles>()
@@ -34,6 +35,15 @@ const CreateEventForm: FC<{
   const [pdfFile, setPdfFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [isWorkshop, setIsWorkshop] = useState<boolean>(false)
+  const handleDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const today = new Date().toISOString().split('T')[0]
+
+    if (e.target.value < today) {
+      setError('date', { message: 'Fecha invalida' })
+    } else {
+      setError('date', { message: '' })
+    }
+  }
 
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
@@ -71,7 +81,6 @@ const CreateEventForm: FC<{
             type="text"
             placeholder="Escriba el nombre del evento"
             defaultValue=""
-            required={true}
           >
             {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
           </CustomInput>
@@ -81,11 +90,11 @@ const CreateEventForm: FC<{
           <div className={styles['datetime-container']}>
             <input
               className={styles['input-date']}
-              {...register('date', { required: true })}
+              {...register('date', { required: { value: true, message: 'Por favor seleccione una fecha de inicio' } })}
               id="date"
               type="date"
               placeholder="Escriba la fecha del evento"
-              defaultValue={new Date().toISOString().split('T')[0]}
+              onChange={handleDate}
             />
             <input
               className={styles['input-time']}
@@ -96,6 +105,8 @@ const CreateEventForm: FC<{
               defaultValue={new Date().toLocaleTimeString('es-Es').slice(0, -3)}
             />
           </div>
+          {errors.date && <small className={styles['error-message']}>{errors.date.message}</small>}
+          {errors.time && <small className={styles['error-message']}>{errors.time.message}</small>}
         </div>
         <div className={styles['image-section']}>
           <div className={styles['container-input']}>
@@ -128,8 +139,9 @@ const CreateEventForm: FC<{
         placeholder="Escribe aquí..."
         className={styles.textarea}
         defaultValue=""
-        {...register('description', { required: false })}
+        {...register('description', { required: { value: true, message: 'El campo no puede estar vacio' } })}
       ></textarea>
+      {errors.description && <small className={styles['error-message']}>{errors.description.message}</small>}
       <div className={styles['switch-section']}>
         <CustomSwitch
           register={register}
