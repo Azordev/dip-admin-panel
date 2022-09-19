@@ -1,16 +1,9 @@
 import formidable from 'formidable'
 import { NextApiRequest, NextApiResponse } from 'next'
-import NextCors from 'nextjs-cors'
 
 import { addObject } from '@/services/AWS/s3'
 
 export const uploadFile = async (req: NextApiRequest, res: NextApiResponse) => {
-  await NextCors(req, res, {
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    origin: '*',
-    optionsSuccessStatus: 200,
-  })
-
   const form = formidable()
   const { prefix } = req.query
 
