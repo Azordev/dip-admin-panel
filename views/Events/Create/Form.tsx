@@ -90,7 +90,7 @@ const CreateEventForm: FC<{
           <div className={styles['datetime-container']}>
             <input
               className={styles['input-date']}
-              {...register('date', { required: { value: true, message: 'El campo no puede estar vacio' } })}
+              {...register('date', { required: { value: true, message: 'Por favor seleccione una fecha de inicio' } })}
               id="date"
               type="date"
               placeholder="Escriba la fecha del evento"
