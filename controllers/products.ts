@@ -32,9 +32,9 @@ export const getProducts = async (
 
 export const getProviderProducts = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { query, headers } = req
+    const { query } = req
 
-    if (!headers.providerid) {
+    if (!query.providerId) {
       return res.status(400).json({ error: 'Missing providerId' })
     }
 
@@ -44,7 +44,7 @@ export const getProviderProducts = async (req: NextApiRequest, res: NextApiRespo
         offset: Number(query?.offset) || 0,
         limit: Number(query?.limit) || 24,
         query: query?.query || '%',
-        providerId: headers.providerid,
+        providerId: query.providerId,
       },
     })
 

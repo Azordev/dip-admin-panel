@@ -1,9 +1,10 @@
 @import 'colors';
 
 .container {
-  margin: 1.5rem auto;
+  flex-basis: 85%;
+  overflow-y: auto;
   padding: 0 15px;
-
+ 
   svg {
     background-color: $black;
     height: 100%;
@@ -31,10 +32,24 @@
   fill: $white;
 }
 
+.relative {
+  height: 100vh;
+  position: relative;
+}
+
+.product-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-height));
+  justify-content: space-between;
+}
+
 .products-list {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(397px, 1fr));
+  overflow-y: auto;
+  padding: 19px 25px;
 }
 
 .product-item {
