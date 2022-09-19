@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -15,14 +16,14 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
     formState: { errors },
   } = useForm<MemberEditable>()
   const submitHandler = handleSubmit(onSubmit)
+  const router = useRouter()
   useEffect(() => {
-    setValue('memberId', originalMember?.memberInfo?.id)
-
-    setValue('memberCode', originalMember?.memberCode)
+    setValue('memberId', originalMember?.memberInfo ? originalMember.memberInfo.id : '')
+    setValue('memberCode', originalMember ? originalMember.memberCode : '')
     setValue('password', originalMember?.password)
     setValue('firstNames', originalMember?.memberInfo?.firstNames)
     setValue('email', originalMember?.memberInfo ? originalMember.memberInfo.email : '')
-  }, [originalMember?.memberCode, originalMember?.memberInfo, originalMember?.password, setValue])
+  }, [originalMember, originalMember?.memberCode, originalMember?.memberInfo, originalMember?.password, setValue])
   const buttonText = loading ? 'Enviando' : 'Enviar'
 
   return (
@@ -97,6 +98,9 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
         </div>
       </section>
       <section className={btnStyle['buttons-container']}>
+        <Button className={btnStyle['button-cancel']} onClick={() => router.push('/eventos')}>
+          Cancelar
+        </Button>
         <Button iconName="" className={btnStyle['button-save']} type="submit">
           {buttonText}
         </Button>

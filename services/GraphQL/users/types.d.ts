@@ -19,8 +19,8 @@ export interface MemberBase {
 
 export interface MemberEditable extends MemberBase {
   email: string
-  memberCode?: string
-  memberId?: string
+  memberCode: string
+  memberId: string
   createdAt?: string
   password?: string
 }
@@ -58,7 +58,7 @@ export const usersInfo = gql`
     position
     memberCode: member_code
     avatarUrl: avatar_url
-    password: password
+    password
     type
     isActive: is_active
   }

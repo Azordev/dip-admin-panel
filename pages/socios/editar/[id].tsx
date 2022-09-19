@@ -16,7 +16,6 @@ const EditUserInformation: NextPage = () => {
   const { error: logError } = useLogger()
 
   const submitMemberHandler = async (user: UserEditable) => {
-    console.log(user)
     setLoading(true)
     try {
       await axios.put(`/api/members/${query.id}`, user)
@@ -35,15 +34,13 @@ const EditUserInformation: NextPage = () => {
   }
 
   return (
-    <div>
-      <UpdateFormContainer
-        currentDataQuery={USER_BY_ID}
-        submitHandler={submitMemberHandler}
-        isSubmitLoading={loading}
-        UpdateForm={EditMemberForm}
-        queryName="user"
-      />
-    </div>
+    <UpdateFormContainer
+      currentDataQuery={USER_BY_ID}
+      submitHandler={submitMemberHandler}
+      isSubmitLoading={loading}
+      UpdateForm={EditMemberForm}
+      queryName="user"
+    />
   )
 }
 
