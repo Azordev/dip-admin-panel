@@ -23,7 +23,7 @@ const ProfileContainers: NextPage = () => {
 
     const form = new FormData(e.target as HTMLFormElement)
 
-    form.append('id', `${user.providerInfo.id}`)
+    form.append('id', user.providerInfo.id)
     form.append('logoUrl', `${values.logo}`)
     try {
       await axios.put(`/api/providers/${query.id}`, form, {
