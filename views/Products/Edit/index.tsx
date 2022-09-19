@@ -1,8 +1,13 @@
+import axios from 'axios'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useEffect, useState } from 'react'
+import CurrencyFormat from 'react-currency-format'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 
+import Button from '@/components/Button'
+import DeleteModal from '@/components/DeleteModal'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
 import Picture from '@/views/SVGs/Picture'
@@ -22,6 +27,8 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
     handleSubmit,
     formState: { errors },
   } = useForm<ProductEditableWithImg>()
+  const router = useRouter()
+
   const submitHandler = handleSubmit(onSubmit as SubmitHandler<ProductEditableWithImg>)
   useEffect(() => {
     setValue('description', originalData?.description)
@@ -29,7 +36,18 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
     setValue('basePriceSol', originalData?.basePriceSol)
   }, [originalData?.description, originalData?.name, setValue, getValues, originalData?.basePriceSol])
 
-  const showModal = () => {}
+  const showModal = () => {
+    const message = originalData?.name ? `el producto "${originalData?.name}"` : 'product'
+
+    DeleteModal(message, async (confirmed: boolean) => {
+      if (confirmed) {
+        await axios.delete(`/api/products/${originalData?.id}`)
+        router.push('/productos')
+      }
+    })
+  }
+
+  const handlePrice = (e: { value: any }) => setValue('basePriceSol', e.value)
 
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
@@ -55,7 +73,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           Nombre del Producto
         </label>
         <input
-          className="input-product font-visby"
+          className={`input-product font-visby ${errors.name && 'error'}`}
           id="name"
           type="text"
           placeholder="Escriba el nombre del producto..."
@@ -66,11 +84,20 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
         </label>
         <div className="container-price">
           <p className="price">S/.</p>
-          <input
-            className="input-product font-visby"
+          <CurrencyFormat
+            fixedDecimalScale={true}
+            decimalScale={2}
+            className={`input-product font-visby ${errors.basePriceSol && 'error'}`}
             type="text"
+            allowNegative={false}
+            isNumericString={true}
             placeholder="00.00"
-            {...register('basePriceSol', { required: true })}
+            onValueChange={handlePrice}
+            value={originalData?.basePriceSol}
+            {...register('basePriceSol', {
+              required: true,
+              validate: value => value !== 0,
+            })}
           />
           {errors.basePriceSol && <small className={stylesInput['error-message']}>{errors.basePriceSol.message}</small>}
         </div>
@@ -78,7 +105,7 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           Descripción del producto
         </label>
         <textarea
-          className="textarea font-visby"
+          className={`textarea font-visby ${errors.description && 'error'}`}
           id="description"
           placeholder="Escribe aquí..."
           {...register('description', { required: true })}
@@ -107,12 +134,14 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
           </label>
         </div>
         {errors.image && <small className={stylesInput['error-message']}>{errors.image.message}</small>}
-        <button className="save" type="submit">
-          {loading ? 'Guardando' : 'Guardar'}
-        </button>
-        <button className="delete" onClick={showModal}>
-          Eliminar
-        </button>
+        <div className="button-container">
+          <Button disabled={loading} className={stylesInput['button-save']} type="submit">
+            {loading ? 'Guardando' : 'Guardar'}
+          </Button>
+          <Button className={stylesInput['button-delete']} onClick={showModal}>
+            Eliminar
+          </Button>
+        </div>
       </form>
     </div>
   )

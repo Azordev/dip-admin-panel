@@ -32,9 +32,9 @@ export const getProducts = async (
 
 export const getProviderProducts = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { query, headers } = req
+    const { query } = req
 
-    if (!headers.providerid) {
+    if (!query.providerId) {
       return res.status(400).json({ error: 'Missing providerId' })
     }
 
@@ -44,7 +44,7 @@ export const getProviderProducts = async (req: NextApiRequest, res: NextApiRespo
         offset: Number(query?.offset) || 0,
         limit: Number(query?.limit) || 24,
         query: query?.query || '%',
-        providerId: headers.providerid,
+        providerId: query.providerId,
       },
     })
 
@@ -135,11 +135,15 @@ export const updateProduct = async (req: NextApiRequest, res: NextApiResponse) =
 export const deleteProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
+    const { id } = query
+
+    if (!id) {
+      return res.status(400).json({ msg: 'Product id is required' })
+    }
+
     await client.mutate({
       mutation: DELETE_PRODUCT,
-      variables: {
-        id: query.id,
-      },
+      variables: { id },
     })
 
     return res.status(204).json({ msg: 'Product deleted successfully' })

@@ -41,6 +41,7 @@ export const UPDATE_PRODUCT = gql`
     $available: numeric = 1
     $imageUrl: String = ""
     $offerDiscount: Int = 10
+    $basePriceSol: numeric = 0
     $providerId: uuid = ""
     $unitSystem: String = ""
     $withOffer: Boolean = false
@@ -54,6 +55,7 @@ export const UPDATE_PRODUCT = gql`
         available: $available
         image_url: $imageUrl
         offer_discount: $offerDiscount
+        base_price_sol: $basePriceSol
         provider_id: $providerId
         unit_system: $unitSystem
         with_offer: $withOffer
@@ -66,7 +68,7 @@ export const UPDATE_PRODUCT = gql`
 
 export const DELETE_PRODUCT = gql`
   mutation ($id: uuid!) {
-    delete_products_by_pk(pk_columns: { id: $id }) {
+    delete_products_by_pk(id: $id) {
       id
     }
   }

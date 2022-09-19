@@ -103,7 +103,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
             type="text"
             placeholder="Escriba el nombre del evento"
             defaultValue={originalEvent?.title}
-            required="El nombre del evento es obligatorio"
           >
             {errors.title && <small className={styles['error-message']}>{errors.title.message}</small>}
           </CustomInput>

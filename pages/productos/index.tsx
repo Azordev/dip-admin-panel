@@ -1,54 +1,47 @@
 import axios from 'axios'
 import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
-import EmptyList from '@/components/EmptyList'
-import ListHeader from '@/components/ListHeader'
-import Loading from '@/components/Loading'
-import useAuth from '@/hooks/useAuth'
+import ProductsContainers from '@/containers/Products/ProductsContainers'
 import { Product } from '@/services/GraphQL/products/types'
-import ProductList from '@/views/Products/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-const showProductList = (products: Product[]) =>
-  products?.length > 0 ? (
-    <ProductList products={products} />
-  ) : (
-    <EmptyList className="center-text" text="No hay productos" />
-  )
+interface ProductResponse {
+  products: Product[]
+  products_aggregate: {
+    aggregate: {
+      totalCount: number
+    }
+  }
+}
 
 const Products: NextPage = () => {
   const [products, setProducts] = useState<Product[]>([])
+  const [totalProducts, setTotalProducts] = useState(0)
   const [isLoading, setIsLoading] = useState<Boolean>(true)
-  const { user } = useAuth()
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const providerId = sessionStorage.getItem('providerId')
-
-      const { data } = await axios.get<{ products: Product[] }>('/api/providers/products', {
-        headers: {
-          providerId: providerId || '',
-        },
-      })
-      setProducts(data.products)
-      setIsLoading(false)
-    }
-
-    getProducts()
+  const getProducts = useCallback(async (limit: number, offset: number) => {
+    const providerId = sessionStorage.getItem('providerId')
+    const { data } = await axios.get<ProductResponse>('/api/providers/products', {
+      params: {
+        limit,
+        offset,
+        providerId: providerId || '',
+      },
+    })
+    setProducts(data.products)
+    setTotalProducts(data.products_aggregate.aggregate.totalCount)
+    setIsLoading(false)
   }, [])
 
   return (
     <ClientOnly>
-      <>
-        <ListHeader
-          createPath={`/productos/crear`}
-          createText="Añadir nuevo producto"
-          logoUrl={user?.providerInfo.logoUrl}
-          altLogo={user?.providerInfo.commercialName}
-        />
-        {isLoading ? <Loading className="center-text" /> : showProductList(products)}
-      </>
+      <ProductsContainers
+        products={products}
+        totalProducts={totalProducts}
+        onchangePage={getProducts}
+        loading={isLoading}
+      />
     </ClientOnly>
   )
 }

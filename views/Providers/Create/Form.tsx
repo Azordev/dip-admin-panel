@@ -27,7 +27,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           label="Nombre de la empresa"
           register={register}
           name="commercialName"
-          required
         >
           {errors.commercialName && <span className={styles['error-message']}>El nombre es requerido.</span>}
         </CustomInput>
@@ -39,7 +38,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           label="Fecha de inicio"
           register={register}
           name="createdAt"
-          required
           type="date"
         >
           {errors.createdAt && <span className={styles['error-message']}>La fecha de inicio es requerida.</span>}
@@ -52,7 +50,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           label="Usuario"
           register={register}
           name="memberCode"
-          required
         >
           {errors.memberCode && <span className={styles['error-message']}>El nombre de usuario es requerido.</span>}
         </CustomInput>
@@ -64,7 +61,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           label="Correo Electrónico"
           register={register}
           name="salesEmail"
-          required
           type="email"
         >
           {errors.salesEmail && <span className={styles['error-message']}>El correo es requerido.</span>}
@@ -77,7 +73,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           label="Contraseña"
           register={register}
           name="password"
-          required
           type="password"
         >
           {errors.password && <span className={styles['error-message']}>La contraseña es requerida</span>}
