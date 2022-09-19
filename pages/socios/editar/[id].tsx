@@ -1,48 +1,45 @@
-import { useMutation } from '@apollo/client'
+import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import Swal from 'sweetalert2'
 
+import UpdateFormContainer from '@/components/UpdateForm'
 import useLogger from '@/hooks/useLogger'
-import { UPDATE_MEMBER, UPDATE_USER } from '@/services/GraphQL/users/mutations'
-import { MemberEditable, UserEditable } from '@/services/GraphQL/users/types'
-import EditUserAndMember from '@/views/Users/Edit'
+import { USER_BY_ID } from '@/services/GraphQL/users/queries'
+import { UserEditable } from '@/services/GraphQL/users/types'
+import EditMemberForm from '@/views/Users//Edit/EditMember'
 
 const EditUserInformation: NextPage = () => {
   const { push, query } = useRouter()
-  const [updateUser, { loading: updateUserMutationLoading, error: updaterUserMutationError }] = useMutation(UPDATE_USER)
-  const [updateMember, { loading: updaterMemberMutationLoading, error: updateMemberError }] = useMutation(UPDATE_MEMBER)
+  const [loading, setLoading] = useState(false)
   const { error: logError } = useLogger()
 
-  const submitUserHandler = async (updatedUser: UserEditable) => {
-    await updateUser({
-      variables: { ...updatedUser, id: query.id },
-    })
-    push('/socios')
+  const submitMemberHandler = async (user: UserEditable) => {
+    setLoading(true)
+    try {
+      await axios.put(`/api/members/${query.id}`, user)
+      setLoading(false)
+      Swal.fire({
+        title: 'Socio actualizado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      })
+      push('/socios')
+    } catch (error) {
+      logError(error as Error, 'pages/socios/editar/[id].tsx', 'useQuery(USER_BY_ID)', 'UNEXPECTED')
+    }
   }
-
-  const submitMemberHandler = async (updatedMember: MemberEditable) => {
-    await updateMember({
-      variables: { ...updatedMember, id: query.id },
-    })
-    push('/socios')
-  }
-
-  if (updaterUserMutationError)
-    logError(updaterUserMutationError, 'pages/socios/editar/[id].tsx', 'Error al actualizar la información del usuario')
-
-  if (updateMemberError)
-    logError(
-      updateMemberError,
-      'pages/socios/editar/[id].tsx',
-      'Error al actualizar la información de miembro del usuario',
-    )
 
   return (
-    <EditUserAndMember
-      submitUser={submitUserHandler}
-      submitMember={submitMemberHandler}
-      updateUserMutationLoading={updateUserMutationLoading}
-      updaterMemberMutationLoading={updaterMemberMutationLoading}
+    <UpdateFormContainer
+      currentDataQuery={USER_BY_ID}
+      submitHandler={submitMemberHandler}
+      isSubmitLoading={loading}
+      UpdateForm={EditMemberForm}
+      queryName="user"
     />
   )
 }

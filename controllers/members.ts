@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import client from '@/services/GraphQL/client'
-import { CREATE_MEMBER, CREATE_USER_MEMBER, TOGGLE_USER } from '@/services/GraphQL/users/mutations'
+import { CREATE_MEMBER, CREATE_USER_MEMBER, TOGGLE_USER, UPDATE_MEMBER } from '@/services/GraphQL/users/mutations'
 import { MEMBER_USERS } from '@/services/GraphQL/users/queries'
 import { User } from '@/services/GraphQL/users/types'
 
@@ -72,6 +72,31 @@ export const createMember = async (req: NextApiRequest, res: NextApiResponse) =>
     return res.json({
       msg: 'Member created successfully',
       data: { ...newMember },
+    })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export const updateMember = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const userId = req.query?.id
+    const { body } = req
+
+    const { data, errors: userErrors } = await client.mutate({
+      mutation: UPDATE_MEMBER,
+      variables: {
+        ...body,
+        userId,
+      },
+    })
+
+    if (userErrors) {
+      return res.status(500).json(userErrors)
+    }
+    return res.json({
+      msg: 'Member updated successfully',
+      data,
     })
   } catch (error) {
     res.status(500).json(error)

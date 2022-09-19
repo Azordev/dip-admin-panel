@@ -36,7 +36,6 @@ export const USER_BY_ID = gql`
   query ($id: uuid!) {
     user: users_by_pk(id: $id) {
       ...UserInfoFragment
-      isActive
       memberInfo: member_info {
         ...MemberInfoFragment
       }
