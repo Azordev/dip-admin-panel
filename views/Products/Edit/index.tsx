@@ -1,10 +1,13 @@
+import axios from 'axios'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 
 import Button from '@/components/Button'
+import DeleteModal from '@/components/DeleteModal'
 import { MutableProductFormProps, ProductEditable } from '@/services/GraphQL/products/types'
 import stylesInput from '@/styles/EditEvent.module.scss'
 import Picture from '@/views/SVGs/Picture'
@@ -24,6 +27,8 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
     handleSubmit,
     formState: { errors },
   } = useForm<ProductEditableWithImg>()
+  const router = useRouter()
+
   const submitHandler = handleSubmit(onSubmit as SubmitHandler<ProductEditableWithImg>)
   useEffect(() => {
     setValue('description', originalData?.description)
@@ -31,7 +36,16 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
     setValue('basePriceSol', originalData?.basePriceSol)
   }, [originalData?.description, originalData?.name, setValue, getValues, originalData?.basePriceSol])
 
-  const showModal = () => {}
+  const showModal = () => {
+    const message = originalData?.name ? `el producto "${originalData?.name}"` : 'product'
+
+    DeleteModal(message, async (confirmed: boolean) => {
+      if (confirmed) {
+        await axios.delete(`/api/products/${originalData?.id}`)
+        router.push('/productos')
+      }
+    })
+  }
 
   const handlePrice = (e: { value: any }) => setValue('basePriceSol', e.value)
 

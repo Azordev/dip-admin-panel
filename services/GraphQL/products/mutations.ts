@@ -68,7 +68,7 @@ export const UPDATE_PRODUCT = gql`
 
 export const DELETE_PRODUCT = gql`
   mutation ($id: uuid!) {
-    delete_products_by_pk(pk_columns: { id: $id }) {
+    delete_products_by_pk(id: $id) {
       id
     }
   }

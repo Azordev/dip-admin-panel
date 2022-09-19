@@ -135,11 +135,15 @@ export const updateProduct = async (req: NextApiRequest, res: NextApiResponse) =
 export const deleteProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query } = req
+    const { id } = query
+
+    if (!id) {
+      return res.status(400).json({ msg: 'Product id is required' })
+    }
+
     await client.mutate({
       mutation: DELETE_PRODUCT,
-      variables: {
-        id: query.id,
-      },
+      variables: { id },
     })
 
     return res.status(204).json({ msg: 'Product deleted successfully' })
