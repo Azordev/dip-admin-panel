@@ -85,24 +85,22 @@ export const CREATE_MEMBER = gql`
 
 export const UPDATE_MEMBER = gql`
   mutation (
-    $id: uuid!
-    $firstNames: String
-    $lastNames: String
-    $email: String
-    $contactInformation: String
-    $degree: String
+    $memberId: uuid!
+    $memberCode: String!
+    $password: String!
+    $userId: uuid!
+    $firstNames: String!
+    $createdAt: timestamptz!
+    $email: String!
   ) {
-    member: update_members(
-      where: { user_id: { _eq: $id } }
-      _set: {
-        first_names: $firstNames
-        last_names: $lastNames
-        email: $email
-        contact_information: $contactInformation
-        degree: $degree
-      }
+    update_members_by_pk(
+      pk_columns: { id: $memberId }
+      _set: { first_names: $firstNames, created_at: $createdAt, email: $email }
     ) {
-      affected_rows
+      updated_at
+    }
+    update_users_by_pk(pk_columns: { id: $userId }, _set: { member_code: $memberCode, password: $password }) {
+      is_active
     }
   }
 `

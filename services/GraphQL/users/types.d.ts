@@ -19,6 +19,10 @@ export interface MemberBase {
 
 export interface MemberEditable extends MemberBase {
   email: string
+  memberCode: string
+  memberId: string
+  createdAt?: string
+  password?: string
 }
 
 export interface Member extends MemberBase {
@@ -54,6 +58,7 @@ export const usersInfo = gql`
     position
     memberCode: member_code
     avatarUrl: avatar_url
+    password
     type
     isActive: is_active
   }
@@ -123,7 +128,7 @@ export interface MutableUserFormProps {
 export interface MutableMemberFormProps {
   onSubmit: (_formData: MemberEditable) => void
   loading: boolean
-  originalData?: Member
+  originalData?: User
 }
 
 export interface MutableProviderUserFormProps {

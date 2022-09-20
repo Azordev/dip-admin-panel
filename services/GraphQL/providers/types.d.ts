@@ -35,13 +35,14 @@ export interface ProviderBase {
   b2bEmail: string
   plan: string
   orderIndex: number
+  catalogUrl?: string
 }
 
 export interface ProviderEditable extends ProviderBase {
   userId?: string
   providerId?: string
   commercialName?: string
-  logoUrl?: string
+  logo?: string
   salesPhone?: string
   orderIndex?: number
   plan?: string

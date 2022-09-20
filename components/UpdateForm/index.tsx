@@ -10,6 +10,7 @@ import UpdateFormLayout from './Layout'
 
 interface Props extends BackHeaderProps {
   submitHandler: (_values: any, _e: FormEvent<HTMLFormElement>) => void
+
   currentDataQuery: DocumentNode
   UpdateForm: FC<any>
   isSubmitLoading?: boolean
