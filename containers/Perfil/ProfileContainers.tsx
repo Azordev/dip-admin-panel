@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+
 import { FormEvent, useState } from 'react'
 
 import ProfileForm from '@/components/ProfileForm'
@@ -25,25 +26,11 @@ const ProfileContainers: NextPage = () => {
     form.append('id', user.providerInfo.id)
     form.append('logoUrl', `${values.logo}`)
     try {
-      const response = await axios.put(`/api/providers/${query.id}`, form, {
+      await axios.put(`/api/providers/${query.id}`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-      const userResponse = response?.data ?? {}
-      const userSession = window.sessionStorage.getItem('user') ?? ''
-      const userData = userSession ? JSON.parse(userSession) : {}
-      const { providerInfo } = userData ?? {}
-      const updatedUser = {
-        ...userData,
-        providerInfo: {
-          ...providerInfo,
-          logoUrl: userResponse?.data?.logoUrl ?? '',
-        },
-      }
-
-      if (userSession) window.sessionStorage.setItem('user', JSON.stringify(updatedUser))
-
       push('/proveedores')
     } catch (error) {
       logError(error as Error, 'pages/proveedores/editar.tsx', 'Error al crear el evento')
