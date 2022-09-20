@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-
 import { FormEvent, useState } from 'react'
 
 import ProfileForm from '@/components/ProfileForm'
