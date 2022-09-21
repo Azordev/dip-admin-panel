@@ -24,7 +24,7 @@ const ListHeader: FC<ListHeaderProps> = ({ createPath, createText, logoUrl, altL
       </a>
     </Link>
     {logoUrl ? (
-      <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={120} height={15} objectFit="contain" />
+      <Image src={logoUrl || ''} alt={altLogo || 'default alt'} width={36} height={48} objectFit="contain" />
     ) : (
       <h1>{altLogo}</h1>
     )}
