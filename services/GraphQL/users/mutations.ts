@@ -112,3 +112,19 @@ export const TOGGLE_USER = gql`
     }
   }
 `
+
+export const DELETE_MEMBER = gql`
+  mutation ($id: uuid!) {
+    member: delete_members_by_pk(id: $id) {
+      userId: user_id
+    }
+  }
+`
+
+export const DELETE_USER = gql`
+  mutation ($id: uuid!) {
+    user: delete_users_by_pk(id: $id) {
+      id
+    }
+  }
+`
