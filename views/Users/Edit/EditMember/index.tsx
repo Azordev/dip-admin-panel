@@ -22,6 +22,8 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
     setValue('memberCode', originalMember ? originalMember.memberCode : '')
     setValue('password', originalMember?.password)
     setValue('firstNames', originalMember?.memberInfo?.firstNames)
+    setValue('lastNames', originalMember?.memberInfo?.lastNames)
+    setValue('startDate', originalMember?.memberInfo?.startDate)
     setValue('email', originalMember?.memberInfo ? originalMember.memberInfo.email : '')
   }, [originalMember, originalMember?.memberCode, originalMember?.memberInfo, originalMember?.password, setValue])
   const buttonText = loading ? 'Enviando' : 'Enviar'
@@ -44,6 +46,19 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
             {errors.firstNames && <small className={styles['error-message']}>{errors.firstNames.message}</small>}
           </div>
           <div className={styles['custom-input']}>
+            <label className={styles['label-input']} htmlFor="lastenamePartner">
+              Apellido del Socio
+            </label>
+            <input
+              className={styles.input}
+              id="lastenamePartner"
+              type="text"
+              placeholder="Escribe el apellido del socio"
+              {...register('lastNames', { required: true })}
+            />
+            {errors.lastNames && <small className={styles['error-message']}>{errors.lastNames.message}</small>}
+          </div>
+          <div className={styles['custom-input']}>
             <label className={styles['label-input']} htmlFor="memberCode">
               Código del Socio
             </label>
@@ -60,14 +75,8 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
             <label className={styles['label-input']} htmlFor="startDate">
               Fecha de Inicio
             </label>
-            <input
-              className={styles.input}
-              id="startDate"
-              type="date"
-              placeholder="Escribe el código del socio"
-              {...register('createdAt')}
-            />
-            {errors.createdAt && <small className={styles['error-message']}>{errors.createdAt.message}</small>}
+            <input className={styles.input} id="startDate" type="date" {...register('startDate')} />
+            {errors.startDate && <small className={styles['error-message']}>{errors.startDate.message}</small>}
           </div>
           <div className={styles['custom-input']}>
             <label className={styles['label-input']} htmlFor="email">

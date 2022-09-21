@@ -61,6 +61,8 @@ export const createMember = async (req: NextApiRequest, res: NextApiResponse) =>
 
     const newMember = {
       firstNames: body.namePartner,
+      lastNames: body.lastnamePartner,
+      startDate: body.startDate,
       email: body.email,
       userId: data?.user?.id,
     }
