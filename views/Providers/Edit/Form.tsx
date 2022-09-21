@@ -107,9 +107,9 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
           <Button type="submit" className={btnStyles['button-save']}>
             {buttonText}
           </Button>
-          <button onClick={showModal} className={`${btnStyles['button-delete']}`}>
+          <Button onClick={showModal} className={btnStyles['button-delete']}>
             Eliminar
-          </button>
+          </Button>
         </div>
       </form>
     </ClientOnly>

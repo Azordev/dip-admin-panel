@@ -83,9 +83,9 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
         <Button type="submit" className={btnStyles['button-save']}>
           {buttonText}
         </Button>
-        <button onClick={() => router.push('/proveedores')} className={`${btnStyles['button-cancel']}`}>
+        <Button onClick={() => router.push('/proveedores')} className={btnStyles['button-cancel']}>
           Cancelar
-        </button>
+        </Button>
       </div>
     </form>
   )
