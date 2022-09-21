@@ -5,7 +5,7 @@ import NextCors from 'nextjs-cors'
 
 import client from '@/services/GraphQL/client'
 import { CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from '@/services/GraphQL/products/mutations'
-import { PRODUCTS, PRODUCTS_BY_PROVIDER } from '@/services/GraphQL/products/queries'
+import { PRODUCT_BY_ID, PRODUCTS, PRODUCTS_BY_PROVIDER } from '@/services/GraphQL/products/queries'
 import { Product } from '@/services/GraphQL/products/types'
 
 import { addObject } from '../services/AWS/s3'
@@ -14,6 +14,19 @@ interface GetParams {
   limit?: number
   offset?: number
   query?: string
+}
+
+export const getProduct = async (
+  productId: string | string[],
+): Promise<{ product: Product | undefined; error: ApolloError | undefined }> => {
+  const { data, error } = await client.query<{ product: Product }>({
+    query: PRODUCT_BY_ID,
+    variables: {
+      id: productId,
+    },
+  })
+
+  return { product: data.product, error }
 }
 
 export const getProducts = async (
@@ -111,18 +124,25 @@ export const updateProduct = async (req: NextApiRequest, res: NextApiResponse) =
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
     try {
-      const eventId = req.query?.id
+      const productId = req.query?.id
+      const productDataBase = await getProduct(productId)
+      const { product: productDefault, error: errEventDataBase } = productDataBase ?? {}
 
-      if (err) {
+      if (err || errEventDataBase) {
         return res.status(500).json(err)
       }
 
-      const file = files.image as formidable.File
-      const { Location: imageUrl } = await addObject(file, 'products')
+      let imageUrl = productDefault?.imageUrl ?? ''
+
+      if (files.image) {
+        const file = files.image as formidable.File
+        const { Location } = await addObject(file, 'products')
+        imageUrl = Location ?? ''
+      }
 
       const { data } = await client.mutate({
         mutation: UPDATE_PRODUCT,
-        variables: { ...fields, imageUrl, id: eventId },
+        variables: { ...fields, imageUrl, id: productId },
       })
 
       if (!data?.update_products_by_pk) {

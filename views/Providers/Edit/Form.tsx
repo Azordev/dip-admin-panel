@@ -1,9 +1,12 @@
+import axios from 'axios'
+import { useRouter } from 'next/router'
 import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import btnStyles from '@/components/Button/Button.module.scss'
 import CustomInput from '@/components/CustomInput'
+import DeleteModal from '@/components/DeleteModal'
 import { MutableProviderFormProps, ProviderEditable } from '@/services/GraphQL/providers/types'
 
 import ClientOnly from '../../Shared/ClientOnly'
@@ -13,12 +16,24 @@ import styles from '../Create/ProviderCreateForm.module.scss'
 const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, originalData: originalProvider }) => {
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<ProviderEditable>()
+  const router = useRouter()
   const submitHandler = handleSubmit(onSubmit)
   const buttonText = loading ? 'Enviando' : 'Enviar'
+  const showModal = () => {
+    const message = originalProvider?.commercialName
+      ? `el proveedor "${originalProvider?.commercialName}"`
+      : 'proveedor'
+
+    DeleteModal(message, async (confirmed: boolean) => {
+      if (confirmed) {
+        // await axios.delete(`/api/products/${originalProvider?.id}`)
+        router.push('/proveedores')
+      }
+    })
+  }
 
   return (
     <ClientOnly>
@@ -92,9 +107,9 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
           <Button type="submit" className={btnStyles['button-save']}>
             {buttonText}
           </Button>
-          <button onClick={() => reset()} className={`${btnStyles['button-delete']} delete`}>
-            Cancelar
-          </button>
+          <Button onClick={showModal} className={btnStyles['button-delete']}>
+            Eliminar
+          </Button>
         </div>
       </form>
     </ClientOnly>

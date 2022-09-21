@@ -30,11 +30,6 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
   const router = useRouter()
 
   const submitHandler = handleSubmit(onSubmit as SubmitHandler<ProductEditableWithImg>)
-  useEffect(() => {
-    setValue('description', originalData?.description)
-    setValue('name', originalData?.name)
-    setValue('basePriceSol', originalData?.basePriceSol)
-  }, [originalData?.description, originalData?.name, setValue, getValues, originalData?.basePriceSol])
 
   const showModal = () => {
     const message = originalData?.name ? `el producto "${originalData?.name}"` : 'product'
@@ -65,6 +60,20 @@ const EditProductForm: FC<MutableProductFormProps> = ({ onSubmit, originalData, 
       reader.readAsDataURL(file)
     }
   }
+
+  useEffect(() => {
+    setValue('description', originalData?.description)
+    setValue('name', originalData?.name)
+    setValue('basePriceSol', originalData?.basePriceSol)
+    if (originalData?.imageUrl) setImageUrl(originalData.imageUrl)
+  }, [
+    originalData?.description,
+    originalData?.name,
+    originalData?.imageUrl,
+    setValue,
+    getValues,
+    originalData?.basePriceSol,
+  ])
 
   return (
     <div className="container">

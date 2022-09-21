@@ -52,7 +52,7 @@ export const getEventsAPI = async (req: NextApiRequest, res: NextApiResponse) =>
 }
 
 export const getEvent = async (
-  eventId: string,
+  eventId: string | string[],
 ): Promise<{ event: Event | undefined; error: ApolloError | undefined }> => {
   const { data, error } = await client.query<{ event: Event }>({
     query: EVENT_BY_ID,
@@ -130,8 +130,10 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
   form.parse(req, async (err, fields, files) => {
     try {
       const eventId = req.query?.id
+      const eventDataBase = await getEvent(eventId)
+      const { event: eventDefault, error: errEventDataBase } = eventDataBase ?? {}
 
-      if (err) {
+      if (err || errEventDataBase) {
         return res.status(500).json(err)
       }
 
@@ -155,7 +157,7 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
 
       await client.mutate({
         mutation: UPDATE_EVENT,
-        variables: { ...fields, imageUrl: '', id: eventId },
+        variables: { ...fields, imageUrl: eventDefault?.imageUrl ?? '', id: eventId },
       })
       return res.status(204).json({
         msg: 'Event updated successfully',

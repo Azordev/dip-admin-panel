@@ -1,9 +1,11 @@
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
 import btnStyle from '@/components/Button/Button.module.scss'
+import DeleteModal from '@/components/DeleteModal'
 import { MemberEditable, MutableMemberFormProps } from '@/services/GraphQL/users/types'
 
 import styles from '../../Create/Form.module.scss'
@@ -27,6 +29,19 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
     setValue('email', originalMember?.memberInfo ? originalMember.memberInfo.email : '')
   }, [originalMember, originalMember?.memberCode, originalMember?.memberInfo, originalMember?.password, setValue])
   const buttonText = loading ? 'Enviando' : 'Enviar'
+
+  const showModal = () => {
+    const message = originalMember?.memberInfo?.firstNames
+      ? `el socio "${originalMember?.memberInfo?.firstNames}"`
+      : 'socio'
+
+    DeleteModal(message, async (confirmed: boolean) => {
+      if (confirmed) {
+        await axios.delete(`/api/members/${originalMember?.memberInfo?.id}`)
+        router.push('/socios')
+      }
+    })
+  }
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
@@ -113,7 +128,7 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
         <Button iconName="" className={btnStyle['button-save']} type="submit">
           {buttonText}
         </Button>
-        <Button iconName="" className={btnStyle['button-delete']} type="button">
+        <Button onClick={showModal} iconName="" className={btnStyle['button-delete']} type="button">
           Eliminar
         </Button>
       </section>

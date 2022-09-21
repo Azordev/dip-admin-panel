@@ -34,16 +34,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [isWorkshop, setIsWorkshop] = useState<boolean>(false)
 
-  useEffect(() => {
-    setValue('type', originalEvent?.type === 'WORKSHOP')
-    setValue('date', originalEvent?.date.split('T')[0] as string)
-    setValue('time', originalEvent?.date.split('T')[1].slice(0, -9) as string)
-    setValue('description', originalEvent?.description)
-    setValue('title', originalEvent?.title)
-
-    setIsWorkshop(originalEvent?.type === 'WORKSHOP')
-  }, [originalEvent?.date, originalEvent?.description, originalEvent?.title, setValue, getValues, originalEvent?.type])
-
   const handleFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = evt.target.files?.[0]
     if (file?.type.includes('image')) {
@@ -81,6 +71,24 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
       }
     })
   }
+
+  useEffect(() => {
+    setValue('type', originalEvent?.type === 'WORKSHOP')
+    setValue('date', originalEvent?.date.split('T')[0] as string)
+    setValue('time', originalEvent?.date.split('T')[1].slice(0, -9) as string)
+    setValue('description', originalEvent?.description)
+    setValue('title', originalEvent?.title)
+    setIsWorkshop(originalEvent?.type === 'WORKSHOP')
+    if (originalEvent?.imageUrl) setImageUrl(originalEvent?.imageUrl)
+  }, [
+    originalEvent?.date,
+    originalEvent?.description,
+    originalEvent?.title,
+    originalEvent?.imageUrl,
+    setValue,
+    getValues,
+    originalEvent?.type,
+  ])
 
   return (
     <form onSubmit={submitHandler} className={styles.form}>
