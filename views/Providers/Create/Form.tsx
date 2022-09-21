@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -11,10 +12,10 @@ import styles from './ProviderCreateForm.module.scss'
 const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loading }) => {
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<ProviderUserEditable>()
+  const router = useRouter()
   const submitHandler = handleSubmit(onSubmit)
   const buttonText = loading ? 'Añadiendo' : 'Añadir'
 
@@ -82,7 +83,7 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
         <Button type="submit" className={btnStyles['button-save']}>
           {buttonText}
         </Button>
-        <button onClick={() => reset()} className={`${btnStyles['button-delete']} delete`}>
+        <button onClick={() => router.push('/proveedores')} className={`${btnStyles['button-cancel']}`}>
           Cancelar
         </button>
       </div>
