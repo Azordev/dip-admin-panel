@@ -44,9 +44,9 @@ const ProfileContainers: NextPage = () => {
 
       if (userSession) window.sessionStorage.setItem('user', JSON.stringify(updatedUser))
 
-      push('/proveedores')
+      push('/productos')
     } catch (error) {
-      logError(error as Error, 'pages/proveedores/editar.tsx', 'Error al crear el evento')
+      logError(error as Error, 'pages/perfil/editar/[id].tsx', 'Error al crear el evento')
       setLoading(false)
     }
   }
