@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import Swal from 'sweetalert2'
 
 import useLogger from '@/hooks/useLogger'
 import { ProviderUserEditable } from '@/services/GraphQL/users/types'
@@ -35,8 +36,15 @@ const Create: NextPage = () => {
         },
       })
 
-      setLoading(false)
+      Swal.fire({
+        title: 'Proveedor creado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      })
       push('/proveedores')
+      setLoading(false)
     } catch (error) {
       logError(error as Error, 'pages/proveedores/crear.tsx', 'Error al crear el proveedor')
       setLoading(false)
