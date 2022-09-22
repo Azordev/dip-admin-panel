@@ -67,3 +67,11 @@ export const TOGGLE_PROVIDER = gql`
     }
   }
 `
+
+export const DELETE_PROVIDER = gql`
+  mutation ($id: uuid!) {
+    provider: delete_providers_by_pk(id: $id) {
+      userId: user_id
+    }
+  }
+`
