@@ -31,7 +31,7 @@ const ProvidersList: FC<{
         id: provider.id,
         items: [
           provider.orderIndex,
-          provider.createdAt,
+          provider.startDate,
           provider.commercialName,
           provider.b2bEmail,
           '**********',

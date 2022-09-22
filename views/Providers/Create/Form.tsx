@@ -38,10 +38,10 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           placeholder="DD/MM/AA"
           label="Fecha de inicio"
           register={register}
-          name="createdAt"
+          name="startDate"
           type="date"
         >
-          {errors.createdAt && <span className={styles['error-message']}>La fecha de inicio es requerida.</span>}
+          {errors.startDate && <span className={styles['error-message']}>La fecha de inicio es requerida.</span>}
         </CustomInput>
       </div>
       <div className={styles['input-container']}>

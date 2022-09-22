@@ -11,6 +11,7 @@ export const CREATE_PROVIDER = gql`
     $legalName: String
     $details: String
     $logoUrl: String
+    $startDate: date
     $userId: uuid
   ) {
     provider: insert_providers_one(
@@ -25,6 +26,7 @@ export const CREATE_PROVIDER = gql`
         details: $details
         logo_url: $logoUrl
         user_id: $userId
+        start_date: $startDate
         is_active: true
       }
     ) {
@@ -43,6 +45,7 @@ export const UPDATE_PROVIDER = gql`
     $address: String
     $logoUrl: String
     $catalogUrl: String
+    $startDate: date
   ) {
     provider: update_providers_by_pk(
       pk_columns: { id: $id }
@@ -53,6 +56,7 @@ export const UPDATE_PROVIDER = gql`
         address: $address
         logo_url: $logoUrl
         catalog_url: $catalogUrl
+        start_date: $startDate
       }
     ) {
       is_active
