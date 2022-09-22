@@ -44,6 +44,23 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
               {errors.namePartner && <small className={styles['error-message']}>{errors.namePartner.message}</small>}
             </div>
             <div className={styles['custom-input']}>
+              <label className={styles['label-input']} htmlFor="lastnamePartner">
+                Apellido del Socio
+              </label>
+              <input
+                className={styles.input}
+                id="lastnamePartner"
+                type="text"
+                placeholder="Escribe el apellido del socio"
+                {...register('lastnamePartner', {
+                  required: { value: true, message: 'El campo no puede estar vacio' },
+                })}
+              />
+              {errors.lastnamePartner && (
+                <small className={styles['error-message']}>{errors.lastnamePartner.message}</small>
+              )}
+            </div>
+            <div className={styles['custom-input']}>
               <label className={styles['label-input']} htmlFor="memberCode">
                 Código del Socio
               </label>

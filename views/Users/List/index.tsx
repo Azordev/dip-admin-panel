@@ -26,6 +26,7 @@ const UsersList: FC<{
       const name = `${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`
       const isActive = Boolean(user?.isActive)
       const code = `#${user.memberCode}`
+      const startDate = user.memberInfo?.startDate
 
       const Active = () => (
         <span className={`${styles.status} ${isActive ? styles.active : styles.inactive}`}>
@@ -37,7 +38,7 @@ const UsersList: FC<{
         id: user.id,
         items: [
           code,
-          user.createdAt,
+          startDate,
           name,
           user.memberInfo?.email,
           '**********',

@@ -8,6 +8,7 @@ export const memberInfo = gql`
     # user
     firstNames: first_names
     lastNames: last_names
+    startDate: start_date
   }
 `
 
@@ -15,6 +16,7 @@ export interface MemberBase {
   email: string
   firstNames?: string
   lastNames?: string
+  startDate?: string
 }
 
 export interface MemberEditable extends MemberBase {
@@ -77,6 +79,7 @@ export interface UserBase {
 export interface UserEditable extends UserBase {
   memberCode?: string
   namePartner?: string
+  lastnamePartner?: string
   startDate?: string
   email?: string
   password?: string
