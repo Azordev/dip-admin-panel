@@ -19,6 +19,7 @@ export const providerInfo = gql`
     plan
     orderIndex: order_index
     isActive: is_active
+    startDate: start_date
     user_info {
       id
       memberCode: member_code
@@ -36,6 +37,7 @@ export interface ProviderBase {
   plan: string
   orderIndex: number
   catalogUrl?: string
+  startDate?: string
 }
 
 export interface ProviderEditable extends ProviderBase {

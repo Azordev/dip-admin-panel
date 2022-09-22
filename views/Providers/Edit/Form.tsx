@@ -29,7 +29,7 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
 
     DeleteModal(message, async (confirmed: boolean) => {
       if (confirmed) {
-        // await axios.delete(`/api/products/${originalProvider?.id}`)
+        await axios.delete(`/api/providers/${originalProvider?.id}`)
         router.push('/proveedores')
       }
     })
@@ -58,11 +58,11 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             placeholder="DD/MM/AA"
             label="Fecha de inicio"
             register={register}
-            name="createdAt"
+            name="startDate"
             type="date"
-            defaultValue={originalProvider?.createdAt?.split('T')[0]}
+            defaultValue={originalProvider?.startDate?.split('T')[0]}
           >
-            {errors.createdAt && <span>La fecha de inicio es requerida.</span>}
+            {errors.startDate && <span>La fecha de inicio es requerida.</span>}
           </CustomInput>
         </div>
         <div className={styles['input-container']}>

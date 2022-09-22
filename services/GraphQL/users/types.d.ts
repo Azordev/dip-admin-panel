@@ -43,6 +43,7 @@ export interface ProviderBase {
   id: string
   createdAt?: string
   updatedAt?: string
+  startDate?: string
   address?: string
   commercialName?: string
   salesPhone?: string

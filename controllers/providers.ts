@@ -97,6 +97,7 @@ export const createProvider = (req: NextApiRequest, res: NextApiResponse) => {
         b2bPhone: fields.b2bPhone,
         legalName: fields.legalName,
         details: fields.details,
+        startDate: fields.startDate,
         userId: data?.user?.id,
         logoUrl,
       }
