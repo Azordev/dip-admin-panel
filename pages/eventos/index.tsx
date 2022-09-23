@@ -1,38 +1,42 @@
-import { GetServerSideProps, NextPage } from 'next'
+import axios from 'axios'
+import { NextPage } from 'next'
+import { useCallback, useState } from 'react'
 
-import EmptyList from '@/components/EmptyList'
-import ListHeader from '@/components/ListHeader'
+import EventsContainers from '@/containers/Events/EventsContainer'
 import { Event } from '@/services/GraphQL/events/types'
-import EventsList from '@/views/Events/List'
 import ClientOnly from '@/views/Shared/ClientOnly'
 
-import { getEvents } from 'controllers/events'
-
-interface PageProps {
+interface EventsResponse {
   events: Event[]
+  events_aggregate: {
+    aggregate: {
+      totalCount: number
+    }
+  }
 }
 
-const Events: NextPage<PageProps> = ({ events }) => {
-  if (!events || events.length < 1) return <EmptyList text="No hay eventos" />
+const Events: NextPage = () => {
+  const [events, setEvents] = useState<Event[]>([])
+  const [total, setTotal] = useState(0)
+  const [loading, setLoading] = useState(true)
+
+  const getEvents = useCallback(async (limit: number, offset: number) => {
+    const { data } = await axios.get<EventsResponse>('/api/events/', {
+      params: {
+        limit,
+        offset,
+      },
+    })
+    setEvents(data.events)
+    setTotal(data.events_aggregate.aggregate.totalCount)
+    setLoading(false)
+  }, [])
 
   return (
     <ClientOnly>
-      <>
-        <ListHeader createText="Crear nuevo evento" createPath="/eventos/crear" />
-        <EventsList events={events} />
-      </>
+      <EventsContainers events={events} totalEvents={total} onchangePage={getEvents} loading={loading} />
     </ClientOnly>
   )
 }
 
 export default Events
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { events } = await getEvents()
-
-  return {
-    props: {
-      events: events || [],
-    },
-  }
-}
