@@ -67,7 +67,7 @@ const DIDAdminPanel = ({ Component, pageProps: { ...pageProps } }: AppProps) => 
         <meta name="author" content="Israel Antonio Rosales Laguan" />
       </Head>
       <ApolloProvider client={client}>
-        {pathname === '/ingresar' ? (
+        {pathname === '/ingresar' || pathname === '/info/[memberCode]' ? (
           <Component {...pageProps} />
         ) : (
           <Dashboard>

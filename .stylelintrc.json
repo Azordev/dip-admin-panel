@@ -24,7 +24,8 @@
         ],
         "ignoreSelectors": [":export"]
       }
-    ]
+    ],
+    "selector-max-compound-selectors": null
   },
   "ignoreFiles": [".github/**", "**/coverage/**", "**/node_modules/**", "**/test/**", "**/public/**"]
 }

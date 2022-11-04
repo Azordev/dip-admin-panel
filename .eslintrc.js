@@ -82,6 +82,7 @@ module.exports = {
       },
     ],
     'import/core-modules': 0,
+    '@next/next/no-img-element': 0,
   },
   env: {
     'jest/globals': true,

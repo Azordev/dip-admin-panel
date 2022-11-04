@@ -10,13 +10,28 @@ import {
   TOGGLE_USER,
   UPDATE_MEMBER,
 } from '@/services/GraphQL/users/mutations'
-import { MEMBER_USERS } from '@/services/GraphQL/users/queries'
+import { MEMBER_USERS, USER_BY_MEMBER_CODE } from '@/services/GraphQL/users/queries'
 import { User } from '@/services/GraphQL/users/types'
 
 interface GetParams {
   limit?: number
   offset?: number
   query?: string
+}
+
+export const getMemberByMemberCode = async (memberCode: string) => {
+  const { data } = await client.query<{ users: User[] }>({
+    query: USER_BY_MEMBER_CODE,
+    variables: {
+      memberCode,
+    },
+  })
+
+  if (data.users.length) {
+    return { user: data.users[0], error: null }
+  }
+
+  return { error: 'Usuario no encontrado', user: null }
 }
 
 export const getMembers = async (
