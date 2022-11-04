@@ -24,6 +24,9 @@ const Create: NextPage = () => {
       }
       const user = await axios.post('/api/members', member)
       const { data } = user.data
+      if (!data) {
+        throw new Error('Incomplete member data')
+      }
       const { startDate, memberId } = data
       const parseStartDate = new Date(startDate)
       const expiration = new Date(parseStartDate.setFullYear(parseStartDate.getFullYear() + 1))

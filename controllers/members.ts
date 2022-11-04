@@ -74,12 +74,16 @@ export const createMember = async (req: NextApiRequest, res: NextApiResponse) =>
       userId: data?.user?.id,
     }
 
-    const dataMember = await client.mutate({
+    const { data: dataMember, errors: memberErrors } = await client.mutate({
       mutation: CREATE_MEMBER,
       variables: newMember,
     })
 
-    const memberId = dataMember.data.member.id
+    if (memberErrors) {
+      return res.status(500).json(memberErrors)
+    }
+
+    const memberId = dataMember.member.id
     return res.json({
       msg: 'Member created successfully',
       data: { ...newMember, memberId },
