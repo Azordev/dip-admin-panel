@@ -7,9 +7,11 @@ export const createSubscription = async (req: NextApiRequest, res: NextApiRespon
   try {
     const { body } = req
     if (!body.memberId) {
-      return res.status(500)
+      return res.status(500).json({
+        msg: 'Error getting member id',
+      })
     }
-    const { data, errors: subscriptionErrors } = await client.mutate({
+    const { data, errors } = await client.mutate({
       mutation: CREATE_SUBSCRIPTION,
       variables: {
         memberId: body.memberId,
@@ -17,10 +19,10 @@ export const createSubscription = async (req: NextApiRequest, res: NextApiRespon
       },
     })
 
-    if (subscriptionErrors) {
+    if (errors) {
       return res.status(500).json({
         msg: 'Error while communicating with Data Base',
-        errors: subscriptionErrors,
+        errors,
       })
     }
 
