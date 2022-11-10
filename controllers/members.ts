@@ -28,10 +28,10 @@ export const getMemberByMemberCode = async (memberCode: string) => {
   })
 
   if (data.users.length) {
-    return { user: data.users[0], error: null }
+    return { user: data.users[0] }
   }
 
-  return { error: 'Usuario no encontrado', user: null }
+  return { error: 'Usuario no encontrado' }
 }
 
 export const getMembers = async (

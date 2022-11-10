@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React from 'react'
 
 import { User } from '@/services/GraphQL/users/types'
-import Image from '@/views/Shared/Image'
 
 import { getMemberByMemberCode } from 'controllers/members'
 
@@ -24,13 +23,13 @@ const MemberInfo: NextPage<MemberInfoProps> = ({ user, error }) => {
           <>
             <div className={styles['card-header']}>
               {user.avatarUrl ? (
-                <Image
+                <img
                   src={user.avatarUrl}
                   alt={`Avatar of ${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`}
                 />
               ) : (
                 <img
-                  src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-user-user-tanah-basah-glyph-tanah-basah-7.png"
+                  src="/images/default-avatar.png"
                   alt={`Avatar of ${user.memberInfo?.firstNames} ${user.memberInfo?.lastNames}`}
                 />
               )}
@@ -68,9 +67,9 @@ export default MemberInfo
 export const getServerSideProps: GetServerSideProps = async context => {
   const { memberCode } = context.query
 
-  const { user, error } = await getMemberByMemberCode(memberCode as string)
+  const res = await getMemberByMemberCode(memberCode as string)
 
   return {
-    props: { user, error },
+    props: res,
   }
 }
