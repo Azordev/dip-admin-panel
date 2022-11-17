@@ -70,7 +70,6 @@ export const MEMBER_USERS = gql`
   ${memberInfo}
   query ($query: String = "%%", $limit: Int = 24, $offset: Int = 0) {
     users(
-      limit: $limit
       offset: $offset
       order_by: { member_code: asc }
       where: { member_code: { _ilike: $query }, type: { _eq: "MEMBER" } }
