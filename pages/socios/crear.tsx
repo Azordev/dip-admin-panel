@@ -22,7 +22,21 @@ const Create: NextPage = () => {
         position: 'Socio',
         type: 'MEMBER',
       }
-      await axios.post('/api/members', member)
+      const { data } = await axios.post('/api/members', member)
+      const { data: memberData } = data
+      if (!memberData) {
+        throw new Error('Incomplete member data')
+      }
+      const { startDate, memberId } = memberData
+      const parseStartDate = new Date(startDate)
+      const expiration = new Date(parseStartDate.setFullYear(parseStartDate.getFullYear() + 1))
+      const subscriptionData = {
+        expiration: expiration.toLocaleDateString(),
+        memberId,
+      }
+      await axios.post('/api/subscriptions', subscriptionData).catch(error => {
+        throw new Error(error.message)
+      })
       setLoading(false)
       Swal.fire({
         title: 'Socio creado',
@@ -34,6 +48,7 @@ const Create: NextPage = () => {
       push('/socios')
     } catch (error) {
       logError(error as Error, 'pages/proveedores/crear.tsx', 'Error al crear el proveedor')
+      setLoading(false)
     }
   }
 
