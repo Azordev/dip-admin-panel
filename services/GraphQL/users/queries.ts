@@ -87,6 +87,19 @@ export const MEMBER_USERS = gql`
   }
 `
 
+export const USER_BY_MEMBER_CODE = gql`
+  ${usersInfo}
+  ${memberInfo}
+  query ($memberCode: String!) {
+    users(where: { member_code: { _eq: $memberCode } }) {
+      ...UserInfoFragment
+      memberInfo: member_info {
+        ...MemberInfoFragment
+      }
+    }
+  }
+`
+
 export const MEMBERS = gql`
   ${usersInfo}
   ${memberInfo}

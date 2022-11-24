@@ -1,0 +1,61 @@
+@import 'colors', 'fonts';
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  .card {
+    background: $white;
+    margin-top: 4rem;
+    padding: 2rem;
+    width: 800px;
+
+    .error {
+      color: $red;
+    }
+
+    .card-header {
+      padding: 1.5rem;
+
+      p {
+        font-size: 1rem;
+        margin: .5rem 0;
+      }
+
+      img {
+        border-radius: 50%;
+        height: 150px;
+        margin: 0 auto;
+        width: 150px;
+      }
+    }
+
+    .card-body {
+      background: $bg-gray;
+      padding: 1.5rem;
+
+      .value {
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        margin-top: .5rem;
+      }
+    }
+  }
+}
+
+.is-active {
+  color: $green;
+}
+
+.is-inactive {
+  color: $red;
+}
+
+.return {
+  margin: 1rem 0;
+
+  * {
+    margin: 0;
+  }
+}

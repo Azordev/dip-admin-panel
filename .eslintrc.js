@@ -81,7 +81,8 @@ module.exports = {
         devDependencies: ['**/*.stories.@(ts|tsx)', '**/*.test.@(ts|tsx)', '**/tests/*.@(ts|tsx)', '@types/prop-types'],
       },
     ],
-    'import/core-modules': 0,
+    'import/core-modules': 'off',
+    '@next/next/no-img-element': 'off',
   },
   env: {
     'jest/globals': true,

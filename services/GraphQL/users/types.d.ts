@@ -9,6 +9,10 @@ export const memberInfo = gql`
     firstNames: first_names
     lastNames: last_names
     startDate: start_date
+    subscriptions {
+      id
+      expiration
+    }
   }
 `
 
@@ -37,6 +41,10 @@ export interface Member extends MemberBase {
       count: number
     }
   }
+  subscriptions?: {
+    id: string
+    expiration: string
+  }[]
 }
 
 export interface ProviderBase {
