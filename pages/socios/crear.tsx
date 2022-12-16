@@ -21,6 +21,7 @@ const Create: NextPage = () => {
         ...newUser,
         position: 'Socio',
         type: 'MEMBER',
+        isActive: true,
       }
       const { data } = await axios.post('/api/members', member)
       const { data: memberData } = data

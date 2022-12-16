@@ -13,13 +13,20 @@ export const CREATE_ADMIN = gql`
 
 // This creates also the member
 export const CREATE_USER_MEMBER = gql`
-  mutation ($memberCode: String!, $password: String, $avatarUrl: String, $type: String, $position: String) {
+  mutation (
+    $memberCode: String!
+    $password: String
+    $avatarUrl: String
+    $type: String
+    $position: String
+    $isActive: Boolean
+  ) {
     user: insert_users_one(
       object: {
         member_code: $memberCode
         password: $password
         type: $type
-        is_active: true
+        is_active: $isActive
         avatar_url: $avatarUrl
         position: $position
       }

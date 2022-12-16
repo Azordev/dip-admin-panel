@@ -74,6 +74,7 @@ export const createMember = async (req: NextApiRequest, res: NextApiResponse) =>
         password: body.password,
         position: body.position,
         type: body.type,
+        isActive: body.isActive,
       },
     })
 
