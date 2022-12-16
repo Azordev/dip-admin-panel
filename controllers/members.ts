@@ -10,13 +10,28 @@ import {
   TOGGLE_USER,
   UPDATE_MEMBER,
 } from '@/services/GraphQL/users/mutations'
-import { MEMBER_USERS } from '@/services/GraphQL/users/queries'
+import { MEMBER_USERS, USER_BY_MEMBER_CODE } from '@/services/GraphQL/users/queries'
 import { User } from '@/services/GraphQL/users/types'
 
 interface GetParams {
   limit?: number
   offset?: number
   query?: string
+}
+
+export const getMemberByMemberCode = async (memberCode: string) => {
+  const { data } = await client.query<{ users: User[] }>({
+    query: USER_BY_MEMBER_CODE,
+    variables: {
+      memberCode,
+    },
+  })
+
+  if (data.users.length) {
+    return { user: data.users[0] }
+  }
+
+  return { error: 'Usuario no encontrado' }
 }
 
 export const getMembers = async (
@@ -74,13 +89,19 @@ export const createMember = async (req: NextApiRequest, res: NextApiResponse) =>
       userId: data?.user?.id,
     }
 
-    await client.mutate({
+    const { data: dataMember, errors: memberErrors } = await client.mutate({
       mutation: CREATE_MEMBER,
       variables: newMember,
     })
+
+    if (memberErrors) {
+      return res.status(500).json(memberErrors)
+    }
+
+    const memberId = dataMember.member.id
     return res.json({
       msg: 'Member created successfully',
-      data: { ...newMember },
+      data: { ...newMember, memberId },
     })
   } catch (error) {
     res.status(500).json(error)
