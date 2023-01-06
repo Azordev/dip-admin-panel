@@ -137,6 +137,14 @@ export const DELETE_MEMBER = gql`
   }
 `
 
+export const DELETE_SUBSCRIPTION = gql`
+  mutation ($id: uuid!) {
+    delete_subscriptions(where: { member_id: { _eq: $id } }) {
+      affected_rows
+    }
+  }
+`
+
 export const DELETE_USER = gql`
   mutation ($id: uuid!) {
     user: delete_users_by_pk(id: $id) {

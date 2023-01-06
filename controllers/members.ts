@@ -6,6 +6,7 @@ import {
   CREATE_MEMBER,
   CREATE_USER_MEMBER,
   DELETE_MEMBER,
+  DELETE_SUBSCRIPTION,
   DELETE_USER,
   TOGGLE_USER,
   UPDATE_MEMBER,
@@ -137,6 +138,10 @@ export const updateMember = async (req: NextApiRequest, res: NextApiResponse) =>
 export const deleteMember = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query
+    await client.mutate({
+      mutation: DELETE_SUBSCRIPTION,
+      variables: { id },
+    })
     const { data } = await client.mutate({
       mutation: DELETE_MEMBER,
       variables: { id },
