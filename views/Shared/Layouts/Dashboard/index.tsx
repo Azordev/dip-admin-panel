@@ -69,7 +69,7 @@ const Dashboard: FC<Props> = ({ children }) => {
               </Link>
               <Link href={`/perfil/${isProvider}`} passHref>
                 <a className={`${styles.link} ${checkIsActive('/perfil') ? styles.active : ''}`}>
-                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="male-user" />
+                  <Icons8 size={48} className={styles.icons} color="ffffff" iconStyle="ios-filled" name="user" />
                   <span>Perfil</span>
                 </a>
               </Link>

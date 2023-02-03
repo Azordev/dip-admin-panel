@@ -28,7 +28,8 @@ const Icons8: React.FC<Icons8Props> = ({ color, iconStyle, name, className = '',
   const colorPartial = color ? (color !== 'color' ? color.replace('#', '') + '/' : color + '/') : ''
   // reference: https://img.icons8.com/
   const src = `https://img.icons8.com/${stylePartial}${size}/${colorPartial}/${name}.png`
-  const classNameInherited = className ? ' ' + className : '' // creates space before class if needed
+  /** @desc Creates space before class if needed */
+  const classNameInherited = className ? ' ' + className : ''
   return (
     <Image
       src={src}
