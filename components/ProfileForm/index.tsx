@@ -102,7 +102,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
               placeholder="Inserte número de WhatsApp del proveedor..."
               id="title"
               type="number"
-              {...register('salesPhone', { required: { value: true, message: 'El campo no puede estar vacio' } })}
+              {...register('salesPhone')}
             />
             {errors.salesPhone && <small className={styles['error-message']}>{errors.salesPhone.message}</small>}
           </div>
@@ -113,7 +113,7 @@ const ProfileForm: FC<MutableProviderFormProps> = ({ onSubmit, originalData, loa
               placeholder="Inserta el enlace de tu catálogo web"
               id="catalogo"
               type="text"
-              {...register('catalogUrl', { required: { value: true, message: 'El campo no puede estar vacio' } })}
+              {...register('catalogUrl')}
             />
 
             {errors.catalogUrl && <small className={styles['error-message']}>{errors.catalogUrl.message}</small>}
