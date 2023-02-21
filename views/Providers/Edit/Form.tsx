@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { FC, memo } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '@/components/Button'
@@ -18,6 +18,8 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    getValues,
   } = useForm<ProviderEditable>()
   const router = useRouter()
   const submitHandler = handleSubmit(onSubmit)
@@ -35,11 +37,27 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
     })
   }
 
+  useEffect(() => {
+    setValue('commercialName', originalProvider?.commercialName)
+    setValue('startDate', originalProvider?.startDate)
+    setValue('memberCode', originalProvider?.user_info?.memberCode)
+    setValue('salesEmail', originalProvider?.b2bEmail)
+    setValue('password', originalProvider?.user_info?.password)
+  }, [
+    originalProvider?.commercialName,
+    originalProvider?.startDate,
+    originalProvider?.user_info?.memberCode,
+    originalProvider?.b2bEmail,
+    originalProvider?.user_info?.password,
+    setValue,
+    getValues,
+  ])
+
   return (
     <ClientOnly>
       <form onSubmit={submitHandler} className={styles.container} noValidate>
-        <input type="hidden" value={originalProvider?.id} {...register('providerId')} />
-        <input type="hidden" value={originalProvider?.user_info?.id} {...register('userId')} />
+        <input type="hidden" value={originalProvider?.id || ''} {...register('providerId')} />
+        <input type="hidden" value={originalProvider?.user_info?.id || ''} {...register('userId')} />
         <div className={styles['input-container']}>
           <CustomInput
             id="name"
@@ -47,7 +65,7 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Nombre de la empresa"
             register={register}
             name="commercialName"
-            defaultValue={originalProvider?.commercialName}
+            defaultValue={originalProvider?.commercialName || ''}
           >
             {errors.commercialName && <span>El nombre es requerido.</span>}
           </CustomInput>
@@ -60,7 +78,7 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             register={register}
             name="startDate"
             type="date"
-            defaultValue={originalProvider?.startDate?.split('T')[0]}
+            defaultValue={originalProvider?.startDate?.split('T')[0] || ''}
           >
             {errors.startDate && <span>La fecha de inicio es requerida.</span>}
           </CustomInput>
@@ -72,7 +90,7 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Usuario"
             register={register}
             name="memberCode"
-            defaultValue={originalProvider?.user_info?.memberCode}
+            defaultValue={originalProvider?.user_info?.memberCode || ''}
           >
             {errors.memberCode && <span>El nombre de usuario es requerido.</span>}
           </CustomInput>
@@ -85,7 +103,7 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             register={register}
             name="salesEmail"
             type="email"
-            defaultValue={originalProvider?.b2bEmail}
+            defaultValue={originalProvider?.b2bEmail || ''}
           >
             {errors.salesEmail && <span>El correo es requerido.</span>}
           </CustomInput>
@@ -97,8 +115,7 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
             label="Contraseña"
             register={register}
             name="password"
-            type="password"
-            defaultValue={originalProvider?.user_info?.password}
+            defaultValue={originalProvider?.user_info?.password || ''}
           >
             {errors.password && <span>La contraseña es requerida</span>}
           </CustomInput>
