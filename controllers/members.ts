@@ -2,6 +2,7 @@ import { ApolloError } from '@apollo/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import client from '@/services/GraphQL/client'
+import { DELETE_MEMBER_INSCRIPTION } from '@/services/GraphQL/inscriptions/mutations'
 import {
   CREATE_MEMBER,
   CREATE_USER_MEMBER,
@@ -138,6 +139,10 @@ export const updateMember = async (req: NextApiRequest, res: NextApiResponse) =>
 export const deleteMember = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query
+    await client.mutate({
+      mutation: DELETE_MEMBER_INSCRIPTION,
+      variables: { id },
+    })
     await client.mutate({
       mutation: DELETE_SUBSCRIPTION,
       variables: { id },

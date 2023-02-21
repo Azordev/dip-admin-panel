@@ -15,3 +15,11 @@ export const DELETE_INSCRIPTION = gql`
     }
   }
 `
+
+export const DELETE_MEMBER_INSCRIPTION = gql`
+  mutation ($id: uuid!) {
+    delete_inscriptions(where: { member_id: { _eq: $id } }) {
+      affected_rows
+    }
+  }
+`
