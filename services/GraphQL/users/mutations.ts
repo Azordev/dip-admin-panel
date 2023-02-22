@@ -56,28 +56,12 @@ export const CREATE_PROVIDER_USER = gql`
 `
 
 export const UPDATE_USER = gql`
-  mutation (
-    $id: uuid!
-    $memberCode: String
-    $password: String
-    $isActive: Boolean
-    $avatarUrl: String
-    $position: String
-    $type: String
-  ) {
+  mutation ($id: uuid!, $memberCode: String, $password: String, $isActive: Boolean, $avatarUrl: String, $type: String) {
     user: update_users_by_pk(
       pk_columns: { id: $id }
-      _set: {
-        member_code: $memberCode
-        password: $password
-        is_active: $isActive
-        avatar_url: $avatarUrl
-        position: $position
-        type: $type
-      }
+      _set: { member_code: $memberCode, password: $password, is_active: $isActive, avatar_url: $avatarUrl, type: $type }
     ) {
       id
-      isActive: is_active
     }
   }
 `
