@@ -62,8 +62,6 @@ export const getProviderProducts = async (req: NextApiRequest, res: NextApiRespo
       },
     })
 
-    console.log(data)
-
     res.json(data)
   } catch (error) {
     res.status(500).json(error)

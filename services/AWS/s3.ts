@@ -22,7 +22,7 @@ export const addObject = async (file: File, prefix?: string) => {
   if (!file) return { Location: '' }
 
   try {
-    const extName = file?.originalFilename?.split('.').at(-1)
+    const extName = file?.originalFilename
     const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${extName}`
 
     const fileBuffer = fs.readFileSync(file.filepath)
