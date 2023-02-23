@@ -17,8 +17,6 @@ const EditProvider: NextPage = () => {
   const { error } = useLogger()
 
   const submitHandler = async (updatedProvider: ProviderEditable) => {
-    // console.log(updatedProvider)
-    // return null
     await updateUser({
       variables: {
         id: updatedProvider.userId,

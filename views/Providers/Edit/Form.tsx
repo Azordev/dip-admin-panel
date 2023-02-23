@@ -19,7 +19,6 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm<ProviderEditable>()
   const router = useRouter()
   const submitHandler = handleSubmit(onSubmit)
@@ -38,26 +37,18 @@ const EditProviderForm: FC<MutableProviderFormProps> = ({ onSubmit, loading, ori
   }
 
   useEffect(() => {
+    setValue('userId', originalProvider?.user_info?.id)
     setValue('commercialName', originalProvider?.commercialName)
     setValue('startDate', originalProvider?.startDate)
     setValue('memberCode', originalProvider?.user_info?.memberCode)
     setValue('salesEmail', originalProvider?.b2bEmail)
     setValue('password', originalProvider?.user_info?.password)
-  }, [
-    originalProvider?.commercialName,
-    originalProvider?.startDate,
-    originalProvider?.user_info?.memberCode,
-    originalProvider?.b2bEmail,
-    originalProvider?.user_info?.password,
-    setValue,
-    getValues,
-  ])
+  }, [originalProvider, setValue])
 
   return (
     <ClientOnly>
       <form onSubmit={submitHandler} className={styles.container} noValidate>
-        <input type="hidden" value={originalProvider?.id || ''} {...register('providerId')} />
-        <input type="hidden" value={originalProvider?.user_info?.id || ''} {...register('userId')} />
+        <input defaultValue={originalProvider?.user_info?.id || ''} {...register('userId')} />
         <div className={styles['input-container']}>
           <CustomInput
             id="name"
