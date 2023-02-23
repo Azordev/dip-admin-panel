@@ -113,7 +113,6 @@ const EditMemberForm: FC<MutableMemberFormProps> = ({ onSubmit, loading, origina
             <input
               className={styles.input}
               id="password"
-              type="password"
               placeholder="Inserte la contraseña del socio"
               {...register('password', { required: true })}
             />

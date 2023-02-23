@@ -74,7 +74,6 @@ const CreateProviderForm: FC<MutableProviderUserFormProps> = ({ onSubmit, loadin
           label="Contraseña"
           register={register}
           name="password"
-          type="password"
         >
           {errors.password && <span className={styles['error-message']}>La contraseña es requerida</span>}
         </CustomInput>

@@ -107,7 +107,6 @@ const CreateUserForm: FC<MutableUserFormProps> = ({ onSubmit, loading }) => {
               <input
                 className={styles.input}
                 id="password"
-                type="password"
                 placeholder="Inserte la contraseña del socio"
                 {...register('password', { required: { value: true, message: 'El campo no puede estar vacio' } })}
               />
