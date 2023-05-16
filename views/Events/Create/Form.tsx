@@ -12,8 +12,6 @@ import Icons8 from '@/views/Shared/Icons8'
 import Picture from '@/views/SVGs/Picture'
 
 export interface EventEditableWithFiles extends EventEditable {
-  image?: FileList
-  pdf?: FileList
   time?: string
 }
 
@@ -115,7 +113,7 @@ const CreateEventForm: FC<{
               type="file"
               accept="image/*"
               className={styles['input-file']}
-              {...register('image')}
+              {...register('imageUrl')}
               onChange={handleFile}
             />
             <label htmlFor="image-file" className={styles.image}>
@@ -162,7 +160,7 @@ const CreateEventForm: FC<{
           id="pdf-file"
           className={styles['input-file']}
           accept="application/pdf"
-          {...register('pdf', { required: false })}
+          {...register('requirementsUrl', { required: false })}
           onChange={handleFile}
         />
         <label htmlFor="pdf-file" className={styles.pdf}>

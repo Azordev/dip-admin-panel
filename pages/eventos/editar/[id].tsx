@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Swal from 'sweetalert2'
 
 import UpdateFormContainer from '@/components/UpdateForm'
@@ -16,35 +16,27 @@ const EditEvent: NextPage = () => {
   const { push, query } = useRouter()
   const { error: logError } = useLogger()
   const [loading, setLoading] = useState(false)
-  const submitHandler = async (updatedEvent: EventEditable) => {
+  const submitHandler = async (updatedEvent: EventEditable, e: FormEvent<HTMLFormElement>) => {
+    setLoading(true)
     const formattedDate = updatedEvent.date.concat('T', updatedEvent?.time || '00:00', ':00')
-    const formData = new FormData()
-
-    Object.entries(updatedEvent).forEach(([key, value]) => {
-      if (key === 'image' || key === 'pdf') {
-        formData.set(key, value[0])
-      } else {
-        formData.set(key, value)
-      }
-    })
+    const formData = new FormData(e.target as HTMLFormElement)
     formData.set('date', formattedDate)
     formData.set('type', isEventOrWorkshop(updatedEvent.type as boolean))
 
     try {
-      setLoading(true)
       await axios.put(`/api/events/${query.id}`, formData)
-      setLoading(false)
-      push(`/eventos`)
       Swal.fire({
         title: 'Evento actualizado',
         icon: 'success',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 2000,
         timerProgressBar: true,
       })
-    } catch (error: any) {
+      push(`/eventos`)
       setLoading(false)
+    } catch (error: any) {
       logError(error, 'pages/eventos/editar/[id].tsx', 'Error al actualizar el evento')
+      setLoading(false)
     }
   }
 
