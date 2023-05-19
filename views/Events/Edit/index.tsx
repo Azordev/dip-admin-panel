@@ -194,7 +194,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
         />
         <label htmlFor="pdf-file" className={styles.pdf}>
           <figure>
-            <Icons8 name="installing-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
+            <Icons8 name="uninstalling-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
           </figure>
           <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
         </label>
@@ -202,7 +202,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           <a href={originalEvent?.requirementsUrl} download id="pdf-download">
             <label htmlFor="pdf-download" className={styles.pdf}>
               <figure>
-                <Icons8 name="uninstalling-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
+                <Icons8 name="installing-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
               </figure>
               <span className={styles.label}>Descargar PDF</span>
             </label>
