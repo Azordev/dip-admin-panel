@@ -1,6 +1,5 @@
 import S3 from 'aws-sdk/clients/s3'
 import crypto from 'crypto'
-import type { File } from 'formidable'
 import fs from 'fs'
 import { v4 as uuid } from 'uuid'
 
@@ -18,15 +17,14 @@ const s3 = new S3({
   signatureVersion: 'v4',
 })
 
-export const addObject = async (file: File, prefix?: string) => {
-  if (!file) return { Location: '' }
-
+export const addObject = async ({ originalFilename, filepath }: any, prefix?: string) => {
+  if (!filepath || !originalFilename) {
+    return { Location: '' }
+  }
   try {
-    const extName = file?.originalFilename
-    const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${extName}`
-
-    const fileBuffer = fs.readFileSync(file.filepath)
-    const fileStream = fs.createReadStream(file.filepath)
+    const fileName = `${prefix ? `${prefix}_` : ''}${uuid()}.${originalFilename}`
+    const fileBuffer = fs.readFileSync(filepath)
+    const fileStream = fs.createReadStream(filepath)
     const hex = crypto.createHash('sha256').update(fileBuffer).digest('base64')
 
     const { Location } = await s3

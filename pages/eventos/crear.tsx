@@ -17,13 +17,12 @@ const Create: NextPage = () => {
 
   const submitHandler = async (formValues: EventEditableWithFiles, e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = new FormData(e.target as HTMLFormElement)
+    form.set('type', isEventOrWorkshop(form.get('type') as unknown as boolean))
+    form.set('date', formValues.date.concat('T', formValues.time || '00:00', ':00'))
     setLoading(true)
 
     try {
-      const form = new FormData(e.target as HTMLFormElement)
-      form.set('type', isEventOrWorkshop(form.get('type') as unknown as boolean))
-      form.set('date', formValues.date.concat('T', formValues.time || '00:00', ':00'))
-
       await axios.post('/api/events', form, {
         headers: {
           'Content-Type': 'multipart/form-data',

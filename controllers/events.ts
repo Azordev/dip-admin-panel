@@ -83,41 +83,35 @@ export const getEventAPI = async (req: NextApiRequest, res: NextApiResponse) => 
 export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
+    const filesUrl: { [key: string]: any } = {}
     try {
       if (err) {
-        return res.status(500).json({ error: err, fields, files })
+        return res.status(500).json(err)
       }
 
-      if (files.image) {
-        const file = files.image as formidable.File
-        const { Location: imageUrl, error: saveError } = await addObject(file, 'events')
+      for (const key in files) {
+        if (Object.prototype.hasOwnProperty.call(files, key)) {
+          const file = files[key] as formidable.File
+          const { Location: url, error: awsError } = await addObject(file, 'events')
 
-        if (saveError) {
-          return res.status(500).json({ error: saveError, fields, files })
+          if (awsError) {
+            return res.status(500).json({ error: awsError, fields, files })
+          }
+
+          if (url) {
+            filesUrl[key] = url
+          }
         }
-
-        const { errors } = await client.mutate({
-          mutation: CREATE_EVENT,
-          variables: { ...fields, imageUrl: imageUrl || '' },
-        })
-
-        if (errors) {
-          return res.status(500).json({ errors })
-        }
-
-        return res.json({
-          msg: 'Event created successfully',
-          data: { ...fields, imageUrl },
-        })
       }
 
+      const variables = { ...fields, ...filesUrl }
       await client.mutate({
         mutation: CREATE_EVENT,
-        variables: { ...fields, imageUrl: '' },
+        variables,
       })
       return res.json({
         msg: 'Event created successfully',
-        data: { ...fields },
+        variables,
       })
     } catch (error) {
       res.status(500).json({ error, fields, files })
@@ -128,12 +122,10 @@ export const createEvent = (req: NextApiRequest, res: NextApiResponse) => {
 export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => {
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
+    const filesUrl: { [key: string]: any } = {}
+    const eventId = req.query?.id
     try {
-      const eventId = req.query?.id
-      const eventDataBase = await getEvent(eventId)
-      const { event: eventDefault, error: errEventDataBase } = eventDataBase ?? {}
-
-      if (err || errEventDataBase) {
+      if (err) {
         return res.status(500).json(err)
       }
 
@@ -141,27 +133,28 @@ export const updateEvent = async (req: NextApiRequest, res: NextApiResponse) => 
         return res.status(400).json({ msg: 'EventId is required' })
       }
 
-      if (files.image) {
-        const file = files.image as formidable.File
-        const { Location: imageUrl } = await addObject(file, 'events')
+      for (const key in files) {
+        if (Object.prototype.hasOwnProperty.call(files, key)) {
+          const file = files[key] as formidable.File
+          const { Location: url, error: awsError } = await addObject(file, 'events')
 
-        await client.mutate({
-          mutation: UPDATE_EVENT,
-          variables: { ...fields, imageUrl, id: eventId },
-        })
-        return res.status(204).json({
-          msg: 'Event updated successfully',
-          data: { ...fields, imageUrl },
-        })
+          if (awsError) {
+            return res.status(500).json({ error: awsError, fields, files })
+          }
+
+          if (url) {
+            filesUrl[key] = url
+          }
+        }
       }
 
       await client.mutate({
         mutation: UPDATE_EVENT,
-        variables: { ...fields, imageUrl: eventDefault?.imageUrl ?? '', id: eventId },
+        variables: { ...fields, ...filesUrl, id: eventId },
       })
       return res.status(204).json({
         msg: 'Event updated successfully',
-        data: { ...fields },
+        variables: { ...fields, ...filesUrl },
       })
     } catch (error) {
       res.status(500).json(error)

@@ -13,8 +13,6 @@ import Icons8 from '@/views/Shared/Icons8'
 import Picture from '@/views/SVGs/Picture'
 
 export interface EventEditableWithFiles extends EventEditable {
-  image?: FileList
-  pdf?: FileList
   time?: string
 }
 
@@ -65,7 +63,6 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
   const showModal = () => {
     DeleteModal('evento', async (confirmed: boolean) => {
       if (confirmed) {
-        // Add petition Delete
         await fetch(`/api/events/${originalEvent?.id}`, { method: 'DELETE' })
         router.push('/eventos')
       }
@@ -144,7 +141,7 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
               type="file"
               accept="image/*"
               className={styles['input-file']}
-              {...register('image')}
+              {...register('imageUrl')}
               onChange={handleFile}
             />
             <label htmlFor="image-file" className={styles.image}>
@@ -192,15 +189,25 @@ const EditEventForm: FC<MutableEventFormProps> = ({ onSubmit, loading, originalD
           id="pdf-file"
           className={styles['input-file']}
           accept="application/pdf"
-          {...register('pdf', { required: false })}
+          {...register('requirementsUrl', { required: false })}
           onChange={handleFile}
         />
         <label htmlFor="pdf-file" className={styles.pdf}>
           <figure>
-            <Icons8 name="installing-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
+            <Icons8 name="uninstalling-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
           </figure>
           <span className={styles.label}>{pdfFile?.name ? `${pdfFile?.name}` : 'Añadir PDF'}</span>
         </label>
+        {originalEvent?.requirementsUrl && (
+          <a href={originalEvent?.requirementsUrl} download id="pdf-download">
+            <label htmlFor="pdf-download" className={styles.pdf}>
+              <figure>
+                <Icons8 name="installing-updates" iconStyle="ios" size={35} className={styles['btn-icon']} />
+              </figure>
+              <span className={styles.label}>Descargar PDF</span>
+            </label>
+          </a>
+        )}
       </div>
       <section className={styles['buttons-container']}>
         <Button iconName="" className={styles['button-cancel']} onClick={() => router.push('/eventos')}>
